@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Aamalnaa</string>
+    <string name="title_activity_splash_">Splash_Activity</string>
+
+    <string name="log_in">Log In</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+    <string name="are_you_forgot_password">are you forgot password ?</string>
+    <string name="do_you_have_a_new_account">Do you have a new account?</string>
+    <string name="create_an_account">Create a new account</string>
+    <string name="user_name">Name</string>
+    <string name="phone">Phone Number</string>
+    <string name="back">Back</string>
+    <string name="skip">skip</string>
+    <string name="no_account">No Account</string>
+    <string name="select_language">Select Language</string>
+    <string name="select">Select</string>
+    <string name="cancel">Cancel</string>
+    <string name="notifications">notifications</string>
+    <string name="please_sign_in_or_sign_up">Please Sign In or Sign Up</string>
+    <string name="sign_in">Sign In</string>
+
 </resources>
