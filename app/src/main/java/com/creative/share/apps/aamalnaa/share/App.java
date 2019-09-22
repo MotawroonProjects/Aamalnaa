@@ -4,8 +4,8 @@ package com.creative.share.apps.aamalnaa.share;
 import android.app.Application;
 import android.content.Context;
 
-import com.creativeshare.sunfun.language.Language;
-import com.creativeshare.sunfun.preferences.Preferences;
+import com.creative.share.apps.aamalnaa.language.Language;
+import com.creative.share.apps.aamalnaa.preferences.Preferences;
 
 
 public class App extends Application {

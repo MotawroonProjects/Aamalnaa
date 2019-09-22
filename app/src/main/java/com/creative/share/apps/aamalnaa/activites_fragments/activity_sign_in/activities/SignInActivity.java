@@ -1,24 +1,23 @@
 package com.creative.share.apps.aamalnaa.activites_fragments.activity_sign_in.activities;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-
-import com.creativeshare.sunfun.R;
-import com.creativeshare.sunfun.activities_fragments.activity_sign_in.fragments.Fragment_Language;
-import com.creativeshare.sunfun.activities_fragments.activity_sign_in.fragments.Fragment_Sign_In;
-import com.creativeshare.sunfun.activities_fragments.activity_sign_in.fragments.Fragment_Sign_Up;
-import com.creativeshare.sunfun.language.Language;
-import com.creativeshare.sunfun.preferences.Preferences;
-import com.creativeshare.sunfun.share.TypefaceUtil;
+import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activites_fragments.activity_sign_in.fragments.Fragment_Language;
+import com.creative.share.apps.aamalnaa.activites_fragments.activity_sign_in.fragments.Fragment_Sign_In;
+import com.creative.share.apps.aamalnaa.activites_fragments.activity_sign_in.fragments.Fragment_Sign_Up;
+import com.creative.share.apps.aamalnaa.language.Language;
+import com.creative.share.apps.aamalnaa.preferences.Preferences;
+import com.creative.share.apps.aamalnaa.share.TypefaceUtil;
 
 import java.util.Locale;
 
 import io.paperdb.Paper;
-
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -33,7 +32,7 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang",Locale.getDefault().getLanguage())));
+        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", Locale.getDefault().getLanguage())));
 
     }
 
@@ -64,10 +63,10 @@ public class SignInActivity extends AppCompatActivity {
             {
                 DisplayFragmentLanguage();
             }else
-                {
-                    DisplayFragmentSignIn();
+            {
+                DisplayFragmentSignIn();
 
-                }
+            }
         }
 
 
@@ -134,21 +133,19 @@ public class SignInActivity extends AppCompatActivity {
             finish();
 
         }else
-            {
-                if (fragment_count >1) {
-                    fragment_count -= 1;
-                    super.onBackPressed();
+        {
+            if (fragment_count >1) {
+                fragment_count -= 1;
+                super.onBackPressed();
 
 
-                } else  {
+            } else  {
 
-                    finish();
+                finish();
 
-                }
             }
+        }
 
 
     }
-
-
 }

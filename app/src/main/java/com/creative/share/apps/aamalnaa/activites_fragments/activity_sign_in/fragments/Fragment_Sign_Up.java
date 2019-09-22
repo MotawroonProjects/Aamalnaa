@@ -1,9 +1,6 @@
 package com.creative.share.apps.aamalnaa.activites_fragments.activity_sign_in.fragments;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

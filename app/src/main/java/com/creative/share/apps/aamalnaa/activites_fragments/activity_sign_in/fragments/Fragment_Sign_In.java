@@ -1,6 +1,5 @@
 package com.creative.share.apps.aamalnaa.activites_fragments.activity_sign_in.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
