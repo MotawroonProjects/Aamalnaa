@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1075b6</color>
-    <color name="colorPrimaryDark">#0d649b</color>
-    <color name="colorAccent">#1075b6</color>
-    <color name="primary_dark">#176BAE</color>
+    <color name="colorPrimary">#2b8dcd</color>
+    <color name="colorPrimaryDark">#176BAE</color>
+    <color name="colorAccent">#176BAE</color>
+    <color name="secondColor">#32db64</color>
+    <color name="endColor">#26A84D</color>
+
     <color name="white">#fff</color>
     <color name="black">#000</color>
     <color name="transparent">#00000000</color>
@@ -20,6 +22,11 @@
     <color name="golden">#df8d32</color>
     <color name="end_color">#4c9bfa</color>
     <color name="rating">#FBC02D</color>
-    <color name="active">#32db64</color>
-    <color name="book_trans">#99000000</color>
+    <color name="icon">#7791a1</color>
+    <color name="textColor">#3c4a53</color>
+    <color name="primary_dark">#176BAE</color>
+    <color name="filter_color">#552b8dcd</color>
+    <color name="unsel_color">#dfe9f3</color>
+    <color name="ll_balance">#ffdfe9f3</color>
+
 </resources>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    >
+    <data>
+        <variable
+            name="backListener"
+            type="com.creative.share.apps.aamalnaa.interfaces.Listeners.BackListener" />
+        <variable
+            name="lang"
+            type="String" />
+        <variable
+            name="contactUs"
+            type="com.creative.share.apps.aamalnaa.models.ContactUsModel" />
+
+        <variable
+            name="contactListener"
+            type="com.creative.share.apps.aamalnaa.interfaces.Listeners.ContactListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activities_fragments.activity_choose_order_type.ChooseOrderTypeActivity"
+        android:background="@color/gray0"
+        >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/colorPrimary"
+            app:contentInsetEnd="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:onClick="@{()->backListener.back()}"
+                >
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/ic_left_arrow"
+                    android:tint="@color/white"
+                    android:padding="8dp"
+                    android:clickable="false"
+                    android:longClickable="false"
+                    android:rotation='@{lang.equals("ar")?180:0}'
+                    />
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:textColor="@color/white"
+                    android:clickable="false"
+                    android:longClickable="false"
+                    android:textSize="16sp"
+                    android:text="@string/contact_us"
+                    />
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:fitsSystemWindows="true"
+            android:fillViewport="true"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp"
+
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:text="@string/user_name"
+
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/edt_bg"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="@={contactUs.name}"
+                    error="@{contactUs.error_name}"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:text="@string/email"
+
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/edt_bg"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:inputType="textEmailAddress"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="@={contactUs.email}"
+                    error="@{contactUs.error_email}"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:text="@string/subject"
+
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/edt_bg"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="@={contactUs.subject}"
+                    error="@{contactUs.error_subject}"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:text="@string/message"
+
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/edt_bg"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:padding="8dp"
+                    android:gravity="top"
+                    android:text="@={contactUs.message}"
+                    error="@{contactUs.error_message}"
+
+                    />
+                <Button
+                    android:id="@+id/btnSend"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/btn_trans"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:text="@string/send"
+                    android:onClick="@{()->contactListener.sendContact(contactUs)}"
+                    />
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

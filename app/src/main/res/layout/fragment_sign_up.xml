@@ -7,6 +7,19 @@
         <variable
             name="lang"
             type="String" />
+        <variable
+            name="backListener"
+            type="com.creative.share.apps.aamalnaa.interfaces.Listeners.BackListener" />
+        <variable
+            name="signUpModel"
+            type="com.creative.share.apps.aamalnaa.models.SignUpModel" />
+        <variable
+            name="signUpListener"
+            type="com.creative.share.apps.aamalnaa.interfaces.Listeners.SignUpListener" />
+
+        <variable
+            name="showDialogListener"
+            type="com.creative.share.apps.aamalnaa.interfaces.Listeners.ShowCountryDialogListener" />
 
     </data>
     <ScrollView
@@ -15,8 +28,7 @@
         android:fillViewport="true"
         android:fitsSystemWindows="true"
         android:scrollbars="none"
-        android:background="@drawable/splash"
-        android:alpha=".7"
+        android:background="@drawable/login_bg"
         android:clickable="true"
         android:focusable="true"
         >
@@ -28,7 +40,7 @@
             >
 
             <LinearLayout
-                android:id="@+id/ll_back"
+                android:id="@+id/llBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
@@ -37,6 +49,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:orientation="horizontal"
+                android:onClick="@{()->backListener.back()}"
+
                 >
                 <ImageView
                     android:id="@+id/arrow"
@@ -44,7 +58,7 @@
                     android:layout_height="30dp"
                     android:src="@drawable/ic_left_arrow"
                     android:padding="5dp"
-                    android:tint="@color/colorPrimary"
+                    android:tint="@color/secondColor"
                     android:clickable="false"
                     android:longClickable="false"
                     android:rotation='@{lang.equals("ar")?180:0}'
@@ -53,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/secondColor"
                     android:textSize="15sp"
                     android:text="@string/back"
                     android:clickable="false"
@@ -61,25 +75,6 @@
                     />
             </LinearLayout>
 
-<!--
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias=".8"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/gray1"
-                app:cardCornerRadius="3dp"
-                >
-
-            </androidx.cardview.widget.CardView>!-->
             <ImageView
                 android:id="@+id/logo"
                 android:layout_width="200dp"
@@ -104,6 +99,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
+                app:layout_constraintVertical_bias=".25"
                 >
 
                 <LinearLayout
@@ -117,7 +113,7 @@
                         android:layout_height="30dp"
                         android:src="@drawable/ic_user"
                         android:padding="5dp"
-                        android:tint="@color/gray7"
+                        android:tint="@color/icon"
                         />
                     <View
                         android:layout_width="1px"
@@ -126,7 +122,7 @@
                         android:layout_marginBottom="8dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:background="@color/gray4"/>
+                        android:background="@color/white"/>
 
                     <EditText
                         android:id="@+id/edtName"
@@ -140,14 +136,15 @@
                         android:hint="@string/user_name"
                         android:textSize="14sp"
                         android:textColorHint="@color/white"
-
+                        android:text="@={signUpModel.name}"
+                        error="@{signUpModel.error_name}"
 
                         />
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/white"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     />
@@ -157,16 +154,27 @@
                     android:layout_height="35dp"
                     >
 
+                    <ImageView
+                        android:id="@+id/icon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_phone_call"
+                        android:padding="5dp"
+                        android:tint="@color/icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        />
                     <TextView
-                        android:id="@+id/tvPhoneCode"
+                        android:id="@+id/tvCode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/icon"
                         app:layout_constraintTop_toTopOf="parent"
                         android:paddingStart="2dp"
                         android:paddingEnd="2dp"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/white"
 
 
                         android:textSize="15sp"
@@ -180,10 +188,10 @@
                         android:layout_marginBottom="8dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:background="@color/gray4"
+                        android:background="@color/white"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/tvPhoneCode"
+                        app:layout_constraintStart_toEndOf="@id/tvCode"
                         />
 
                     <EditText
@@ -203,6 +211,8 @@
                         app:layout_constraintEnd_toStartOf="@id/imagePhoneCode"
                         app:layout_constraintStart_toEndOf="@id/viewPhoneCode"
                         app:layout_constraintTop_toTopOf="parent"
+                        android:text="@={signUpModel.phone}"
+                        error="@{signUpModel.error_phone}"
 
 
 
@@ -216,10 +226,11 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:src="@drawable/ic_left_arrow"
+                        android:src="@drawable/ic_arrow_right"
                         android:padding="10dp"
-                        android:tint="@color/colorPrimary"
-                        android:rotation='@{lang.equals("en")?180:0}'
+                        android:tint="@color/white"
+                        android:rotation='@{lang.equals("ar")?180:0}'
+                        android:onClick="@{()->showDialogListener.showDialog()}"
 
                         />
                     <View
@@ -230,7 +241,7 @@
                         android:layout_marginBottom="8dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
-                        android:background="@color/gray4"
+                        android:background="@color/white"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/imagePhoneCode"
@@ -242,7 +253,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/white"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     />
@@ -258,7 +269,7 @@
                         android:layout_height="30dp"
                         android:src="@drawable/ic_email"
                         android:padding="5dp"
-                        android:tint="@color/gray7"
+                        android:tint="@color/icon"
                         />
                     <View
                         android:layout_width="1px"
@@ -282,6 +293,9 @@
                         android:textColor="@color/black"
                         android:textColorHint="@color/white"
                         android:textSize="14sp"
+                        android:text="@={signUpModel.email}"
+                        error="@{signUpModel.error_email}"
+
 
 
                         />
@@ -289,7 +303,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/white"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     />
@@ -304,7 +318,7 @@
                         android:layout_height="30dp"
                         android:src="@drawable/ic_lock"
                         android:padding="5dp"
-                        android:tint="@color/gray7"
+                        android:tint="@color/icon"
                         />
                     <View
                         android:layout_width="1px"
@@ -318,7 +332,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:passwordToggleTint="@color/colorPrimary"
+                        app:passwordToggleTint="@color/white"
                         app:passwordToggleEnabled="true"
                         app:hintEnabled="false"
                         app:errorEnabled="false"
@@ -336,6 +350,8 @@
                             android:hint="@string/password"
                             android:textSize="14sp"
                             android:textColorHint="@color/white"
+                            android:text="@={signUpModel.password}"
+                            error="@{signUpModel.error_password}"
 
 
 
@@ -346,16 +362,44 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/white"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    >
+                    <CheckBox
+                        android:id="@+id/checkbox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:buttonTint="@color/white"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:text="@string/accept"
+
+                        />
+                    <TextView
+                        android:id="@+id/tvTerms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:textColor="@color/black"
+                        android:text="@string/terms_and_conditions"
+                        />
+                </LinearLayout>
             </LinearLayout>
 
             <Button
-                android:id="@+id/btnLogin"
+                android:id="@+id/btnSignUp"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ll"
@@ -364,11 +408,12 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="25dp"
-                android:background="@drawable/btn_login_bg"
+                android:background="@drawable/btn_sign_up"
                 app:layout_constraintVertical_bias="0"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:text="@string/signup"
+                android:onClick="@{()->signUpListener.checkDataSignUp(signUpModel.name,signUpModel.phone_code,signUpModel.phone,signUpModel.email,signUpModel.password)}"
                 />
 
 
