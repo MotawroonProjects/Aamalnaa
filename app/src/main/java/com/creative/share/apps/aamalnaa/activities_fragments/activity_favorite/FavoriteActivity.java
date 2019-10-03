@@ -24,7 +24,7 @@ public class FavoriteActivity extends AppCompatActivity implements Listeners.Bac
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", Locale.getDefault().getLanguage())));
+        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", "ar")));
 
     }
 

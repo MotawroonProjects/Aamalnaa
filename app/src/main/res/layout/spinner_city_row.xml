@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <data>
+        <variable
+            name="cityModel"
+            type="com.creative.share.apps.aamalnaa.models.Cities_Model.Data" />
+        <variable
+            name="lang"
+            type="String" />
+    </data>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text='@{cityModel.name}'
+        />
+</layout>

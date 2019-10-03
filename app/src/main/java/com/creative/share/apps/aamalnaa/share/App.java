@@ -4,11 +4,13 @@ package com.creative.share.apps.aamalnaa.share;
 import android.app.Application;
 import android.content.Context;
 
+import androidx.multidex.MultiDexApplication;
+
 import com.creative.share.apps.aamalnaa.language.Language;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
 
 
-public class App extends Application {
+public class App extends MultiDexApplication {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(Language.updateResources(newBase, Preferences.getInstance().getLanguage(newBase)));

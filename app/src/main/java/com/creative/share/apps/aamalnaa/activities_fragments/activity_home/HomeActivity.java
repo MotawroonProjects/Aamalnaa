@@ -1,6 +1,7 @@
 package com.creative.share.apps.aamalnaa.activities_fragments.activity_home;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,12 +30,19 @@ import com.creative.share.apps.aamalnaa.databinding.ActivityHomeBinding;
 import com.creative.share.apps.aamalnaa.language.Language;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
+import com.creative.share.apps.aamalnaa.remote.Api;
+import com.creative.share.apps.aamalnaa.share.Common;
+import com.creative.share.apps.aamalnaa.tags.Tags;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding binding;
@@ -53,7 +61,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", Locale.getDefault().getLanguage())));
+        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", "ar")));
 
     }
 
@@ -343,7 +351,7 @@ public class HomeActivity extends AppCompatActivity {
             NavigateToSignInActivity();
         }else
             {
-
+Logout();
             }
     }
     @Override
@@ -384,6 +392,41 @@ public class HomeActivity extends AppCompatActivity {
         }
 
     }
+    public void Logout() {
+        final ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .Logout(userModel.getId() + "")
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+                            /*new Handler()
+                                    .postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                                            manager.cancelAll();
+                                        }
+                                    },1);
+                            userSingleTone.clear(ClientHomeActivity.this);*/
+                            preferences.create_update_userdata(HomeActivity.this, null);
+                            preferences.create_update_session(HomeActivity.this, Tags.session_logout);
+                            Intent intent = new Intent(HomeActivity.this, SignInActivity.class);
+                            startActivity(intent);
+                            finish();
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
+    }
+
 
 
 }

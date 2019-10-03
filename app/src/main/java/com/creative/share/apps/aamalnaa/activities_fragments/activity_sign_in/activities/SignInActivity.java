@@ -31,7 +31,7 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", Locale.getDefault().getLanguage())));
+        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", "ar")));
 
     }
 
@@ -44,14 +44,16 @@ public class SignInActivity extends AppCompatActivity {
 
         initView();
         if (savedInstanceState == null) {
-            if (!preferences.isLanguageSelected(this))
+           /* if (!preferences.isLanguageSelected(this))
             {
                 DisplayFragmentLanguage();
             }else
             {
                 DisplayFragmentSignIn();
 
-            }
+            }*/
+            DisplayFragmentSignIn();
+
         }
 
 

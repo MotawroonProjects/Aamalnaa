@@ -3,6 +3,7 @@ package com.creative.share.apps.aamalnaa.models;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Patterns;
+import android.widget.Toast;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
@@ -20,6 +21,8 @@ public class SignUpModel extends BaseObservable implements Serializable {
     private String phone;
     private String email;
     private String password;
+    private String city_id;
+
     public ObservableField<String> error_name = new ObservableField<>();
     public ObservableField<String> error_phone_code = new ObservableField<>();
     public ObservableField<String> error_phone = new ObservableField<>();
@@ -34,17 +37,17 @@ public class SignUpModel extends BaseObservable implements Serializable {
         this.phone="";
         this.password="";
         this.email = "";
+        this.city_id = "";
+
     }
 
-    public SignUpModel(String name, String phone_code, String phone,String email, String password) {
+    public SignUpModel(String name,String city_id, String phone_code, String phone,String email, String password) {
         setName(name);
-        notifyPropertyChanged(BR.name);
         setPhone_code(phone_code);
-        //notifyPropertyChanged(BR.phone_code);
         setPhone(phone);
-        //notifyPropertyChanged(BR.phone);
+        setEmail(email);
         setPassword(password);
-        //notifyPropertyChanged(BR.password);
+        setCity_id(city_id);
     }
 
     @Bindable
@@ -69,6 +72,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
         notifyPropertyChanged(BR.phone_code);
 
     }
+
     @Bindable
 
     public String getPhone() {
@@ -105,7 +109,14 @@ public class SignUpModel extends BaseObservable implements Serializable {
 
     }
 
+    @Bindable
+    public String getCity_id() {
+        return city_id;
+    }
 
+    public void setCity_id(String city_id) {
+        this.city_id = city_id;
+    }
 
     public boolean isDataValid(Context context)
     {
@@ -114,15 +125,15 @@ public class SignUpModel extends BaseObservable implements Serializable {
                 password.length()>=6&&
                 !TextUtils.isEmpty(name)&&
                 !TextUtils.isEmpty(email)&&
-                Patterns.EMAIL_ADDRESS.matcher(email).matches()
-
+                Patterns.EMAIL_ADDRESS.matcher(email).matches()&&
+                !TextUtils.isEmpty(city_id)
         )
         {
             error_name.set(null);
             error_phone_code.set(null);
             error_phone.set(null);
-            error_password.set(null);
             error_email.set(null);
+            error_password.set(null);
 
             return true;
         }else
@@ -135,6 +146,17 @@ public class SignUpModel extends BaseObservable implements Serializable {
                 error_name.set(null);
             }
 
+            if (email.isEmpty())
+            {
+                error_email.set(context.getString(R.string.field_req));
+            }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
+            {
+                error_email.set(context.getString(R.string.inv_email));
+            }else
+            {
+                error_email.set(null);
+
+            }
 
             if (phone_code.isEmpty())
             {
@@ -152,17 +174,6 @@ public class SignUpModel extends BaseObservable implements Serializable {
                 error_phone.set(null);
             }
 
-            if (email.isEmpty())
-            {
-                error_email.set(context.getString(R.string.field_req));
-            }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
-            {
-                error_email.set(context.getString(R.string.inv_email));
-            }else
-            {
-                error_email.set(null);
-
-            }
 
             if (password.isEmpty())
             {
@@ -176,7 +187,10 @@ public class SignUpModel extends BaseObservable implements Serializable {
 
             }
 
-
+            if (city_id.isEmpty())
+            {
+                Toast.makeText(context, context.getString(R.string.ch_city), Toast.LENGTH_SHORT).show();
+            }
 
 
             return false;

@@ -1,12 +1,16 @@
 package com.creative.share.apps.aamalnaa.activities_fragments.activity_sign_in.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,19 +19,32 @@ import androidx.fragment.app.Fragment;
 
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_sign_in.activities.SignInActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_terms.TermsActivity;
+import com.creative.share.apps.aamalnaa.adapters.CityAdapter;
 import com.creative.share.apps.aamalnaa.databinding.FragmentSignUpBinding;
 import com.creative.share.apps.aamalnaa.interfaces.Listeners;
+import com.creative.share.apps.aamalnaa.models.Cities_Model;
 import com.creative.share.apps.aamalnaa.models.SignUpModel;
+import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
+import com.creative.share.apps.aamalnaa.remote.Api;
+import com.creative.share.apps.aamalnaa.share.Common;
+import com.creative.share.apps.aamalnaa.tags.Tags;
 import com.mukesh.countrypicker.Country;
 import com.mukesh.countrypicker.CountryPicker;
 import com.mukesh.countrypicker.listeners.OnCountryPickerListener;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Fragment_Sign_Up extends Fragment implements Listeners.SignUpListener,Listeners.BackListener,Listeners.ShowCountryDialogListener, OnCountryPickerListener {
     private SignInActivity activity;
@@ -36,8 +53,10 @@ public class Fragment_Sign_Up extends Fragment implements Listeners.SignUpListen
     private CountryPicker countryPicker;
     private SignUpModel signUpModel;
     private Preferences preferences;
-    private boolean isAcceptTerms = false;
-
+    private int isAcceptTerms = 0;
+    private CityAdapter adapter;
+    private List<Cities_Model.Data> dataList;
+    private String city_id = "";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,6 +67,7 @@ public class Fragment_Sign_Up extends Fragment implements Listeners.SignUpListen
     }
 
     private void initView() {
+        dataList=new ArrayList<>();
         signUpModel = new SignUpModel();
         activity = (SignInActivity) getActivity();
         Paper.init(activity);
@@ -59,21 +79,21 @@ public class Fragment_Sign_Up extends Fragment implements Listeners.SignUpListen
         binding.setSignUpListener(this);
         binding.setShowDialogListener(this);
         createCountryDialog();
-
-
+adapter=new CityAdapter(dataList,activity);
+binding.spinnerCity.setAdapter(adapter);
         binding.checkbox.setOnClickListener(view -> {
             if (binding.checkbox.isChecked())
             {
-                isAcceptTerms = true;
+                isAcceptTerms = 1;
                 navigateToTermsActivity();
             }else
                 {
-                    isAcceptTerms = false;
+                    isAcceptTerms = 0;
                 }
         });
 
         binding.tvTerms.setOnClickListener(view -> {
-            isAcceptTerms = true;
+            isAcceptTerms = 0;
             navigateToTermsActivity();
         });
 
@@ -81,6 +101,97 @@ public class Fragment_Sign_Up extends Fragment implements Listeners.SignUpListen
 
 
 
+
+        getCities();
+
+        binding.spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0) {
+                    city_id = "";
+                    signUpModel.setCity_id(city_id);
+                    binding.setSignUpModel(signUpModel);
+                } else {
+                    city_id = String.valueOf(dataList.get(i).getId());
+                    signUpModel.setCity_id(city_id);
+                    binding.setSignUpModel(signUpModel);
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+    }
+    private void updateCityAdapter(Cities_Model body) {
+
+        dataList.add(new Cities_Model.Data("إختر"));
+if(body.getData()!=null){
+        dataList.addAll(body.getData());
+        adapter.notifyDataSetChanged();}
+    }
+    private void getCities() {
+        try {
+            ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
+            dialog.setCancelable(false);
+            dialog.show();
+            Api.getService(Tags.base_url)
+                    .getCity()
+                    .enqueue(new Callback<Cities_Model>() {
+                        @Override
+                        public void onResponse(Call<Cities_Model> call, Response<Cities_Model> response) {
+                            dialog.dismiss();
+                            if (response.isSuccessful() && response.body() != null) {
+                                if(response.body().getData()!=null){
+                                updateCityAdapter(response.body());}
+                                else {
+                                    Log.e("error",response.code()+"_"+response.errorBody());
+
+                                }
+
+                            } else {
+
+                                try {
+
+                                    Log.e("error",response.code()+"_"+response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                if (response.code() == 500) {
+                                    Toast.makeText(activity, "Server Error", Toast.LENGTH_SHORT).show();
+
+
+                                }else
+                                {
+                                    Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Cities_Model> call, Throwable t) {
+                            try {
+                                dialog.dismiss();
+                                if (t.getMessage() != null) {
+                                    Log.e("error", t.getMessage());
+                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                        Toast.makeText(activity, R.string.something, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(activity, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+        }
 
     }
 
@@ -147,7 +258,10 @@ public class Fragment_Sign_Up extends Fragment implements Listeners.SignUpListen
 
     @Override
     public void checkDataSignUp(String name, String phone_code, String phone,String email, String password) {
-        signUpModel = new SignUpModel(name,phone_code,phone,email,password);
+        if (phone.startsWith("0")) {
+            phone = phone.replaceFirst("0", "");
+        }
+        signUpModel = new SignUpModel(name,city_id,phone_code,phone,email,password);
         binding.setSignUpModel(signUpModel);
         if (signUpModel.isDataValid(activity))
         {
@@ -156,7 +270,65 @@ public class Fragment_Sign_Up extends Fragment implements Listeners.SignUpListen
     }
 
     private void signUp(SignUpModel signUpModel) {
+        try {
+            ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
+            dialog.setCancelable(false);
+            dialog.show();
+            Api.getService(Tags.base_url)
+                    .sign_up(signUpModel.getName(), signUpModel.getPhone(),signUpModel.getEmail(),signUpModel.getCity_id(),signUpModel.getPassword(),isAcceptTerms)
+                    .enqueue(new Callback<UserModel>() {
+                        @Override
+                        public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                            dialog.dismiss();
+                            if (response.isSuccessful() && response.body() != null) {
+                                preferences.create_update_userdata(activity,response.body());
+                                preferences.create_update_session(activity, Tags.session_login);
+                                Intent intent = new Intent(activity, HomeActivity.class);
+                                startActivity(intent);
+                                activity.finish();
 
+                            } else {
+                                try {
+
+                                    Log.e("error",response.code()+"_"+response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                if (response.code() == 422) {
+                                    Toast.makeText(activity, getString(R.string.em_exist), Toast.LENGTH_SHORT).show();
+                                } else if (response.code() == 500) {
+                                    Toast.makeText(activity, "Server Error", Toast.LENGTH_SHORT).show();
+
+
+                                }else
+                                {
+                                    Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+
+                                }
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<UserModel> call, Throwable t) {
+                            try {
+                                dialog.dismiss();
+                                if (t.getMessage() != null) {
+                                    Log.e("error", t.getMessage());
+                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                        Toast.makeText(activity, R.string.something, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(activity, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+        }
     }
 
     @Override

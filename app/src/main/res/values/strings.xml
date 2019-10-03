@@ -118,6 +118,7 @@
     <string name="ad_details">Ad details</string>
     <string name="location">Location</string>
     <string name="ads_photos">Ads photos</string>
+    <string name="inc_phone_pas">Incorrect phone number or password</string>
 
 
 </resources>

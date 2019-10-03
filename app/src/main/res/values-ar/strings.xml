@@ -116,6 +116,7 @@
     <string name="ad_details">تفاصيل الإعلان</string>
     <string name="location">الموقع</string>
     <string name="ads_photos">صور الإعلان</string>
+    <string name="inc_phone_pas">رقم الجوال او كلمة المرور غير صحيحة</string>
 
 
 </resources>
