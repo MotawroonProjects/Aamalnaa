@@ -117,6 +117,7 @@
     <string name="location">الموقع</string>
     <string name="ads_photos">صور الإعلان</string>
     <string name="inc_phone_pas">رقم الجوال او كلمة المرور غير صحيحة</string>
+    <string name="please_accept_terms">Please Accept Terms And Condition</string>
 
 
 </resources>

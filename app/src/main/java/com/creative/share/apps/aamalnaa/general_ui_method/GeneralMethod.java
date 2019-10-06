@@ -4,10 +4,13 @@ import android.net.Uri;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
 
+import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.tags.Tags;
 import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -32,7 +35,13 @@ public class GeneralMethod {
     }
 
 
+    @BindingAdapter("imageActivityEndPoint")
+    public static void displayImage2(ImageView imageView, String imageEndPoint)
+    {
 
+        Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_URL+imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+
+    }
     @BindingAdapter("url")
     public static void imageUrl(RoundedImageView imageView,String url)
     {
@@ -49,7 +58,13 @@ public class GeneralMethod {
         textView.setText(String.format("%s",m_date)+" "+work_time+" "+work_time_choosen);
 
     }
+    @BindingAdapter("imageEventEndPoint")
+    public static void displayImage(RoundedImageView imageView, String imageEndPoint)
+    {
 
+        Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_Ads_URL+imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+
+    }
 
     @BindingAdapter("rate")
     public static void rate (SimpleRatingBar simpleRatingBar, double rate)

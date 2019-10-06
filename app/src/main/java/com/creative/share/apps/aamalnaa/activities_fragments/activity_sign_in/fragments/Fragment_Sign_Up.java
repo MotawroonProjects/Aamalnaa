@@ -85,15 +85,20 @@ binding.spinnerCity.setAdapter(adapter);
             if (binding.checkbox.isChecked())
             {
                 isAcceptTerms = 1;
+                signUpModel.setIsAcceptTerms(isAcceptTerms);
                 navigateToTermsActivity();
             }else
                 {
                     isAcceptTerms = 0;
+                    signUpModel.setIsAcceptTerms(isAcceptTerms);
+
                 }
         });
 
         binding.tvTerms.setOnClickListener(view -> {
             isAcceptTerms = 0;
+            signUpModel.setIsAcceptTerms(isAcceptTerms);
+
             navigateToTermsActivity();
         });
 
@@ -261,7 +266,7 @@ if(body.getData()!=null){
         if (phone.startsWith("0")) {
             phone = phone.replaceFirst("0", "");
         }
-        signUpModel = new SignUpModel(name,city_id,phone_code,phone,email,password);
+        signUpModel = new SignUpModel(name,city_id,phone_code,phone,email,password,isAcceptTerms);
         binding.setSignUpModel(signUpModel);
         if (signUpModel.isDataValid(activity))
         {

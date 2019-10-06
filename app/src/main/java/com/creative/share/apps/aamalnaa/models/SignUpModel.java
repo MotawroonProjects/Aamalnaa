@@ -22,7 +22,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
     private String email;
     private String password;
     private String city_id;
-
+private int isAcceptTerms;
     public ObservableField<String> error_name = new ObservableField<>();
     public ObservableField<String> error_phone_code = new ObservableField<>();
     public ObservableField<String> error_phone = new ObservableField<>();
@@ -38,16 +38,17 @@ public class SignUpModel extends BaseObservable implements Serializable {
         this.password="";
         this.email = "";
         this.city_id = "";
-
+        isAcceptTerms=0;
     }
 
-    public SignUpModel(String name,String city_id, String phone_code, String phone,String email, String password) {
+    public SignUpModel(String name,String city_id, String phone_code, String phone,String email, String password,int isAcceptTerms) {
         setName(name);
         setPhone_code(phone_code);
         setPhone(phone);
         setEmail(email);
         setPassword(password);
         setCity_id(city_id);
+        setIsAcceptTerms(isAcceptTerms);
     }
 
     @Bindable
@@ -114,10 +115,17 @@ public class SignUpModel extends BaseObservable implements Serializable {
         return city_id;
     }
 
+    public void setIsAcceptTerms(int  isAcceptTerms) {
+        this.isAcceptTerms = isAcceptTerms;
+    }
+    @Bindable
+    public int getIsAcceptTerms() {
+        return isAcceptTerms;
+    }
+
     public void setCity_id(String city_id) {
         this.city_id = city_id;
     }
-
     public boolean isDataValid(Context context)
     {
         if (!TextUtils.isEmpty(phone_code)&&
@@ -126,7 +134,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
                 !TextUtils.isEmpty(name)&&
                 !TextUtils.isEmpty(email)&&
                 Patterns.EMAIL_ADDRESS.matcher(email).matches()&&
-                !TextUtils.isEmpty(city_id)
+                !TextUtils.isEmpty(city_id)&&isAcceptTerms==1
         )
         {
             error_name.set(null);
@@ -190,6 +198,10 @@ public class SignUpModel extends BaseObservable implements Serializable {
             if (city_id.isEmpty())
             {
                 Toast.makeText(context, context.getString(R.string.ch_city), Toast.LENGTH_SHORT).show();
+            }
+            if (isAcceptTerms==0)
+            {
+                Toast.makeText(context, context.getString(R.string.please_accept_terms), Toast.LENGTH_SHORT).show();
             }
 
 

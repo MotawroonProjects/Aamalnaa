@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+   >
+
+    <data>
+
+
+        <variable
+            name="lang"
+            type="String" />
+        <variable
+            name="catogrymodel"
+            type="com.creative.share.apps.aamalnaa.models.Catogries_Model.Data" />
+    </data>
+
+
+
+
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@{catogrymodel.name}"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/linear_bg_white"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+       
+
+</layout>

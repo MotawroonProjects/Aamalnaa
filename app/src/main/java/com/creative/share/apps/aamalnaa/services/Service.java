@@ -3,7 +3,10 @@ package com.creative.share.apps.aamalnaa.services;
 
 
 
+import com.creative.share.apps.aamalnaa.models.Adversiment_Model;
+import com.creative.share.apps.aamalnaa.models.Catogries_Model;
 import com.creative.share.apps.aamalnaa.models.Cities_Model;
+import com.creative.share.apps.aamalnaa.models.Slider_Model;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 
 import okhttp3.ResponseBody;
@@ -38,6 +41,20 @@ public interface Service {
     @POST("api/logout")
     Call<ResponseBody> Logout(@Field("id") String id
 
+    );
+    @GET("api/all_slider")
+    Call<Slider_Model> get_slider();
+    @GET("api/all_categories")
+    Call<Catogries_Model> getDepartment(
+
+
+
+    );
+    @FormUrlEncoded
+    @POST("api/fillter_by_cat")
+    Call<Adversiment_Model> getAds(
+            @Field("page")int page,
+            @Field("category_id")String category_id
     );
 }
 
