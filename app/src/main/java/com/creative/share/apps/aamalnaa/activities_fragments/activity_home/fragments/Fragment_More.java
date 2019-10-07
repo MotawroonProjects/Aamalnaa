@@ -145,7 +145,14 @@ public class Fragment_More extends Fragment {
             startActivity(intent);
         });
 
-        binding.llLogout.setOnClickListener(view -> activity.logout());
+        binding.llLogout.setOnClickListener(view -> {
+            if(userModel!=null){
+
+                activity.logout();}
+            else {
+                Common.CreateNoSignAlertDialog(activity);
+            }
+        });
 
 
     }
