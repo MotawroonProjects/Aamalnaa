@@ -12,13 +12,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.core.widget.NestedScrollView;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeActivity;
@@ -33,7 +30,6 @@ import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
 import com.creative.share.apps.aamalnaa.remote.Api;
 import com.creative.share.apps.aamalnaa.tags.Tags;
-import com.google.android.material.tabs.TabLayout;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,18 +45,19 @@ import retrofit2.Response;
 public class Fragment_Main extends Fragment {
     private HomeActivity activity;
     private FragmentMainBinding binding;
-    private LinearLayoutManager manager,manager2;
+    private LinearLayoutManager manager, manager2;
     private Preferences preferences;
     private UserModel userModel;
-private String cat_id="all";
+    private String cat_id = "all";
     private SlidingImage_Adapter slidingImage__adapter;
     private boolean isLoading = false;
     private int current_page2 = 1;
-    private int current_page = 0,NUM_PAGES;
+    private int current_page = 0, NUM_PAGES;
     private List<Catogries_Model.Data> dataList;
     private Category_Adapter catogries_adapter;
     private Ads_Adapter ads_adapter;
-    private List<Adversiment_Model.Data>  advesriment_data_list;
+    private List<Adversiment_Model.Data> advesriment_data_list;
+
     public static Fragment_Main newInstance() {
         return new Fragment_Main();
     }
@@ -77,11 +74,12 @@ private String cat_id="all";
 
         return binding.getRoot();
     }
+
     private void change_slide_image() {
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                if (current_page==NUM_PAGES){
+                if (current_page == NUM_PAGES) {
                     current_page = 0;
                 }
                 binding.pager.setCurrentItem(current_page++, true);
@@ -98,9 +96,9 @@ private String cat_id="all";
 
 
     private void initView() {
-dataList=new ArrayList<>();
-advesriment_data_list=new ArrayList<>();
-dataList.add(new Catogries_Model.Data("all","الكل"));
+        dataList = new ArrayList<>();
+        advesriment_data_list = new ArrayList<>();
+        dataList.add(new Catogries_Model.Data("all", "الكل"));
         activity = (HomeActivity) getActivity();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
@@ -109,77 +107,60 @@ dataList.add(new Catogries_Model.Data("all","الكل"));
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
         binding.progBar2.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
-binding.recView.setNestedScrollingEnabled(false);
+        binding.recView.setNestedScrollingEnabled(false);
         manager = new LinearLayoutManager(activity);
-        manager2 = new LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false);
+        manager2 = new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false);
         binding.recView.setLayoutManager(manager);
         binding.recViewCategory.setLayoutManager(manager2);
-        catogries_adapter=new Category_Adapter(dataList,activity,this);
-binding.recViewCategory.setItemViewCacheSize(25);
-binding.recViewCategory.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-binding.recViewCategory.setDrawingCacheEnabled(true);
- binding.recViewCategory.setAdapter(catogries_adapter);
-        ads_adapter = new Ads_Adapter(advesriment_data_list,activity);
+        catogries_adapter = new Category_Adapter(dataList, activity, this);
+        binding.recViewCategory.setItemViewCacheSize(25);
+        binding.recViewCategory.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+        binding.recViewCategory.setDrawingCacheEnabled(true);
+        binding.recViewCategory.setAdapter(catogries_adapter);
+        ads_adapter = new Ads_Adapter(advesriment_data_list, activity);
         binding.recView.setItemViewCacheSize(25);
         binding.recView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         binding.recView.setDrawingCacheEnabled(true);
         binding.progBar.setVisibility(View.GONE);
         binding.llNoStore.setVisibility(View.GONE);
-binding.nestedScrollview.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-    @Override
-    public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-        if(scrollY>0){
-            int totalItems = ads_adapter.getItemCount();
-            int lastVisiblePos = manager.findLastCompletelyVisibleItemPosition();
-            if (totalItems > 5 && (totalItems - lastVisiblePos) == 1 && !isLoading) {
-                isLoading = true;
-                advesriment_data_list.add(null);
-                ads_adapter.notifyItemInserted(advesriment_data_list.size() - 1);
-                int page= current_page2 +1;
-                loadMore(page);
 
+        binding.recView.setAdapter(ads_adapter);
+        binding.recView.setNestedScrollingEnabled(true);
 
-
-
-            }
-        }
-    }
-});
-      /*  binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                int totalItems = ads_adapter.getItemCount();
-                int lastVisiblePos = manager.findLastCompletelyVisibleItemPosition();
-                Log.e("jkjkjj",lastVisiblePos+" "+totalItems);
-                if (totalItems > 5 && (totalItems - lastVisiblePos) == 1 && !isLoading) {
-                    isLoading = true;
-                    advesriment_data_list.add(null);
-                    ads_adapter.notifyItemInserted(advesriment_data_list.size() - 1);
-                    int page= current_page2 +1;
-                    loadMore(page);
+
+                if (dy>0)
+                {
+                    int totalItems = ads_adapter.getItemCount();
+                    int lastVisiblePos = manager.findLastCompletelyVisibleItemPosition();
+                    if (totalItems > 5 && (totalItems - lastVisiblePos) == 1 && !isLoading) {
+                        isLoading = true;
+                        advesriment_data_list.add(null);
+                        ads_adapter.notifyItemInserted(advesriment_data_list.size() - 1);
+                        int page = current_page2 + 1;
+                        loadMore(page);
 
 
-
-
+                    }
                 }
             }
-        });*/
-        binding.recView.setAdapter(ads_adapter);
+        });
 
     }
-    public void getAds() {
-        //   Common.CloseKeyBoard(homeActivity, edt_name);
+
+    private void getAds() {
         advesriment_data_list.clear();
-ads_adapter.notifyDataSetChanged();
+        ads_adapter.notifyDataSetChanged();
         binding.progBar2.setVisibility(View.VISIBLE);
 
-        // rec_sent.setVisibility(View.GONE);
         try {
 
 
-            Api.getService( Tags.base_url)
-                    .getAds(1,cat_id)
+            Api.getService(Tags.base_url)
+                    .getAds(1, cat_id)
                     .enqueue(new Callback<Adversiment_Model>() {
                         @Override
                         public void onResponse(Call<Adversiment_Model> call, Response<Adversiment_Model> response) {
@@ -228,7 +209,7 @@ ads_adapter.notifyDataSetChanged();
                             }
                         }
                     });
-        }catch (Exception e){
+        } catch (Exception e) {
             binding.progBar2.setVisibility(View.GONE);
             binding.llNoStore.setVisibility(View.VISIBLE);
 
@@ -275,8 +256,8 @@ ads_adapter.notifyDataSetChanged();
                             } catch (Exception e) {
                             }
                         }
-                    });}
-        catch (Exception e){
+                    });
+        } catch (Exception e) {
             advesriment_data_list.remove(advesriment_data_list.size() - 1);
             ads_adapter.notifyItemRemoved(advesriment_data_list.size() - 1);
             isLoading = false;
@@ -284,32 +265,25 @@ ads_adapter.notifyDataSetChanged();
     }
 
     private void get_slider() {
+
         Api.getService(Tags.base_url).get_slider().enqueue(new Callback<Slider_Model>() {
             @Override
             public void onResponse(Call<Slider_Model> call, Response<Slider_Model> response) {
                 binding.progBar.setVisibility(View.GONE);
-                if(response.isSuccessful()){
-                    if(response.body().getData().size()>0){
-                        NUM_PAGES=response.body().getData().size();
-                        slidingImage__adapter = new SlidingImage_Adapter(activity,response.body().getData());
+
+                if (response.isSuccessful()&&response.body()!=null&&response.body().getData()!=null) {
+                    if (response.body().getData().size() > 0) {
+                        NUM_PAGES = response.body().getData().size();
+                        slidingImage__adapter = new SlidingImage_Adapter(activity, response.body().getData());
                         binding.pager.setAdapter(slidingImage__adapter);
 
-                        //indicator.setupWithViewPager(mPager);
-                    }
-                    else {
+                    } else {
 
-                        //    error.setText("No data Found");
-                        // recc.setVisibility(View.GONE);
                         binding.pager.setVisibility(View.GONE);
                     }
-                }
-                else if (response.code() == 404) {
-
-                    //  error.setText(activity.getString(R.string.no_data));
-                    //recc.setVisibility(View.GONE);
+                } else if (response.code() == 404) {
                     binding.pager.setVisibility(View.GONE);
                 } else {
-                    // recc.setVisibility(View.GONE);
                     binding.pager.setVisibility(View.GONE);
                     try {
                         Log.e("Error_code", response.code() + "_" + response.errorBody().string());
@@ -323,13 +297,12 @@ ads_adapter.notifyDataSetChanged();
             @Override
             public void onFailure(Call<Slider_Model> call, Throwable t) {
                 try {
-                    Log.e("Error", t.getMessage());
                     binding.progBar.setVisibility(View.GONE);
-                    //error.setText(activity.getString(R.string.faild));
-                    //recc.setVisibility(View.GONE);
                     binding.pager.setVisibility(View.GONE);
-                }
-                catch (Exception e){
+
+                    Log.e("Error", t.getMessage());
+
+                } catch (Exception e) {
 
                 }
 
@@ -337,11 +310,8 @@ ads_adapter.notifyDataSetChanged();
         });
 
     }
+
     public void getDepartments() {
-        //   Common.CloseKeyBoard(homeActivity, edt_name);
-
-        // rec_sent.setVisibility(View.GONE);
-
         Api.getService(Tags.base_url)
                 .getDepartment()
                 .enqueue(new Callback<Catogries_Model>() {
@@ -388,7 +358,7 @@ ads_adapter.notifyDataSetChanged();
 
 
     public void setcat_id(String id) {
-        this.cat_id=id;
+        this.cat_id = id;
         getAds();
     }
 }
