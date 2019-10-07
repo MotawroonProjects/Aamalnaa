@@ -11,6 +11,9 @@
             type="com.creative.share.apps.aamalnaa.interfaces.Listeners.BackListener"
             />
         <variable
+            name="appdatamodel"
+            type="com.creative.share.apps.aamalnaa.models.App_Data_Model" />
+        <variable
             name="lang"
             type="String" />
 
@@ -89,6 +92,7 @@
                     android:layout_marginTop="10dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
+                    android:text="@{appdatamodel.conditions}"
 
                     />
                 <ProgressBar

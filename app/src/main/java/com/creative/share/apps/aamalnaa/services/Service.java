@@ -4,6 +4,7 @@ package com.creative.share.apps.aamalnaa.services;
 
 
 import com.creative.share.apps.aamalnaa.models.Adversiment_Model;
+import com.creative.share.apps.aamalnaa.models.App_Data_Model;
 import com.creative.share.apps.aamalnaa.models.Catogries_Model;
 import com.creative.share.apps.aamalnaa.models.Cities_Model;
 import com.creative.share.apps.aamalnaa.models.Slider_Model;
@@ -56,6 +57,33 @@ public interface Service {
             @Field("page")int page,
             @Field("category_id")String category_id
     );
+    @FormUrlEncoded
+    @POST("api/favorite_ads")
+    Call<Adversiment_Model> getFAds(
+            @Field("page")int page,
+            @Field("user_id")String user_id
+    );
+    @FormUrlEncoded
+    @POST("api/my_ads")
+    Call<Adversiment_Model> getMyAds(
+            @Field("page")int page,
+            @Field("user_id")String user_id
+    );
+
+    @GET("api/conditions")
+    Call<App_Data_Model> getterms();
+    @FormUrlEncoded
+    @POST("api/contact_us")
+    Call<ResponseBody> sendContact(@Field("name") String name,
+                                   @Field("email") String email,
+                                   @Field("title") String title,
+                                   @Field("content") String content
+    );
+    @FormUrlEncoded
+    @POST("api/commission")
+    Call<App_Data_Model> transfer(
+            @Field("amount") String amount,
+            @Field("category_id") String category_id);
 }
 
 

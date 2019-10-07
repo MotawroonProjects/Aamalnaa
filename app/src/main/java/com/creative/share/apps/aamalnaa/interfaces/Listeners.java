@@ -8,7 +8,9 @@ public interface Listeners {
     interface LoginListener {
         void checkDataLogin(String phone_code, String phone, String password);
     }
-
+    interface TransFerListener {
+        void checkData(String amount);
+    }
     interface SkipListener
     {
         void skip();

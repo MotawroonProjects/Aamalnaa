@@ -71,8 +71,9 @@ private String cat_id="all";
         initView();
         get_slider();
         change_slide_image();
-        getAds();
         getDepartments();
+
+        getAds();
 
         return binding.getRoot();
     }
@@ -118,7 +119,7 @@ binding.recViewCategory.setItemViewCacheSize(25);
 binding.recViewCategory.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
 binding.recViewCategory.setDrawingCacheEnabled(true);
  binding.recViewCategory.setAdapter(catogries_adapter);
-        ads_adapter = new Ads_Adapter(advesriment_data_list,activity,this);
+        ads_adapter = new Ads_Adapter(advesriment_data_list,activity);
         binding.recView.setItemViewCacheSize(25);
         binding.recView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         binding.recView.setDrawingCacheEnabled(true);

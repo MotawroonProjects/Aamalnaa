@@ -13,7 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_favorite.FavoriteActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_my_ads.MyAdsActivity;
 import com.creative.share.apps.aamalnaa.databinding.AdsRowBinding;
 import com.creative.share.apps.aamalnaa.databinding.LoadMoreBinding;
 import com.creative.share.apps.aamalnaa.models.Adversiment_Model;
@@ -32,15 +34,22 @@ public class Ads_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater inflater;
     private String lang;
     private HomeActivity activity;
-private Fragment fragment;
-    public Ads_Adapter(List<Adversiment_Model.Data> orderlist, Context context, Fragment fragment) {
+    private FavoriteActivity favoriteActivity;
+    private MyAdsActivity myAdsActivity;
+    public Ads_Adapter(List<Adversiment_Model.Data> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        this.activity = (HomeActivity) context;
-        this.fragment=fragment;
+        if(context instanceof HomeActivity){
+        this.activity = (HomeActivity) context;}
+        else if(context instanceof FavoriteActivity) {
+            favoriteActivity=(FavoriteActivity)context;
+        }
+        else {
+          myAdsActivity=(MyAdsActivity)context;
+        }
     }
 
     @NonNull

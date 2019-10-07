@@ -13,7 +13,11 @@ private List<Data> data;
 
     public static class Data implements Serializable
     {
-      private String id;
+        public Data(String name) {
+            this.name = name;
+        }
+
+        private String id;
         private String  icon;
         private String  name;
               private int commission;

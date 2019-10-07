@@ -28,6 +28,7 @@ import com.creative.share.apps.aamalnaa.databinding.DialogLanguageBinding;
 import com.creative.share.apps.aamalnaa.databinding.FragmentMoreBinding;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
+import com.creative.share.apps.aamalnaa.share.Common;
 
 import java.util.Locale;
 
@@ -69,8 +70,12 @@ public class Fragment_More extends Fragment  {
         });
 
         binding.llFavorite.setOnClickListener(view -> {
+            if(userModel!=null){
             Intent intent = new Intent(activity, FavoriteActivity.class);
-            startActivity(intent);
+            startActivity(intent);}
+            else {
+                Common.CreateNoSignAlertDialog(activity);
+            }
         });
 
         binding.llAds.setOnClickListener(view -> {

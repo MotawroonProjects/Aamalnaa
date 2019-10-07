@@ -141,7 +141,21 @@
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
                     />
-
+                <EditText
+                    android:id="@+id/edtAdPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:singleLine="true"
+                    android:background="@drawable/edt_bg"
+                    android:layout_marginTop="8dp"
+                    android:textColorHint="@color/gray4"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:hint="@string/price"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:inputType="numberDecimal"
+                    />
                 <EditText
                     android:id="@+id/edtAdDetails"
                     android:layout_width="match_parent"
@@ -153,8 +167,8 @@
                     android:textColor="@color/black"
                     android:textSize="13sp"
                     android:hint="@string/ad_details"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
+                    android:padding="8dp"
+                    android:gravity="top"
                     />
 
                 <TextView
@@ -173,7 +187,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="9dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="8dp"

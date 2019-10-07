@@ -10,9 +10,18 @@
             type="com.creative.share.apps.aamalnaa.interfaces.Listeners.BackListener"
             />
         <variable
+            name="transferListener"
+            type="com.creative.share.apps.aamalnaa.interfaces.Listeners.TransFerListener" />
+
+        <variable
+            name="transfelmodel"
+            type="com.creative.share.apps.aamalnaa.models.Transfer_Model" />
+        <variable
             name="lang"
             type="String" />
-
+        <variable
+            name="appdatamodel"
+            type="com.creative.share.apps.aamalnaa.models.App_Data_Model" />
 
     </data>
     <LinearLayout
@@ -141,6 +150,7 @@
                                 android:layout_marginEnd="5dp"
                                 >
                                 <Spinner
+                                    android:id="@+id/sp_Category"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     app:backgroundTint="@color/colorPrimary"
@@ -160,7 +170,10 @@
                                 android:singleLine="true"
                                 android:textColor="@color/black"
                                 android:textSize="15sp"
+                                android:inputType="numberDecimal"
                                 android:gravity="center"
+                                android:text="@={transfelmodel.amount}"
+                                error="@{transfelmodel.error_amount}"
 
                                 />
                         </LinearLayout>
@@ -190,6 +203,7 @@
                             android:gravity="center"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="10dp"
+                            android:text='@{appdatamodel.commission+" "+"رس"}'
 
                             />
 
@@ -205,6 +219,7 @@
                     android:textSize="15sp"
                     android:text="@string/transfer"
                     android:background="@drawable/btn_trans"
+                    android:onClick="@{()->transferListener.checkData(transfelmodel.amount)}"
                     />
 
             </LinearLayout>
