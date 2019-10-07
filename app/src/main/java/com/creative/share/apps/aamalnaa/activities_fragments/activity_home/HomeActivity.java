@@ -396,7 +396,7 @@ Logout();
         final ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.show();
         Api.getService(Tags.base_url)
-                .Logout(userModel.getId() + "")
+                .Logout(userModel.getUser().getId() + "")
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

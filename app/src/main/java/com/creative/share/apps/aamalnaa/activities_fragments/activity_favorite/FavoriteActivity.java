@@ -123,7 +123,7 @@ binding.recView.setAdapter(ads_adapter);
 
 
             Api.getService( Tags.base_url)
-                    .getFAds(1,userModel.getId()+"")
+                    .getFAds(1,userModel.getUser().getId()+"")
                     .enqueue(new Callback<Adversiment_Model>() {
                         @Override
                         public void onResponse(Call<Adversiment_Model> call, Response<Adversiment_Model> response) {
@@ -187,7 +187,7 @@ binding.recView.setAdapter(ads_adapter);
 
 
             Api.getService(Tags.base_url)
-                    .getFAds(page, userModel.getId()+"")
+                    .getFAds(page, userModel.getUser().getId()+"")
                     .enqueue(new Callback<Adversiment_Model>() {
                         @Override
                         public void onResponse(Call<Adversiment_Model> call, Response<Adversiment_Model> response) {

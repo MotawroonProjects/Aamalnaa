@@ -13,7 +13,9 @@
         <variable
             name="lang"
             type="String" />
-
+<variable
+    name="usermodel"
+    type="com.creative.share.apps.aamalnaa.models.UserModel.User" />
 
     </data>
 
@@ -103,7 +105,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="10dp"
                                         android:layout_marginEnd="10dp"
-                                        android:text="@string/member_since"
+                                        android:text='@{"عضو منذ"+usermodel.created_at}'
                                         android:textColor="@color/textColor"
                                         android:textSize="12sp"
                                         app:layout_constraintBottom_toBottomOf="parent"
@@ -161,7 +163,7 @@
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginStart="5dp"
                                         android:layout_marginEnd="5dp"
-                                        android:text="0"
+                                        android:text="@{usermodel.postivesRate}"
                                         android:textColor="@color/textColor"
                                         android:textSize="13sp" />
 
@@ -198,7 +200,7 @@
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginStart="5dp"
                                         android:layout_marginEnd="5dp"
-                                        android:text="0"
+                                        android:text="@{usermodel.negativeRate}"
                                         android:textColor="@color/textColor"
                                         android:textSize="13sp" />
 

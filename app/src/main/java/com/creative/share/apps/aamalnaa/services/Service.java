@@ -84,6 +84,10 @@ public interface Service {
     Call<App_Data_Model> transfer(
             @Field("amount") String amount,
             @Field("category_id") String category_id);
+    @FormUrlEncoded
+    @POST("api/my_account")
+    Call<UserModel> getmyprofile(
+            @Field("user_id")String user_id);
 }
 
 

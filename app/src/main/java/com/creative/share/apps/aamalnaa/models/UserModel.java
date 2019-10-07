@@ -1,9 +1,31 @@
 package com.creative.share.apps.aamalnaa.models;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class UserModel implements Serializable {
+    private User user;
+    private List<Customers> customers;
+    private List<Ads> ads;
+    private List<Rateds> rateds;
 
+    public User getUser() {
+        return user;
+    }
+
+    public List<Customers> getCustomers() {
+        return customers;
+    }
+
+    public List<Ads> getAds() {
+        return ads;
+    }
+
+    public List<Rateds> getRateds() {
+        return rateds;
+    }
+
+    public class User implements Serializable{
 private int id;
         private String user_type;
     private String avatar;
@@ -144,6 +166,118 @@ private int id;
 
     public String getLastSeen() {
         return lastSeen;
-    }
+    }}
+ public class Customers implements Serializable
+    {
+        private int id;
+        private int follower_id;
+        private int followed_id;
+        private String created_at;
+        private String updated_at;
+        private String user_name;
+        private String user_avatar;
 
+        public int getId() {
+            return id;
+        }
+
+        public int getFollower_id() {
+            return follower_id;
+        }
+
+        public int getFollowed_id() {
+            return followed_id;
+        }
+
+        public String getCreated_at() {
+            return created_at;
+        }
+
+        public String getUpdated_at() {
+            return updated_at;
+        }
+
+        public String getUser_name() {
+            return user_name;
+        }
+
+        public String getUser_avatar() {
+            return user_avatar;
+        }
+    }
+     public class Ads implements Serializable
+    {
+        private int  id;
+        private int category_id;
+        private int subcategory_id;
+        private int user_id;
+        private int city_id;
+        private String title;
+        private String address;
+        private String details;
+        private int views_num;
+        private int is_Special;
+        private int is_Install;
+        private int commented;
+        private int end_by_client;
+        private int my_work;
+        private int accepted;
+        private int price;
+        private double lat;
+        private double lng;
+        private int code;
+        private String created_at;
+        private int ads_type;
+        private String image;
+        private String city_name;
+        private String category_name;
+        private String sub_category_name;
+        private int is_like;
+        private int is_reported;
+        private String user_name;
+    }
+     public class Rateds implements Serializable
+    {
+        private int id;
+        private int user_id;
+        private int ad_id;
+        private int liked;
+        private int rated_id;
+        private String reason;
+
+           private String user_name;
+        private String user_avatar;
+
+        public int getId() {
+            return id;
+        }
+
+        public int getUser_id() {
+            return user_id;
+        }
+
+        public int getAd_id() {
+            return ad_id;
+        }
+
+        public int getLiked() {
+            return liked;
+        }
+
+        public int getRated_id() {
+            return rated_id;
+        }
+
+        public String getReason() {
+            return reason;
+        }
+
+        public String getUser_name() {
+            return user_name;
+        }
+
+        public String getUser_avatar() {
+            return user_avatar;
+        }
+    }
 }

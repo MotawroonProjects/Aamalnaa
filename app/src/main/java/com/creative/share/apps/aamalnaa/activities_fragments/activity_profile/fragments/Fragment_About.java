@@ -45,4 +45,7 @@ public class Fragment_About extends Fragment {
     }
 
 
+    public void setbout(UserModel.User user) {
+        binding.setUsermodel(user);
+    }
 }

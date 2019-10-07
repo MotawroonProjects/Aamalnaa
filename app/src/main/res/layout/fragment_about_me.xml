@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+
     >
+    <data>
+        <variable
+            name="usermodel"
+            type="com.creative.share.apps.aamalnaa.models.UserModel.User" />
+
+    </data>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -44,6 +51,7 @@
                 android:layout_gravity="center_vertical"
                 android:textSize="13sp"
                 android:textColor="@color/black"
+                android:text="@{usermodel.about}"
                 />
         </LinearLayout>
 
@@ -84,6 +92,7 @@
                 android:layout_gravity="center_vertical"
                 android:textSize="13sp"
                 android:textColor="@color/black"
+                android:text="@{usermodel.city_name}"
                 />
         </LinearLayout>
 
@@ -124,6 +133,7 @@
                 android:layout_gravity="center_vertical"
                 android:textSize="13sp"
                 android:textColor="@color/black"
+                android:text="@{usermodel.mobile}"
                 />
         </LinearLayout>
 
@@ -165,6 +175,7 @@
                 android:layout_gravity="center_vertical"
                 android:textSize="13sp"
                 android:textColor="@color/black"
+                android:text="@{usermodel.email}"
                 />
         </LinearLayout>
 

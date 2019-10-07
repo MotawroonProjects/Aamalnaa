@@ -122,7 +122,7 @@ public class MyAdsActivity extends AppCompatActivity implements Listeners.BackLi
 
 
             Api.getService( Tags.base_url)
-                    .getMyAds(1,userModel.getId()+"")
+                    .getMyAds(1,userModel.getUser().getId()+"")
                     .enqueue(new Callback<Adversiment_Model>() {
                         @Override
                         public void onResponse(Call<Adversiment_Model> call, Response<Adversiment_Model> response) {
@@ -187,7 +187,7 @@ public class MyAdsActivity extends AppCompatActivity implements Listeners.BackLi
 
 
             Api.getService(Tags.base_url)
-                    .getMyAds(page, userModel.getId()+"")
+                    .getMyAds(page, userModel.getUser().getId()+"")
                     .enqueue(new Callback<Adversiment_Model>() {
                         @Override
                         public void onResponse(Call<Adversiment_Model> call, Response<Adversiment_Model> response) {
