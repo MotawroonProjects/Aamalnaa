@@ -34,14 +34,13 @@ import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class Fragment_More extends Fragment  {
+public class Fragment_More extends Fragment {
 
     private HomeActivity activity;
     private FragmentMoreBinding binding;
     private Preferences preferences;
     private UserModel userModel;
     private String lang;
-
 
 
     public static Fragment_More newInstance() {
@@ -66,22 +65,22 @@ public class Fragment_More extends Fragment  {
 
         binding.image.setOnClickListener(view -> {
 
-            if(userModel!=null){
+
+
+            if (userModel != null) {
                 Intent intent = new Intent(activity, ProfileActivity.class);
                 startActivity(intent);
-
-            }
-            else {
+            } else {
                 Common.CreateNoSignAlertDialog(activity);
-            }
 
+            }
         });
 
         binding.llFavorite.setOnClickListener(view -> {
-            if(userModel!=null){
-            Intent intent = new Intent(activity, FavoriteActivity.class);
-            startActivity(intent);}
-            else {
+            if (userModel != null) {
+                Intent intent = new Intent(activity, FavoriteActivity.class);
+                startActivity(intent);
+            } else {
                 Common.CreateNoSignAlertDialog(activity);
             }
         });
@@ -124,19 +123,18 @@ public class Fragment_More extends Fragment  {
         });
 
         binding.llShare.setOnClickListener(view -> {
-            String app_url = "https://play.google.com/store/apps/details?id="+activity.getPackageName();
+            String app_url = "https://play.google.com/store/apps/details?id=" + activity.getPackageName();
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
-            intent.putExtra(Intent.EXTRA_TITLE,"تطبيق عالم أعمالنا");
-            intent.putExtra(Intent.EXTRA_TEXT,app_url);
+            intent.putExtra(Intent.EXTRA_TITLE, "تطبيق عالم أعمالنا");
+            intent.putExtra(Intent.EXTRA_TEXT, app_url);
             startActivity(intent);
         });
 
         binding.llRate.setOnClickListener(view -> {
             try {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + activity.getPackageName())));
-            }catch (ActivityNotFoundException e)
-            {
+            } catch (ActivityNotFoundException e) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + activity.getPackageName())));
 
             }
@@ -148,8 +146,6 @@ public class Fragment_More extends Fragment  {
         });
 
         binding.llLogout.setOnClickListener(view -> activity.logout());
-
-
 
 
     }
@@ -182,7 +178,6 @@ public class Fragment_More extends Fragment  {
             activity.refreshActivity("en");
 
 
-
         });
         dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
@@ -190,8 +185,6 @@ public class Fragment_More extends Fragment  {
         dialog.setView(binding.getRoot());
         dialog.show();
     }
-
-
 
 
 }

@@ -163,7 +163,7 @@
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginStart="5dp"
                                         android:layout_marginEnd="5dp"
-                                        android:text="@{usermodel.postivesRate}"
+                                        android:text='@{usermodel.postivesRate+""}'
                                         android:textColor="@color/textColor"
                                         android:textSize="13sp" />
 
@@ -200,7 +200,7 @@
                                         android:layout_gravity="center_vertical"
                                         android:layout_marginStart="5dp"
                                         android:layout_marginEnd="5dp"
-                                        android:text="@{usermodel.negativeRate}"
+                                        android:text='@{usermodel.negativeRate+""}'
                                         android:textColor="@color/textColor"
                                         android:textSize="13sp" />
 

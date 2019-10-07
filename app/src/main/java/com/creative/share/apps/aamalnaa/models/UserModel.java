@@ -244,6 +244,7 @@ private int id;
         private int liked;
         private int rated_id;
         private String reason;
+        private String created_at;
 
            private String user_name;
         private String user_avatar;
@@ -270,6 +271,10 @@ private int id;
 
         public String getReason() {
             return reason;
+        }
+
+        public String getCreated_at() {
+            return created_at;
         }
 
         public String getUser_name() {

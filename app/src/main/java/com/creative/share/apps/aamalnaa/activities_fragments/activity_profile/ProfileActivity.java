@@ -62,12 +62,14 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
         initView();
-        getprofiledata();
     }
 
     private void initView() {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
+//        Log.e("y",userModel.getUser().getId()+"");
+        getprofiledata();
+
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
@@ -190,8 +192,7 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
                         public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                             dialog.dismiss();
                             if (response.isSuccessful() && response.body() != null) {
-
-updateprofile(userModel);
+                                updateprofile(response.body());
                             } else {
 
                                 Toast.makeText(ProfileActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
@@ -225,17 +226,17 @@ updateprofile(userModel);
                     });
         } catch (Exception e) {
             dialog.dismiss();
-
+Log.e("err",e.getCause().toString());
         }
     }
 
     private void updateprofile(UserModel userModel) {
         binding.setUsermodel(userModel.getUser());
-        Fragment_About fragment_about= (Fragment_About) pagerAdapter.getItem(0);
-        Fragment_Works fragment_works= (Fragment_Works) pagerAdapter.getItem(1);
-        Fragment_Clients fragment_clients= (Fragment_Clients) pagerAdapter.getItem(2);
-        Fragment_Comments fragment_comments= (Fragment_Comments) pagerAdapter.getItem(3);
-fragment_about.setbout(userModel.getUser());
+        Fragment_About fragment_about = (Fragment_About) pagerAdapter.getItem(0);
+        Fragment_Works fragment_works = (Fragment_Works) pagerAdapter.getItem(1);
+        Fragment_Clients fragment_clients = (Fragment_Clients) pagerAdapter.getItem(2);
+        Fragment_Comments fragment_comments = (Fragment_Comments) pagerAdapter.getItem(3);
+        fragment_about.setbout(userModel.getUser());
 
     }
 }
