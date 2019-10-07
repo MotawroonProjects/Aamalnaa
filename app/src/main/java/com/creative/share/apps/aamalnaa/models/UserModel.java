@@ -145,4 +145,5 @@ private int id;
     public String getLastSeen() {
         return lastSeen;
     }
+
 }

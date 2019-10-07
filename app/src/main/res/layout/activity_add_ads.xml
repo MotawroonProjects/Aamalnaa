@@ -116,6 +116,23 @@
                     android:background="@drawable/edt_bg"
                     >
                     <Spinner
+                        android:id="@+id/spinnerAdCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:backgroundTint="@color/colorPrimary"
+
+
+                        >
+
+                    </Spinner>
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/edt_bg"
+                    >
+                    <Spinner
                         android:id="@+id/spinnerAdType"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
