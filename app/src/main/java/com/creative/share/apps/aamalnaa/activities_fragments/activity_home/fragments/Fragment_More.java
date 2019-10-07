@@ -65,8 +65,16 @@ public class Fragment_More extends Fragment  {
         userModel = preferences.getUserData(activity);
 
         binding.image.setOnClickListener(view -> {
-            Intent intent = new Intent(activity, ProfileActivity.class);
-            startActivity(intent);
+
+            if(userModel!=null){
+                Intent intent = new Intent(activity, ProfileActivity.class);
+                startActivity(intent);
+
+            }
+            else {
+                Common.CreateNoSignAlertDialog(activity);
+            }
+
         });
 
         binding.llFavorite.setOnClickListener(view -> {
@@ -79,8 +87,16 @@ public class Fragment_More extends Fragment  {
         });
 
         binding.llAds.setOnClickListener(view -> {
-            Intent intent = new Intent(activity, MyAdsActivity.class);
-            startActivity(intent);
+            if(userModel!=null){
+                Intent intent = new Intent(activity, MyAdsActivity.class);
+                startActivity(intent);
+
+            }
+            else {
+                Common.CreateNoSignAlertDialog(activity);
+            }
+
+
         });
 
         binding.llWallet.setOnClickListener(view -> {

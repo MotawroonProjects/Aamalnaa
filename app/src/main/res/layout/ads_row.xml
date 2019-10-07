@@ -2,12 +2,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     >
-
     <data>
-
-
         <variable
             name="lang"
             type="String" />
@@ -146,7 +142,7 @@
                             android:id="@+id/im2"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:padding="3dp"
+                            android:padding="5dp"
                             android:src="@drawable/info"
                             android:tint="@color/endColor"
 
@@ -198,9 +194,9 @@
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
                             android:singleLine="true"
-                            android:text="@{adversimentmodel.address}"
+                            android:text="@{adversimentmodel.city_name}"
                             android:textColor="@color/gray7"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/im3"
                             app:layout_constraintTop_toTopOf="parent"
@@ -230,7 +226,7 @@
                             android:gravity="center_vertical"
                             android:text='@{adversimentmodel.commented+"تعليق"}'
                             android:textColor="@color/gray7"
-                            android:textSize="14sp"
+                            android:textSize="13sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0"
@@ -272,7 +268,7 @@
                             android:singleLine="true"
                             android:text="@{adversimentmodel.created_at}"
                             android:textColor="@color/gray7"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/im5"
                             app:layout_constraintTop_toTopOf="parent"
@@ -302,7 +298,7 @@
                             android:gravity="center_vertical"
                             android:text="@{adversimentmodel.user_name}"
                             android:textColor="@color/gray7"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0"

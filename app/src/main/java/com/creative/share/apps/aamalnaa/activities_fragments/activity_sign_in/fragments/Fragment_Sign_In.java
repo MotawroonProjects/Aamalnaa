@@ -17,8 +17,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.creative.share.apps.aamalnaa.R;
-import com.creative.share.apps.aamalnaa.activities_fragments.activity_sign_in.activities.SignInActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_sign_in.activities.SignInActivity;
 import com.creative.share.apps.aamalnaa.databinding.FragmentSignInBinding;
 import com.creative.share.apps.aamalnaa.interfaces.Listeners;
 import com.creative.share.apps.aamalnaa.models.LoginModel;
