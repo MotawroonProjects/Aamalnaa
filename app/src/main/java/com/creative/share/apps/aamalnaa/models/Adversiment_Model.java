@@ -47,6 +47,11 @@ private String created_at;
             private int is_like;
             private int is_reported;
 private String user_name;
+private long date;
+
+        public long getDate() {
+            return date;
+        }
 
         public int getId() {
             return id;

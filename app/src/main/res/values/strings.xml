@@ -127,5 +127,11 @@
     <string name="work">Work</string>
     <string name="ads">Ads</string>
     <string name="news">New</string>
-
+    <string name="just_now">just now</string>
+    <string name="a_minute_ago">a minute ago</string>
+    <string name="min">MIN</string>
+    <string name="an_hour_ago">an hour ago</string>
+    <string name="hs">Hs</string>
+    <string name="yesterday">yesterday</string>
+    <string name="day">D</string>
 </resources>

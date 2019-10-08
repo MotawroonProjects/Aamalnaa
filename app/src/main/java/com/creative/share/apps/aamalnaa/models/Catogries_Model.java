@@ -48,11 +48,15 @@ private List<Subcategory> subcategory;
             return subcategory;
         }
 
-        public class Subcategory implements Serializable
+        public static class Subcategory implements Serializable
         {
             private int id;
                 private int category_id;
                 private String name;
+
+            public Subcategory(String name) {
+                this.name = name;
+            }
 
             public int getId() {
                 return id;

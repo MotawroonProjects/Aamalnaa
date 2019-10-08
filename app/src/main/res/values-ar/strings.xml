@@ -122,9 +122,15 @@
     <string name="price">السعر</string>
     <string name="info">معلوماتى</string>
     <string name="rated">التقيمات</string>
-    <string name="work">Work</string>
-    <string name="ads">Ads</string>
-    <string name="news">New</string>
-
+    <string name="work">عمل</string>
+    <string name="ads">اعلان</string>
+    <string name="news">جديد</string>
+    <string name="just_now">الان</string>
+    <string name="a_minute_ago">منذ دقيقة</string>
+    <string name="min">د</string>
+    <string name="an_hour_ago">منذ ساعة</string>
+    <string name="hs">س</string>
+    <string name="yesterday">أمس</string>
+    <string name="day">يوم</string>
 
 </resources>

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.databinding.BindingAdapter;
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.share.TimeAgo;
 import com.creative.share.apps.aamalnaa.tags.Tags;
 import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -50,7 +51,14 @@ public class GeneralMethod {
         Picasso.with(imageView.getContext()).load(Uri.parse(url)).fit().into(imageView);
 
     }
+    @BindingAdapter("date")
+    public static void convertToNotDate(TextView textView,long date)
+    {
+        long d = date*1000;
+        String n_date = TimeAgo.getTimeAgo(d,textView.getContext());
+        textView.setText(n_date);
 
+    }
     @BindingAdapter("imageUserEndPoint")
     public static void displayImage3(CircleImageView imageView, String imageEndPoint)
     {

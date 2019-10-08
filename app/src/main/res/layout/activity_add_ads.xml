@@ -201,7 +201,12 @@
                     android:hint="@string/location"
                     android:textSize="13sp"
                     />
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recService"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
+</androidx.recyclerview.widget.RecyclerView>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

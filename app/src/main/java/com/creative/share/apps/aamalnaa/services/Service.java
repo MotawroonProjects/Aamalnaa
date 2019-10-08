@@ -7,6 +7,7 @@ import com.creative.share.apps.aamalnaa.models.Adversiment_Model;
 import com.creative.share.apps.aamalnaa.models.App_Data_Model;
 import com.creative.share.apps.aamalnaa.models.Catogries_Model;
 import com.creative.share.apps.aamalnaa.models.Cities_Model;
+import com.creative.share.apps.aamalnaa.models.Service_Model;
 import com.creative.share.apps.aamalnaa.models.Slider_Model;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 
@@ -98,6 +99,8 @@ public interface Service {
     @POST("api/my_account")
     Call<UserModel> getmyprofile(
             @Field("user_id")String user_id);
+    @GET("api/servicesPrice")
+    Call<Service_Model> getservice();
 }
 
 

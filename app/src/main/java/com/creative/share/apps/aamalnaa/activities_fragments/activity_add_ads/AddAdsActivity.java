@@ -2,6 +2,7 @@ package com.creative.share.apps.aamalnaa.activities_fragments.activity_add_ads;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,7 +11,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,18 +27,33 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_transfer.TransferActivity;
+import com.creative.share.apps.aamalnaa.adapters.CityAdapter;
 import com.creative.share.apps.aamalnaa.adapters.ImagesAdapter;
+import com.creative.share.apps.aamalnaa.adapters.Service_Adapter;
+import com.creative.share.apps.aamalnaa.adapters.Spinner_Category_Adapter;
+import com.creative.share.apps.aamalnaa.adapters.Spinner_Sub_Category_Adapter;
 import com.creative.share.apps.aamalnaa.databinding.ActivityAddAdsBinding;
 import com.creative.share.apps.aamalnaa.databinding.DialogSelectImageBinding;
 import com.creative.share.apps.aamalnaa.interfaces.Listeners;
 import com.creative.share.apps.aamalnaa.language.Language;
+import com.creative.share.apps.aamalnaa.models.Catogries_Model;
+import com.creative.share.apps.aamalnaa.models.Cities_Model;
+import com.creative.share.apps.aamalnaa.models.Service_Model;
+import com.creative.share.apps.aamalnaa.remote.Api;
+import com.creative.share.apps.aamalnaa.share.Common;
+import com.creative.share.apps.aamalnaa.tags.Tags;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddAdsActivity extends AppCompatActivity implements Listeners.BackListener {
     private ActivityAddAdsBinding binding;
@@ -45,8 +64,19 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
     private final int IMG_REQ1 = 1, IMG_REQ2 = 2;
     private Uri url = null;
     private List<String> urlList;
-    private LinearLayoutManager manager;
+    private LinearLayoutManager manager,manager2;
     private ImagesAdapter imagesAdapter;
+private List<Service_Model.Data> dataList;
+private List<Cities_Model.Data> cDataList;
+private Service_Adapter service_adapter;
+private int views_num=0,is_Special=0,is_Install=0,commented=0;
+    private Spinner_Category_Adapter adapter;
+    private List<Catogries_Model.Data> dataList2;
+    private Spinner_Sub_Category_Adapter spinner_sub_category_adapters;
+    private List<Catogries_Model.Data.Subcategory> subcategories;
+    private String cat_id,sub_cat_id;
+    private CityAdapter cityadapter;
+    private String city_id;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -60,12 +90,72 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_add_ads);
         initView();
+        getservice();
+        getDepartments();
+    }
+    private void updateCatogryAdapter(Catogries_Model body) {
+
+        dataList2.add(new Catogries_Model.Data("إختر"));
+        if (body.getData() != null) {
+            dataList2.addAll(body.getData());
+            adapter.notifyDataSetChanged();
+
+        }
+    }
+    public void getDepartments() {
+        //   Common.CloseKeyBoard(homeActivity, edt_name);
+
+        // rec_sent.setVisibility(View.GONE);
+
+        Api.getService(Tags.base_url)
+                .getDepartment()
+                .enqueue(new Callback<Catogries_Model>() {
+                    @Override
+                    public void onResponse(Call<Catogries_Model> call, Response<Catogries_Model> response) {
+                        //   progBar.setVisibility(View.GONE);
+                        if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
+                            if (response.body().getData().size() > 0) {
+                                // rec_sent.setVisibility(View.VISIBLE);
+
+                                //   ll_no_order.setVisibility(View.GONE);
+                                updateCatogryAdapter(response.body());                                //   total_page = response.body().getMeta().getLast_page();
+
+                            } else {
+                                //  ll_no_order.setVisibility(View.VISIBLE);
+
+                            }
+                        } else {
+
+                            Toast.makeText(AddAdsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            try {
+                                Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Catogries_Model> call, Throwable t) {
+                        try {
+
+
+                            Toast.makeText(AddAdsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                            Log.e("error", t.getMessage());
+                        } catch (Exception e) {
+                        }
+                    }
+                });
+
     }
 
     private void initView() {
 
         urlList = new ArrayList<>();
-
+dataList=new ArrayList<>();
+dataList2=new ArrayList<>();
+subcategories=new ArrayList<>();
+cDataList=new ArrayList<>();
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
@@ -73,9 +163,154 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
         binding.imageSelectPhoto.setOnClickListener(view -> CreateImageAlertDialog());
 
         manager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        manager2 = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+
         binding.recView.setLayoutManager(manager);
         imagesAdapter = new ImagesAdapter(urlList,this);
         binding.recView.setAdapter(imagesAdapter);
+        service_adapter=new Service_Adapter(dataList,this);
+        binding.recService.setLayoutManager(manager2);
+        binding.recService.setAdapter(service_adapter);
+        adapter = new Spinner_Category_Adapter(dataList2, this);
+        binding.spinnerMainDepart.setAdapter(adapter);
+spinner_sub_category_adapters=new Spinner_Sub_Category_Adapter(subcategories,this);
+binding.spinnerSubDepart.setAdapter(spinner_sub_category_adapters);
+        cityadapter=new CityAdapter(cDataList,this);
+        binding.spinnerAdCity.setAdapter(cityadapter);
+        binding.spinnerMainDepart.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0) {
+                    cat_id = "";
+
+                } else {
+                    cat_id = String.valueOf(dataList2.get(i).getId());
+updatesublist(dataList2.get(i).getSubcategory());
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        binding.spinnerSubDepart.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(i==0){
+                    sub_cat_id="";
+                }
+                else {
+                    sub_cat_id=String.valueOf(subcategories.get(i).getId());
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+        getCities();
+
+        binding.spinnerAdCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0) {
+                    city_id = "";
+
+                } else {
+                    city_id = String.valueOf(dataList.get(i).getId());
+
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+    }
+    private void updateCityAdapter(Cities_Model body) {
+
+        cDataList.add(new Cities_Model.Data("إختر"));
+        if(body.getData()!=null){
+            cDataList.addAll(body.getData());
+            cityadapter.notifyDataSetChanged();}
+    }
+    private void getCities() {
+        try {
+            ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+            dialog.setCancelable(false);
+            dialog.show();
+            Api.getService(Tags.base_url)
+                    .getCity()
+                    .enqueue(new Callback<Cities_Model>() {
+                        @Override
+                        public void onResponse(Call<Cities_Model> call, Response<Cities_Model> response) {
+                            dialog.dismiss();
+                            if (response.isSuccessful() && response.body() != null) {
+                                if(response.body().getData()!=null){
+                                    updateCityAdapter(response.body());}
+                                else {
+                                    Log.e("error",response.code()+"_"+response.errorBody());
+
+                                }
+
+                            } else {
+
+                                try {
+
+                                    Log.e("error",response.code()+"_"+response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                if (response.code() == 500) {
+                                    Toast.makeText(AddAdsActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+
+
+                                }else
+                                {
+                                    Toast.makeText(AddAdsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Cities_Model> call, Throwable t) {
+                            try {
+                                dialog.dismiss();
+                                if (t.getMessage() != null) {
+                                    Log.e("error", t.getMessage());
+                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                        Toast.makeText(AddAdsActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(AddAdsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+        }
+
+    }
+
+    private void updatesublist(List<Catogries_Model.Data.Subcategory> subcategory) {
+        subcategories.add(new Catogries_Model.Data.Subcategory("إختر"));
+        if (subcategory != null) {
+            subcategories.addAll(subcategory);
+            spinner_sub_category_adapters.notifyDataSetChanged();
+
+        }
     }
 
 
@@ -246,5 +481,97 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
         finish();
     }
 
+
+    public void setcommented() {
+        if(commented==0){
+            commented=1;
+        }
+        else {
+            commented=0;
+        }
+    }
+
+    public void setspicial() {
+        if(is_Special==0){
+            is_Special=1;
+        }
+        else {
+            is_Special=0;
+        }
+    }
+
+    public void setviews() {
+        if(views_num==0){
+            views_num=1;
+        }
+        else {
+            views_num=0;
+        }
+    }
+
+    public void setisinstall() {
+        if(is_Install==0){
+            is_Install=1;
+        }
+        else {
+            is_Install=0;
+        }
+    }
+    private void getservice() {
+        ProgressDialog dialog = Common.createProgressDialog(AddAdsActivity.this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        try {
+
+            Api.getService(Tags.base_url)
+                    .getservice()
+                    .enqueue(new Callback<Service_Model>() {
+                        @Override
+                        public void onResponse(Call<Service_Model> call, Response<Service_Model> response) {
+                            dialog.dismiss();
+                            if (response.isSuccessful() && response.body() != null) {
+                                updateservice(response.body());
+                            } else {
+
+                                Toast.makeText(AddAdsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+                                try {
+
+                                    Log.e("error", response.code() + "_" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Service_Model> call, Throwable t) {
+                            try {
+                                dialog.dismiss();
+                                if (t.getMessage() != null) {
+                                    Log.e("error", t.getMessage());
+                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                        Toast.makeText(AddAdsActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(AddAdsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            dialog.dismiss();
+            Log.e("err", e.getCause().toString());
+        }
+    }
+
+    private void updateservice(Service_Model body) {
+        dataList.clear();
+        dataList.addAll(body.getData());
+        service_adapter.notifyDataSetChanged();
+    }
 
 }

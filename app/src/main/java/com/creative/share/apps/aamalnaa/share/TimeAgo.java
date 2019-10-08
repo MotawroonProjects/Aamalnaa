@@ -12,7 +12,7 @@ public class TimeAgo {
     private static final int MINUTE_MILS = 60*SECOND_MILS;
     private static final int HOUR_MILS = 60*MINUTE_MILS;
     private static final int DAY_MILS = 24*HOUR_MILS;
-/*
+
     public static String getTimeAgo(long time, Context context)
     {
         long now = Calendar.getInstance().getTimeInMillis();
@@ -57,6 +57,6 @@ public class TimeAgo {
             {
                 return diff/DAY_MILS +" "+context.getString(R.string.day);
             }
-    }*/
+    }
 
 }

@@ -98,7 +98,6 @@ public class Fragment_Main extends Fragment {
     private void initView() {
         dataList = new ArrayList<>();
         advesriment_data_list = new ArrayList<>();
-        dataList.add(new Catogries_Model.Data("all", "الكل"));
         activity = (HomeActivity) getActivity();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
@@ -319,6 +318,8 @@ public class Fragment_Main extends Fragment {
                     public void onResponse(Call<Catogries_Model> call, Response<Catogries_Model> response) {
                         //   progBar.setVisibility(View.GONE);
                         if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
+                            dataList.add(new Catogries_Model.Data("all", "الكل"));
+
                             dataList.addAll(response.body().getData());
                             if (response.body().getData().size() > 0) {
                                 // rec_sent.setVisibility(View.VISIBLE);

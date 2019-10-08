@@ -1,5 +1,6 @@
 package com.creative.share.apps.aamalnaa.activities_fragments.activity_ads;
 
+import android.content.Context;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,8 @@ import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeA
 import com.creative.share.apps.aamalnaa.adapters.Ads_Adapter;
 import com.creative.share.apps.aamalnaa.databinding.ActivityAdsBinding;
 import com.creative.share.apps.aamalnaa.databinding.FragmentAdsBinding;
+import com.creative.share.apps.aamalnaa.interfaces.Listeners;
+import com.creative.share.apps.aamalnaa.language.Language;
 import com.creative.share.apps.aamalnaa.models.Adversiment_Model;
 import com.creative.share.apps.aamalnaa.models.Filter_Model;
 import com.creative.share.apps.aamalnaa.models.UserModel;
@@ -32,12 +35,15 @@ import com.creative.share.apps.aamalnaa.tags.Tags;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import io.paperdb.Paper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Ads_Activity extends AppCompatActivity {
+public class Ads_Activity extends AppCompatActivity implements Listeners.BackListener {
+    private String lang;
 
     private ActivityAdsBinding binding;
     private Preferences preferences;
@@ -47,6 +53,12 @@ public class Ads_Activity extends AppCompatActivity {
     private List<Adversiment_Model.Data> adsList;
     private Ads_Adapter ads_adapter;
     private LinearLayoutManager manager;
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        Paper.init(newBase);
+        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", "ar")));
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +74,9 @@ public class Ads_Activity extends AppCompatActivity {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
         ads_adapter = new Ads_Adapter(adsList, this);
+        binding.setBackListener(this);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        binding.setLang(lang);
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.progBar.setVisibility(View.GONE);
         binding.recView.setItemViewCacheSize(25);
@@ -205,6 +220,9 @@ public class Ads_Activity extends AppCompatActivity {
     }
 
 
-
+    @Override
+    public void back() {
+        finish();
+    }
 
 }
