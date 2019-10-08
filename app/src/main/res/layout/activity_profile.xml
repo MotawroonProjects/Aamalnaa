@@ -64,6 +64,7 @@
                                 android:src="@drawable/user_profile"
                                 app:civ_border_color="@color/colorPrimary"
                                 app:civ_border_width="1dp"
+                                imageUserEndPoint="@{usermodel.avatar}"
                                 app:civ_circle_background_color="@color/white" />
 
                             <TextView
@@ -82,6 +83,52 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="20dp"
                                 android:orientation="vertical">
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:text="MyInfo"
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="30dp"
+                                        android:background="@drawable/sp_bg"
+                                        android:orientation="horizontal"
+                                        android:paddingLeft="10dp"
+                                        android:paddingRight="10dp"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent">
+
+                                        <ImageView
+                                            android:layout_width="20dp"
+                                            android:layout_height="20dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:padding="3dp"
+                                            android:src="@drawable/ic_edit"
+                                            android:tint="@color/textColor" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:text="@string/edit_profile"
+                                            android:textColor="@color/textColor"
+                                            android:textSize="13sp" />
+                                    </LinearLayout>
+                                </androidx.constraintlayout.widget.ConstraintLayout>
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="match_parent"
@@ -113,32 +160,6 @@
                                         app:layout_constraintTop_toTopOf="parent" />
 
 
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="30dp"
-                                        android:background="@drawable/sp_bg"
-                                        android:orientation="horizontal"
-                                        android:paddingLeft="10dp"
-                                        android:paddingRight="10dp"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent">
-
-                                        <ImageView
-                                            android:layout_width="20dp"
-                                            android:layout_height="20dp"
-                                            android:layout_gravity="center_vertical"
-                                            android:padding="3dp"
-                                            android:src="@drawable/ic_edit"
-                                            android:tint="@color/textColor" />
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center_vertical"
-                                            android:text="@string/edit_profile"
-                                            android:textColor="@color/textColor"
-                                            android:textSize="13sp" />
-                                    </LinearLayout>
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                                 <LinearLayout
@@ -212,6 +233,170 @@
                                         android:textColor="@color/black"
                                         android:textSize="13sp" />
                                 </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:padding="8dp"
+                                        android:weightSum="1"
+                                        >
+                                        <ImageView
+                                            android:layout_width="0dp"
+                                            android:layout_weight=".1"
+                                            android:layout_height="20dp"
+                                            android:src="@drawable/ic_info"
+                                            android:tint="@color/secondColor"
+                                            android:layout_gravity="center_vertical"
+                                            android:padding="3dp"
+                                            />
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_weight=".3"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:textSize="12sp"
+                                            android:textColor="@color/textColor"
+                                            android:text="@string/about" />
+
+
+                                        <TextView
+                                            android:id="@+id/tvAbout"
+                                            android:layout_width="0dp"
+                                            android:layout_weight=".6"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:textSize="13sp"
+                                            android:textColor="@color/black"
+                                            android:text="@{usermodel.about}"
+                                            />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:padding="8dp"
+                                        android:weightSum="1"
+                                        android:layout_marginTop="5dp"
+                                        >
+                                        <ImageView
+                                            android:layout_width="0dp"
+                                            android:layout_weight=".1"
+                                            android:layout_height="20dp"
+                                            android:src="@drawable/ic_map"
+                                            android:tint="@color/secondColor"
+                                            android:layout_gravity="center_vertical"
+                                            android:padding="3dp"
+
+                                            />
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_weight=".3"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:textSize="12sp"
+                                            android:textColor="@color/textColor"
+                                            android:text="@string/city"
+                                            />
+
+
+                                        <TextView
+                                            android:id="@+id/tvCity"
+                                            android:layout_width="0dp"
+                                            android:layout_weight=".6"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:textSize="13sp"
+                                            android:textColor="@color/black"
+                                            android:text="@{usermodel.city_name}"
+                                            />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:padding="8dp"
+                                        android:weightSum="1"
+                                        android:layout_marginTop="5dp"
+                                        >
+                                        <ImageView
+                                            android:layout_width="0dp"
+                                            android:layout_weight=".1"
+                                            android:layout_height="20dp"
+                                            android:src="@drawable/ic_phone_call"
+                                            android:tint="@color/secondColor"
+                                            android:layout_gravity="center_vertical"
+                                            android:padding="3dp"
+
+                                            />
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_weight=".3"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:textSize="12sp"
+                                            android:textColor="@color/textColor"
+                                            android:text="@string/phone"
+                                            />
+
+
+                                        <TextView
+                                            android:id="@+id/tvPhone"
+                                            android:layout_width="0dp"
+                                            android:layout_weight=".6"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:textSize="13sp"
+                                            android:textColor="@color/black"
+                                            android:text="@{usermodel.mobile}"
+                                            />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:padding="8dp"
+                                        android:weightSum="1"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginBottom="20dp"
+                                        >
+                                        <ImageView
+                                            android:layout_width="0dp"
+                                            android:layout_weight=".1"
+                                            android:layout_height="20dp"
+                                            android:src="@drawable/ic_mail"
+                                            android:tint="@color/secondColor"
+                                            android:layout_gravity="center_vertical"
+                                            android:padding="3dp"
+
+                                            />
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_weight=".3"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:textSize="12sp"
+                                            android:textColor="@color/textColor"
+                                            android:text="@string/email"
+                                            />
+
+
+                                        <TextView
+                                            android:id="@+id/tvEmail"
+                                            android:layout_width="0dp"
+                                            android:layout_weight=".6"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:textSize="13sp"
+                                            android:textColor="@color/black"
+                                            android:text="@{usermodel.email}"
+                                            />
+                                    </LinearLayout>
+
 
                             </LinearLayout>
 

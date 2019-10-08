@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:orientation="horizontal"
-            android:weightSum="3"
+            android:weightSum="4"
             >
             <TextView
                 android:layout_width="0dp"
@@ -58,31 +58,16 @@
                 />
 
             <Button
-                android:id="@+id/btnFurthest"
+                android:id="@+id/btnNew"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:textSize="14sp"
-                android:text="@string/furthest"
+                android:text="@string/news"
                 android:background="@drawable/un_selected_filter"
                 android:textColor="@color/textColor"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal"
-            android:weightSum="3"
-            >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textColor="@color/textColor"
                 />
             <Button
                 android:id="@+id/btnWithImage"
@@ -96,20 +81,8 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
                 />
-
-            <Button
-                android:id="@+id/btnWithoutImage"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:textSize="14sp"
-                android:text="@string/not_pictured"
-                android:background="@drawable/un_selected_filter"
-                android:textColor="@color/textColor"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                />
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -151,38 +124,32 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:orientation="horizontal"
-            android:weightSum="3"
+            android:weightSum="2"
             android:layout_marginBottom="20dp"
-            >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textColor="@color/textColor"
-                android:text="@string/client_type"
-                />
+android:gravity="center"            >
+
             <Button
-                android:id="@+id/btnClient"
+                android:id="@+id/btnCancel"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:textSize="14sp"
-                android:text="@string/normal"
-                android:background="@drawable/un_selected_filter"
+                android:text="@string/cancel"
+                android:background="@drawable/linear_bg_white"
                 android:textColor="@color/textColor"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
                 />
 
             <Button
-                android:id="@+id/btnGolden"
+                android:id="@+id/btnfilter"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:textSize="14sp"
-                android:text="@string/golden"
-                android:background="@drawable/un_selected_filter"
-                android:textColor="@color/textColor"
+                android:text="@string/filter"
+                android:background="@drawable/btn_login_bg"
+                android:textColor="@color/white"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
                 />

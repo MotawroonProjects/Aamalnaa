@@ -119,7 +119,12 @@
     <string name="inc_phone_pas">رقم الجوال او كلمة المرور غير صحيحة</string>
     <string name="please_accept_terms">من فضلك اقبل الشروط  والاحكام</string>
     <string name="Choose_Catogry">اختر القسم</string>
-    <string name="price">Price</string>
+    <string name="price">السعر</string>
+    <string name="info">معلوماتى</string>
+    <string name="rated">التقيمات</string>
+    <string name="work">Work</string>
+    <string name="ads">Ads</string>
+    <string name="news">New</string>
 
 
 </resources>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="lang"
+            type="String" />
+
+        <variable
+            name="workmodel"
+            type="com.creative.share.apps.aamalnaa.models.UserModel.Previous" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="3dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+<de.hdodenhof.circleimageview.CircleImageView
+    android:id="@+id/image"
+    android:layout_width="60dp"
+    android:layout_height="60dp"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:civ_border_color="@color/colorPrimary"
+    app:civ_border_width="1dp"
+    imageUserEndPoint="@{workmodel.user_avatar}"
+    app:civ_circle_background_color="@color/white"
+    />
+<TextView
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    app:layout_constraintStart_toEndOf="@+id/image"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/bt_work"
+    android:text="@{workmodel.user_name}"
+    android:textSize="15sp"
+    android:textColor="@color/black"
+
+    />
+            <Button
+                android:id="@+id/bt_work"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_login_bg"
+                android:text="@string/work"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textSize="14sp"
+                android:padding="5dp"
+                android:textColor="@color/white"
+
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
+

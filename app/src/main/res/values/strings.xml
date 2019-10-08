@@ -122,6 +122,10 @@
     <string name="please_accept_terms">Please Accept Terms And Condition</string>
     <string name="Choose_Catogry">Choose Category</string>
     <string name="price">Price</string>
-
+<string name="info">MyInfo</string>
+    <string name="rated">Rated</string>
+    <string name="work">Work</string>
+    <string name="ads">Ads</string>
+    <string name="news">New</string>
 
 </resources>

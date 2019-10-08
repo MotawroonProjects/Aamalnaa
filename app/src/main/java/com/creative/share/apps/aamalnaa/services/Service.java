@@ -58,6 +58,16 @@ public interface Service {
             @Field("category_id")String category_id
     );
     @FormUrlEncoded
+    @POST("api/fillter")
+    Call<Adversiment_Model> getAds(
+            @Field("page")int page,
+            @Field("city_id")String city_id,
+            @Field("lat")String lat,
+            @Field("lng")String lng,
+            @Field("is_new")int is_new
+
+    );
+    @FormUrlEncoded
     @POST("api/favorite_ads")
     Call<Adversiment_Model> getFAds(
             @Field("page")int page,

@@ -19,6 +19,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class GeneralMethod {
 
     @BindingAdapter("error")
@@ -49,6 +51,12 @@ public class GeneralMethod {
 
     }
 
+    @BindingAdapter("imageUserEndPoint")
+    public static void displayImage3(CircleImageView imageView, String imageEndPoint)
+    {
+        Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_Ads_URL+imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+
+    }
 
     @BindingAdapter({"date","workTimehoosen","workTime"})
     public static void displayDate (TextView textView,long date,String work_time_choosen,String work_time)

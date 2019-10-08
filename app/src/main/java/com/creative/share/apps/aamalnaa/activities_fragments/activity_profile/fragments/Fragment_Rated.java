@@ -15,14 +15,11 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
-import com.creative.share.apps.aamalnaa.adapters.Customer_Adapter;
-import com.creative.share.apps.aamalnaa.adapters.Work_Adapter;
-import com.creative.share.apps.aamalnaa.databinding.FragmentClientsBinding;
-import com.creative.share.apps.aamalnaa.databinding.FragmentWorksBinding;
+import com.creative.share.apps.aamalnaa.adapters.Rated_Adapter;
+import com.creative.share.apps.aamalnaa.databinding.FragmentRatedBinding;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
 import com.creative.share.apps.aamalnaa.remote.Api;
@@ -37,44 +34,42 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Fragment_Clients extends Fragment {
+public class Fragment_Rated extends Fragment {
     private ProfileActivity activity;
-    private FragmentClientsBinding binding;
-    private LinearLayoutManager manager;
-    private List<UserModel.Customers> adsList;
-    private Customer_Adapter customer_adapter;
+    private FragmentRatedBinding binding;
     private Preferences preferences;
     private UserModel userModel;
+    private List<UserModel.Rateds> ratedsList;
+    private Rated_Adapter rated_adapter;
 
-    public static Fragment_Works newInstance() {
-        return new Fragment_Works();
+    public static Fragment_Rated newInstance() {
+        return new Fragment_Rated();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_clients,container,false);
-        getprofiledata();
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_rated,container,false);
+
         initView();
         getprofiledata();
         return binding.getRoot();
     }
 
     private void initView() {
-        adsList = new ArrayList<>();
+
+        ratedsList = new ArrayList<>();
         activity = (ProfileActivity) getActivity();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
-        customer_adapter = new Customer_Adapter(adsList, activity);
+        rated_adapter = new Rated_Adapter(ratedsList, activity);
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.progBar.setVisibility(View.GONE);
         binding.recView.setItemViewCacheSize(25);
         binding.recView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         binding.recView.setDrawingCacheEnabled(true);
         binding.recView.setLayoutManager(new GridLayoutManager(activity, 1));
-        binding.recView.setAdapter(customer_adapter);
-
-
+        binding.recView.setAdapter(rated_adapter);
     }
 
     private void getprofiledata() {
@@ -131,19 +126,18 @@ public class Fragment_Clients extends Fragment {
     private void updateprofile(UserModel userModel) {
 
 
-        if (userModel.getCustomers() != null) {
+        if (userModel.getRateds() != null) {
 
-            setads(userModel.getCustomers());
-            activity.updateClientCount(userModel.getCustomers().size());
+            setrated(userModel.getRateds());
+            activity.updateratedCount(userModel.getRateds().size());
 
         }
 
     }
-
-    private void setads(List<UserModel.Customers> ads) {
-        adsList.clear();
-        adsList.addAll(ads);
-        customer_adapter.notifyDataSetChanged();
+    private void setrated(List<UserModel.Rateds> rateds) {
+        //  Log.e("jjj",ratedsList.size()+"");
+        ratedsList.clear();
+        ratedsList.addAll(rateds);
+        rated_adapter.notifyDataSetChanged();
     }
-
 }

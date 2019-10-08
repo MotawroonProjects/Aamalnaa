@@ -1,17 +1,26 @@
 package com.creative.share.apps.aamalnaa.activities_fragments.activity_home;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.Looper;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -21,20 +30,39 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_add_ads.AddAdsActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_ads.Ads_Activity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.fragments.Fragment_Main;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.fragments.Fragment_Messages;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.fragments.Fragment_More;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.fragments.Fragment_Notifications;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_sign_in.activities.SignInActivity;
+import com.creative.share.apps.aamalnaa.adapters.CityAdapter;
 import com.creative.share.apps.aamalnaa.databinding.ActivityHomeBinding;
 import com.creative.share.apps.aamalnaa.language.Language;
+import com.creative.share.apps.aamalnaa.models.Cities_Model;
+import com.creative.share.apps.aamalnaa.models.Filter_Model;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
 import com.creative.share.apps.aamalnaa.remote.Api;
 import com.creative.share.apps.aamalnaa.share.Common;
 import com.creative.share.apps.aamalnaa.tags.Tags;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResult;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -44,7 +72,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks, LocationListener {
     private ActivityHomeBinding binding;
     private FragmentManager fragmentManager;
     private Fragment_Main fragment_main;
@@ -55,8 +83,18 @@ public class HomeActivity extends AppCompatActivity {
     private UserModel userModel;
     private BottomSheetBehavior behavior;
     private View root;
-    private Button btnNearby, btnFurthest, btnWithImage, btnWithoutImage, btnClient, btnGolden;
+    private Button btnNearby, btnFurthest, btnWithImage, btcancel, btfilter;
     private Spinner spinner;
+    private String lat="0.0", lng="0.0";
+    private CityAdapter adapter;
+    private List<Cities_Model.Data> dataList;
+    private final String gps_perm = Manifest.permission.ACCESS_FINE_LOCATION;
+    private final int gps_req = 22;
+    private GoogleApiClient googleApiClient;
+    private LocationRequest locationRequest;
+    private LocationCallback locationCallback;
+    private Location location;
+    private ProgressDialog dialog;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -72,6 +110,8 @@ public class HomeActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         initView();
         if (savedInstanceState == null) {
+            CheckPermission();
+
             displayFragmentMain();
         }
 
@@ -80,72 +120,93 @@ public class HomeActivity extends AppCompatActivity {
 
     @SuppressLint("RestrictedApi")
     private void initView() {
+        dataList=new ArrayList<>();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
         fragmentManager = getSupportFragmentManager();
         binding.toolbar.setTitle("");
         root = findViewById(R.id.root);
         btnNearby = findViewById(R.id.btnNearby);
-        btnFurthest = findViewById(R.id.btnFurthest);
+        btnFurthest = findViewById(R.id.btnNew);
         btnWithImage = findViewById(R.id.btnWithImage);
-        btnWithoutImage = findViewById(R.id.btnWithoutImage);
-        btnClient = findViewById(R.id.btnClient);
-        btnGolden = findViewById(R.id.btnGolden);
+        btcancel = findViewById(R.id.btnCancel);
+        btfilter = findViewById(R.id.btnfilter);
+        spinner=findViewById(R.id.spinner);
+        Filter_Model.setCity_id("all");
+        Filter_Model.setLat("all");
+        Filter_Model.setLng("all");
+        Filter_Model.setIs_new(0);
+        Filter_Model.setphoto(0);
+        adapter=new CityAdapter(dataList,this);
+        spinner.setAdapter(adapter);
+        getCities();
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0) {
+                    Filter_Model.setCity_id("all");
+                } else {
+                  Filter_Model.setCity_id(dataList.get(i).getId()+"");
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         btnNearby.setOnClickListener(view -> {
-            btnNearby.setBackgroundResource(R.drawable.selected_filter);
-            btnFurthest.setBackgroundResource(R.drawable.un_selected_filter);
-            btnNearby.setTextColor(ContextCompat.getColor(this, R.color.white));
-            btnFurthest.setTextColor(ContextCompat.getColor(this, R.color.textColor));
+            if (Filter_Model.getLat().equals("all")) {
+                btnNearby.setBackgroundResource(R.drawable.selected_filter);
+                btnNearby.setTextColor(ContextCompat.getColor(this, R.color.white));
+             dialog = Common.createProgressDialog(this, getString(R.string.wait));
+
+                dialog.show();
+                CheckPermission();
+                Filter_Model.setLat(lat);
+                Filter_Model.setLng(lng);
+                Log.e("lat",lat+"  "+lng);
+            } else {
+                btnNearby.setBackgroundResource(R.drawable.un_selected_filter);
+                btnNearby.setTextColor(ContextCompat.getColor(this, R.color.textColor));
+                Filter_Model.setLat("all");
+                Filter_Model.setLng("all");
+            }
 
         });
 
         btnFurthest.setOnClickListener(view -> {
-            btnFurthest.setBackgroundResource(R.drawable.selected_filter);
-            btnNearby.setBackgroundResource(R.drawable.un_selected_filter);
-
-            btnFurthest.setTextColor(ContextCompat.getColor(this, R.color.white));
-            btnNearby.setTextColor(ContextCompat.getColor(this, R.color.textColor));
+            if (Filter_Model.getIs_new() == 0) {
+                btnFurthest.setBackgroundResource(R.drawable.selected_filter);
+                btnFurthest.setTextColor(ContextCompat.getColor(this, R.color.white));
+                Filter_Model.setIs_new(1);
+            } else {
+                btnFurthest.setBackgroundResource(R.drawable.un_selected_filter);
+                btnFurthest.setTextColor(ContextCompat.getColor(this, R.color.textColor));
+                Filter_Model.setIs_new(0);
+            }
 
         });
 
 
         btnWithImage.setOnClickListener(view -> {
-            btnWithImage.setBackgroundResource(R.drawable.selected_filter);
-            btnWithoutImage.setBackgroundResource(R.drawable.un_selected_filter);
+            if (Filter_Model.getPhoto() == 0) {
+                btnWithImage.setBackgroundResource(R.drawable.selected_filter);
 
-            btnWithImage.setTextColor(ContextCompat.getColor(this, R.color.white));
-            btnWithoutImage.setTextColor(ContextCompat.getColor(this, R.color.textColor));
+                btnWithImage.setTextColor(ContextCompat.getColor(this, R.color.white));
+                Filter_Model.setphoto(1);
+            } else {
+                btnWithImage.setBackgroundResource(R.drawable.un_selected_filter);
+                btnWithImage.setTextColor(ContextCompat.getColor(this, R.color.textColor));
+                Filter_Model.setphoto(0);
 
-        });
-
-        btnWithoutImage.setOnClickListener(view -> {
-            btnWithoutImage.setBackgroundResource(R.drawable.selected_filter);
-            btnWithImage.setBackgroundResource(R.drawable.un_selected_filter);
-
-            btnWithoutImage.setTextColor(ContextCompat.getColor(this, R.color.white));
-            btnWithImage.setTextColor(ContextCompat.getColor(this, R.color.textColor));
+            }
 
         });
 
-        btnClient.setOnClickListener(view -> {
-            btnClient.setBackgroundResource(R.drawable.selected_filter);
-            btnGolden.setBackgroundResource(R.drawable.un_selected_filter);
-
-            btnClient.setTextColor(ContextCompat.getColor(this, R.color.white));
-            btnGolden.setTextColor(ContextCompat.getColor(this, R.color.textColor));
-
-        });
-
-        btnGolden.setOnClickListener(view -> {
-            btnGolden.setBackgroundResource(R.drawable.selected_filter);
-            btnClient.setBackgroundResource(R.drawable.un_selected_filter);
-
-            btnGolden.setTextColor(ContextCompat.getColor(this, R.color.white));
-            btnClient.setTextColor(ContextCompat.getColor(this, R.color.textColor));
-
-        });
 
         binding.imageFilter.setOnClickListener(view -> {
             binding.fab.setVisibility(View.INVISIBLE);
@@ -159,10 +220,23 @@ public class HomeActivity extends AppCompatActivity {
 
         binding.fab.setOnClickListener(view -> {
             Intent intent = new Intent(this, AddAdsActivity.class);
-            startActivityForResult(intent,1);
+            startActivityForResult(intent, 1);
 
         });
-
+btcancel.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        binding.fab.setVisibility(View.VISIBLE);
+        behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+    }
+});
+btfilter.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Intent intent=new Intent(HomeActivity.this, Ads_Activity.class);
+        startActivity(intent);
+    }
+});
         setSupportActionBar(binding.toolbar);
         setUpBottomNavigation();
         setUpBottomSheet();
@@ -327,8 +401,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-
-
     private void NavigateToSignInActivity() {
         Intent intent = new Intent(HomeActivity.this, SignInActivity.class);
         startActivity(intent);
@@ -344,33 +416,16 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    public void logout()
-    {
-        if (userModel==null)
-        {
+    public void logout() {
+        if (userModel == null) {
             NavigateToSignInActivity();
-        }else
-            {
-Logout();
-            }
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        List<Fragment> fragmentList = fragmentManager.getFragments();
-        for (Fragment fragment : fragmentList) {
-            fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        } else {
+            Logout();
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        List<Fragment> fragmentList = fragmentManager.getFragments();
-        for (Fragment fragment : fragmentList) {
-            fragment.onActivityResult(requestCode, resultCode, data);
-        }
-    }
+
+
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -392,8 +447,10 @@ Logout();
         }
 
     }
+
     public void Logout() {
         final ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+
         dialog.show();
         Api.getService(Tags.base_url)
                 .Logout(userModel.getUser().getId() + "")
@@ -426,7 +483,195 @@ Logout();
                     }
                 });
     }
+    private void updateCityAdapter(Cities_Model body) {
+
+        dataList.add(new Cities_Model.Data("إختر"));
+        if(body.getData()!=null){
+            dataList.addAll(body.getData());
+            adapter.notifyDataSetChanged();}
+    }
+
+    private void getCities() {
+        try {
+            ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+            dialog.setCancelable(false);
+            dialog.show();
+            Api.getService(Tags.base_url)
+                    .getCity()
+                    .enqueue(new Callback<Cities_Model>() {
+                        @Override
+                        public void onResponse(Call<Cities_Model> call, Response<Cities_Model> response) {
+                            dialog.dismiss();
+                            if (response.isSuccessful() && response.body() != null) {
+                                if(response.body().getData()!=null){
+                                    updateCityAdapter(response.body());}
+                                else {
+                                    Log.e("error",response.code()+"_"+response.errorBody());
+
+                                }
+
+                            } else {
+
+                                try {
+
+                                    Log.e("error",response.code()+"_"+response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                if (response.code() == 500) {
+                                    Toast.makeText(HomeActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
 
 
+                                }else
+                                {
+                                    Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
 
+
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Cities_Model> call, Throwable t) {
+                            try {
+                                dialog.dismiss();
+                                if (t.getMessage() != null) {
+                                    Log.e("error", t.getMessage());
+                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                        Toast.makeText(HomeActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(HomeActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+        }
+
+    }
+
+    private void CheckPermission() {
+        if (ActivityCompat.checkSelfPermission(this, gps_perm) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{gps_perm}, gps_req);
+        } else {
+            initGoogleApiClient();
+
+        }
+    }
+
+    private void initGoogleApiClient() {
+        googleApiClient = new GoogleApiClient.
+                Builder(this).
+                addOnConnectionFailedListener(this).
+                addConnectionCallbacks(this).
+                addApi(LocationServices.API).build();
+        googleApiClient.connect();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        List<Fragment> fragmentList = fragmentManager.getFragments();
+        for (Fragment fragment : fragmentList) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
+        if (requestCode == 1255) {
+            if (requestCode == Activity.RESULT_OK) {
+                startLocationUpdate();
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        List<Fragment> fragmentList = fragmentManager.getFragments();
+        for (Fragment fragment : fragmentList) {
+            fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+        if (requestCode == gps_req && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            initGoogleApiClient();
+        }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        this.location = location;
+        lat = location.getLatitude()+"";
+        lng = location.getLongitude()+"";
+
+        //AddMarker(lat, lang);
+
+        if (googleApiClient != null) {
+            googleApiClient.disconnect();
+        }
+        if (locationRequest != null) ;
+        {
+            LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(locationCallback);
+        }
+        if(dialog!=null){
+        dialog.dismiss();}
+    }
+
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        intLocationRequest();
+
+    }
+
+    private void intLocationRequest() {
+        locationRequest = new LocationRequest();
+        locationRequest.setFastestInterval(1000 * 60 * 2);
+        locationRequest.setInterval(1000 * 60 * 2);
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
+        PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi.checkLocationSettings(googleApiClient, builder.build());
+        result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
+            @Override
+            public void onResult(@NonNull LocationSettingsResult locationSettingsResult) {
+                Status status = locationSettingsResult.getStatus();
+                switch (status.getStatusCode()) {
+                    case LocationSettingsStatusCodes.SUCCESS:
+                        startLocationUpdate();
+                        break;
+                    case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                        try {
+                            status.startResolutionForResult(HomeActivity.this, 1255);
+                        } catch (Exception e) {
+
+                        }
+                        break;
+                    case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                        Log.e("not available", "not available");
+                        break;
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        if (googleApiClient != null) {
+            googleApiClient.connect();
+        }
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @SuppressLint("MissingPermission")
+    private void startLocationUpdate() {
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                onLocationChanged(locationResult.getLastLocation());
+            }
+        };
+        LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
+    }
 }

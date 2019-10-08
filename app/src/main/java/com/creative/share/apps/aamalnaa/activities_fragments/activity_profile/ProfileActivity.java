@@ -2,7 +2,6 @@ package com.creative.share.apps.aamalnaa.activities_fragments.activity_profile;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,10 +15,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.creative.share.apps.aamalnaa.R;
-import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeActivity;
-import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.fragments.Fragment_About;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.fragments.Fragment_Ads;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.fragments.Fragment_Clients;
-import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.fragments.Fragment_Comments;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.fragments.Fragment_Rated;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.fragments.Fragment_Works;
 import com.creative.share.apps.aamalnaa.adapters.MyPagerAdapter;
 import com.creative.share.apps.aamalnaa.databinding.ActivityProfileBinding;
@@ -46,7 +44,7 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
     private ActivityProfileBinding binding;
     private String lang;
     private MyPagerAdapter pagerAdapter;
-    private TextView tvWorkCount, tvClientCount;
+    private TextView tvads, tvWorkCount, tvClientCount, tvratedcount;
     private Preferences preferences;
     private UserModel userModel;
 
@@ -61,14 +59,16 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
+
         initView();
+        getprofiledata();
+
     }
 
     private void initView() {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
 //        Log.e("y",userModel.getUser().getId()+"");
-        getprofiledata();
 
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
@@ -82,23 +82,33 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
         binding.setUsermodel(userModel.getUser());
         View tab_item1 = LayoutInflater.from(this).inflate(R.layout.tab_custom_view, null);
         View tab_item2 = LayoutInflater.from(this).inflate(R.layout.tab_custom_view, null);
+        View tab_item3 = LayoutInflater.from(this).inflate(R.layout.tab_custom_view, null);
+        View tab_item0 = LayoutInflater.from(this).inflate(R.layout.tab_custom_view, null);
 
         tvWorkCount = tab_item1.findViewById(R.id.tvCount);
         tvClientCount = tab_item2.findViewById(R.id.tvCount);
-
+        tvratedcount = tab_item3.findViewById(R.id.tvCount);
+        tvads = tab_item0.findViewById(R.id.tvCount);
         TextView tvTitle = tab_item1.findViewById(R.id.tvTitle);
         tvTitle.setText(getString(R.string.works));
 
         TextView tvTitle2 = tab_item2.findViewById(R.id.tvTitle);
         tvTitle2.setText(getString(R.string.clients));
+        TextView tvTitle0 = tab_item0.findViewById(R.id.tvTitle);
+        tvTitle0.setText(getString(R.string.my_ads));
+        TextView tvTitle3 = tab_item3.findViewById(R.id.tvTitle);
+        tvTitle3.setText(getString(R.string.rated));
+        binding.tab.getTabAt(0).setCustomView(tab_item0);
 
         binding.tab.getTabAt(1).setCustomView(tab_item1);
 
         binding.tab.getTabAt(2).setCustomView(tab_item2);
+        binding.tab.getTabAt(3).setCustomView(tab_item3);
 
         updateWorkCount(0);
         updateClientCount(0);
-
+updateratedCount(0);
+        updateadsCount(0);
 
         binding.tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -107,15 +117,25 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
                     TextView tvTitle = tab.getCustomView().findViewById(R.id.tvTitle);
                     tvTitle.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.colorPrimary));
 
-                    TextView tvTitle2 = binding.tab.getTabAt(2).getCustomView().findViewById(R.id.tvTitle);
+                    TextView tvTitle2 = binding.tab.getTabAt(1).getCustomView().findViewById(R.id.tvTitle);
                     tvTitle2.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
 
 
-                } else if (tab.getPosition() == 2) {
+                }
+                else if (tab.getPosition() == 0) {
                     TextView tvTitle = tab.getCustomView().findViewById(R.id.tvTitle);
                     tvTitle.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.colorPrimary));
 
-                    TextView tvTitle2 = binding.tab.getTabAt(1).getCustomView().findViewById(R.id.tvTitle);
+                    TextView tvTitle2 = binding.tab.getTabAt(0).getCustomView().findViewById(R.id.tvTitle);
+                    tvTitle2.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
+
+
+                }
+                else if (tab.getPosition() == 2) {
+                    TextView tvTitle = tab.getCustomView().findViewById(R.id.tvTitle);
+                    tvTitle.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.colorPrimary));
+
+                    TextView tvTitle2 = binding.tab.getTabAt(2).getCustomView().findViewById(R.id.tvTitle);
                     tvTitle2.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
 
 
@@ -126,7 +146,8 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
 
                     TextView tvTitle2 = binding.tab.getTabAt(2).getCustomView().findViewById(R.id.tvTitle);
                     tvTitle2.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
-
+                    TextView tvTitle3 = binding.tab.getTabAt(0).getCustomView().findViewById(R.id.tvTitle);
+                    tvTitle3.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
                 }
             }
 
@@ -144,20 +165,29 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
 
     }
 
-    private void updateWorkCount(int count) {
+    public void updateadsCount(int count) {
+        tvads.setText(String.format("%s%s%s", "(", String.valueOf(count), ")"));
+
+    }
+
+    public void updateWorkCount(int count) {
         tvWorkCount.setText(String.format("%s%s%s", "(", String.valueOf(count), ")"));
     }
 
-    private void updateClientCount(int count) {
+    public void updateClientCount(int count) {
         tvClientCount.setText(String.format("%s%s%s", "(", String.valueOf(count), ")"));
+    }
+
+    public void updateratedCount(int count) {
+        tvratedcount.setText(String.format("%s%s%s", "(", String.valueOf(count), ")"));
     }
 
     private List<Fragment> getFragments() {
         List<Fragment> fragmentList = new ArrayList<>();
-        fragmentList.add(Fragment_About.newInstance());
+        fragmentList.add(Fragment_Ads.newInstance());
         fragmentList.add(Fragment_Works.newInstance());
         fragmentList.add(Fragment_Clients.newInstance());
-        fragmentList.add(Fragment_Comments.newInstance());
+        fragmentList.add(Fragment_Rated.newInstance());
 
         return fragmentList;
 
@@ -165,10 +195,10 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
 
     private List<String> getTitles() {
         List<String> titles = new ArrayList<>();
-        titles.add(getString(R.string.infor));
+        titles.add(getString(R.string.my_ads));
         titles.add(getString(R.string.works));
         titles.add(getString(R.string.clients));
-        titles.add(getString(R.string.comments));
+        titles.add(getString(R.string.rated));
         return titles;
 
     }
@@ -226,17 +256,12 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
                     });
         } catch (Exception e) {
             dialog.dismiss();
-Log.e("err",e.getCause().toString());
+            Log.e("err", e.getCause().toString());
         }
     }
 
     private void updateprofile(UserModel userModel) {
         binding.setUsermodel(userModel.getUser());
-        Fragment_About fragment_about = (Fragment_About) pagerAdapter.getItem(0);
-        Fragment_Works fragment_works = (Fragment_Works) pagerAdapter.getItem(1);
-        Fragment_Clients fragment_clients = (Fragment_Clients) pagerAdapter.getItem(2);
-        Fragment_Comments fragment_comments = (Fragment_Comments) pagerAdapter.getItem(3);
-        fragment_about.setbout(userModel.getUser());
 
     }
 }
