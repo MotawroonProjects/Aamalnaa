@@ -134,4 +134,15 @@
     <string name="hs">Hs</string>
     <string name="yesterday">yesterday</string>
     <string name="day">D</string>
+    <string name="select_location_on_map">Select Location On Map</string>
+    <string name="Choose_Sub_Category">Choose Sub Category</string>
+    <string name="select_location">Select Location</string>
+    <string-array name="models">
+
+        <item>ِAds</item>
+        <item>Advertising</item>
+        <item>Advertising and Ads</item>
+
+
+    </string-array>
 </resources>

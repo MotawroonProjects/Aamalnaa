@@ -6,9 +6,15 @@
     >
     <data>
         <variable
+            name="location"
+            type="com.creative.share.apps.aamalnaa.models.SelectedLocation" />
+        <variable
             name="backListener"
             type="com.creative.share.apps.aamalnaa.interfaces.Listeners.BackListener"
             />
+        <variable
+            name="orderModel"
+            type="com.creative.share.apps.aamalnaa.models.Order_Upload_Model" />
         <variable
             name="lang"
             type="String" />
@@ -137,7 +143,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:backgroundTint="@color/colorPrimary"
-
+                          android:gravity="center"
 
                         >
 
@@ -157,6 +163,9 @@
                     android:hint="@string/ad_title"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
+                    error="@{orderModel.title_error}"
+                    android:text="@={orderModel.title}"
+
                     />
                 <EditText
                     android:id="@+id/edtAdPrice"
@@ -172,6 +181,7 @@
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
                     android:inputType="numberDecimal"
+                    android:text="@{orderModel.price}"
                     />
                 <EditText
                     android:id="@+id/edtAdDetails"
@@ -186,6 +196,8 @@
                     android:hint="@string/ad_details"
                     android:padding="8dp"
                     android:gravity="top"
+                    error="@{orderModel.detials_error}"
+                    android:text="@={orderModel.details}"
                     />
 
                 <TextView
@@ -200,6 +212,9 @@
                     android:textColorHint="@color/gray4"
                     android:hint="@string/location"
                     android:textSize="13sp"
+                    android:text="@{location.address}"
+                    android:singleLine="true"
+                    error="@{orderModel.address_error}"
                     />
 <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/recService"
@@ -242,7 +257,20 @@
 
                     </androidx.recyclerview.widget.RecyclerView>
                 </LinearLayout>
-
+                <Button
+                    android:id="@+id/btnSend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="30dp"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:text="@string/send"
+                    android:background="@drawable/btn_login_bg"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
+                    android:layout_marginBottom="30dp"
+                    />
             </LinearLayout>
         </ScrollView>
 

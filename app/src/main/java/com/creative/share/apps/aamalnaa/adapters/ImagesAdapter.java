@@ -1,6 +1,7 @@
 package com.creative.share.apps.aamalnaa.adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -16,11 +17,11 @@ import java.util.List;
 
 public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.MyHolder> {
 
-    private List<String> urlList;
+    private List<Uri> urlList;
     private Context context;
     private AddAdsActivity activity;
 
-    public ImagesAdapter(List<String> urlList, Context context) {
+    public ImagesAdapter(List<Uri> urlList, Context context) {
         this.urlList = urlList;
         this.context = context;
         activity = (AddAdsActivity) context;
@@ -39,9 +40,9 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.MyHolder> 
     @Override
     public void onBindViewHolder(@NonNull final MyHolder holder, int position) {
 
-        String url = urlList.get(position);
+        Uri url = urlList.get(position);
 
-        holder.imageRowBinding.setUrl(url);
+        holder.imageRowBinding.setUrl(url.toString());
 
         holder.imageRowBinding.imageDelete.setOnClickListener(view -> activity.deleteImage(holder.getAdapterPosition())
         );

@@ -132,5 +132,15 @@
     <string name="hs">س</string>
     <string name="yesterday">أمس</string>
     <string name="day">يوم</string>
+    <string name="select_location_on_map">Select Location On Map</string>
+    <string name="Choose_Sub_Category">Choose Sub Category</string>
+    <string name="select_location">Select Location</string>
+    <string-array name="models">
 
+        <item>اعلان</item>
+        <item>دعايه</item>
+        <item>دعايه واعلان </item>
+
+
+    </string-array>
 </resources>

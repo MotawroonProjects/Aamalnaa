@@ -7,19 +7,38 @@ import com.creative.share.apps.aamalnaa.models.Adversiment_Model;
 import com.creative.share.apps.aamalnaa.models.App_Data_Model;
 import com.creative.share.apps.aamalnaa.models.Catogries_Model;
 import com.creative.share.apps.aamalnaa.models.Cities_Model;
+import com.creative.share.apps.aamalnaa.models.PlaceGeocodeData;
+import com.creative.share.apps.aamalnaa.models.PlaceMapDetailsData;
 import com.creative.share.apps.aamalnaa.models.Service_Model;
 import com.creative.share.apps.aamalnaa.models.Slider_Model;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 
+import java.util.List;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface Service {
-
+    @GET("geocode/json")
+    Call<PlaceGeocodeData> getGeoData(@Query(value = "latlng") String latlng,
+                                      @Query(value = "language") String language,
+                                      @Query(value = "key") String key);
+    @GET("place/findplacefromtext/json")
+    Call<PlaceMapDetailsData> searchOnMap(@Query(value = "inputtype") String inputtype,
+                                          @Query(value = "input") String input,
+                                          @Query(value = "fields") String fields,
+                                          @Query(value = "language") String language,
+                                          @Query(value = "key") String key
+    );
     @GET("api/cities")
     Call<Cities_Model> getCity();
     @FormUrlEncoded
@@ -101,6 +120,29 @@ public interface Service {
             @Field("user_id")String user_id);
     @GET("api/servicesPrice")
     Call<Service_Model> getservice();
+    @Multipart
+    @POST("api/add_ad")
+    Call<ResponseBody> Sendorder
+            (@Part("user_id") RequestBody user_id,
+             @Part("category_id") RequestBody category_id,
+             @Part("subcategory_id") RequestBody subcategory_id,
+             @Part("city_id") RequestBody city_id,
+             @Part("ads_type") RequestBody ads_type,
+             @Part("title") RequestBody title,
+             @Part("details") RequestBody details,
+             @Part("price") RequestBody price,
+             @Part("address") RequestBody address,
+             @Part("lng") RequestBody lng,
+             @Part("lat") RequestBody lat,
+             @Part("views_num") RequestBody views_num,
+             @Part("is_Special") RequestBody is_Special,
+             @Part("is_Install") RequestBody is_Install,
+             @Part("commented") RequestBody commented,
+             @Part List<MultipartBody.Part> partimageInsideList
+
+//
+            );
+
 }
 
 
