@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_about.AboutActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_be_golden_client.BeGoldenClientActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_contact.ContactActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_favorite.FavoriteActivity;
@@ -112,7 +113,10 @@ public class Fragment_More extends Fragment {
             Intent intent = new Intent(activity, TermsActivity.class);
             startActivity(intent);
         });
-
+        binding.llAbout.setOnClickListener(view -> {
+            Intent intent = new Intent(activity, AboutActivity.class);
+            startActivity(intent);
+        });
         binding.llGoldenClient.setOnClickListener(view -> {
             Intent intent = new Intent(activity, BeGoldenClientActivity.class);
             startActivity(intent);

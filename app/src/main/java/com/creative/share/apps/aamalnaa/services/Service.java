@@ -102,6 +102,9 @@ public interface Service {
 
     @GET("api/conditions")
     Call<App_Data_Model> getterms();
+
+    @GET("api/advantages")
+    Call<App_Data_Model> getabout();
     @FormUrlEncoded
     @POST("api/contact_us")
     Call<ResponseBody> sendContact(@Field("name") String name,
