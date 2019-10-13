@@ -163,6 +163,8 @@
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                                 <LinearLayout
+                                    android:padding="8dp"
+
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content">
 
@@ -201,7 +203,10 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:layout_marginBottom="10dp">
+                                    android:layout_marginBottom="10dp"
+                                    android:padding="8dp"
+
+                                    >
 
                                     <ImageView
                                         android:layout_width="20dp"
@@ -231,7 +236,9 @@
                                         android:layout_gravity="center_vertical"
                                         android:text="@string/negative_evaluation"
                                         android:textColor="@color/black"
-                                        android:textSize="13sp" />
+                                        android:textSize="13sp"
+
+                                        />
                                 </LinearLayout>
 
 
