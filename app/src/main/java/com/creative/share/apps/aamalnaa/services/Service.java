@@ -10,6 +10,7 @@ import com.creative.share.apps.aamalnaa.models.Cities_Model;
 import com.creative.share.apps.aamalnaa.models.PlaceGeocodeData;
 import com.creative.share.apps.aamalnaa.models.PlaceMapDetailsData;
 import com.creative.share.apps.aamalnaa.models.Service_Model;
+import com.creative.share.apps.aamalnaa.models.Single_Adversiment_Model;
 import com.creative.share.apps.aamalnaa.models.Slider_Model;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 
@@ -99,7 +100,12 @@ public interface Service {
             @Field("page")int page,
             @Field("user_id")String user_id
     );
+    @FormUrlEncoded
+    @POST("api/my_ads")
+    Call<Single_Adversiment_Model> getSingleAds(
 
+            @Field("user_id")String user_id
+    );
     @GET("api/conditions")
     Call<App_Data_Model> getterms();
 
