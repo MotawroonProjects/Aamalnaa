@@ -3,6 +3,7 @@ package com.creative.share.apps.aamalnaa.adapters;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_ads.Ads_Activity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_favorite.FavoriteActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_my_ads.MyAdsActivity;
 import com.creative.share.apps.aamalnaa.databinding.AdsRowBinding;
 import com.creative.share.apps.aamalnaa.databinding.LoadMoreBinding;
 import com.creative.share.apps.aamalnaa.models.Adversiment_Model;
@@ -29,8 +33,10 @@ public class Ads_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private LayoutInflater inflater;
     private String lang;
-    private Ads_Activity activity;
-
+    private Ads_Activity ads_activity;
+private FavoriteActivity favoriteActivity;
+private MyAdsActivity myAdsActivity;
+private HomeActivity homeActivity;
     public Ads_Adapter(List<Adversiment_Model.Data> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
@@ -64,7 +70,30 @@ public class Ads_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             EventHolder eventHolder = (EventHolder) holder;
             eventHolder.binding.setLang(lang);
             eventHolder.binding.setAdversimentmodel(order_data);
+eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+if(context instanceof  Ads_Activity){
+    ads_activity=(Ads_Activity)context;
+    ads_activity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
 
+}
+else if(context instanceof  MyAdsActivity){
+    myAdsActivity=(MyAdsActivity)context;
+    myAdsActivity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
+}
+else  if(context instanceof HomeActivity){
+    homeActivity=(HomeActivity)context;
+    homeActivity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
+
+}
+else if(context instanceof FavoriteActivity){
+    favoriteActivity=(FavoriteActivity)context;
+    favoriteActivity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
+
+}
+    }
+});
 
 
 

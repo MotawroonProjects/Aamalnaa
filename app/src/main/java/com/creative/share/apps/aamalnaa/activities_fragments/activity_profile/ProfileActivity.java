@@ -2,6 +2,7 @@ package com.creative.share.apps.aamalnaa.activities_fragments.activity_profile;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_adsdetails.AdsDetialsActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.fragments.Fragment_Ads;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.fragments.Fragment_Clients;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.fragments.Fragment_Rated;
@@ -61,14 +63,14 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
 
         initView();
-        getprofiledata();
+
 
     }
 
     private void initView() {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
-//        Log.e("y",userModel.getUser().getId()+"");
+    Log.e("y",userModel.getUser().getId()+"");
 
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
@@ -161,6 +163,7 @@ updateratedCount(0);
 
             }
         });
+        getprofiledata();
 
 
     }
@@ -210,7 +213,7 @@ updateratedCount(0);
     }
 
     private void getprofiledata() {
-        ProgressDialog dialog = Common.createProgressDialog(ProfileActivity.this, getString(R.string.wait));
+       final ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
         try {
@@ -255,13 +258,21 @@ updateratedCount(0);
                         }
                     });
         } catch (Exception e) {
-            dialog.dismiss();
-            Log.e("err", e.getCause().toString());
+            if(dialog!=null){
+            dialog.dismiss();}
+
+           // Log.e("err", e.getMessage());
         }
     }
 
     private void updateprofile(UserModel userModel) {
         binding.setUsermodel(userModel.getUser());
 
+    }
+
+    public void showdetials(int id) {
+        Intent intent=new Intent(ProfileActivity.this, AdsDetialsActivity.class);
+        intent.putExtra("search",id);
+        startActivity(intent);
     }
 }

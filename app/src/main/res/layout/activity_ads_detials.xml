@@ -271,7 +271,6 @@
                                     android:layout_gravity="center_vertical"
                                     android:textSize="13sp"
                                     android:textColor="@color/black"
-                                    android:text="@{adsmodel.}"
                                     />
                             </LinearLayout>
 

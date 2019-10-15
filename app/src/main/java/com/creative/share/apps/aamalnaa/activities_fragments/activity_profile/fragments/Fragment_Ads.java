@@ -121,8 +121,9 @@ public class Fragment_Ads extends Fragment {
                         }
                     });
         } catch (Exception e) {
-            dialog.dismiss();
-            Log.e("err", e.getCause().toString());
+            if(dialog!=null){
+            dialog.dismiss();}
+//            Log.e("err", e.getMessage());
         }
     }
 

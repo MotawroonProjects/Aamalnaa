@@ -31,10 +31,12 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_add_ads.AddAdsActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_ads.Ads_Activity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_adsdetails.AdsDetialsActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.fragments.Fragment_Main;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.fragments.Fragment_Messages;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.fragments.Fragment_More;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.fragments.Fragment_Notifications;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_sign_in.activities.SignInActivity;
 import com.creative.share.apps.aamalnaa.adapters.CityAdapter;
 import com.creative.share.apps.aamalnaa.databinding.ActivityHomeBinding;
@@ -673,5 +675,10 @@ btfilter.setOnClickListener(new View.OnClickListener() {
             }
         };
         LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
+    }
+    public void showdetials(int id) {
+        Intent intent=new Intent(HomeActivity.this, AdsDetialsActivity.class);
+        intent.putExtra("search",id);
+        startActivity(intent);
     }
 }

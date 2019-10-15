@@ -1,6 +1,7 @@
 package com.creative.share.apps.aamalnaa.activities_fragments.activity_favorite;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_adsdetails.AdsDetialsActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
 import com.creative.share.apps.aamalnaa.adapters.Ads_Adapter;
 import com.creative.share.apps.aamalnaa.databinding.ActivityFavoriteBinding;
 import com.creative.share.apps.aamalnaa.interfaces.Listeners;
@@ -232,5 +235,10 @@ binding.recView.setAdapter(ads_adapter);
     @Override
     public void back() {
         finish();
+    }
+    public void showdetials(int id) {
+        Intent intent=new Intent(FavoriteActivity.this, AdsDetialsActivity.class);
+        intent.putExtra("search",id);
+        startActivity(intent);
     }
 }

@@ -57,7 +57,6 @@ public class Comments_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         EventHolder eventHolder = (EventHolder) holder;
 eventHolder.binding.setLang(lang);
-eventHolder.binding.setCommentmodel(commentsList.get(position));
 
     }
 

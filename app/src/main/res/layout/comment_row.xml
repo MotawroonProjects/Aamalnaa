@@ -6,9 +6,6 @@
 <variable
     name="lang"
     type="String" />
-<variable
-    name="commentmodel"
-    type="com.creative.share.apps.aamalnaa.models.Single_Adversiment_Model.comments" />
 
 </data>
 

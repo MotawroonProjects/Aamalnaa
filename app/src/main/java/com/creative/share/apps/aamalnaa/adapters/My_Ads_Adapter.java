@@ -2,6 +2,7 @@ package com.creative.share.apps.aamalnaa.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -54,7 +55,12 @@ public class My_Ads_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         EventHolder eventHolder = (EventHolder) holder;
         eventHolder.binding.setLang(lang);
 eventHolder.binding.setAdversimentmodel(orderlist.get(position));
-
+eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        activity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
+    }
+});
     }
 
     @Override

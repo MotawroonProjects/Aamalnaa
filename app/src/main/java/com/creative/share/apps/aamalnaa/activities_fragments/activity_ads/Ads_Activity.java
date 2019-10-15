@@ -1,6 +1,7 @@
 package com.creative.share.apps.aamalnaa.activities_fragments.activity_ads;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,7 +20,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_adsdetails.AdsDetialsActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
 import com.creative.share.apps.aamalnaa.adapters.Ads_Adapter;
 import com.creative.share.apps.aamalnaa.databinding.ActivityAdsBinding;
 import com.creative.share.apps.aamalnaa.databinding.FragmentAdsBinding;
@@ -218,7 +221,11 @@ public class Ads_Activity extends AppCompatActivity implements Listeners.BackLis
             isLoading = false;
         }
     }
-
+    public void showdetials(int id) {
+        Intent intent=new Intent(Ads_Activity.this, AdsDetialsActivity.class);
+        intent.putExtra("search",id);
+        startActivity(intent);
+    }
 
     @Override
     public void back() {

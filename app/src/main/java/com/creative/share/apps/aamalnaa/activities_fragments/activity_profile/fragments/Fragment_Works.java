@@ -123,7 +123,7 @@ public class Fragment_Works extends Fragment {
                     });
         } catch (Exception e) {
             dialog.dismiss();
-            Log.e("err", e.getCause().toString());
+//            Log.e("err", e.getCause().toString());
         }
     }
 
