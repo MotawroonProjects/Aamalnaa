@@ -26,15 +26,14 @@ import io.paperdb.Paper;
 
 public class Comments_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Single_Adversiment_Model.comments> orderlist;
+    private List<Single_Adversiment_Model.comments> commentsList;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
     private AdsDetialsActivity activity;
-    private int i = 0;
 
-    public Comments_Adapter(List<Single_Adversiment_Model.comments> orderlist, Context context) {
-        this.orderlist = orderlist;
+    public Comments_Adapter(List<Single_Adversiment_Model.comments> commentsList, Context context) {
+        this.commentsList = commentsList;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
@@ -58,13 +57,13 @@ public class Comments_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         EventHolder eventHolder = (EventHolder) holder;
 eventHolder.binding.setLang(lang);
-eventHolder.binding.setCatogrymodel(orderlist.get(position));
+eventHolder.binding.setCommentmodel(commentsList.get(position));
 
     }
 
     @Override
     public int getItemCount() {
-        return orderlist.size();
+        return commentsList.size();
     }
 
     public class EventHolder extends RecyclerView.ViewHolder {

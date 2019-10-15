@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
@@ -20,6 +21,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
 import com.creative.share.apps.aamalnaa.adapters.Ads_Adapter;
+import com.creative.share.apps.aamalnaa.adapters.Comments_Adapter;
+import com.creative.share.apps.aamalnaa.adapters.SingleAdsSlidingImage_Adapter;
+import com.creative.share.apps.aamalnaa.adapters.SlidingImage_Adapter;
 import com.creative.share.apps.aamalnaa.databinding.ActivityAdsBinding;
 import com.creative.share.apps.aamalnaa.databinding.ActivityAdsDetialsBinding;
 import com.creative.share.apps.aamalnaa.databinding.ActivityMyAdsBinding;
@@ -37,6 +41,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import io.paperdb.Paper;
 import retrofit2.Call;
@@ -46,15 +52,17 @@ import retrofit2.Response;
 public class AdsDetialsActivity extends AppCompatActivity implements Listeners.BackListener {
     private ActivityAdsDetialsBinding binding;
     private String lang;
-    private Ads_Adapter ads_adapter;
-    private List<Adversiment_Model.Data> advesriment_data_list;
+    private Comments_Adapter comments_adapter;
+    private List<Single_Adversiment_Model.comments> commentsList;
     private Single_Adversiment_Model single_adversiment_model;
     private LinearLayoutManager manager;
-    private boolean isLoading = false;
-    private int current_page2 = 1;
+
     private Preferences preferences;
     private UserModel userModel;
-    private List<Single_Adversiment_Model.comments> commentsList;
+private String search_id;
+    private int current_page = 0, NUM_PAGES;
+
+    private SingleAdsSlidingImage_Adapter singleslidingImage__adapter;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -68,14 +76,36 @@ public class AdsDetialsActivity extends AppCompatActivity implements Listeners.B
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_ads_detials);
         initView();
-        getsingleads();
+        change_slide_image();
+        if(search_id!=null){
+        getsingleads();}
 
+    }
+    private void change_slide_image() {
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+                if (current_page == NUM_PAGES) {
+                    current_page = 0;
+                }
+                binding.pager.setCurrentItem(current_page++, true);
+            }
+        };
+        Timer swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 3000, 3000);
     }
 
     private void initView() {
+if(getIntent().getStringExtra("search")!=null){
+    search_id=getIntent().getStringExtra("search");
+}
         commentsList=new ArrayList<>();
         single_adversiment_model=new Single_Adversiment_Model();
-        advesriment_data_list=new ArrayList<>();
         preferences= Preferences.getInstance();
         userModel=preferences.getUserData(this);
         Paper.init(this);
@@ -88,14 +118,13 @@ public class AdsDetialsActivity extends AppCompatActivity implements Listeners.B
 binding.setAdsmodel(single_adversiment_model);
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.reccomment.setLayoutManager(manager);
-        ads_adapter = new Ads_Adapter(advesriment_data_list,this);
         binding.reccomment.setItemViewCacheSize(25);
         binding.reccomment.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         binding.reccomment.setDrawingCacheEnabled(true);
         binding.progBar.setVisibility(View.GONE);
         binding.llAds.setVisibility(View.GONE);
-
-        binding.reccomment.setAdapter(ads_adapter);
+comments_adapter=new Comments_Adapter(commentsList,this);
+        binding.reccomment.setAdapter(comments_adapter);
 
     }
     public void getsingleads() {
@@ -109,7 +138,7 @@ binding.setAdsmodel(single_adversiment_model);
 
 
             Api.getService( Tags.base_url)
-                    .getSingleAds(userModel.getUser().getId()+"")
+                    .getSingleAds(search_id)
                     .enqueue(new Callback<Single_Adversiment_Model>() {
                         @Override
                         public void onResponse(Call<Single_Adversiment_Model> call, Response<Single_Adversiment_Model> response) {
@@ -151,9 +180,16 @@ dialog.dismiss();
     private void update(Single_Adversiment_Model body) {
         binding.setAdsmodel(body);
         commentsList.clear();
-        if(body.getComments()!=null){
+        if(body.getComments()!=null&&body.getCommented()==0){
         commentsList.addAll(body.getComments());}
+        comments_adapter.notifyDataSetChanged();
+        if(body.getImages()!=null){
+            NUM_PAGES = body.getImages().size();
+            singleslidingImage__adapter = new SingleAdsSlidingImage_Adapter(this, body.getImages());
+            binding.pager.setAdapter(singleslidingImage__adapter);
+        }
     }
+
 
 
     @Override

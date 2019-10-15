@@ -101,10 +101,10 @@ public interface Service {
             @Field("user_id")String user_id
     );
     @FormUrlEncoded
-    @POST("api/my_ads")
+    @POST("api/single_ad")
     Call<Single_Adversiment_Model> getSingleAds(
 
-            @Field("user_id")String user_id
+            @Field("ad_id")String ad_id
     );
     @GET("api/conditions")
     Call<App_Data_Model> getterms();
