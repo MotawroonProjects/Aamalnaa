@@ -7,29 +7,19 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.creative.share.apps.aamalnaa.R;
-import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
-import com.creative.share.apps.aamalnaa.adapters.Ads_Adapter;
 import com.creative.share.apps.aamalnaa.adapters.Comments_Adapter;
 import com.creative.share.apps.aamalnaa.adapters.SingleAdsSlidingImage_Adapter;
-import com.creative.share.apps.aamalnaa.adapters.SlidingImage_Adapter;
-import com.creative.share.apps.aamalnaa.databinding.ActivityAdsBinding;
 import com.creative.share.apps.aamalnaa.databinding.ActivityAdsDetialsBinding;
-import com.creative.share.apps.aamalnaa.databinding.ActivityMyAdsBinding;
 import com.creative.share.apps.aamalnaa.interfaces.Listeners;
 import com.creative.share.apps.aamalnaa.language.Language;
-import com.creative.share.apps.aamalnaa.models.Adversiment_Model;
 import com.creative.share.apps.aamalnaa.models.Single_Adversiment_Model;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
@@ -53,7 +43,7 @@ public class AdsDetialsActivity extends AppCompatActivity implements Listeners.B
     private ActivityAdsDetialsBinding binding;
     private String lang;
     private Comments_Adapter comments_adapter;
-    private List<Single_Adversiment_Model.comments> commentsList;
+    private List<Single_Adversiment_Model.Comments> commentsList;
     private Single_Adversiment_Model single_adversiment_model;
     private LinearLayoutManager manager;
 
@@ -101,8 +91,8 @@ private String search_id;
     }
 
     private void initView() {
-if(getIntent().getStringExtra("search")!=null){
-    search_id=getIntent().getStringExtra("search");
+if(getIntent().getIntExtra("search",-1)!=0){
+    search_id=getIntent().getIntExtra("search",-1)+"";
 }
         commentsList=new ArrayList<>();
         single_adversiment_model=new Single_Adversiment_Model();
@@ -114,16 +104,18 @@ if(getIntent().getStringExtra("search")!=null){
         binding.setBackListener(this);
         if(userModel!=null){
         binding.setUsermodel(userModel.getUser());
-        manager = new LinearLayoutManager(this);}
+        }
+        manager = new LinearLayoutManager(this);
 binding.setAdsmodel(single_adversiment_model);
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
-        binding.reccomment.setLayoutManager(manager);
         binding.reccomment.setItemViewCacheSize(25);
         binding.reccomment.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         binding.reccomment.setDrawingCacheEnabled(true);
         binding.progBar.setVisibility(View.GONE);
         binding.llAds.setVisibility(View.GONE);
-comments_adapter=new Comments_Adapter(commentsList,this);
+        binding.reccomment.setLayoutManager(manager);
+
+        comments_adapter=new Comments_Adapter(commentsList,this);
         binding.reccomment.setAdapter(comments_adapter);
 
     }
@@ -181,9 +173,21 @@ dialog.dismiss();
         binding.setAdsmodel(body);
         commentsList.clear();
         if(body.getComments()!=null&&body.getCommented()==0){
-        commentsList.addAll(body.getComments());}
-        comments_adapter.notifyDataSetChanged();
+        commentsList.addAll(body.getComments());
+        binding.llAds.setVisibility(View.GONE);
+            comments_adapter.notifyDataSetChanged();
+            binding.reccomment.setVisibility(View.VISIBLE);
+            Log.e("llll",body.getComments().get(0).getComment()+"");
+
+        }
+        else {
+            Log.e("lll",body.getCommented()+"");
+
+            binding.llAds.setVisibility(View.VISIBLE);
+        }
+
         if(body.getImages()!=null){
+            Log.e("lll",body.getImages().size()+"");
             NUM_PAGES = body.getImages().size();
             singleslidingImage__adapter = new SingleAdsSlidingImage_Adapter(this, body.getImages());
             binding.pager.setAdapter(singleslidingImage__adapter);

@@ -2,12 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-<data>
-<variable
-    name="lang"
-    type="String" />
 
-</data>
+    <data>
+
+        <variable
+            name="lang"
+            type="String" />
+
+        <variable
+            name="commentmodel"
+            type="com.creative.share.apps.aamalnaa.models.Single_Adversiment_Model.Comments" />
+    </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,18 +37,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:riv_border_width="1dp"
-            app:riv_corner_radius="10dp" />
+            app:riv_corner_radius="10dp"
+            imageUserEndPoint="@{commentmodel.user_image}"
+
+            />
 
         <LinearLayout
             android:id="@+id/ll"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@id/image"
             app:layout_constraintTop_toTopOf="parent"
@@ -53,7 +61,7 @@ app:layout_constraintEnd_toEndOf="parent"
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/user_name"
+                android:text="@{commentmodel.user_name}"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -70,16 +78,12 @@ app:layout_constraintEnd_toEndOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:text="@string/user_name"
+                android:text="@{commentmodel.comment}"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
 
-
-
         </LinearLayout>
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

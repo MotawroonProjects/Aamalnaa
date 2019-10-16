@@ -36,7 +36,7 @@ private String created_at;
 private String user_name;
 private long date;
 private List<Images> images;
-private List<comments> comments;
+private List<Comments> comments;
 
 public class Images implements Serializable
     {
@@ -56,8 +56,38 @@ public class Images implements Serializable
             return image;
         }
     }
-public class comments implements Serializable{
+public class Comments implements Serializable{
+  private int id;
+    private int user_id;
+    private int ad_id;
+          private String comment;
 
+          private String user_name;
+          private String user_image;
+
+    public int getId() {
+        return id;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public int getAd_id() {
+        return ad_id;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public String getUser_image() {
+        return user_image;
+    }
 }
         public long getDate() {
             return date;
@@ -180,7 +210,7 @@ public class comments implements Serializable{
         return images;
     }
 
-    public List<Single_Adversiment_Model.comments> getComments() {
+    public List<Comments> getComments() {
         return comments;
     }
 }

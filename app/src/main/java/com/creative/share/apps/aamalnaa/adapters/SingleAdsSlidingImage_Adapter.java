@@ -51,7 +51,7 @@ public class SingleAdsSlidingImage_Adapter extends PagerAdapter {
         SliderBinding rowBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.slider,view,false);
 
 
-        Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL+IMAGES.get(position).getImage())).fit().into(rowBinding.image);
+        Picasso.with(context).load(Uri.parse(Tags.IMAGE_Ads_URL+IMAGES.get(position).getImage())).fit().into(rowBinding.image);
         view.addView(rowBinding.getRoot());
         return rowBinding.getRoot();
     }

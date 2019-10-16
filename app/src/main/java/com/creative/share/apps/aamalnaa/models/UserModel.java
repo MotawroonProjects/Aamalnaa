@@ -149,9 +149,6 @@ private int id;
         return city_name;
     }
 
-    public int getTotal() {
-        return total;
-    }
 
     public int getEvaluation() {
         return Evaluation;
