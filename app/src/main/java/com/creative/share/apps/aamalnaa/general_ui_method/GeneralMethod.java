@@ -62,7 +62,7 @@ public class GeneralMethod {
     @BindingAdapter("imageUserEndPoint")
     public static void displayImage3(CircleImageView imageView, String imageEndPoint)
     {
-        Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_Ads_URL+imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+        Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_Ads_URL+imageEndPoint)).fit().into(imageView);
 
     }
 

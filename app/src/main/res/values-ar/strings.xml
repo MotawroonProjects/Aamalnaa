@@ -132,19 +132,19 @@
     <string name="hs">س</string>
     <string name="yesterday">أمس</string>
     <string name="day">يوم</string>
-    <string name="select_location_on_map">Select Location On Map</string>
-    <string name="Choose_Sub_Category">Choose Sub Category</string>
+    <string name="select_location_on_map">حدد الموقع على الخريطه</string>
+    <string name="Choose_Sub_Category">اختر القائمه الفرعيه</string>
     <string name="select_location">اختر الموقع</string>
-    <string name="evaluation">Evaluation</string>
-    <string name="retreat">Retreat</string>
+    <string name="evaluation">التقيم</string>
+    <string name="retreat">تراجع</string>
     <string name="write_your_comment_here">اكتب تعليقك هنا</string>
     <string name="time_of_ads">وقت الاعلان </string>
     <string name="advertiser">المعلن</string>
-    <string name="last_seen">اهر ظهور</string>
+    <string name="last_seen">اخر ظهور</string>
     <string name="views">عدد المشاهدات</string>
-    <string name="address_detials">Address Detials</string>
-    <string name="email_the_advertiser">Email the advertiser</string>
-    <string name="delete_reporting">Delete Reporting</string>
+    <string name="address_detials">تفاصيل العنوان</string>
+    <string name="email_the_advertiser">ارسل بريد الى المعلن</string>
+    <string name="delete_reporting">احذف الريبورت</string>
     <string-array name="models">
 
         <item>اعلان</item>

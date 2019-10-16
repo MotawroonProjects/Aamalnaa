@@ -70,7 +70,7 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
     private void initView() {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
-    Log.e("y",userModel.getUser().getId()+"");
+//    Log.e("y",userModel.getUser().getId()+"");
 
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());

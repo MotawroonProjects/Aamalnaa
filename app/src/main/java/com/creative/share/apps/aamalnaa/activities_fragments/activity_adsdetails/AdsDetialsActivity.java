@@ -136,8 +136,10 @@ binding.setAdsmodel(single_adversiment_model);
                         public void onResponse(Call<Single_Adversiment_Model> call, Response<Single_Adversiment_Model> response) {
                             dialog.dismiss();
 
-                            binding.progBar.setVisibility(View.GONE);
+                          //  binding.progBar.setVisibility(View.GONE);
                             if (response.isSuccessful() && response.body() != null && response.body() != null) {
+                                //binding.coord1.scrollTo(0,0);
+
                                 update(response.body());
                             } else {
 
