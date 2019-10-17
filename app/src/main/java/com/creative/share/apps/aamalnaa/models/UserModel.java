@@ -54,7 +54,7 @@ private int id;
     private String updated_at;
 
     private String city_name;
-    private int total;
+    private double total;
     private int Evaluation;
     private int negativeRate;
     private int postivesRate;
@@ -168,7 +168,12 @@ private int id;
 
     public String getLastSeen() {
         return lastSeen;
-    }}
+    }
+
+        public double getTotal() {
+            return total;
+        }
+    }
  public class Customers implements Serializable
     {
         private int id;

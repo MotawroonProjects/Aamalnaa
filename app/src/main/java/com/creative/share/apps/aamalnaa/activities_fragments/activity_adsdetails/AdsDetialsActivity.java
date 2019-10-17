@@ -178,21 +178,21 @@ dialog.dismiss();
     private void update(Single_Adversiment_Model body) {
         binding.setAdsmodel(body);
         commentsList.clear();
-        if(body.getComments()!=null&&body.getCommented()==0){
+        if(body.getComments()!=null&&body.getCommented()==0&&body.getComments().size()>0){
         commentsList.addAll(body.getComments());
         binding.llAds.setVisibility(View.GONE);
             comments_adapter.notifyDataSetChanged();
             binding.reccomment.setVisibility(View.VISIBLE);
-            Log.e("llll",body.getComments().get(0).getComment()+"");
+      //      Log.e("llll",body.getComments().get(0).getComment()+"");
 
         }
         else {
-            Log.e("lll",body.getCommented()+"");
+          //  Log.e("lll",body.getCommented()+"");
 
             binding.llAds.setVisibility(View.VISIBLE);
         }
 
-        if(body.getImages()!=null){
+        if(body.getImages()!=null&&body.getImages().size()>0){
             Log.e("lll",body.getImages().size()+"");
             NUM_PAGES = body.getImages().size();
             singleslidingImage__adapter = new SingleAdsSlidingImage_Adapter(this, body.getImages());
