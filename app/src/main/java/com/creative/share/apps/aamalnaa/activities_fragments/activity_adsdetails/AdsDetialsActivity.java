@@ -66,9 +66,12 @@ private String search_id;
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_ads_detials);
         initView();
-        change_slide_image();
         if(search_id!=null){
-        getsingleads();}
+        getsingleads();
+
+        }
+        change_slide_image();
+
 
     }
     private void change_slide_image() {
@@ -94,6 +97,7 @@ private String search_id;
 if(getIntent().getIntExtra("search",-1)!=0){
     search_id=getIntent().getIntExtra("search",-1)+"";
 }
+
         commentsList=new ArrayList<>();
         single_adversiment_model=new Single_Adversiment_Model();
         preferences= Preferences.getInstance();
