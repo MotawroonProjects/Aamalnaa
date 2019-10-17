@@ -152,7 +152,7 @@ public class Fragment_Sign_In extends Fragment implements Listeners.LoginListene
                                     Toast.makeText(activity, "Server Error", Toast.LENGTH_SHORT).show();
 
 
-                                }else if (response.code()==401)
+                                }else if (response.code()==401||response.code()==404)
                                 {
                                     Toast.makeText(activity, R.string.inc_phone_pas, Toast.LENGTH_SHORT).show();
 
