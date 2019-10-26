@@ -49,8 +49,15 @@ public class SlidingImage_Adapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup view, int position) {
         SliderBinding rowBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.slider,view,false);
 
+rowBinding.tvTitle.setText(IMAGES.get(position).getTitle());
+if(IMAGES.get(position).getDetails().length()>10){
+    rowBinding.tvDetials.setText(IMAGES.get(position).getDetails().substring(0,9)+"...");
+}
+else {
+    rowBinding.tvDetials.setText(IMAGES.get(position).getDetails());
 
-        Picasso.with(context).load(Uri.parse(Tags.IMAGE_URL+IMAGES.get(position).getImage())).fit().into(rowBinding.image);
+}
+        Picasso.with(context).load(Uri.parse(Tags.IMAGE_Ads_URL+IMAGES.get(position).getImage())).fit().into(rowBinding.image);
         view.addView(rowBinding.getRoot());
         return rowBinding.getRoot();
     }

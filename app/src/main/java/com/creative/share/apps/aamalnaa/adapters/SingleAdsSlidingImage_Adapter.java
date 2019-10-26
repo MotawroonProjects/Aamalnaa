@@ -49,7 +49,8 @@ public class SingleAdsSlidingImage_Adapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup view, int position) {
         SliderBinding rowBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.slider,view,false);
-
+rowBinding.tvDetials.setVisibility(View.GONE);
+rowBinding.tvTitle.setVisibility(View.GONE);
 
         Picasso.with(context).load(Uri.parse(Tags.IMAGE_Ads_URL+IMAGES.get(position).getImage())).fit().into(rowBinding.image);
         view.addView(rowBinding.getRoot());

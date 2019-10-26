@@ -13,6 +13,7 @@ import com.creative.share.apps.aamalnaa.models.Service_Model;
 import com.creative.share.apps.aamalnaa.models.Single_Adversiment_Model;
 import com.creative.share.apps.aamalnaa.models.Slider_Model;
 import com.creative.share.apps.aamalnaa.models.UserModel;
+import com.creative.share.apps.aamalnaa.models.UserRoomModelData;
 
 import java.util.List;
 
@@ -64,7 +65,7 @@ public interface Service {
     Call<ResponseBody> Logout(@Field("id") String id
 
     );
-    @GET("api/all_slider")
+    @GET("api/is_install")
     Call<Slider_Model> get_slider();
     @GET("api/all_categories")
     Call<Catogries_Model> getDepartment(
@@ -151,6 +152,10 @@ public interface Service {
 
 //
             );
+    @FormUrlEncoded
+    @POST ("api/allRoms")
+    Call<UserRoomModelData> getRooms(@Field("user_id") String user_id
+    );
 
 }
 
