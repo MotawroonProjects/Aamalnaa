@@ -34,7 +34,7 @@
     <string name="general_settings">الإعدادت العامة</string>
     <string name="edit_profile">تعديل الملف الشخصي</string>
     <string name="language_settings">إعدادات اللغة</string>
-    <string name="sar">ر.س</string>
+    <string name="sar">نقطه</string>
     <string name="no_details">لا توجد تفاصيل</string>
     <string name="sign_in">تسجيل الدخول</string>
     <string name="please_sign_in_or_sign_up">برجاء تسجيل الدخول أو إنشاء حساب جديد.</string>
@@ -82,15 +82,15 @@
     <string name="normal">العادي</string>
     <string name="golden">الذهبي</string>
     <string name="favorite">المفضلة</string>
-    <string name="my_ads">إعلاناتي</string>
+    <string name="my_ads">دعاياتى</string>
     <string name="i_m_a_golden_client">الإشتراك كعميل ذهبي</string>
     <string name="my_wallet">المحفظة</string>
     <string name="transfer_accounts">حساب العمولة</string>
     <string name="share_app">مشاركة التطبيق</string>
     <string name="rate_app">تقييم التطبيق</string>
     <string name="about_tour">عن التطبيق</string>
-    <string name="balance">الرصيد الحالي</string>
-    <string name="add_balance">إضافة رصيد لحسابي</string>
+    <string name="balance">الرصيد النقاطى الحالي</string>
+    <string name="add_balance">إضافة رصيد لمحفظتى</string>
     <string name="app_commission">عمولة التطبيق</string>
     <string name="app_note">علما بأن نسبة عمولة التطبيق  <font color ='#2b8dcd'>1%</font> إذا تمت من خارج المحفظة, <font color ='#2b8dcd'>2%</font> وإذا تمت من داخل المحفظة و <font color ='#2b8dcd'>10%</font> على التوصيل والتخزين</string>
     <string name="enter_perc">أدخل سعر العملية لتحصل على نسبة التطبيق منها</string>
@@ -145,6 +145,24 @@
     <string name="address_detials">تفاصيل العنوان</string>
     <string name="email_the_advertiser">ارسل بريد الى المعلن</string>
     <string name="delete_reporting">احذف الريبورت</string>
+    <string name="transactions">معاملاتى</string>
+    <string name="profits">الارباح</string>
+    <string name="the_bouquet">الباقه</string>
+    <string name="advertising_and_promotional_points">النقاط الاعلانيه والدعائيه</string>
+    <string name="_10_ryal">10 ريال</string>
+    <string name="_10_points">10 نقطه</string>
+    <string name="_30_ryal">30 ريال</string>
+    <string name="_35_points">35 نقطه</string>
+    <string name="_50_ryal">50 ريال</string>
+    <string name="_60_points">60 نقطه</string>
+    <string name="more_than_60">اكثر من 60</string>
+    <string name="banks">الحسابات البنكيه</string>
+    <string name="transferred_account_name">Transferred account name</string>
+    <string name="transferred_account_number">Transferred account number</string>
+    <string name="transfer_amount">Transfer amount</string>
+    <string name="image_conversion">Image conversion</string>
+    <string name="choose_bank_acount">Choose Bank Acount</string>
+    <string name="search">بحث</string>
     <string-array name="models">
 
         <item>اعلان</item>

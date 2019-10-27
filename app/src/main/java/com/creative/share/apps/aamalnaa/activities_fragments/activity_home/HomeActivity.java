@@ -37,6 +37,7 @@ import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.fragm
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.fragments.Fragment_More;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.fragments.Fragment_Notifications;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_search.Search_Activity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_sign_in.activities.SignInActivity;
 import com.creative.share.apps.aamalnaa.adapters.CityAdapter;
 import com.creative.share.apps.aamalnaa.databinding.ActivityHomeBinding;
@@ -239,6 +240,13 @@ btfilter.setOnClickListener(new View.OnClickListener() {
         startActivity(intent);
     }
 });
+binding.imageSearch.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Intent intent=new Intent(HomeActivity.this, Search_Activity.class);
+        startActivity(intent);
+    }
+});
         setSupportActionBar(binding.toolbar);
         setUpBottomNavigation();
         setUpBottomSheet();
@@ -277,10 +285,19 @@ btfilter.setOnClickListener(new View.OnClickListener() {
                     displayFragmentMain();
                     break;
                 case 1:
-                    displayFragmentMessages();
+                    if(userModel!=null){
+                    displayFragmentMessages();}
+                    else {
+                        Common.CreateNoSignAlertDialog(this);
+                    }
                     break;
                 case 2:
-                    displayFragmentNotification();
+                    if(userModel!=null){
+                    displayFragmentNotification();}
+                    else {
+                        Common.CreateNoSignAlertDialog(this);
+
+                    }
                     break;
                 case 3:
                     displayFragmentMore();

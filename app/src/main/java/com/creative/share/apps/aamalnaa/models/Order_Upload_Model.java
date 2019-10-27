@@ -169,7 +169,7 @@ public class Order_Upload_Model extends BaseObservable implements Serializable {
 
     public void setLatitude(String latitude) {
         this.latitude = latitude;
-        notifyPropertyChanged(BR.longitude);
+        notifyPropertyChanged(BR.latitude);
 
     }
 

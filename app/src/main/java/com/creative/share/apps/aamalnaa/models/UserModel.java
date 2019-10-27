@@ -226,6 +226,7 @@ private int id;
         private int is_Special;
         private int is_Install;
         private int commented;
+        private int councomments;
         private int end_by_client;
         private int my_work;
         private int accepted;
@@ -294,6 +295,10 @@ private int id;
 
         public int getCommented() {
             return commented;
+        }
+
+        public int getCouncomments() {
+            return councomments;
         }
 
         public int getEnd_by_client() {

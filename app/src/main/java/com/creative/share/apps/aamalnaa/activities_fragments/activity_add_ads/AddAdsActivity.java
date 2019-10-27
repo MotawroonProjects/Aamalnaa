@@ -764,6 +764,11 @@ RequestBody views_num_part=Common.getRequestBodyText(views_num+"");
         dataList.clear();
         dataList.addAll(body.getData());
         service_adapter.notifyDataSetChanged();
+        double totla=0;
+        for(int i=0;i<body.getData().size();i++){
+            totla+=body.getData().get(i).getCoun();
+        }
+        binding.tvtotal.setText(totla+" "+getResources().getString(R.string.sar));
     }
 
 }

@@ -32,6 +32,7 @@ private String created_at;
         private String category_name;
         private String sub_category_name;
             private int is_like;
+            private int like_ad;
             private int is_reported;
 private String user_name;
 private long date;
@@ -198,7 +199,11 @@ public class Comments implements Serializable{
             return is_like;
         }
 
-        public int getIs_reported() {
+    public int getLike_ad() {
+        return like_ad;
+    }
+
+    public int getIs_reported() {
             return is_reported;
         }
 

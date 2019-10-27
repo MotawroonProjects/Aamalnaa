@@ -5,8 +5,10 @@ package com.creative.share.apps.aamalnaa.services;
 
 import com.creative.share.apps.aamalnaa.models.Adversiment_Model;
 import com.creative.share.apps.aamalnaa.models.App_Data_Model;
+import com.creative.share.apps.aamalnaa.models.BankDataModel;
 import com.creative.share.apps.aamalnaa.models.Catogries_Model;
 import com.creative.share.apps.aamalnaa.models.Cities_Model;
+import com.creative.share.apps.aamalnaa.models.NotificationDataModel;
 import com.creative.share.apps.aamalnaa.models.PlaceGeocodeData;
 import com.creative.share.apps.aamalnaa.models.PlaceMapDetailsData;
 import com.creative.share.apps.aamalnaa.models.Service_Model;
@@ -14,6 +16,7 @@ import com.creative.share.apps.aamalnaa.models.Single_Adversiment_Model;
 import com.creative.share.apps.aamalnaa.models.Slider_Model;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.models.UserRoomModelData;
+import com.creative.share.apps.aamalnaa.models.Wallet_Model;
 
 import java.util.List;
 
@@ -57,8 +60,8 @@ public interface Service {
     @FormUrlEncoded
     @POST("api/login")
     Call<UserModel> login(
-                          @Field("mobile") String mobile,
-                          @Field("password") String password
+            @Field("mobile") String mobile,
+            @Field("password") String password
     );
     @FormUrlEncoded
     @POST("api/logout")
@@ -74,15 +77,26 @@ public interface Service {
 
     );
     @FormUrlEncoded
-    @POST("api/fillter_by_cat")
+    @POST("api/subs")
     Call<Adversiment_Model> getAds(
             @Field("page")int page,
-            @Field("category_id")String category_id
+            @Field("subcategory_id")String category_id
+    );
+    @FormUrlEncoded
+    @POST("api/my_notification")
+    Call<NotificationDataModel> getnotification(
+            @Field("page")int page,
+            @Field("user_id")String user_id
+    );
+    @FormUrlEncoded
+    @POST("api/search")
+    Call<Adversiment_Model> getAds(
+
+            @Field("key_word")String key_word
     );
     @FormUrlEncoded
     @POST("api/fillter")
     Call<Adversiment_Model> getAds(
-            @Field("page")int page,
             @Field("city_id")String city_id,
             @Field("lat")String lat,
             @Field("lng")String lng,
@@ -105,7 +119,8 @@ public interface Service {
     @POST("api/single_ad")
     Call<Single_Adversiment_Model> getSingleAds(
 
-            @Field("ad_id")String ad_id
+            @Field("ad_id")String ad_id,
+            @Field("user_id") String user_id
     );
     @GET("api/conditions")
     Call<App_Data_Model> getterms();
@@ -128,6 +143,12 @@ public interface Service {
     @POST("api/my_account")
     Call<UserModel> getmyprofile(
             @Field("user_id")String user_id);
+    @FormUrlEncoded
+    @POST("api/my_wallet")
+    Call<Wallet_Model> getmywallet(
+            @Field("user_id")String user_id);
+    @GET("api/all_banks")
+    Call<BankDataModel> getBanks();
     @GET("api/servicesPrice")
     Call<Service_Model> getservice();
     @Multipart
@@ -149,6 +170,19 @@ public interface Service {
              @Part("is_Install") RequestBody is_Install,
              @Part("commented") RequestBody commented,
              @Part List<MultipartBody.Part> partimageInsideList
+
+//
+            );
+    @Multipart
+    @POST("api/payment")
+    Call<ResponseBody> Payment
+            (@Part("user_id") RequestBody user_id,
+             @Part("bank_id") RequestBody bank_id,
+             @Part("name") RequestBody name,
+             @Part("number") RequestBody number,
+             @Part("amount") RequestBody amount,
+
+             @Part MultipartBody.Part partimage
 
 //
             );

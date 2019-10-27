@@ -100,8 +100,13 @@ public class Fragment_More extends Fragment {
         });
 
         binding.llWallet.setOnClickListener(view -> {
+            if(userModel!=null){
             Intent intent = new Intent(activity, WalletActivity.class);
-            startActivity(intent);
+            startActivity(intent);}
+            else {
+                Common.CreateNoSignAlertDialog(activity);
+
+            }
         });
 
         binding.llTransfer.setOnClickListener(view -> {

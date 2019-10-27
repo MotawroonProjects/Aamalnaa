@@ -71,66 +71,66 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
-            android:fitsSystemWindows="true"
-            >
+            android:fitsSystemWindows="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="8dp"
-                >
+                android:padding="8dp">
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:contentPadding="8dp"
-                    app:cardCornerRadius="5dp"
                     app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="5dp"
                     app:cardElevation="3dp"
+                    app:contentPadding="8dp"
 
                     >
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/textColor"
-                            android:textSize="15sp"
                             android:text="@string/balance"
-                            />
+                            android:textColor="@color/textColor"
+                            android:textSize="15sp" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:layout_marginTop="8dp"
-                            android:weightSum="1"
                             android:background="@drawable/ll_balance"
-                            >
+                            android:weightSum="1">
+
                             <TextView
                                 android:id="@+id/tvBalance"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight=".9"
+                                android:layout_weight=".8"
+                                android:gravity="center_vertical|start"
                                 android:paddingLeft="8dp"
                                 android:paddingRight="8dp"
-                                android:gravity="center_vertical|start"
-                                android:textColor="@color/colorPrimary"
-                                android:textStyle="bold"
-                                android:textSize="14sp"
                                 android:text="@{balance}"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
 
                                 />
+
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight=".1"
+                                android:layout_weight=".2"
                                 android:gravity="center"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="14sp"
                                 android:text="@string/sar"
-                                />
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14sp" />
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -139,36 +139,226 @@
                     android:id="@+id/llAddBalance"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:weightSum="1"
-                    android:background="@color/white"
-                    android:layout_marginTop="20dp"
-                    >
+                    android:weightSum="1">
+
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_weight=".9"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/textColor"
-                        android:textSize="15sp"
+                        android:layout_weight=".9"
+                        android:clickable="false"
+                        android:longClickable="false"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:text="@string/add_balance"
-                        android:clickable="false"
-                        android:longClickable="false"
-                        />
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+
                     <ImageView
                         android:layout_width="0dp"
-                        android:layout_weight=".1"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_arrow_right"
-                        android:padding="13dp"
-                        android:tint="@color/colorPrimary"
-                        android:rotation='@{lang.equals("ar")?180:0}'
+                        android:layout_weight=".1"
                         android:clickable="false"
                         android:longClickable="false"
-                        />
+                        android:padding="13dp"
+                        android:rotation='@{lang.equals("ar")?180:0}'
+                        android:src="@drawable/ic_arrow_right"
+                        android:tint="@color/colorPrimary" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llAddTransactions"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".9"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/transactions"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".1"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:padding="13dp"
+                        android:rotation='@{lang.equals("ar")?180:0}'
+                        android:src="@drawable/ic_arrow_right"
+                        android:tint="@color/colorPrimary" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:text="@string/profits"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/textColor" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/the_bouquet"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/advertising_and_promotional_points"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/gray3"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/_10_ryal"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/_10_points"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/_30_ryal"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/_35_points"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/gray3"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/_50_ryal"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/_60_points"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recbank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"></androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

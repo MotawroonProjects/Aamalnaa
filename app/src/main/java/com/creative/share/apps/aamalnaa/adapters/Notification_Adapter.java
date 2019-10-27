@@ -19,27 +19,24 @@ import com.creative.share.apps.aamalnaa.activities_fragments.activity_my_ads.MyA
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_search.Search_Activity;
 import com.creative.share.apps.aamalnaa.databinding.AdsRowBinding;
 import com.creative.share.apps.aamalnaa.databinding.LoadMoreBinding;
+import com.creative.share.apps.aamalnaa.databinding.NotificationRowBinding;
 import com.creative.share.apps.aamalnaa.models.Adversiment_Model;
-
+import com.creative.share.apps.aamalnaa.models.NotificationDataModel;
 
 import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class Ads_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class Notification_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int ITEM_DATA = 1;
     private final int LOAD = 2;
-    private List<Adversiment_Model.Data> orderlist;
+    private List<NotificationDataModel.NotificationModel> orderlist;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
-    private Ads_Activity ads_activity;
-private FavoriteActivity favoriteActivity;
-private MyAdsActivity myAdsActivity;
-private HomeActivity homeActivity;
-private Search_Activity search_activity;
-    public Ads_Adapter(List<Adversiment_Model.Data> orderlist, Context context) {
+
+    public Notification_Adapter(List<NotificationDataModel.NotificationModel> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -54,7 +51,7 @@ private Search_Activity search_activity;
 
         if (viewType==ITEM_DATA)
         {
-            AdsRowBinding binding  = DataBindingUtil.inflate(inflater, R.layout.ads_row,parent,false);
+            NotificationRowBinding binding  = DataBindingUtil.inflate(inflater, R.layout.notification_row,parent,false);
             return new EventHolder(binding);
 
         }else
@@ -66,41 +63,12 @@ private Search_Activity search_activity;
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        Adversiment_Model.Data order_data = orderlist.get(position);
+        NotificationDataModel.NotificationModel order_data = orderlist.get(position);
         if (holder instanceof EventHolder)
         {
             EventHolder eventHolder = (EventHolder) holder;
-            eventHolder.binding.setLang(lang);
-            eventHolder.binding.setAdversimentmodel(order_data);
-eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-if(context instanceof  Ads_Activity){
-    ads_activity=(Ads_Activity)context;
-    ads_activity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
 
-}
-else if(context instanceof  MyAdsActivity){
-    myAdsActivity=(MyAdsActivity)context;
-    myAdsActivity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
-}
-else  if(context instanceof HomeActivity){
-    homeActivity=(HomeActivity)context;
-    homeActivity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
-
-}
-else if(context instanceof FavoriteActivity){
-    favoriteActivity=(FavoriteActivity)context;
-    favoriteActivity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
-
-}
-else if(context instanceof  Search_Activity){
-    search_activity=(Search_Activity)context;
-    search_activity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
-}
-    }
-});
-
+            eventHolder.binding.setNotificationModel(order_data);
 
 
 
@@ -117,8 +85,8 @@ else if(context instanceof  Search_Activity){
     }
 
     public class EventHolder extends RecyclerView.ViewHolder {
-        public AdsRowBinding binding;
-        public EventHolder(@NonNull AdsRowBinding binding) {
+        public NotificationRowBinding binding;
+        public EventHolder(@NonNull NotificationRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 
@@ -137,7 +105,7 @@ else if(context instanceof  Search_Activity){
 
     @Override
     public int getItemViewType(int position) {
-        Adversiment_Model.Data order_Model = orderlist.get(position);
+        NotificationDataModel.NotificationModel order_Model = orderlist.get(position);
         if (order_Model!=null)
         {
             return ITEM_DATA;

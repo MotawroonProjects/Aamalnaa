@@ -235,7 +235,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:text='@{adversimentmodel.councomments+"تعليق"}'
+                            android:text='@{adversimentmodel.commented==0?adversimentmodel.councomments+"تعليق":"لا يوجد تعليق"}'
                             android:textColor="@color/gray7"
                             android:textSize="13sp"
                             app:layout_constraintBottom_toBottomOf="parent"

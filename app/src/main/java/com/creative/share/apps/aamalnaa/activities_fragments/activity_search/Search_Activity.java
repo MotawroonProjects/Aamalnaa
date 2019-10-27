@@ -1,31 +1,27 @@
-package com.creative.share.apps.aamalnaa.activities_fragments.activity_ads;
+package com.creative.share.apps.aamalnaa.activities_fragments.activity_search;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_adsdetails.AdsDetialsActivity;
-import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeActivity;
-import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_map.MapActivity;
 import com.creative.share.apps.aamalnaa.adapters.Ads_Adapter;
 import com.creative.share.apps.aamalnaa.databinding.ActivityAdsBinding;
-import com.creative.share.apps.aamalnaa.databinding.FragmentAdsBinding;
+import com.creative.share.apps.aamalnaa.databinding.ActivitySearchBinding;
 import com.creative.share.apps.aamalnaa.interfaces.Listeners;
 import com.creative.share.apps.aamalnaa.language.Language;
 import com.creative.share.apps.aamalnaa.models.Adversiment_Model;
@@ -33,6 +29,7 @@ import com.creative.share.apps.aamalnaa.models.Filter_Model;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
 import com.creative.share.apps.aamalnaa.remote.Api;
+import com.creative.share.apps.aamalnaa.share.Common;
 import com.creative.share.apps.aamalnaa.tags.Tags;
 
 import java.io.IOException;
@@ -45,10 +42,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Ads_Activity extends AppCompatActivity implements Listeners.BackListener {
+public class Search_Activity extends AppCompatActivity implements Listeners.BackListener {
     private String lang;
 
-    private ActivityAdsBinding binding;
+    private ActivitySearchBinding binding;
     private Preferences preferences;
     private UserModel userModel;
     private boolean isLoading = false;
@@ -56,6 +53,8 @@ public class Ads_Activity extends AppCompatActivity implements Listeners.BackLis
     private List<Adversiment_Model.Data> adsList;
     private Ads_Adapter ads_adapter;
     private LinearLayoutManager manager;
+    private String query="all";
+
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -65,9 +64,9 @@ public class Ads_Activity extends AppCompatActivity implements Listeners.BackLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_ads);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
         initView();
-        getAds();
+        getAds(query);
 
 
     }
@@ -88,30 +87,20 @@ public class Ads_Activity extends AppCompatActivity implements Listeners.BackLis
         manager=new LinearLayoutManager(this);
         binding.recView.setLayoutManager(manager);
         binding.recView.setAdapter(ads_adapter);
-       /* binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
 
-                if (dy>0)
-                {
-                    int totalItems = ads_adapter.getItemCount();
-                    int lastVisiblePos = manager.findLastCompletelyVisibleItemPosition();
-                    if (totalItems > 5 && (totalItems - lastVisiblePos) == 1 && !isLoading) {
-                        isLoading = true;
-                        adsList.add(null);
-                        ads_adapter.notifyItemInserted(adsList.size() - 1);
-                        int page = current_page2 + 1;
-                        loadMore(page);
-
-
-                    }
+        binding.edtSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+              query = binding.edtSearch.getText().toString();
+                if (!TextUtils.isEmpty(query)) {
+                    Common.CloseKeyBoard(Search_Activity.this,binding.edtSearch);
+                    getAds(query);
+                    return false;
                 }
             }
-        });*/
-
+            return false;
+        });
     }
-    private void getAds() {
+    private void getAds(String query) {
         adsList.clear();
         ads_adapter.notifyDataSetChanged();
         binding.progBar.setVisibility(View.VISIBLE);
@@ -120,7 +109,7 @@ public class Ads_Activity extends AppCompatActivity implements Listeners.BackLis
 
 
             Api.getService(Tags.base_url)
-                    .getAds(Filter_Model.getCity_id(),Filter_Model.getLat(),Filter_Model.getLng(),Filter_Model.getIs_new())
+                    .getAds(query)
                     .enqueue(new Callback<Adversiment_Model>() {
                         @Override
                         public void onResponse(Call<Adversiment_Model> call, Response<Adversiment_Model> response) {
@@ -174,55 +163,9 @@ public class Ads_Activity extends AppCompatActivity implements Listeners.BackLis
         }
     }
 
-    private void loadMore(int page) {
-        try {
 
-
-            Api.getService(Tags.base_url)
-                    .getAds( Filter_Model.getCity_id(),Filter_Model.getLat(),Filter_Model.getLng(),Filter_Model.getIs_new())
-                    .enqueue(new Callback<Adversiment_Model>() {
-                        @Override
-                        public void onResponse(Call<Adversiment_Model> call, Response<Adversiment_Model> response) {
-                            adsList.remove(adsList.size() - 1);
-                            ads_adapter.notifyItemRemoved(adsList.size() - 1);
-                            isLoading = false;
-                            if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
-
-                                adsList.addAll(response.body().getData());
-                                // categories.addAll(response.body().getCategories());
-                                current_page2 = response.body().getCurrent_page();
-                                ads_adapter.notifyDataSetChanged();
-
-                            } else {
-                                //Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                                try {
-                                    Log.e("Error_code", response.code() + "_" + response.errorBody().string());
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<Adversiment_Model> call, Throwable t) {
-                            try {
-                                adsList.remove(adsList.size() - 1);
-                                ads_adapter.notifyItemRemoved(adsList.size() - 1);
-                                isLoading = false;
-                                // Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
-                                Log.e("error", t.getMessage());
-                            } catch (Exception e) {
-                            }
-                        }
-                    });
-        } catch (Exception e) {
-            adsList.remove(adsList.size() - 1);
-            ads_adapter.notifyItemRemoved(adsList.size() - 1);
-            isLoading = false;
-        }
-    }
     public void showdetials(int id) {
-        Intent intent=new Intent(Ads_Activity.this, AdsDetialsActivity.class);
+        Intent intent=new Intent(Search_Activity.this, AdsDetialsActivity.class);
         intent.putExtra("search",id);
         startActivity(intent);
     }

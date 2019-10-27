@@ -35,7 +35,7 @@
     <string name="general_settings">General Settings</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="language_settings">Language Settings</string>
-    <string name="sar">SAR</string>
+    <string name="sar">point</string>
     <string name="no_details">No details</string>
     <string name="sign_in">Sign In</string>
     <string name="please_sign_in_or_sign_up">Please Sign In or Sign Up</string>
@@ -91,8 +91,8 @@
     <string name="share_app">Share App</string>
     <string name="rate_app">Rate App</string>
     <string name="about_tour">About Tour</string>
-    <string name="balance">Balance</string>
-    <string name="add_balance">Add balance</string>
+    <string name="balance">Current Points Balance</string>
+    <string name="add_balance">Add balance To My Wallet</string>
     <string name="app_commission">App Commission</string>
     <string name="app_note">Note that the application commission rate is <font color='#2b8dcd'>1%</font> if done outside the wallet, <font color='#2b8dcd'>2%</font> if it is done inside the wallet and <font color='#2b8dcd'>10%</font> on delivery and storage</string>
     <string name="enter_perc">Enter the price of the transaction to get the percentage of application</string>
@@ -122,7 +122,7 @@
     <string name="please_accept_terms">Please Accept Terms And Condition</string>
     <string name="Choose_Catogry">Choose Category</string>
     <string name="price">Price</string>
-<string name="info">MyInfo</string>
+    <string name="info">MyInfo</string>
     <string name="rated">Rated</string>
     <string name="work">Work</string>
     <string name="ads">Ads</string>
@@ -147,6 +147,24 @@
     <string name="address_detials">Address Detials</string>
     <string name="email_the_advertiser">Email the advertiser</string>
     <string name="delete_reporting">Delete Reporting</string>
+    <string name="transactions">Transactions</string>
+    <string name="profits">Profits</string>
+    <string name="the_bouquet">The bouquet</string>
+    <string name="advertising_and_promotional_points">Advertising and promotional points</string>
+    <string name="_10_ryal">10 ryal</string>
+    <string name="_10_points">10 points</string>
+    <string name="_30_ryal">30 ryal</string>
+    <string name="_35_points">35 Points</string>
+    <string name="_50_ryal">50 ryal</string>
+    <string name="_60_points">60 Points</string>
+    <string name="more_than_60">More Than 60</string>
+    <string name="banks">Banks</string>
+    <string name="transferred_account_name">Transferred account name</string>
+    <string name="transferred_account_number">Transferred account number</string>
+    <string name="transfer_amount">Transfer amount</string>
+    <string name="image_conversion">Image conversion</string>
+    <string name="choose_bank_acount">Choose Bank Acount</string>
+    <string name="search">search</string>
     <string-array name="models">
 
         <item>ِAds</item>

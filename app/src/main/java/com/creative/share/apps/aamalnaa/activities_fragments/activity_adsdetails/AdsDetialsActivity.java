@@ -134,7 +134,7 @@ binding.setAdsmodel(single_adversiment_model);
 
 
             Api.getService( Tags.base_url)
-                    .getSingleAds(search_id)
+                    .getSingleAds(search_id,userModel.getUser().getId()+"")
                     .enqueue(new Callback<Single_Adversiment_Model>() {
                         @Override
                         public void onResponse(Call<Single_Adversiment_Model> call, Response<Single_Adversiment_Model> response) {
@@ -191,7 +191,13 @@ dialog.dismiss();
 
             binding.llAds.setVisibility(View.VISIBLE);
         }
+if(body.getLike_ad()==0){
+binding.image.setImageDrawable(getResources().getDrawable(R.drawable.ic_follow));
+}
+else {
+    binding.image.setImageDrawable(getResources().getDrawable(R.drawable.ic_follow2));
 
+}
         if(body.getImages()!=null&&body.getImages().size()>0){
             Log.e("lll",body.getImages().size()+"");
             NUM_PAGES = body.getImages().size();

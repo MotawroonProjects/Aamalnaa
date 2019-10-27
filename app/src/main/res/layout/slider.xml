@@ -4,30 +4,10 @@
     <data>
 
     </data>
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         >
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:padding="3dp"
-            android:gravity="center"
-            android:layout_marginTop="8dp"
-            />
-        <TextView
-            android:id="@+id/tv_detials"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:padding="3dp"
-            android:gravity="center"            />
-
         <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -41,5 +21,30 @@
         android:scaleType="fitXY"
       />
 </FrameLayout>
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/book_container_bg"
+            >
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:padding="3dp"
+                android:layout_marginTop="8dp"
+                />
+            <TextView
+                android:id="@+id/tv_detials"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:padding="3dp"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
