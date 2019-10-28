@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_transfer.TransferActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.bank_activity.BanksActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_addbalance.AddBalanceActivity;
 import com.creative.share.apps.aamalnaa.adapters.BankAdapter;
@@ -85,7 +86,13 @@ binding.llAddBalance.setOnClickListener(new View.OnClickListener() {
         startActivity(intent);
     }
 });
-
+        binding.llAddTransactions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(WalletActivity.this, TransferActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     private void getBankAccount() {
         Api.getService(Tags.base_url)

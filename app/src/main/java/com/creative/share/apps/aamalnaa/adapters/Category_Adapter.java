@@ -22,6 +22,8 @@ import com.creative.share.apps.aamalnaa.databinding.CatogryRowBinding;
 import com.creative.share.apps.aamalnaa.databinding.SliderBinding;
 import com.creative.share.apps.aamalnaa.models.Catogries_Model;
 
+import net.cachapa.expandablelayout.ExpandableLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -104,7 +106,7 @@ if(i==position){
         }
         else {
 
-            ((EventHolder) holder).binding.tvTitle.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+          //  ((EventHolder) holder).binding.tvTitle.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             ((EventHolder) holder).binding.recView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
             ((EventHolder) holder).binding.expandLayout.setVisibility(View.VISIBLE);
 

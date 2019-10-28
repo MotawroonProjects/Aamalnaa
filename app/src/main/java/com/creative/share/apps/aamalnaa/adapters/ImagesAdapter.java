@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_add_ads.AddAdsActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_update_ads.UpdateAdsActivity;
 import com.creative.share.apps.aamalnaa.databinding.ImageRowBinding;
 
 import java.util.List;
@@ -20,12 +21,17 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.MyHolder> 
     private List<Uri> urlList;
     private Context context;
     private AddAdsActivity activity;
-
+private UpdateAdsActivity updateAdsActivity;
     public ImagesAdapter(List<Uri> urlList, Context context) {
         this.urlList = urlList;
         this.context = context;
-        activity = (AddAdsActivity) context;
 
+if(context instanceof  AddAdsActivity){
+    activity=(AddAdsActivity)context;
+}
+else if(context instanceof UpdateAdsActivity){
+    updateAdsActivity=(UpdateAdsActivity)context;
+}
 
     }
 
@@ -44,7 +50,14 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.MyHolder> 
 
         holder.imageRowBinding.setUrl(url.toString());
 
-        holder.imageRowBinding.imageDelete.setOnClickListener(view -> activity.deleteImage(holder.getAdapterPosition())
+        holder.imageRowBinding.imageDelete.setOnClickListener(view -> {
+            if(context instanceof  AddAdsActivity){
+                    activity.deleteImage(holder.getAdapterPosition());}
+            else if(context instanceof  UpdateAdsActivity){
+                updateAdsActivity.deleteImage(holder.getAdapterPosition());
+            }
+
+                }
         );
 
 

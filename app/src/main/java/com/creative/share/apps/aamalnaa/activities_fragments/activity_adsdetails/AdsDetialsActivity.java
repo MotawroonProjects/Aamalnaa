@@ -35,6 +35,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import io.paperdb.Paper;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -121,6 +122,24 @@ binding.setAdsmodel(single_adversiment_model);
 
         comments_adapter=new Comments_Adapter(commentsList,this);
         binding.reccomment.setAdapter(comments_adapter);
+        binding.llReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Report();
+            }
+        });
+        binding.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Likeads();
+            }
+        });
+        binding.follow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                becustomer();
+            }
+        });
 
     }
     public void getsingleads() {
@@ -174,6 +193,156 @@ dialog.dismiss();
 dialog.dismiss();
         }
     }
+    public void Likeads() {
+        //   Common.CloseKeyBoard(homeActivity, edt_name);
+
+        ProgressDialog dialog = Common.createProgressDialog(AdsDetialsActivity.this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        // rec_sent.setVisibility(View.GONE);
+        try {
+
+
+            Api.getService( Tags.base_url)
+                    .Like(search_id,userModel.getUser().getId()+"")
+                    .enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            dialog.dismiss();
+
+                            //  binding.progBar.setVisibility(View.GONE);
+                            if (response.isSuccessful() && response.body() != null && response.body() != null) {
+                                //binding.coord1.scrollTo(0,0);
+
+getsingleads();                            } else {
+
+
+                                Toast.makeText(AdsDetialsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                try {
+                                    Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            try {
+
+                                dialog.dismiss();
+
+                                Toast.makeText(AdsDetialsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                Log.e("error", t.getMessage());
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        }catch (Exception e){
+
+            dialog.dismiss();
+        }
+    }
+    public void Report() {
+        //   Common.CloseKeyBoard(homeActivity, edt_name);
+
+        ProgressDialog dialog = Common.createProgressDialog(AdsDetialsActivity.this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        // rec_sent.setVisibility(View.GONE);
+        try {
+
+
+            Api.getService( Tags.base_url)
+                    .Report(single_adversiment_model.getUser_id()+"",userModel.getUser().getId()+"")
+                    .enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            dialog.dismiss();
+
+                            //  binding.progBar.setVisibility(View.GONE);
+                            if (response.isSuccessful() && response.body() != null && response.body() != null) {
+                                //binding.coord1.scrollTo(0,0);
+
+                                getsingleads();                            } else {
+
+
+                                Toast.makeText(AdsDetialsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                try {
+                                    Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            try {
+
+                                dialog.dismiss();
+
+                                Toast.makeText(AdsDetialsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                Log.e("error", t.getMessage());
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        }catch (Exception e){
+
+            dialog.dismiss();
+        }
+    }
+    public void becustomer() {
+        //   Common.CloseKeyBoard(homeActivity, edt_name);
+
+        ProgressDialog dialog = Common.createProgressDialog(AdsDetialsActivity.this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        // rec_sent.setVisibility(View.GONE);
+        try {
+
+
+            Api.getService( Tags.base_url)
+                    .becustomer(single_adversiment_model.getUser_id()+"",userModel.getUser().getId()+"")
+                    .enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            dialog.dismiss();
+
+                            //  binding.progBar.setVisibility(View.GONE);
+                            if (response.isSuccessful() && response.body() != null && response.body() != null) {
+                                //binding.coord1.scrollTo(0,0);
+
+                                getsingleads();                            } else {
+
+
+                                Toast.makeText(AdsDetialsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                try {
+                                    Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            try {
+
+                                dialog.dismiss();
+
+                                Toast.makeText(AdsDetialsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                Log.e("error", t.getMessage());
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        }catch (Exception e){
+
+            dialog.dismiss();
+        }
+    }
 
     private void update(Single_Adversiment_Model body) {
         binding.setAdsmodel(body);
@@ -198,6 +367,20 @@ else {
     binding.image.setImageDrawable(getResources().getDrawable(R.drawable.ic_follow2));
 
 }
+if(body.getFollow()==0){
+    binding.follow.setText(getResources().getString(R.string.be_my_customer));
+
+}
+else {
+    binding.follow.setText(getResources().getString(R.string.retreat));
+}
+        if(body.getReport()==0){
+            binding.tvReport.setText(getResources().getString(R.string.report));
+
+        }
+        else {
+            binding.tvReport.setText(getResources().getString(R.string.delete_reporting));
+        }
         if(body.getImages()!=null&&body.getImages().size()>0){
             Log.e("lll",body.getImages().size()+"");
             NUM_PAGES = body.getImages().size();

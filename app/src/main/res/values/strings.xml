@@ -165,6 +165,9 @@
     <string name="image_conversion">Image conversion</string>
     <string name="choose_bank_acount">Choose Bank Acount</string>
     <string name="search">search</string>
+    <string name="edit">Edit</string>
+    <string name="be_my_customer">Be my customer</string>
+    <string name="report">Report</string>
     <string-array name="models">
 
         <item>ِAds</item>

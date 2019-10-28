@@ -89,6 +89,12 @@ public interface Service {
             @Field("user_id")String user_id
     );
     @FormUrlEncoded
+    @POST("api/my_money_report")
+    Call<NotificationDataModel> gettransactions(
+            @Field("page")int page,
+            @Field("user_id")String user_id
+    );
+    @FormUrlEncoded
     @POST("api/search")
     Call<Adversiment_Model> getAds(
 
@@ -121,6 +127,27 @@ public interface Service {
 
             @Field("ad_id")String ad_id,
             @Field("user_id") String user_id
+    );
+    @FormUrlEncoded
+    @POST("api/is_like")
+    Call<ResponseBody> Like(
+
+            @Field("ad_id")String ad_id,
+            @Field("user_id") String user_id
+    );
+    @FormUrlEncoded
+    @POST("api/reporte")
+    Call<ResponseBody> Report(
+
+            @Field("reported_id")String reported_id,
+            @Field("user_id") String user_id
+    );
+    @FormUrlEncoded
+    @POST("api/follow")
+    Call<ResponseBody> becustomer(
+
+            @Field("followed_id")String followed_id,
+            @Field("follower_id") String follower_id
     );
     @GET("api/conditions")
     Call<App_Data_Model> getterms();
@@ -170,6 +197,54 @@ public interface Service {
              @Part("is_Install") RequestBody is_Install,
              @Part("commented") RequestBody commented,
              @Part List<MultipartBody.Part> partimageInsideList
+
+//
+            );
+    @Multipart
+    @POST("api/update_ad")
+    Call<ResponseBody> Updateorder
+            (
+                    @Part("ad_id")RequestBody ad_id,
+
+                    @Part("user_id") RequestBody user_id,
+             @Part("category_id") RequestBody category_id,
+             @Part("subcategory_id") RequestBody subcategory_id,
+             @Part("city_id") RequestBody city_id,
+             @Part("ads_type") RequestBody ads_type,
+             @Part("title") RequestBody title,
+             @Part("details") RequestBody details,
+             @Part("price") RequestBody price,
+             @Part("address") RequestBody address,
+             @Part("lng") RequestBody lng,
+             @Part("lat") RequestBody lat,
+             @Part("views_num") RequestBody views_num,
+             @Part("is_Special") RequestBody is_Special,
+             @Part("is_Install") RequestBody is_Install,
+             @Part("commented") RequestBody commented,
+             @Part List<MultipartBody.Part> partimageInsideList
+
+//
+            );
+    @FormUrlEncoded
+    @POST("api/update_ad")
+    Call<ResponseBody> Updateorder
+            (
+                    @Field("ad_id")String ad_id,
+                    @Field("user_id") String user_id,
+             @Field("category_id") String category_id,
+             @Field("subcategory_id") String subcategory_id,
+             @Field("city_id") String city_id,
+             @Field("ads_type") String ads_type,
+             @Field("title") String title,
+             @Field("details") String details,
+             @Field("price") String price,
+             @Field("address") String address,
+             @Field("lng") String lng,
+             @Field("lat") String lat,
+             @Field("views_num") String views_num,
+             @Field("is_Special") String is_Special,
+             @Field("is_Install") String is_Install,
+             @Field("commented") String commented
 
 //
             );

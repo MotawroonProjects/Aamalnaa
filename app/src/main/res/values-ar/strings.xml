@@ -157,12 +157,16 @@
     <string name="_60_points">60 نقطه</string>
     <string name="more_than_60">اكثر من 60</string>
     <string name="banks">الحسابات البنكيه</string>
-    <string name="transferred_account_name">Transferred account name</string>
-    <string name="transferred_account_number">Transferred account number</string>
-    <string name="transfer_amount">Transfer amount</string>
-    <string name="image_conversion">Image conversion</string>
-    <string name="choose_bank_acount">Choose Bank Acount</string>
+    <string name="transferred_account_name">اسم حساب المحول</string>
+    <string name="transferred_account_number">رقم حساب المحول</string>
+    <string name="transfer_amount">قيمة التحويل</string>
+    <string name="image_conversion">صورة التحويل</string>
+    <string name="choose_bank_acount">اختر اسم البنك </string>
     <string name="search">بحث</string>
+    <string name="edit">تعديل</string>
+    <string name="be_my_customer">كن عميلى</string>
+    <string name="report">ابلاغ</string>
+
     <string-array name="models">
 
         <item>اعلان</item>

@@ -1,4 +1,4 @@
-package com.creative.share.apps.aamalnaa.activities_fragments.activity_add_ads;
+package com.creative.share.apps.aamalnaa.activities_fragments.activity_update_ads;
 
 import android.Manifest;
 import android.app.Activity;
@@ -33,15 +33,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_map.MapActivity;
-import com.creative.share.apps.aamalnaa.activities_fragments.activity_my_ads.MyAdsActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
-import com.creative.share.apps.aamalnaa.activities_fragments.activity_transfer.TransferActivity;
 import com.creative.share.apps.aamalnaa.adapters.CityAdapter;
 import com.creative.share.apps.aamalnaa.adapters.ImagesAdapter;
 import com.creative.share.apps.aamalnaa.adapters.Service_Adapter;
 import com.creative.share.apps.aamalnaa.adapters.Spinner_Category_Adapter;
 import com.creative.share.apps.aamalnaa.adapters.Spinner_Sub_Category_Adapter;
-import com.creative.share.apps.aamalnaa.databinding.ActivityAddAdsBinding;
+import com.creative.share.apps.aamalnaa.databinding.ActivityUpdateAdsBinding;
 import com.creative.share.apps.aamalnaa.databinding.DialogSelectImageBinding;
 import com.creative.share.apps.aamalnaa.interfaces.Listeners;
 import com.creative.share.apps.aamalnaa.language.Language;
@@ -53,7 +51,6 @@ import com.creative.share.apps.aamalnaa.models.Service_Model;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
 import com.creative.share.apps.aamalnaa.remote.Api;
-import com.creative.share.apps.aamalnaa.share.App;
 import com.creative.share.apps.aamalnaa.share.Common;
 import com.creative.share.apps.aamalnaa.tags.Tags;
 
@@ -72,8 +69,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddAdsActivity extends AppCompatActivity implements Listeners.BackListener {
-    private ActivityAddAdsBinding binding;
+public class UpdateAdsActivity extends AppCompatActivity implements Listeners.BackListener {
+    private ActivityUpdateAdsBinding binding;
     private SelectedLocation selectedLocation;
 
     private String lang;
@@ -102,6 +99,7 @@ private int views_num=0,is_Special=0,is_Install=0,commented=0;
     private Order_Upload_Model order_upload_model;
 private Preferences preferences;
 private UserModel userModel;
+private UserModel.Ads ads;
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -112,21 +110,47 @@ private UserModel userModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_add_ads);
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_update_ads);
         initView();
         getCities();
 
         getservice();
         getDepartments();
+        if(ads!=null){
+        updatedata(ads);}
+
     }
     private void updateCatogryAdapter(Catogries_Model body) {
 
-        dataList2.add(new Catogries_Model.Data("إختر"));
+        dataList2.add(new Catogries_Model.Data("إختر القسم"));
         if (body.getData() != null) {
             dataList2.addAll(body.getData());
             adapter.notifyDataSetChanged();
 
         }
+        if(ads!=null){
+            int x=0;
+            for(int i=1;i<dataList2.size();i++){
+                Log.e("kkk",ads.getCategory_id()+"  "+dataList2.get(i).getId());
+
+                if(dataList2.get(i).getId().equals(ads.getCategory_id()+"")){
+
+                    binding.spinnerMainDepart.setSelection(i);
+                    x=i;
+                    break;
+                }
+            }
+updatesublist(dataList2.get(x).getSubcategory());
+            for(int i=1;i<subcategories.size();i++){
+
+                if(subcategories.get(i).getId()==ads.getSubcategory_id()){
+
+                    binding.spinnerSubDepart.setSelection(i);
+                }
+            }
+
+        }
+
     }
     public void getDepartments() {
         //   Common.CloseKeyBoard(homeActivity, edt_name);
@@ -152,7 +176,7 @@ private UserModel userModel;
                             }
                         } else {
 
-                            Toast.makeText(AddAdsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UpdateAdsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             try {
                                 Log.e("Error_code", response.code() + "_" + response.errorBody().string());
                             } catch (IOException e) {
@@ -166,7 +190,7 @@ private UserModel userModel;
                         try {
 
 
-                            Toast.makeText(AddAdsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UpdateAdsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                             Log.e("error", t.getMessage());
                         } catch (Exception e) {
                         }
@@ -176,6 +200,9 @@ private UserModel userModel;
     }
 
     private void initView() {
+        if(getIntent().getSerializableExtra("data")!=null){
+            ads= (UserModel.Ads) getIntent().getSerializableExtra("data");
+        }
         order_upload_model=new Order_Upload_Model();
         preferences=Preferences.getInstance();
         userModel=preferences.getUserData(this);
@@ -280,7 +307,7 @@ updatesublist(dataList2.get(i).getSubcategory());
                     city_id = "";
 
                 } else {
-                    city_id = String.valueOf(dataList.get(i).getId());
+                    city_id = String.valueOf(cDataList.get(i).getId());
 
 
                 }
@@ -308,43 +335,89 @@ updatesublist(dataList2.get(i).getSubcategory());
         binding.tvLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AddAdsActivity.this, MapActivity.class);
+                Intent intent = new Intent(UpdateAdsActivity.this, MapActivity.class);
                 startActivityForResult(intent, 1);
             }
         });
         binding.btnSend.setOnClickListener(view -> {
-            if (order_upload_model.isDataValidStep1(this)&&urlList!=null&&urlList.size()!=0) {
+            if (order_upload_model.isDataValidStep1(this)) {
                 if (userModel != null) {
-                   sendorder(order_upload_model);
+                    if(urlList!=null&&urlList.size()>0){
+                   updateorder(order_upload_model);}
+                    else {
+                        updateorderwithoutimage(order_upload_model);
+                    }
                 } else {
                     Common.CreateNoSignAlertDialog(this);
                 }
 
 
             }
-            else {
-                if(urlList==null||urlList.size()==0){
-                    Toast.makeText(this,getResources().getString(R.string.upload_picture),Toast.LENGTH_LONG).show();
-                }
-            }
+
         });
+
+    }
+
+    private void updatedata(UserModel.Ads ads) {
+        order_upload_model.setPrice(ads.getPrice()+"");
+        order_upload_model.setCity_id(ads.getCity_id()+"");
+        order_upload_model.setSubcategory_id(ads.getSubcategory_id()+"");
+        order_upload_model.setTitle(ads.getTitle());
+        order_upload_model.setAddress(ads.getAddress());
+        SelectedLocation selectedLocation = new SelectedLocation(ads.getLat(),ads.getLng(),ads.getAddress());
+
+        binding.setLocation(selectedLocation);
+        binding.tvLocation.setText(ads.getAddress());
+        binding.tvTitle.setText(ads.getTitle());
+        Log.e("eee",ads.getTitle()+"  "+ads.getAddress());
+        order_upload_model.setLatitude(ads.getLat()+"");
+        order_upload_model.setLongitude(ads.getLng()+"");
+        order_upload_model.setDetails(ads.getDetails());
+        type_id=ads.getAds_type()+"";
+        if(type_id.equals("1")){
+            binding.spinnerAdType.setSelection(0);
+        }
+        else if(type_id.equals("2")){
+            binding.spinnerAdType.setSelection(1);
+
+        }
+        else if(type_id.equals("3")){
+            binding.spinnerAdType.setSelection(2);
+
+        }
+        if(ads.getCommented()==1){
+            service_adapter.setSelection(0);
+        }
+        if(ads.getIs_Special()==1){
+            service_adapter.setSelection(1);
+        }
+        if(ads.getViews_num()>0){
+            service_adapter.setSelection(2);
+        }
+        if(ads.getIs_Install()==1){
+            service_adapter.setSelection(3);
+        }
+
+        binding.setOrderModel(order_upload_model);
 
     }
 
     private List<MultipartBody.Part> getMultipartBodyList(List<Uri> uriList, String image_cv) {
         List<MultipartBody.Part> partList = new ArrayList<>();
         for (Uri uri : uriList) {
-            MultipartBody.Part part = Common.getMultiPart(AddAdsActivity.this, uri, image_cv);
+            MultipartBody.Part part = Common.getMultiPart(UpdateAdsActivity.this, uri, image_cv);
             partList.add(part);
         }
         return partList;
     }
 
-    private void sendorder(Order_Upload_Model order_upload_model) {
-        final Dialog dialog = Common.createProgressDialog(AddAdsActivity.this, getString(R.string.wait));
+    private void updateorder(Order_Upload_Model order_upload_model) {
+        final Dialog dialog = Common.createProgressDialog(UpdateAdsActivity.this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
         Log.e("data",userModel.getUser().getId()+" "+order_upload_model.getCategory_id()+" "+order_upload_model.getSubcategory_id()+" "+order_upload_model.getCity_id()+" "+type_id+" "+order_upload_model.getTitle()+" "+order_upload_model.getDetails()+" "+order_upload_model.getAddress()+" "+order_upload_model.getLongitude()+" "+order_upload_model.getLatitude()+" "+views_num+" "+is_Special+" "+is_Install+" "+commented);
+        RequestBody ad_part = Common.getRequestBodyText(ads.getId() + "");
+
         RequestBody user_part = Common.getRequestBodyText(userModel.getUser().getId() + "");
 
         RequestBody category_part = Common.getRequestBodyText(order_upload_model.getCategory_id());
@@ -373,23 +446,23 @@ RequestBody views_num_part=Common.getRequestBodyText(views_num+"");
         List<MultipartBody.Part> partimageList = getMultipartBodyList(urlList, "image[]");
         try {
             Api.getService(Tags.base_url)
-                    .Sendorder(user_part, category_part,subcategory_part,city_part,type_part, title_part, detials_part,price_part,address_part,long_part,lat_part,views_num_part,is_Special_part,is_Install_part,commented_part,partimageList).enqueue(new Callback<ResponseBody>() {
+                    .Updateorder(ad_part,user_part, category_part,subcategory_part,city_part,type_part, title_part, detials_part,price_part,address_part,long_part,lat_part,views_num_part,is_Special_part,is_Install_part,commented_part,partimageList).enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     dialog.dismiss();
                     if (response.isSuccessful()) {
                         // Common.CreateSignAlertDialog(adsActivity,getResources().getString(R.string.suc));
-                        Toast.makeText(AddAdsActivity.this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UpdateAdsActivity.this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
 
                         //  adsActivity.finish(response.body().getId_advertisement());
-                        Intent intent = new Intent(AddAdsActivity.this, ProfileActivity.class);
+                        Intent intent = new Intent(UpdateAdsActivity.this, ProfileActivity.class);
 
                         startActivity(intent);
                         finish();
                     } else {
                         try {
 
-                            Toast.makeText(AddAdsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UpdateAdsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             Log.e("Error", response.toString()+" "+response.code() + "" + response.message() + "" + response.errorBody() + response.raw() + response.body() + response.headers()+" "+response.errorBody().toString());
                         } catch (Exception e) {
 
@@ -402,7 +475,55 @@ RequestBody views_num_part=Common.getRequestBodyText(views_num+"");
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                     dialog.dismiss();
                     try {
-                        Toast.makeText(AddAdsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UpdateAdsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                        Log.e("Error", t.getMessage());
+                    } catch (Exception e) {
+
+                    }
+                }
+            });
+        } catch (Exception e) {
+            dialog.dismiss();
+            Log.e("error", e.getMessage().toString());
+        }
+    }
+    private void updateorderwithoutimage(Order_Upload_Model order_upload_model) {
+        final Dialog dialog = Common.createProgressDialog(UpdateAdsActivity.this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+
+        try {
+            Api.getService(Tags.base_url)
+                    .Updateorder(ads.getId()+"",userModel.getUser().getId()+"", order_upload_model.getCategory_id(),order_upload_model.getSubcategory_id(),order_upload_model.getCity_id(),type_id, order_upload_model.getTitle(), order_upload_model.getDetails(),order_upload_model.getPrice(),order_upload_model.getAddress(),order_upload_model.getLongitude(),order_upload_model.getLongitude(),views_num+"",is_Special+"",is_Install+"",commented+"").enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    dialog.dismiss();
+                    if (response.isSuccessful()) {
+                        // Common.CreateSignAlertDialog(adsActivity,getResources().getString(R.string.suc));
+                        Toast.makeText(UpdateAdsActivity.this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+
+                        //  adsActivity.finish(response.body().getId_advertisement());
+                        Intent intent = new Intent(UpdateAdsActivity.this, ProfileActivity.class);
+
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        try {
+
+                            Toast.makeText(UpdateAdsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            Log.e("Error", response.toString()+" "+response.code() + "" + response.message() + "" + response.errorBody() + response.raw() + response.body() + response.headers()+" "+response.errorBody().toString());
+                        } catch (Exception e) {
+
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    dialog.dismiss();
+                    try {
+                        Toast.makeText(UpdateAdsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                         Log.e("Error", t.getMessage());
                     } catch (Exception e) {
 
@@ -417,10 +538,18 @@ RequestBody views_num_part=Common.getRequestBodyText(views_num+"");
 
     private void updateCityAdapter(Cities_Model body) {
 
-        cDataList.add(new Cities_Model.Data("إختر"));
+        cDataList.add(new Cities_Model.Data("إختر المدينه"));
         if(body.getData()!=null){
             cDataList.addAll(body.getData());
             cityadapter.notifyDataSetChanged();}
+        if(ads!=null){
+            for(int i=1;i<cDataList.size();i++){
+                if(cDataList.get(i).getId()==ads.getCity_id()){
+                    Log.e("kkk",ads.getCity_id()+"");
+                    binding.spinnerAdCity.setSelection(i);
+                }
+            }
+        }
     }
     private void getCities() {
         try {
@@ -450,12 +579,12 @@ RequestBody views_num_part=Common.getRequestBodyText(views_num+"");
                                     e.printStackTrace();
                                 }
                                 if (response.code() == 500) {
-                                    Toast.makeText(AddAdsActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(UpdateAdsActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
 
 
                                 }else
                                 {
-                                    Toast.makeText(AddAdsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(UpdateAdsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
 
 
                                 }
@@ -469,9 +598,9 @@ RequestBody views_num_part=Common.getRequestBodyText(views_num+"");
                                 if (t.getMessage() != null) {
                                     Log.e("error", t.getMessage());
                                     if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-                                        Toast.makeText(AddAdsActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(UpdateAdsActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(AddAdsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(UpdateAdsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
@@ -485,7 +614,7 @@ RequestBody views_num_part=Common.getRequestBodyText(views_num+"");
     }
 
     private void updatesublist(List<Catogries_Model.Data.Subcategory> subcategory) {
-        subcategories.add(new Catogries_Model.Data.Subcategory("إختر"));
+        subcategories.add(new Catogries_Model.Data.Subcategory("إختر القسم الفرعى"));
         if (subcategory != null) {
             subcategories.addAll(subcategory);
             spinner_sub_category_adapters.notifyDataSetChanged();
@@ -710,7 +839,7 @@ RequestBody views_num_part=Common.getRequestBodyText(views_num+"");
         }
     }
     private void getservice() {
-        ProgressDialog dialog = Common.createProgressDialog(AddAdsActivity.this, getString(R.string.wait));
+        ProgressDialog dialog = Common.createProgressDialog(UpdateAdsActivity.this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
         try {
@@ -725,7 +854,7 @@ RequestBody views_num_part=Common.getRequestBodyText(views_num+"");
                                 updateservice(response.body());
                             } else {
 
-                                Toast.makeText(AddAdsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(UpdateAdsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
 
                                 try {
 
@@ -744,9 +873,9 @@ RequestBody views_num_part=Common.getRequestBodyText(views_num+"");
                                 if (t.getMessage() != null) {
                                     Log.e("error", t.getMessage());
                                     if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-                                        Toast.makeText(AddAdsActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(UpdateAdsActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(AddAdsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(UpdateAdsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
 

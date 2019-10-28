@@ -15,6 +15,9 @@ import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.Pr
 import com.creative.share.apps.aamalnaa.databinding.AdsUserRowBinding;
 import com.creative.share.apps.aamalnaa.databinding.ReatedRowBinding;
 import com.creative.share.apps.aamalnaa.models.UserModel;
+import com.creative.share.apps.aamalnaa.preferences.Preferences;
+
+import net.cachapa.expandablelayout.ExpandableLayout;
 
 import java.util.List;
 import java.util.Locale;
@@ -28,7 +31,7 @@ public class My_Ads_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private LayoutInflater inflater;
     private String lang;
     private ProfileActivity activity;
-    private int i = 0;
+    private int i = -1;
     public My_Ads_Adapter(List<UserModel.Ads> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
@@ -55,12 +58,39 @@ public class My_Ads_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         EventHolder eventHolder = (EventHolder) holder;
         eventHolder.binding.setLang(lang);
 eventHolder.binding.setAdversimentmodel(orderlist.get(position));
+eventHolder.binding.setUsermodel(Preferences.getInstance().getUserData(activity).getUser());
+eventHolder.binding.expandLayout.setOrientation(ExpandableLayout.HORIZONTAL);
 eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        i=position;
+        notifyDataSetChanged();
+    }
+});
+eventHolder.binding.imageedit.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        activity.editads(orderlist.get(eventHolder.getLayoutPosition()));
+    }
+});
+/*
+eventHolder.binding.cons1.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
         activity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
     }
-});
+});*/
+if(i==position){
+    if(eventHolder.binding.expandLayout.isExpanded()){
+        eventHolder.binding.expandLayout.collapse(true);
+    }
+    else {
+        eventHolder.binding.expandLayout.expand(true);
+    }
+}
+else {
+    eventHolder.binding.expandLayout.collapse(true);
+}
     }
 
     @Override

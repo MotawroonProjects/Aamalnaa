@@ -21,6 +21,7 @@ import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.fr
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.fragments.Fragment_Clients;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.fragments.Fragment_Rated;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.fragments.Fragment_Works;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_update_ads.UpdateAdsActivity;
 import com.creative.share.apps.aamalnaa.adapters.MyPagerAdapter;
 import com.creative.share.apps.aamalnaa.databinding.ActivityProfileBinding;
 import com.creative.share.apps.aamalnaa.interfaces.Listeners;
@@ -273,6 +274,12 @@ updateratedCount(0);
     public void showdetials(int id) {
         Intent intent=new Intent(ProfileActivity.this, AdsDetialsActivity.class);
         intent.putExtra("search",id);
+        startActivity(intent);
+    }
+
+    public void editads(UserModel.Ads ads) {
+        Intent intent=new Intent(ProfileActivity.this, UpdateAdsActivity.class);
+        intent.putExtra("data",ads);
         startActivity(intent);
     }
 }

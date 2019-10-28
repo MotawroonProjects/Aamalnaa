@@ -238,8 +238,8 @@ private int id;
         private int ads_type;
         private String image;
         private String city_name;
-        private String category_name;
-        private String sub_category_name;
+        private String ad_category_name;
+        private String ad_sub_category_name;
         private int is_like;
         private int is_reported;
         private String user_name;
@@ -345,12 +345,12 @@ private int id;
             return city_name;
         }
 
-        public String getCategory_name() {
-            return category_name;
+        public String getAd_category_name() {
+            return ad_category_name;
         }
 
-        public String getSub_category_name() {
-            return sub_category_name;
+        public String getAd_sub_category_name() {
+            return ad_sub_category_name;
         }
 
         public int getIs_like() {

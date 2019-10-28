@@ -11,6 +11,9 @@
         <variable
             name="adversimentmodel"
             type="com.creative.share.apps.aamalnaa.models.UserModel.Ads" />
+        <variable
+            name="usermodel"
+            type="com.creative.share.apps.aamalnaa.models.UserModel.User" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -121,8 +124,8 @@
 
                         <ImageView
                             android:id="@+id/im1"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
+                            android:layout_width="18dp"
+                            android:layout_height="16dp"
                             android:padding="3dp"
                             android:src="@drawable/tag"
                             android:tint="@color/endColor"
@@ -133,7 +136,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{adversimentmodel.category_name}"
+                            android:text="@{adversimentmodel.ad_category_name}"
                             android:textColor="@color/gray7"
                             android:textSize="13sp"
 
@@ -273,11 +276,11 @@
                             />
 
                         <TextView
+                            date="@{adversimentmodel.date}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:singleLine="true"
-                            date="@{adversimentmodel.date}"
                             android:textColor="@color/gray7"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -307,7 +310,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:text="@{adversimentmodel.user_name}"
+                            android:text="@{usermodel.name}"
                             android:textColor="@color/gray7"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -337,6 +340,56 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/expandLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:el_duration="500"
+            app:el_parallax=".5"
+            app:el_expanded="false"
+            android:layout_gravity="end"
+
+            >
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent
+"
+                android:layout_height="match_parent
+"
+                android:background="@color/colorPrimary"
+                >
+
+                <ImageView
+                    android:id="@+id/imageDelete"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:padding="7dp"
+                    android:src="@drawable/ic_delete"
+                    android:tint="@color/white"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/imageedit"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:padding="7dp"
+                    android:src="@drawable/ic_edit"
+                    android:tint="@color/white"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageDelete"                        app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </net.cachapa.expandablelayout.ExpandableLayout>
+
     </androidx.cardview.widget.CardView>
 </layout>
 

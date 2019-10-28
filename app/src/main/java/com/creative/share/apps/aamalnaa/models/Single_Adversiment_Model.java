@@ -33,7 +33,11 @@ private String created_at;
         private String sub_category_name;
             private int is_like;
             private int like_ad;
+             private int follow;
+                     private int report;
             private int is_reported;
+            private int user_is_login;
+                    private long user_current_sing_in_at;
 private String user_name;
 private long date;
 private List<Images> images;
@@ -203,11 +207,27 @@ public class Comments implements Serializable{
         return like_ad;
     }
 
+    public int getFollow() {
+        return follow;
+    }
+
+    public int getReport() {
+        return report;
+    }
+
     public int getIs_reported() {
             return is_reported;
         }
 
-        public String getUser_name() {
+    public int getUser_is_login() {
+        return user_is_login;
+    }
+
+    public long getUser_current_sing_in_at() {
+        return user_current_sing_in_at;
+    }
+
+    public String getUser_name() {
             return user_name;
         }
 

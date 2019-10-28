@@ -46,7 +46,6 @@
         app:el_duration="500"
         app:el_parallax=".5"
         app:el_expanded="false"
-
         >
 
             <androidx.recyclerview.widget.RecyclerView

@@ -58,7 +58,7 @@
                     android:clickable="false"
                     android:longClickable="false"
                     android:textSize="16sp"
-                    android:text="@string/my_ads"
+                    android:text="@string/transactions"
                     />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
@@ -136,7 +136,7 @@
                     android:layout_marginTop="5dp"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:text="@string/no_ads_to_display"
+                    android:text="@string/no_notifications_to_display"
                     />
             </LinearLayout>
 

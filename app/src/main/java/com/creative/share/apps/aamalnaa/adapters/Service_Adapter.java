@@ -14,6 +14,7 @@ import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_add_ads.AddAdsActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_update_ads.UpdateAdsActivity;
 import com.creative.share.apps.aamalnaa.databinding.CustomerRowBinding;
 import com.creative.share.apps.aamalnaa.databinding.ServiceRowBinding;
 import com.creative.share.apps.aamalnaa.models.Service_Model;
@@ -31,6 +32,8 @@ public class Service_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private LayoutInflater inflater;
     private String lang;
     private AddAdsActivity activity;
+    private UpdateAdsActivity updateAdsActivity;
+
     private int i = 0;
 
     public Service_Adapter(List<Service_Model.Data> orderlist, Context context) {
@@ -39,8 +42,13 @@ public class Service_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        this.activity = (AddAdsActivity) context;
-    }
+
+        if(context instanceof  AddAdsActivity){
+            activity=(AddAdsActivity)context;
+        }
+        else if(context instanceof UpdateAdsActivity){
+            updateAdsActivity=(UpdateAdsActivity)context;
+        }    }
 
     @NonNull
     @Override
@@ -61,7 +69,7 @@ public class Service_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 eventHolder.binding.checkbox.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-
+if(context instanceof  AddAdsActivity){
         if(orderlist.get(eventHolder.getLayoutPosition()).getCoun()==1){
             activity.setcommented();
         }else  if(orderlist.get(eventHolder.getLayoutPosition()).getCoun()==2){
@@ -73,7 +81,33 @@ eventHolder.binding.checkbox.setOnClickListener(new View.OnClickListener() {
         }
 
     }
+else if(context instanceof  UpdateAdsActivity){
+    if(orderlist.get(eventHolder.getLayoutPosition()).getCoun()==1){
+        updateAdsActivity.setcommented();
+    }else  if(orderlist.get(eventHolder.getLayoutPosition()).getCoun()==2){
+        updateAdsActivity.setspicial();
+    }else  if(orderlist.get(eventHolder.getLayoutPosition()).getCoun()==3){
+        updateAdsActivity.setviews();
+    }else  if(orderlist.get(eventHolder.getLayoutPosition()).getCoun()==4){
+        updateAdsActivity.setisinstall();
+    }
+
+}
+    }
 });
+if(i==position){
+    eventHolder.binding.checkbox.setChecked(true);
+
+    if(orderlist.get(i).getCoun()==1){
+        updateAdsActivity.setcommented();
+    }else  if(orderlist.get(i).getCoun()==2){
+        updateAdsActivity.setspicial();
+    }else  if(orderlist.get(i).getCoun()==3){
+        updateAdsActivity.setviews();
+    }else  if(orderlist.get(i).getCoun()==4){
+        updateAdsActivity.setisinstall();
+    }
+}
     }
 
     @Override
@@ -90,6 +124,10 @@ eventHolder.binding.checkbox.setOnClickListener(new View.OnClickListener() {
 
         }
     }
-
+    public void setSelection(int selected_pos)
+    {
+        this.i = selected_pos;
+        notifyDataSetChanged();
+    }
 
 }

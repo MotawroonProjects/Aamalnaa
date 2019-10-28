@@ -19,13 +19,17 @@ private int current_page;
     {
         private int id;
                 private String note;
-
+private long date;
         public int getId() {
             return id;
         }
 
         public String getNote() {
             return note;
+        }
+
+        public long getDate() {
+            return date;
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.creative.share.apps.aamalnaa.general_ui_method;
 
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.EditText;
@@ -66,13 +67,17 @@ public class GeneralMethod {
 
     }
 
-    @BindingAdapter({"date","workTimehoosen","workTime"})
-    public static void displayDate (TextView textView,long date,String work_time_choosen,String work_time)
+    @BindingAdapter({"date","islogin"})
+    public static void displayDate (TextView textView,long date,int islogin)
     {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE dd/MMM",Locale.ENGLISH);
-        String m_date = dateFormat.format(new Date(date));
-        textView.setText(String.format("%s",m_date)+" "+work_time+" "+work_time_choosen);
-
+        if(islogin==1){
+            textView.setText("متصل");
+        }
+        else {
+            long d = date*1000;
+            String n_date = TimeAgo.getTimeAgo(d,textView.getContext());
+            textView.setText(n_date);
+        }
     }
     @BindingAdapter("imageEventEndPoint")
     public static void displayImage(RoundedImageView imageView, String imageEndPoint)

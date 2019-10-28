@@ -72,392 +72,62 @@
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:id="@+id/coord1"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedscrol"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/gray3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-            <com.google.android.material.appbar.AppBarLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/gray3"
 
-               android:fitsSystemWindows="true" >
+                android:orientation="vertical">
 
-                <com.google.android.material.appbar.CollapsingToolbarLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_scrollFlags="exitUntilCollapsed|scroll"
-                    android:fitsSystemWindows="true" >
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:id="@+id/fr1"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.viewpager.widget.ViewPager
+                            android:id="@+id/pager"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+
+                        <ProgressBar
+                            android:id="@+id/progBar"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center" />
+                    </FrameLayout>
+
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <FrameLayout
-                            android:id="@+id/fr1"
-                            android:layout_width="match_parent"
-                            android:layout_height="250dp"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <androidx.viewpager.widget.ViewPager
-                                android:id="@+id/pager"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
-
-
-                            <ProgressBar
-                                android:id="@+id/progBar"
-                                android:layout_width="35dp"
-                                android:layout_height="35dp"
-                                android:layout_gravity="center" />
-                        </FrameLayout>
-
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/cons_data"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="230dp"
-                            android:layout_marginRight="15dp"
-                            android:background="@drawable/linear_bg_white"
-                            android:padding="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-
-                            >
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:padding="8dp"
-                                    android:weightSum="1">
-
-                                    <ImageView
-                                        android:layout_width="0dp"
-                                        android:layout_height="20dp"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight=".1"
-                                        android:padding="3dp"
-                                        android:src="@drawable/tag"
-                                        android:tint="@color/secondColor"
-
-                                        />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight=".1"
-                                        android:text="@string/about"
-                                        android:textColor="@color/textColor"
-                                        android:textSize="12sp" />
-
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight=".9"
-                                        android:text="@{adsmodel.category_name}"
-                                        android:textColor="@color/black"
-                                        android:textSize="13sp" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:orientation="horizontal"
-                                    android:padding="8dp"
-                                    android:weightSum="1">
-
-                                    <ImageView
-                                        android:layout_width="0dp"
-                                        android:layout_height="20dp"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight=".1"
-                                        android:padding="3dp"
-                                        android:src="@drawable/ic_map"
-                                        android:tint="@color/secondColor"
-
-                                        />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight=".1"
-                                        android:text="@string/city"
-                                        android:textColor="@color/textColor"
-                                        android:textSize="12sp" />
-
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight=".9"
-                                        android:text="@{adsmodel.city_name}"
-                                        android:textColor="@color/black"
-                                        android:textSize="13sp" />
-                                </LinearLayout>
-
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:padding="8dp"
-                                    android:weightSum="1">
-
-                                    <ImageView
-                                        android:layout_width="0dp"
-                                        android:layout_height="20dp"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight=".1"
-                                        android:padding="3dp"
-                                        android:src="@drawable/clock"
-                                        android:tint="@color/secondColor" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight=".1"
-                                        android:text="@string/time_of_ads"
-                                        android:textColor="@color/textColor"
-                                        android:textSize="12sp" />
-
-
-                                    <TextView
-                                        date="@{adsmodel.date}"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight=".9"
-                                        android:textColor="@color/black"
-                                        android:textSize="13sp" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:orientation="horizontal"
-                                    android:padding="8dp"
-                                    android:weightSum="1">
-
-                                    <ImageView
-                                        android:layout_width="0dp"
-                                        android:layout_height="20dp"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight=".1"
-                                        android:padding="3dp"
-                                        android:src="@drawable/ic_user"
-                                        android:tint="@color/secondColor"
-
-                                        />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight=".1"
-                                        android:text="@string/advertiser"
-                                        android:textColor="@color/textColor"
-                                        android:textSize="12sp" />
-
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight=".9"
-                                        android:text="@{adsmodel.user_name}"
-                                        android:textColor="@color/black"
-                                        android:textSize="13sp" />
-                                </LinearLayout>
-
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:orientation="horizontal"
-                                    android:padding="8dp"
-                                    android:weightSum="1">
-
-                                    <ImageView
-                                        android:layout_width="0dp"
-                                        android:layout_height="20dp"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight=".1"
-                                        android:padding="3dp"
-                                        android:src="@drawable/clock"
-                                        android:tint="@color/secondColor"
-
-                                        />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight=".1"
-                                        android:text="@string/last_seen"
-                                        android:textColor="@color/textColor"
-                                        android:textSize="12sp" />
-
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight=".9"
-                                        android:textColor="@color/black"
-                                        android:textSize="13sp" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginBottom="20dp"
-                                    android:orientation="horizontal"
-                                    android:padding="8dp"
-                                    android:weightSum="1">
-
-                                    <ImageView
-                                        android:layout_width="0dp"
-                                        android:layout_height="20dp"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight=".1"
-                                        android:padding="3dp"
-                                        android:src="@drawable/views"
-                                        android:tint="@color/secondColor"
-
-                                        />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight=".1"
-                                        android:text="@string/views"
-                                        android:textColor="@color/textColor"
-                                        android:textSize="12sp" />
-
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight=".9"
-                                        android:text='@{lang.equals("ar")?adsmodel.views_num+"مشاهدة":adsmodel.views_num+"views"}'
-                                        android:textColor="@color/black"
-                                        android:textSize="13sp" />
-                                </LinearLayout>
-
-                                <androidx.constraintlayout.widget.ConstraintLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
-
-
-                                    <Button
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="45dp"
-                                        android:background="@drawable/custom_bg"
-                                        android:padding="8dp"
-                                        android:text="@string/evaluation"
-                                        android:textColor="@color/white"
-                                        android:textSize="15sp"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
-
-                                        />
-
-                                    <Button
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="30dp"
-                                        android:background="@drawable/custom_bg"
-                                        android:paddingLeft="8dp"
-                                        android:paddingRight="8dp"
-                                        android:text="@string/retreat"
-                                        android:textColor="@color/white"
-                                        android:textSize="15sp"
-                                        app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
-
-                                        />
-                                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            </LinearLayout>
-
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/image"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:layout_marginRight="20dp"
-                            android:src="@drawable/ic_follow"
-
-                            app:civ_border_width="1dp"
-                            app:civ_circle_background_color="@color/secondColor"
-                            app:layout_constraintBottom_toTopOf="@+id/cons_data"
-                            app:layout_constraintRight_toRightOf="@+id/cons_data"
-                            app:layout_constraintTop_toTopOf="@+id/cons_data"
-
-                            />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-
-            </com.google.android.material.appbar.AppBarLayout>
-
-            <androidx.core.widget.NestedScrollView
-                android:id="@+id/nestedscrol"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:orientation="vertical">
-
-                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cons_data"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="230dp"
                         android:layout_marginRight="15dp"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp">
+                        android:background="@drawable/linear_bg_white"
+                        android:padding="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+
+                        >
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="8dp"
-
-                            >
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -472,252 +142,551 @@
                                     android:layout_gravity="center_vertical"
                                     android:layout_weight=".1"
                                     android:padding="3dp"
-                                    android:src="@drawable/ic_info"
-                                    android:tint="@color/secondColor" />
+                                    android:src="@drawable/tag"
+                                    android:tint="@color/secondColor"
+
+                                    />
 
                                 <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_weight=".9"
-                                    android:text="@string/address_detials"
-                                    android:textColor="@color/textColor"
-                                    android:textSize="12sp" />
-
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:text="@{adsmodel.address}"
-                                android:textColor="@color/black"
-                                android:textSize="13sp" />
-
-
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="15dp"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="8dp"
-
-                            >
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="8dp"
-                                android:weightSum="1">
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="20dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_weight=".1"
-                                    android:padding="3dp"
-                                    android:src="@drawable/ic_mail"
-                                    android:tint="@color/secondColor" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_weight=".9"
-                                    android:text="@string/email_the_advertiser"
-                                    android:textColor="@color/textColor"
-                                    android:textSize="12sp" />
-
-
-                            </LinearLayout>
-
-
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="15dp"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="8dp"
-
-                            >
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="8dp"
-                                android:weightSum="1">
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="20dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_weight=".1"
-                                    android:padding="3dp"
-                                    android:src="@drawable/ic_flag"
-                                    android:tint="@color/secondColor" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_weight=".9"
-                                    android:text="@string/delete_reporting"
-                                    android:textColor="@color/textColor"
-                                    android:textSize="12sp" />
-
-
-                            </LinearLayout>
-
-
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="15dp"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="2dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="8dp"
-
-                            >
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="8dp"
-                                android:weightSum="1">
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="20dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_weight=".1"
-                                    android:padding="3dp"
-                                    android:src="@drawable/ic_comment" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_weight=".9"
-                                    android:text="@string/comments"
-                                    android:textColor="@color/textColor"
-                                    android:textSize="12sp" />
-
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="8dp"
-                                android:weightSum="1">
-
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    imageUserEndPoint="@{usermodel.avatar}"
-                                    android:layout_width="45dp"
-                                    android:layout_height="45dp"
-                                    android:layout_marginRight="10dp"
-                                    android:src="@drawable/ic_user"
-                                    app:civ_border_color="@color/colorPrimary"
-                                    app:civ_border_width="1dp" />
-
-                                <EditText
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_weight="1"
-                                    android:background="@color/white"
-                                    android:hint="@string/write_your_comment_here"
-                                    android:inputType="textMultiLine"
-                                    android:paddingLeft="8dp"
-                                    android:paddingRight="8dp"
-                                    android:textColor="@color/black"
-                                    android:textColorHint="@color/gray3"
-                                    android:textSize="12sp" />
-
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/gray3" />
-
-                            <FrameLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <androidx.recyclerview.widget.RecyclerView
-                                    android:id="@+id/reccomment"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
-
-                                <LinearLayout
-                                    android:id="@+id/llAds"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:orientation="vertical"
-                                    android:visibility="gone">
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".1"
+                                    android:text="@string/about"
+                                    android:textColor="@color/textColor"
+                                    android:textSize="12sp" />
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="5dp"
-                                        android:text="@string/no_comments_to_display"
-                                        android:textColor="@color/black"
-                                        android:textSize="18sp" />
-                                </LinearLayout>
-                            </FrameLayout>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".9"
+                                    android:text="@{adsmodel.category_name}"
+                                    android:textColor="@color/black"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:orientation="horizontal"
+                                android:padding="8dp"
+                                android:weightSum="1">
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".1"
+                                    android:padding="3dp"
+                                    android:src="@drawable/ic_map"
+                                    android:tint="@color/secondColor"
+
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".1"
+                                    android:text="@string/city"
+                                    android:textColor="@color/textColor"
+                                    android:textSize="12sp" />
+
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".9"
+                                    android:text="@{adsmodel.city_name}"
+                                    android:textColor="@color/black"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="8dp"
+                                android:weightSum="1">
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".1"
+                                    android:padding="3dp"
+                                    android:src="@drawable/clock"
+                                    android:tint="@color/secondColor" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".1"
+                                    android:text="@string/time_of_ads"
+                                    android:textColor="@color/textColor"
+                                    android:textSize="12sp" />
+
+
+                                <TextView
+                                    date="@{adsmodel.date}"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".9"
+                                    android:textColor="@color/black"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:orientation="horizontal"
+                                android:padding="8dp"
+                                android:weightSum="1">
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".1"
+                                    android:padding="3dp"
+                                    android:src="@drawable/ic_user"
+                                    android:tint="@color/secondColor"
+
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".1"
+                                    android:text="@string/advertiser"
+                                    android:textColor="@color/textColor"
+                                    android:textSize="12sp" />
+
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".9"
+                                    android:text="@{adsmodel.user_name}"
+                                    android:textColor="@color/black"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:orientation="horizontal"
+                                android:padding="8dp"
+                                android:weightSum="1">
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".1"
+                                    android:padding="3dp"
+                                    android:src="@drawable/clock"
+                                    android:tint="@color/secondColor"
+
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".1"
+                                    android:text="@string/last_seen"
+                                    android:textColor="@color/textColor"
+                                    android:textSize="12sp" />
+
+
+                                <TextView
+                                    android:id="@+id/tv_last"
+                                    date="@{adsmodel.user_current_sing_in_at}"
+                                    islogin="@{adsmodel.user_is_login}"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".9"
+                                    android:textColor="@color/black"
+                                    android:textSize="13sp"
+
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="20dp"
+                                android:orientation="horizontal"
+                                android:padding="8dp"
+                                android:weightSum="1">
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".1"
+                                    android:padding="3dp"
+                                    android:src="@drawable/views"
+                                    android:tint="@color/secondColor"
+
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".1"
+                                    android:text="@string/views"
+                                    android:textColor="@color/textColor"
+                                    android:textSize="12sp" />
+
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".9"
+                                    android:text='@{lang.equals("ar")?adsmodel.views_num+"مشاهدة":adsmodel.views_num+"views"}'
+                                    android:textColor="@color/black"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+
+                                <Button
+                                    android:id="@+id/follow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="22dp"
+                                    android:background="@drawable/custom_bg"
+                                    android:paddingLeft="8dp"
+                                    android:paddingRight="8dp"
+                                    android:text="@string/be_my_customer"
+                                    android:textColor="@color/white"
+                                    android:textSize="15sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+
+                                    />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
                         </LinearLayout>
 
 
-                    </androidx.cardview.widget.CardView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/image"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_follow"
+
+                        app:civ_border_width="1dp"
+                        app:civ_circle_background_color="@color/secondColor"
+                        app:layout_constraintBottom_toTopOf="@+id/cons_data"
+                        app:layout_constraintRight_toRightOf="@+id/cons_data"
+                        app:layout_constraintTop_toTopOf="@+id/cons_data"
+
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="8dp"
+                            android:weightSum="1">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight=".1"
+                                android:padding="3dp"
+                                android:src="@drawable/ic_info"
+                                android:tint="@color/secondColor" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight=".9"
+                                android:text="@string/address_detials"
+                                android:textColor="@color/textColor"
+                                android:textSize="12sp" />
 
 
-                </LinearLayout>
+                        </LinearLayout>
 
-            </androidx.core.widget.NestedScrollView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@{adsmodel.address}"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="8dp"
+                            android:weightSum="1">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight=".1"
+                                android:padding="3dp"
+                                android:src="@drawable/ic_mail"
+                                android:tint="@color/secondColor" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight=".9"
+                                android:text="@string/email_the_advertiser"
+                                android:textColor="@color/textColor"
+                                android:textSize="12sp" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+
+                        >
+
+                        <LinearLayout
+                            android:id="@+id/ll_report"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="8dp"
+                            android:weightSum="1">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight=".1"
+                                android:padding="3dp"
+                                android:src="@drawable/ic_flag"
+                                android:tint="@color/secondColor" />
+
+                            <TextView
+                                android:id="@+id/tv_report"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight=".9"
+                                android:text="@string/delete_reporting"
+                                android:textColor="@color/textColor"
+                                android:textSize="12sp" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="8dp"
+                            android:weightSum="1">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight=".1"
+                                android:padding="3dp"
+                                android:src="@drawable/ic_comment" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight=".9"
+                                android:text="@string/comments"
+                                android:textColor="@color/textColor"
+                                android:textSize="12sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="8dp"
+                            android:weightSum="1">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                imageUserEndPoint="@{usermodel.avatar}"
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/ic_user"
+                                app:civ_border_color="@color/colorPrimary"
+                                app:civ_border_width="1dp" />
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:background="@color/white"
+                                android:hint="@string/write_your_comment_here"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="8dp"
+                                android:paddingRight="8dp"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/gray3"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/gray3" />
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/reccomment"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+
+                            <LinearLayout
+                                android:id="@+id/llAds"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="@string/no_comments_to_display"
+                                    android:textColor="@color/black"
+                                    android:textSize="18sp" />
+                            </LinearLayout>
+                        </FrameLayout>
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
