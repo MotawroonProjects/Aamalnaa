@@ -136,6 +136,14 @@ public interface Service {
             @Field("user_id") String user_id
     );
     @FormUrlEncoded
+    @POST("api/add_comment")
+    Call<ResponseBody> comment(
+
+            @Field("ad_id")String ad_id,
+            @Field("user_id") String user_id,
+            @Field("comment")String comment
+    );
+    @FormUrlEncoded
     @POST("api/reporte")
     Call<ResponseBody> Report(
 

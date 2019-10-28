@@ -631,6 +631,7 @@
                                 app:civ_border_width="1dp" />
 
                             <EditText
+                                android:id="@+id/edt_comment"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -642,6 +643,7 @@
                                 android:paddingRight="8dp"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/gray3"
+                                android:imeOptions="actionDone"
                                 android:textSize="12sp" />
 
                         </LinearLayout>

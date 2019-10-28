@@ -5,8 +5,10 @@ import android.content.Context;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_map.MapActivity;
 import com.creative.share.apps.aamalnaa.adapters.Comments_Adapter;
 import com.creative.share.apps.aamalnaa.adapters.SingleAdsSlidingImage_Adapter;
 import com.creative.share.apps.aamalnaa.databinding.ActivityAdsDetialsBinding;
@@ -140,8 +143,69 @@ binding.setAdsmodel(single_adversiment_model);
                 becustomer();
             }
         });
+        binding.edtComment.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                String query = binding.edtComment.getText().toString();
+                if (!TextUtils.isEmpty(query)) {
+                    Common.CloseKeyBoard(AdsDetialsActivity.this,binding.edtComment);
+                    comment(query);
+                    return false;
+                }
+            }
+            return false;
+        });
 
     }
+
+    private void comment(String query) {
+        ProgressDialog dialog = Common.createProgressDialog(AdsDetialsActivity.this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        // rec_sent.setVisibility(View.GONE);
+        try {
+
+
+            Api.getService( Tags.base_url)
+                    .comment(single_adversiment_model.getId()+"",userModel.getUser().getId()+"",query)
+                    .enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            dialog.dismiss();
+
+                            //  binding.progBar.setVisibility(View.GONE);
+                            if (response.isSuccessful() && response.body() != null && response.body() != null) {
+                                //binding.coord1.scrollTo(0,0);
+
+                                getsingleads();                            } else {
+
+
+                                Toast.makeText(AdsDetialsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                try {
+                                    Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            try {
+
+                                dialog.dismiss();
+
+                                Toast.makeText(AdsDetialsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                Log.e("error", t.getMessage());
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        }catch (Exception e){
+
+            dialog.dismiss();
+        }
+    }
+
     public void getsingleads() {
         //   Common.CloseKeyBoard(homeActivity, edt_name);
 
