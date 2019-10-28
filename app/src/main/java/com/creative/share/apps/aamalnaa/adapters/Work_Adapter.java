@@ -2,6 +2,7 @@ package com.creative.share.apps.aamalnaa.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,7 @@ public class Work_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         this.activity = (ProfileActivity) context;
+
     }
 
     @NonNull
@@ -54,7 +56,7 @@ public class Work_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         EventHolder eventHolder = (EventHolder) holder;
         eventHolder.binding.setLang(lang);
         eventHolder.binding.setWorkmodel(orderlist.get(position));
-
+eventHolder.binding.btWork.setVisibility(View.INVISIBLE);
     }
 
     @Override
