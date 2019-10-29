@@ -177,6 +177,7 @@
     <string name="transformation">تحويل</string>
     <string name="application_mechanism">الية عمل التطبيق</string>
     <string name="delete_customer">حذف العميل</string>
+    <string name="type_amessage">اكتب الرساله</string>
 
     <string-array name="models">
 

@@ -179,6 +179,7 @@
     <string name="transformation">Transformation</string>
     <string name="application_mechanism">Application mechanism</string>
     <string name="delete_customer">Delete Customer</string>
+    <string name="type_amessage">Type Amessage</string>
     <string-array name="models">
 
         <item>ِAds</item>

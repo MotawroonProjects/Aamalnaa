@@ -43,7 +43,7 @@ public class GeneralMethod {
     public static void displayImage2(ImageView imageView, String imageEndPoint)
     {
 
-        Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_URL+imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+        Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_Ads_URL+imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 
     }
     @BindingAdapter("url")
