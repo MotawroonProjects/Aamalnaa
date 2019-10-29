@@ -176,7 +176,8 @@ binding.setAdsmodel(single_adversiment_model);
                             if (response.isSuccessful() && response.body() != null && response.body() != null) {
                                 //binding.coord1.scrollTo(0,0);
 
-                                getsingleads();                            } else {
+                                getsingleads();                            }
+                            else {
 
 
                                 Toast.makeText(AdsDetialsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();

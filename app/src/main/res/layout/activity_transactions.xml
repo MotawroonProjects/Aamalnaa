@@ -92,7 +92,7 @@
                     android:layout_gravity="center"
                     android:textColor="@color/black"
                     android:textSize="15sp"
-                    android:text="@string/no_ads_to_display"
+                    android:text="@string/no_notifications_to_display"
                     />
 
             </LinearLayout>
@@ -120,25 +120,6 @@
                 android:layout_gravity="center"
                 />
 
-            <LinearLayout
-                android:id="@+id/llAds"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:visibility="gone"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:text="@string/no_notifications_to_display"
-                    />
-            </LinearLayout>
 
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

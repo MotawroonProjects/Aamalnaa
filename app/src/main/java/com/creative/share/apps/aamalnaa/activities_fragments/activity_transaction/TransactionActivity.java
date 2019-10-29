@@ -51,6 +51,7 @@ public class TransactionActivity extends AppCompatActivity implements Listeners.
     private UserModel userModel;
     private boolean isLoading = false;
     private int current_page2 = 1;
+    private String lang;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -77,7 +78,9 @@ public class TransactionActivity extends AppCompatActivity implements Listeners.
         notification_adapter = new Notification_Adapter(notificationModelList, this);
         binding.recView.setLayoutManager(new GridLayoutManager(this, 1));
         binding.recView.setAdapter(notification_adapter);
-
+        Paper.init(this);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        binding.setLang(lang);
         binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {

@@ -47,15 +47,14 @@ public class Fragment_Clients extends Fragment {
     private Preferences preferences;
     private UserModel userModel;
 
-    public static Fragment_Works newInstance() {
-        return new Fragment_Works();
+    public static Fragment_Clients newInstance() {
+        return new Fragment_Clients();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_clients,container,false);
-        getprofiledata();
         initView();
         getprofiledata();
         return binding.getRoot();
@@ -74,7 +73,6 @@ public class Fragment_Clients extends Fragment {
         binding.recView.setDrawingCacheEnabled(true);
         binding.recView.setLayoutManager(new GridLayoutManager(activity, 1));
         binding.recView.setAdapter(customer_adapter);
-
 
     }
 
@@ -131,7 +129,6 @@ public class Fragment_Clients extends Fragment {
 
     private void updateprofile(UserModel userModel) {
 
-
         if (userModel.getCustomers() != null) {
 
             setads(userModel.getCustomers());
@@ -152,6 +149,7 @@ public class Fragment_Clients extends Fragment {
         dialog.setCancelable(false);
         dialog.show();
         // rec_sent.setVisibility(View.GONE);
+        Log.e("mmmm",userModel.getUser().getId()+" "+adsList.get(layoutPosition).getId());
         try {
 
 
@@ -168,7 +166,7 @@ public class Fragment_Clients extends Fragment {
                                 adsList.remove(layoutPosition);
                                 customer_adapter.notifyItemRemoved(layoutPosition);
 
-                                //  getsingleads();                            } else {
+                                                           } else {
 
 
                                 Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
@@ -202,6 +200,8 @@ public class Fragment_Clients extends Fragment {
         ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
+        Log.e("mmmm",userModel.getUser().getId()+" "+adsList.get(layoutPosition).getId());
+
         // rec_sent.setVisibility(View.GONE);
         try {
 
@@ -219,7 +219,7 @@ public class Fragment_Clients extends Fragment {
                                 adsList.remove(layoutPosition);
                                 customer_adapter.notifyItemRemoved(layoutPosition);
 
-                                //  getsingleads();                            } else {
+                                                         } else {
 
 
                                 Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();

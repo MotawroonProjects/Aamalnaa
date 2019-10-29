@@ -30,7 +30,11 @@ public interface Listeners {
         void checkDataSignUp(String name, String phone_code, String phone,String email, String password);
 
     }
+    interface EditprofileListener
+    {
+        void Editprofile(String name,  String phone,String email);
 
+    }
 
     interface BackListener
     {

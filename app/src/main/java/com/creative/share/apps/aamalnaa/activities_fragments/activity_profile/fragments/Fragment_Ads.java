@@ -177,9 +177,8 @@ public class Fragment_Ads extends Fragment {
                                 Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                                 try {
                                     Log.e("Error_code", response.code() + "_" + response.errorBody().string());
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                                } catch (Exception e) {
+                                    Log.e("Error_code", response.code()+"");                                }
                             }
                         }
 

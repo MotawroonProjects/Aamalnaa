@@ -57,7 +57,19 @@ public interface Service {
                             @Field("password") String password,
                             @Field("accepted") int accepted
     );
+    @FormUrlEncoded
+    @POST("api/user_profile_update")
+    Call<UserModel> editprofile(@Field("name") String name,
+                            @Field("mobile") String mobile,
 
+                            @Field("email") String email,
+                            @Field("city_id") String city_id,
+                            @Field("id") int id
+    );
+    @Multipart
+    @POST("api/user_image")
+    Call<UserModel> editUserImage(@Part("id") RequestBody id,
+                                  @Part MultipartBody.Part image);
     @FormUrlEncoded
     @POST("api/login")
     Call<UserModel> login(

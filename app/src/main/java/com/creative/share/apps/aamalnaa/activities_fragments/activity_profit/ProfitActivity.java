@@ -34,7 +34,8 @@ public class ProfitActivity extends AppCompatActivity implements Listeners.BackL
     private String lang;
     private Preferences preferences;
     private UserModel userModel;
-private Profit_Model.Data profit_model;
+    private Profit_Model.Data profit_model;
+
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -45,29 +46,30 @@ private Profit_Model.Data profit_model;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_profit);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_profit);
         initView();
         getmyprofit();
     }
 
     private void initView() {
-profit_model=new Profit_Model.Data();
-        preferences=Preferences.getInstance();
-        userModel=preferences.getUserData(this);
+        profit_model = new Profit_Model.Data();
+        preferences = Preferences.getInstance();
+        userModel = preferences.getUserData(this);
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
         binding.setBackListener(this);
-binding.setProfitmodel(profit_model);
-binding.btnSend.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
+        binding.setProfitmodel(profit_model);
+        binding.btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-transform();
-    }
-});
+                transform();
+            }
+        });
 
     }
+
     public void transform() {
         //   Common.CloseKeyBoard(homeActivity, edt_name);
 
@@ -78,8 +80,8 @@ transform();
         try {
 
 
-            Api.getService( Tags.base_url)
-                    .Transform(userModel.getUser().getId()+"")
+            Api.getService(Tags.base_url)
+                    .Transform(userModel.getUser().getId() + "")
                     .enqueue(new Callback<Profit_Model>() {
                         @Override
                         public void onResponse(Call<Profit_Model> call, Response<Profit_Model> response) {
@@ -88,14 +90,14 @@ transform();
                             //  binding.progBar.setVisibility(View.GONE);
                             if (response.isSuccessful() && response.body() != null && response.body() != null) {
                                 //binding.coord1.scrollTo(0,0);
-udateprofit(response.body());
-
-
+                                udateprofit(response.body());
+                                Toast.makeText(ProfitActivity.this, getResources().getString(R.string.suc), Toast.LENGTH_LONG).show();
+                            } else {
                                 Toast.makeText(ProfitActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                                 try {
                                     Log.e("Error_code", response.code() + "_" + response.errorBody().string());
-                                } catch (IOException e) {
-                                    e.printStackTrace();
+                                } catch (Exception e) {
+                                    Log.e("Error_code", response.code() + "");
                                 }
                             }
                         }
@@ -112,7 +114,7 @@ udateprofit(response.body());
                             }
                         }
                     });
-        }catch (Exception e){
+        } catch (Exception e) {
 
             dialog.dismiss();
         }
@@ -123,6 +125,7 @@ udateprofit(response.body());
     public void back() {
         finish();
     }
+
     private void getmyprofit() {
         final ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
@@ -136,7 +139,7 @@ udateprofit(response.body());
                         public void onResponse(Call<Profit_Model> call, Response<Profit_Model> response) {
                             dialog.dismiss();
                             if (response.isSuccessful() && response.body() != null) {
-                             //   updatewallet(response.body());
+                                //   updatewallet(response.body());
                                 udateprofit(response.body());
                             } else {
 
@@ -170,15 +173,16 @@ udateprofit(response.body());
                         }
                     });
         } catch (Exception e) {
-            if(dialog!=null){
-                dialog.dismiss();}
+            if (dialog != null) {
+                dialog.dismiss();
+            }
 
             // Log.e("err", e.getMessage());
         }
     }
 
     private void udateprofit(Profit_Model body) {
-        profit_model=body.getData();
+        profit_model = body.getData();
         binding.setProfitmodel(profit_model);
     }
 

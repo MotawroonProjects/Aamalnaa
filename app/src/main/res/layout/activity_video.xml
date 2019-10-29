@@ -53,7 +53,7 @@
                     android:padding="8dp"
                     android:clickable="false"
                     android:longClickable="false"
-                    android:rotation='@{lang.equals("en")?180:0}'
+                    android:rotation='@{lang.equals("ar")?180:0}'
                     />
                 <TextView
                     android:id="@+id/tvTitle"

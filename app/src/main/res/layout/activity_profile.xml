@@ -90,11 +90,12 @@
 
 
                                     <TextView
+                                        android:id="@+id/tvinfo"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="10dp"
                                         android:layout_marginEnd="10dp"
-                                        android:text="MyInfo"
+                                        android:text="@string/info"
                                         android:textColor="@color/black"
                                         android:textSize="12sp"
                                         app:layout_constraintBottom_toBottomOf="parent"
@@ -129,7 +130,19 @@
                                             android:textSize="13sp" />
                                     </LinearLayout>
                                 </androidx.constraintlayout.widget.ConstraintLayout>
-
+                                <net.cachapa.expandablelayout.ExpandableLayout
+                                    android:id="@+id/expandLayout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:el_expanded="false"
+                                    app:el_duration="500"
+                                    app:el_parallax=".5"
+                                    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
@@ -249,15 +262,15 @@
                                         android:padding="8dp"
                                         android:weightSum="1"
                                         >
+
                                         <ImageView
                                             android:layout_width="0dp"
-                                            android:layout_weight=".1"
-                                            android:layout_height="20dp"
-                                            android:src="@drawable/ic_info"
-                                            android:tint="@color/secondColor"
+                                            android:layout_height="12dp"
                                             android:layout_gravity="center_vertical"
+                                            android:layout_weight=".1"
                                             android:padding="3dp"
-                                            />
+                                            android:src="@drawable/ic_info"
+                                            android:tint="@color/secondColor" />
                                         <TextView
                                             android:layout_width="0dp"
                                             android:layout_weight=".3"
@@ -403,7 +416,8 @@
                                             android:text="@{usermodel.email}"
                                             />
                                     </LinearLayout>
-
+</LinearLayout>
+                                </net.cachapa.expandablelayout.ExpandableLayout>
 
                             </LinearLayout>
 

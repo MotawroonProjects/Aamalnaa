@@ -73,7 +73,17 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
 //    Log.e("y",userModel.getUser().getId()+"");
-
+binding.tvinfo.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        if(binding.expandLayout.isExpanded()){
+            binding.expandLayout.collapse(true);
+        }
+        else {
+            binding.expandLayout.expand(true);
+        }
+    }
+});
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
@@ -117,6 +127,7 @@ updateratedCount(0);
         binding.tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+Log.e(";;llll",tab.getPosition()+"");
                 if (tab.getPosition() == 1) {
                     TextView tvTitle = tab.getCustomView().findViewById(R.id.tvTitle);
                     tvTitle.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.colorPrimary));
@@ -143,7 +154,17 @@ updateratedCount(0);
                     tvTitle2.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
 
 
-                } else {
+                }
+                else if (tab.getPosition() == 3) {
+                    TextView tvTitle = tab.getCustomView().findViewById(R.id.tvTitle);
+                    tvTitle.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.colorPrimary));
+
+                    TextView tvTitle2 = binding.tab.getTabAt(3).getCustomView().findViewById(R.id.tvTitle);
+                    tvTitle2.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
+
+
+                }
+                else {
                     TextView tvTitle = binding.tab.getTabAt(1).getCustomView().findViewById(R.id.tvTitle);
                     tvTitle.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
 
@@ -152,6 +173,8 @@ updateratedCount(0);
                     tvTitle2.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
                     TextView tvTitle3 = binding.tab.getTabAt(0).getCustomView().findViewById(R.id.tvTitle);
                     tvTitle3.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
+                    TextView tvTitle4 = binding.tab.getTabAt(3).getCustomView().findViewById(R.id.tvTitle);
+                    tvTitle4.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
                 }
             }
 

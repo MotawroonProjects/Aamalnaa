@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_transaction.TransactionActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_transfer.TransferActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.bank_activity.BanksActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_addbalance.AddBalanceActivity;
@@ -89,7 +90,7 @@ binding.llAddBalance.setOnClickListener(new View.OnClickListener() {
         binding.llAddTransactions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(WalletActivity.this, TransferActivity.class);
+                Intent intent=new Intent(WalletActivity.this, TransactionActivity.class);
                 startActivity(intent);
             }
         });

@@ -55,7 +55,7 @@ private int id;
 
     private String city_name;
     private double total;
-    private int Evaluation;
+    private double Evaluation;
     private int negativeRate;
     private int postivesRate;
     private int is_follow;
@@ -150,7 +150,7 @@ private int id;
     }
 
 
-    public int getEvaluation() {
+    public double getEvaluation() {
         return Evaluation;
     }
 
