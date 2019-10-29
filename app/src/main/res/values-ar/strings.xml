@@ -166,6 +166,17 @@
     <string name="edit">تعديل</string>
     <string name="be_my_customer">كن عميلى</string>
     <string name="report">ابلاغ</string>
+    <string name="treatment">المعاملة</string>
+    <string name="the_value">القيمه</string>
+    <string name="current_profit">الربح الحالى</string>
+    <string name="_30_positive_evaluation">30 تقييم ايجابى</string>
+    <string name="one_point">نقطه واحده</string>
+    <string name="_10_ads">10 اعلانات</string>
+    <string name="_20_acts">20 اعمال</string>
+    <string name="total">المجموع الكلى</string>
+    <string name="transformation">تحويل</string>
+    <string name="application_mechanism">الية عمل التطبيق</string>
+    <string name="delete_customer">حذف العميل</string>
 
     <string-array name="models">
 

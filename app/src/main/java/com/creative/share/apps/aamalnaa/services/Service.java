@@ -11,6 +11,7 @@ import com.creative.share.apps.aamalnaa.models.Cities_Model;
 import com.creative.share.apps.aamalnaa.models.NotificationDataModel;
 import com.creative.share.apps.aamalnaa.models.PlaceGeocodeData;
 import com.creative.share.apps.aamalnaa.models.PlaceMapDetailsData;
+import com.creative.share.apps.aamalnaa.models.Profit_Model;
 import com.creative.share.apps.aamalnaa.models.Service_Model;
 import com.creative.share.apps.aamalnaa.models.Single_Adversiment_Model;
 import com.creative.share.apps.aamalnaa.models.Slider_Model;
@@ -151,6 +152,33 @@ public interface Service {
             @Field("user_id") String user_id
     );
     @FormUrlEncoded
+    @POST("api/changepr")
+    Call<Profit_Model> Transform(
+
+            @Field("user_id") String user_id
+    );
+    @FormUrlEncoded
+    @POST("api/delete_ad")
+    Call<ResponseBody> DelteAds(
+
+            @Field("ad_id")String ad_id,
+            @Field("user_id") String user_id
+    );
+    @FormUrlEncoded
+    @POST("api/my_pre_customer")
+    Call<ResponseBody> precustomer(
+
+            @Field("follower_id")String follower_id,
+            @Field("user_id") String user_id
+    );
+    @FormUrlEncoded
+    @POST("api/delete_follower")
+    Call<ResponseBody> deltecustomer(
+
+            @Field("follower_id")String follower_id,
+            @Field("user_id") String user_id
+    );
+    @FormUrlEncoded
     @POST("api/follow")
     Call<ResponseBody> becustomer(
 
@@ -160,8 +188,10 @@ public interface Service {
     @GET("api/conditions")
     Call<App_Data_Model> getterms();
 
-    @GET("api/advantages")
+    @GET("api/about_us")
     Call<App_Data_Model> getabout();
+    @GET("api/advantages")
+    Call<App_Data_Model> getadvantages();
     @FormUrlEncoded
     @POST("api/contact_us")
     Call<ResponseBody> sendContact(@Field("name") String name,
@@ -181,6 +211,10 @@ public interface Service {
     @FormUrlEncoded
     @POST("api/my_wallet")
     Call<Wallet_Model> getmywallet(
+            @Field("user_id")String user_id);
+    @FormUrlEncoded
+    @POST("api/my_profit")
+    Call<Profit_Model> getmyprofit(
             @Field("user_id")String user_id);
     @GET("api/all_banks")
     Call<BankDataModel> getBanks();

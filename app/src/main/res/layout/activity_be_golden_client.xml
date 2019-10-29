@@ -12,6 +12,9 @@
         <variable
             name="lang"
             type="String" />
+        <variable
+            name="appdatamodel"
+            type="com.creative.share.apps.aamalnaa.models.App_Data_Model" />
 
 
     </data>
@@ -120,23 +123,12 @@
                             android:gravity="center"
                             />
 
+
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="15sp"
-                            android:layout_marginTop="5dp"
-                            android:text="@string/annual_subsc"
-                            android:layout_gravity="center_horizontal"
-                            android:gravity="center"
-                            android:textStyle="bold"
-                            />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/black"
                             android:textSize="15sp"
                             android:layout_marginTop="15dp"
                             android:text="@string/advantages"
@@ -144,31 +136,33 @@
                             android:textStyle="bold"
                             />
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <FrameLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/textColor"
-                            android:textSize="15sp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:text="@string/advantages"
-                            android:gravity="center"
-                            />
+
+                            >
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="16dp"
+                                android:paddingRight="16dp"
+                                android:layout_marginTop="10dp"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                android:text="@{appdatamodel.advantages}"
+
+                                />
+                            <ProgressBar
+                                android:id="@+id/progBar"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_gravity="center"
+                                />
+                        </FrameLayout>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <Button
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_gravity="center_horizontal"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:text="@string/subscribe_now"
-                    android:background="@drawable/btn_trans"
-                    />
 
             </LinearLayout>
         </ScrollView>

@@ -409,6 +409,11 @@ getsingleads();                            } else {
     }
 
     private void update(Single_Adversiment_Model body) {
+        if(body.getUser_id()==userModel.getUser().getId()){
+            binding.cardrepor.setVisibility(View.GONE);
+            binding.follow.setVisibility(View.GONE);
+
+        }
         binding.setAdsmodel(body);
         commentsList.clear();
         if(body.getComments()!=null&&body.getCommented()==0&&body.getComments().size()>0){

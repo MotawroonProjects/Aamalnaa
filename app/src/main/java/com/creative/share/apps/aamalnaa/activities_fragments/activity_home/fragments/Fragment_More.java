@@ -23,8 +23,10 @@ import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeA
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_my_ads.MyAdsActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_my_wallet.WalletActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_profit.ProfitActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_terms.TermsActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_transfer.TransferActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_video.VideoActivity;
 import com.creative.share.apps.aamalnaa.databinding.DialogLanguageBinding;
 import com.creative.share.apps.aamalnaa.databinding.FragmentMoreBinding;
 import com.creative.share.apps.aamalnaa.models.UserModel;
@@ -109,13 +111,18 @@ public class Fragment_More extends Fragment {
             }
         });
 
-        binding.llTransfer.setOnClickListener(view -> {
-            Intent intent = new Intent(activity, TransferActivity.class);
-            startActivity(intent);
+        binding.llprofit.setOnClickListener(view -> {
+            if(userModel!=null){
+            Intent intent = new Intent(activity, ProfitActivity.class);
+            startActivity(intent);}
         });
 
         binding.llTerm.setOnClickListener(view -> {
             Intent intent = new Intent(activity, TermsActivity.class);
+            startActivity(intent);
+        });
+        binding.llvideo.setOnClickListener(view -> {
+            Intent intent = new Intent(activity, VideoActivity.class);
             startActivity(intent);
         });
         binding.llAbout.setOnClickListener(view -> {

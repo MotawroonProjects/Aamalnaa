@@ -2,6 +2,7 @@ package com.creative.share.apps.aamalnaa.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -54,7 +55,19 @@ public class Customer_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         EventHolder eventHolder = (EventHolder) holder;
         eventHolder.binding.setLang(lang);
         eventHolder.binding.setWorkmodel(orderlist.get(position));
+eventHolder.binding.btWork.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        activity.changetoworks(eventHolder.getLayoutPosition());
+    }
+});
+eventHolder.binding.btDelte.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        activity.delte(eventHolder.getLayoutPosition());
 
+    }
+});
     }
 
     @Override

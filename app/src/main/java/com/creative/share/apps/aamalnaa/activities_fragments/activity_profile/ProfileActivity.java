@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_adsdetails.AdsDetialsActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.fragments.Fragment_Main;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.fragments.Fragment_Ads;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.fragments.Fragment_Clients;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.fragments.Fragment_Rated;
@@ -281,5 +282,26 @@ updateratedCount(0);
         Intent intent=new Intent(ProfileActivity.this, UpdateAdsActivity.class);
         intent.putExtra("data",ads);
         startActivity(intent);
+    }
+
+    public void delete(int layoutPosition) {
+        if(pagerAdapter!=null&&pagerAdapter.getItem(0)!=null){
+            Fragment_Ads fragment_ads= (Fragment_Ads) pagerAdapter.getItem(0);
+            fragment_ads.deleteitem(layoutPosition);
+        }
+    }
+
+    public void changetoworks(int layoutPosition) {
+        if(pagerAdapter!=null&&pagerAdapter.getItem(2)!=null){
+            Fragment_Clients fragment_clients= (Fragment_Clients) pagerAdapter.getItem(2);
+            fragment_clients.changeitem(layoutPosition);
+        }
+    }
+
+    public void delte(int layoutPosition) {
+        if(pagerAdapter!=null&&pagerAdapter.getItem(2)!=null){
+            Fragment_Clients fragment_clients= (Fragment_Clients) pagerAdapter.getItem(2);
+            fragment_clients.delte(layoutPosition);
+        }
     }
 }

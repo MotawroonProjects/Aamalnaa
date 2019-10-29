@@ -73,6 +73,12 @@ eventHolder.binding.imageedit.setOnClickListener(new View.OnClickListener() {
         activity.editads(orderlist.get(eventHolder.getLayoutPosition()));
     }
 });
+eventHolder.binding.imageDelete.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        activity.delete(eventHolder.getLayoutPosition());
+    }
+});
 /*
 eventHolder.binding.cons1.setOnClickListener(new View.OnClickListener() {
     @Override

@@ -168,6 +168,17 @@
     <string name="edit">Edit</string>
     <string name="be_my_customer">Be my customer</string>
     <string name="report">Report</string>
+    <string name="treatment">Treatment</string>
+    <string name="the_value">the value</string>
+    <string name="current_profit">Current profit</string>
+    <string name="_30_positive_evaluation">30 Positive evaluation</string>
+    <string name="one_point">one point</string>
+    <string name="_10_ads">10 Ads</string>
+    <string name="_20_acts">20 acts</string>
+    <string name="total">Total</string>
+    <string name="transformation">Transformation</string>
+    <string name="application_mechanism">Application mechanism</string>
+    <string name="delete_customer">Delete Customer</string>
     <string-array name="models">
 
         <item>ِAds</item>
