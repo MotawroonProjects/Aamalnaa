@@ -11,8 +11,7 @@
         <variable
             name="messagemodel"
             type="com.creative.share.apps.aamalnaa.models.MessageModel.Data" />
-    </data>
-<RelativeLayout
+    </data><RelativeLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -49,17 +48,13 @@
 
 
             >
-            <ImageView
-                android:id="@+id/tv_message_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                imageActivityEndPoint="@{messagemodel.message}"
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/mapview"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:clickable="true"
+                android:enabled="true" />
 
-                android:maxWidth="200dp"
-                android:maxHeight="200dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                />
             <TextView
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"

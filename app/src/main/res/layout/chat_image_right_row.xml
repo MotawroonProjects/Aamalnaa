@@ -42,12 +42,13 @@
             >
             <ImageView
                 android:id="@+id/tv_message_content"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 imageActivityEndPoint="@{messagemodel.message}"
 
 
-                android:maxWidth="270dp"
+                android:maxWidth="200dp"
+                android:maxHeight="200dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 />            <TextView

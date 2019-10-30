@@ -154,7 +154,7 @@ public class Fragment_Clients extends Fragment {
 
 
             Api.getService(Tags.base_url)
-                    .precustomer(adsList.get(layoutPosition).getId() + "", userModel.getUser().getId() + "")
+                    .precustomer(adsList.get(layoutPosition).getFollower_id() + "", userModel.getUser().getId() + "")
                     .enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -207,7 +207,7 @@ public class Fragment_Clients extends Fragment {
 
 
             Api.getService(Tags.base_url)
-                    .deltecustomer(adsList.get(layoutPosition).getId() + "", userModel.getUser().getId() + "")
+                    .deltecustomer(adsList.get(layoutPosition).getFollower_id() + "", userModel.getUser().getId() + "")
                     .enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

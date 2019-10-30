@@ -2,6 +2,7 @@ package com.creative.share.apps.aamalnaa.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -54,6 +55,12 @@ public class Room_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         EventHolder eventHolder = (EventHolder) holder;
 eventHolder.binding.setUserroommodel(userRoomModels.get(position));
+eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        activity.gotomessage(userRoomModels.get(eventHolder.getLayoutPosition()).getReceiver_id());
+    }
+});
     }
 
     @Override

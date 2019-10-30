@@ -8,6 +8,7 @@ import com.creative.share.apps.aamalnaa.models.App_Data_Model;
 import com.creative.share.apps.aamalnaa.models.BankDataModel;
 import com.creative.share.apps.aamalnaa.models.Catogries_Model;
 import com.creative.share.apps.aamalnaa.models.Cities_Model;
+import com.creative.share.apps.aamalnaa.models.MessageModel;
 import com.creative.share.apps.aamalnaa.models.NotificationDataModel;
 import com.creative.share.apps.aamalnaa.models.PlaceGeocodeData;
 import com.creative.share.apps.aamalnaa.models.PlaceMapDetailsData;
@@ -126,6 +127,12 @@ public interface Service {
     @POST("api/favorite_ads")
     Call<Adversiment_Model> getFAds(
             @Field("page")int page,
+            @Field("user_id")String user_id
+    );
+    @FormUrlEncoded
+    @POST("api/my_message")
+    Call<MessageModel> getMessge(
+            @Field("receiver_id")String receiver_id,
             @Field("user_id")String user_id
     );
     @FormUrlEncoded

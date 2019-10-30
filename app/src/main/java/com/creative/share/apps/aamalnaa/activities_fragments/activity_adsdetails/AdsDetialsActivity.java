@@ -360,7 +360,7 @@ getsingleads();                            } else {
     }
     public void becustomer() {
         //   Common.CloseKeyBoard(homeActivity, edt_name);
-
+Log.e("kkkkk",single_adversiment_model.getUser_id()+"");
         ProgressDialog dialog = Common.createProgressDialog(AdsDetialsActivity.this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();

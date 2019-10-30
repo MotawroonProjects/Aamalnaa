@@ -79,16 +79,20 @@ if(orderlist.get(position).getSubcategory()!=null) {
 eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-        i=position;
+       // i=position;
         if(fragment instanceof  Fragment_Main){
+            fragment_main=(Fragment_Main)fragment;
 
             if(position==0) {
-                fragment_main=(Fragment_Main)fragment;
                 fragment_main.setcat_id("all");
             }
+            else {
+                if(orderlist.get(eventHolder.getLayoutPosition()).getSubcategory()!=null){
+                fragment_main.CreateNoSignAlertDialog(fragment,activity,orderlist.get(eventHolder.getLayoutPosition()).getSubcategory());
+            }}
 
         }
-        notifyDataSetChanged();
+        //notifyDataSetChanged();
 
 
     }

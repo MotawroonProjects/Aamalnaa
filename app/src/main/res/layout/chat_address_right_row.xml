@@ -11,16 +11,13 @@
         <variable
             name="messagemodel"
             type="com.creative.share.apps.aamalnaa.models.MessageModel.Data" />
-    </data>
-<RelativeLayout
+    </data><RelativeLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
     android:layoutDirection="ltr"
-    tools:ignore="UnusedAttribute"
-
-    >
+    tools:ignore="UnusedAttribute">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -28,38 +25,26 @@
         android:orientation="horizontal"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layoutDirection="ltr"
-        tools:ignore="RtlCompat,UnusedAttribute">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/image"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="top"
-            imageUserEndPoint="@{messagemodel.user_avatar}"
+        tools:ignore="RtlCompat">
 
-            />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/msg_left_bg"
+            android:background="@drawable/msg_right_bg"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="5dp"
+            android:layout_marginEnd="40dp"
 
 
             >
-            <ImageView
-                android:id="@+id/tv_message_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                imageActivityEndPoint="@{messagemodel.message}"
-
-                android:maxWidth="200dp"
-                android:maxHeight="200dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                />
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/mapview"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:clickable="true"
+                android:enabled="true" />
             <TextView
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
@@ -67,7 +52,7 @@
                 android:layout_gravity="end"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="13sp"
                 android:visibility="gone"
                 android:layout_marginBottom="5dp"

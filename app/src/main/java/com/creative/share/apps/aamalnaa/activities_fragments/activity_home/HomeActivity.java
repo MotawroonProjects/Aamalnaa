@@ -39,6 +39,7 @@ import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.fragm
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_search.Search_Activity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_sign_in.activities.SignInActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.chat_activity.ChatActivity;
 import com.creative.share.apps.aamalnaa.adapters.CityAdapter;
 import com.creative.share.apps.aamalnaa.databinding.ActivityHomeBinding;
 import com.creative.share.apps.aamalnaa.language.Language;
@@ -696,6 +697,12 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
     public void showdetials(int id) {
         Intent intent=new Intent(HomeActivity.this, AdsDetialsActivity.class);
         intent.putExtra("search",id);
+        startActivity(intent);
+    }
+
+    public void gotomessage(int receiver_id) {
+        Intent intent=new Intent(HomeActivity.this, ChatActivity.class);
+        intent.putExtra("data",receiver_id+"");
         startActivity(intent);
     }
 }

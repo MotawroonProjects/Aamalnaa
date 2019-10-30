@@ -68,7 +68,7 @@
                             android:clickable="false"
                             android:longClickable="false"
                             android:padding="8dp"
-                            android:rotation='@{lang.equals("ar")?180:0}'
+                            android:rotation='@{lang.equals("en")?180:0}'
                             android:src="@drawable/ic_arrow_right"
                             android:tint="@color/white"
                             tools:ignore="VectorDrawableCompat" />
@@ -185,37 +185,6 @@
 
                 />
 
-            <FrameLayout
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="3dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="3dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/edt_bg"
-                app:layout_constraintBottom_toBottomOf="@id/image_chat_user"
-                app:layout_constraintEnd_toStartOf="@id/image_chat_user"
-                app:layout_constraintTop_toTopOf="@id/image_chat_user"
-
-
-                >
-
-                <com.eyalbira.loadingdots.LoadingDots
-                    android:id="@+id/wait_dot"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    app:LoadingDots_auto_play="true"
-                    app:LoadingDots_dots_color="@color/gray4"
-                    app:LoadingDots_dots_count="3"
-                    app:LoadingDots_dots_size="6dp"
-                    app:LoadingDots_dots_space="2dp"
-                    app:LoadingDots_jump_height="4dp"
-                    app:LoadingDots_loop_duration="800"
-                    app:LoadingDots_loop_start_delay="100"
-                    app:LoadingDots_jump_duration="200"
-                    ></com.eyalbira.loadingdots.LoadingDots>
-            </FrameLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

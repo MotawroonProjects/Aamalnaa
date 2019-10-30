@@ -1,5 +1,7 @@
 package com.creative.share.apps.aamalnaa.activities_fragments.activity_home.fragments;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +24,9 @@ import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeA
 import com.creative.share.apps.aamalnaa.adapters.Ads_Adapter;
 import com.creative.share.apps.aamalnaa.adapters.Category_Adapter;
 import com.creative.share.apps.aamalnaa.adapters.SlidingImage_Adapter;
+import com.creative.share.apps.aamalnaa.adapters.SubCategoryAdapter;
+import com.creative.share.apps.aamalnaa.databinding.DialogCustom2Binding;
+import com.creative.share.apps.aamalnaa.databinding.DialogSubCatogryBinding;
 import com.creative.share.apps.aamalnaa.databinding.FragmentMainBinding;
 import com.creative.share.apps.aamalnaa.models.Adversiment_Model;
 import com.creative.share.apps.aamalnaa.models.Catogries_Model;
@@ -43,6 +48,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Fragment_Main extends Fragment {
+    private static AlertDialog dialog;
     private HomeActivity activity;
     private FragmentMainBinding binding;
     private LinearLayoutManager manager, manager2;
@@ -360,6 +366,26 @@ public class Fragment_Main extends Fragment {
 
     public void setcat_id(String id) {
         this.cat_id = id;
+        if(dialog!=null){
+            dialog.dismiss();
+        }
         getAds();
     }
+    public static void CreateNoSignAlertDialog(Fragment fragment, Context context, List<Catogries_Model.Data.Subcategory>subcategories) {
+        dialog = new AlertDialog.Builder(context)
+                .create();
+      SubCategoryAdapter subCategoryAdapter;
+
+        DialogSubCatogryBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_sub_catogry, null, false);
+        subCategoryAdapter = new SubCategoryAdapter(context, subcategories,fragment );
+        binding.recViewsub.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
+        binding.recViewsub.setAdapter(subCategoryAdapter);
+
+        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setView(binding.getRoot());
+        dialog.show();
+    }
+
 }
