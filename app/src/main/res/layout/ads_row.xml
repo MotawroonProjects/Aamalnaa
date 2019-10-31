@@ -38,9 +38,20 @@
 
                 >
 
+                <ImageView
+                    android:id="@+id/imstar"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:padding="3dp"
+                    android:src="@drawable/ic_star"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
                     android:text="@{adversimentmodel.title}"

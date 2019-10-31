@@ -410,6 +410,7 @@ Log.e("kkkkk",single_adversiment_model.getUser_id()+"");
     }
 
     private void update(Single_Adversiment_Model body) {
+        this.single_adversiment_model=body;
         if(body.getUser_id()==userModel.getUser().getId()){
             binding.cardrepor.setVisibility(View.GONE);
             binding.follow.setVisibility(View.GONE);

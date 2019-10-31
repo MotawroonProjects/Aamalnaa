@@ -72,6 +72,9 @@ private Search_Activity search_activity;
             EventHolder eventHolder = (EventHolder) holder;
             eventHolder.binding.setLang(lang);
             eventHolder.binding.setAdversimentmodel(order_data);
+            if(order_data.getIs_Special()==0){
+                eventHolder.binding.imstar.setVisibility(View.GONE);
+            }
 eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
@@ -121,6 +124,7 @@ else if(context instanceof  Search_Activity){
         public EventHolder(@NonNull AdsRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+
 
         }
     }
