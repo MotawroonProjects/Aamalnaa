@@ -98,6 +98,7 @@
                     app:civ_border_color="@color/gray4"
                     android:src="@drawable/logo"
                     imageUserEndPoint="@{userModel.user.avatar}"
+                  type="@{2}"
                     />
 
             </FrameLayout>

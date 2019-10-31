@@ -3,27 +3,26 @@ package com.creative.share.apps.aamalnaa.models;
 import java.io.Serializable;
 import java.util.List;
 
-public class MessageModel implements Serializable {
-private List<Data> data;
+public class MessageModel  implements Serializable {
+    private SingleMessageModel data;
 
-    public List<Data> getData() {
+    public SingleMessageModel getData() {
         return data;
     }
 
-    public class Data implements Serializable
-    {
+    public class SingleMessageModel implements Serializable {
         private int id;
-           private int sender_id;
-            private int receiver_id;
-            private int room_id;
-            private String message;
-            private int seen;
-            private String type;
-            private double lat;
+        private int sender_id;
+        private int receiver_id;
+        private int room_id;
+        private String message;
+        private int seen;
+        private String type;
+        private double lat;
         private double lng;
 
-            private String user_name;
-            private String user_avatar;
+        private String user_name;
+        private String user_avatar;
 
         public int getId() {
             return id;

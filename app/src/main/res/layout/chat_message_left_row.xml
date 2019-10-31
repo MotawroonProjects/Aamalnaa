@@ -10,7 +10,7 @@
             type="String" />
         <variable
             name="messagemodel"
-            type="com.creative.share.apps.aamalnaa.models.MessageModel.Data" />
+            type="com.creative.share.apps.aamalnaa.models.MessageModel.SingleMessageModel" />
     </data><RelativeLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -36,7 +36,7 @@
             android:layout_height="30dp"
             android:layout_gravity="top"
             imageUserEndPoint="@{messagemodel.user_avatar}"
-
+type="@{2}"
             />
         <LinearLayout
             android:layout_width="wrap_content"

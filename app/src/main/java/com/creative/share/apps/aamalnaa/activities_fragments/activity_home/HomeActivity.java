@@ -705,4 +705,5 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
         intent.putExtra("data",receiver_id+"");
         startActivity(intent);
     }
+
 }

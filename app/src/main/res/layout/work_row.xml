@@ -38,6 +38,7 @@
     app:civ_border_color="@color/colorPrimary"
     app:civ_border_width="1dp"
     imageUserEndPoint="@{workmodel.user_avatar}"
+   type="@{2}"
     app:civ_circle_background_color="@color/white"
     />
 <TextView

@@ -10,7 +10,7 @@
             type="String" />
         <variable
             name="messagemodel"
-            type="com.creative.share.apps.aamalnaa.models.MessageModel.Data" />
+            type="com.creative.share.apps.aamalnaa.models.MessageModel.SingleMessageModel" />
     </data>
 <RelativeLayout
     xmlns:tools="http://schemas.android.com/tools"
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 imageActivityEndPoint="@{messagemodel.message}"
-
+type="@{1}"
 
                 android:maxWidth="200dp"
                 android:maxHeight="200dp"

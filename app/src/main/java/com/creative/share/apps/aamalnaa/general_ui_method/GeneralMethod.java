@@ -39,12 +39,16 @@ public class GeneralMethod {
     }
 
 
-    @BindingAdapter("imageActivityEndPoint")
-    public static void displayImage2(ImageView imageView, String imageEndPoint)
+    @BindingAdapter({"imageActivityEndPoint","type"})
+    public static void displayImage2(ImageView imageView, String imageEndPoint,int type)
     {
+if(type==1) {
+    Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_Ads_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+}
+else {
+    Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_user_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 
-        Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_Ads_URL+imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
-
+}
     }
     @BindingAdapter("url")
     public static void imageUrl(RoundedImageView imageView,String url)
@@ -60,11 +64,16 @@ public class GeneralMethod {
         textView.setText(n_date);
 
     }
-    @BindingAdapter("imageUserEndPoint")
-    public static void displayImage3(CircleImageView imageView, String imageEndPoint)
+    @BindingAdapter({"imageUserEndPoint","type"})
+    public static void displayImage3(CircleImageView imageView, String imageEndPoint,int type)
     {
-        Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_Ads_URL+imageEndPoint)).placeholder(R.drawable.ic_user).fit().into(imageView);
+        if(type==1) {
+            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_Ads_URL + imageEndPoint)).placeholder(R.drawable.ic_user).fit().into(imageView);
+        }
+        else {
+            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_user_URL + imageEndPoint)).placeholder(R.drawable.ic_user).fit().into(imageView);
 
+        }
     }
 
     @BindingAdapter({"date","islogin"})
@@ -79,12 +88,16 @@ public class GeneralMethod {
             textView.setText(n_date);
         }
     }
-    @BindingAdapter("imageEventEndPoint")
-    public static void displayImage(RoundedImageView imageView, String imageEndPoint)
+    @BindingAdapter({"imageEventEndPoint","type"})
+    public static void displayImage(RoundedImageView imageView, String imageEndPoint,int type)
     {
+if(type==1) {
+    Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_Ads_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+}
+else {
+    Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_user_URL + imageEndPoint)).placeholder(R.drawable.ic_user).fit().into(imageView);
 
-        Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_Ads_URL+imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
-
+}
     }
 
     @BindingAdapter("rate")

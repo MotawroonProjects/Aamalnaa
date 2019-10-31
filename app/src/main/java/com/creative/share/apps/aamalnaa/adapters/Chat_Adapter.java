@@ -1,15 +1,12 @@
 package com.creative.share.apps.aamalnaa.adapters;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.creative.share.apps.aamalnaa.R;
@@ -20,15 +17,10 @@ import com.creative.share.apps.aamalnaa.databinding.ChatImageLeftRowBinding;
 import com.creative.share.apps.aamalnaa.databinding.ChatImageRightRowBinding;
 import com.creative.share.apps.aamalnaa.databinding.ChatMessageLeftRowBinding;
 import com.creative.share.apps.aamalnaa.databinding.ChatMessageRightRowBinding;
-import com.creative.share.apps.aamalnaa.databinding.LoadMoreBinding;
-import com.creative.share.apps.aamalnaa.databinding.NotificationRowBinding;
 import com.creative.share.apps.aamalnaa.models.MessageModel;
-import com.creative.share.apps.aamalnaa.models.NotificationDataModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -47,12 +39,12 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private final String lang;
 
 
-    private List<MessageModel.Data> messageModelList;
+    private List<MessageModel.SingleMessageModel> messageModelList;
     private int current_user_id;
     private Context context;
     private LayoutInflater inflater;
 private ChatActivity activity;
-    public Chat_Adapter(List<MessageModel.Data> messageModelList, int current_user_id,  Context context) {
+    public Chat_Adapter(List<MessageModel.SingleMessageModel> messageModelList, int current_user_id, Context context) {
         this.messageModelList = messageModelList;
         this.current_user_id = current_user_id;
         this.context = context;
@@ -107,7 +99,7 @@ private ChatActivity activity;
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        MessageModel.Data messageModel = messageModelList.get(position);
+      MessageModel.SingleMessageModel messageModel = messageModelList.get(position);
         if (holder instanceof RightImageEventHolder)
         {
             RightImageEventHolder eventHolder = (RightImageEventHolder) holder;
@@ -262,7 +254,7 @@ binding.mapview.getMapAsync(this);
 
     @Override
     public int getItemViewType(int position) {
-        MessageModel.Data messageModel = messageModelList.get(position);
+        MessageModel.SingleMessageModel messageModel = messageModelList.get(position);
 
         if (messageModel.getReceiver_id() == current_user_id) {
             Log.e("type",messageModel.getType());

@@ -50,6 +50,7 @@
                     android:layout_height="96dp"
                     android:layout_gravity="center"
                     imageUserEndPoint="@{ratedmodel.user_avatar}"
+                   type="@{2}"
                     app:civ_border_color="@color/colorPrimary"
                     app:civ_border_width="1dp"
                     app:civ_circle_background_color="@color/white"

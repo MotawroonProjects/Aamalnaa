@@ -215,6 +215,22 @@
                     android:src="@drawable/ic_send"
                     android:tint="@color/white"
                     tools:ignore="VectorDrawableCompat" />
+                <ImageView
+                    android:id="@+id/image_photo"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_camera"
+                    android:tint="@color/gray4"
+                    tools:ignore="VectorDrawableCompat" />
+                <ImageView
+                    android:id="@+id/image_address"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_map"
+                    android:tint="@color/gray4"
+                    tools:ignore="VectorDrawableCompat" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
