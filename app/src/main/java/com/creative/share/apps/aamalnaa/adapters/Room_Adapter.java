@@ -80,7 +80,7 @@ if(i==position){
 eventHolder.binding.imageedit.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-        activity.gotomessage(userRoomModels.get(eventHolder.getLayoutPosition()).getReceiver_id());
+        activity.gotomessage(userRoomModels.get(eventHolder.getLayoutPosition()).getReceiver_id(),userRoomModels.get(eventHolder.getLayoutPosition()).getReceiver_name());
     }
 });
 eventHolder.binding.imageDelete.setOnClickListener(new View.OnClickListener() {

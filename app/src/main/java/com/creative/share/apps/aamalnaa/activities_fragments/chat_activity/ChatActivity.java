@@ -71,7 +71,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
     private LinearLayoutManager manager;
     private Preferences preferences;
     private UserModel userModel;
-    private String reciver_id = "0";
+    private String reciver_id = "0",reciver_name;
     private SelectedLocation selectedLocation;
     private final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
     private final String write_permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -95,15 +95,15 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
     }
 
     private void initView() {
-        if (getIntent().getStringExtra("data") != null) {
-            reciver_id = getIntent().getStringExtra("data");
-        }
+       getdataintent();
         messagedatalist = new ArrayList<>();
+
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
+        binding.setName(reciver_name);
         binding.setBackListener(this);
         manager = new LinearLayoutManager(this);
 
@@ -132,6 +132,15 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
         });
         binding.imagePhoto.setOnClickListener(view -> CreateImageAlertDialog());
 
+    }
+
+    private void getdataintent() {
+        if (getIntent().getStringExtra("data") != null) {
+            reciver_id = getIntent().getStringExtra("data");
+        }
+        if (getIntent().getStringExtra("name") != null) {
+            reciver_name = getIntent().getStringExtra("name");
+        }
     }
 
     private void checkdata() {

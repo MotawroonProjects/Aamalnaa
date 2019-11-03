@@ -13,6 +13,9 @@
             name="lang"
             type="String" />
         <variable
+            name="name"
+            type="String" />
+        <variable
             name="contactUs"
             type="com.creative.share.apps.aamalnaa.models.ContactUsModel" />
 
@@ -106,7 +109,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginTop="5dp"
-
+android:text="@{name}"
                         />
 
                     <ImageView
@@ -132,6 +135,7 @@
                         android:padding="4dp"
                         android:src="@drawable/ic_delete"
                         android:tint="@color/white"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/image_info"
                         app:layout_constraintTop_toTopOf="parent"
