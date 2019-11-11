@@ -2,6 +2,7 @@ package com.creative.share.apps.aamalnaa.activities_fragments.activity_adsdetail
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,7 +18,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_map.MapActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.chat_activity.ChatActivity;
 import com.creative.share.apps.aamalnaa.adapters.Comments_Adapter;
 import com.creative.share.apps.aamalnaa.adapters.SingleAdsSlidingImage_Adapter;
 import com.creative.share.apps.aamalnaa.databinding.ActivityAdsDetialsBinding;
@@ -155,6 +158,17 @@ binding.setAdsmodel(single_adversiment_model);
             return false;
         });
 
+        binding.chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(userModel.getUser().getId()!=single_adversiment_model.getUser_id()){
+                Intent intent=new Intent(AdsDetialsActivity.this, ChatActivity.class);
+                intent.putExtra("data",single_adversiment_model.getUser_id()+"");
+                intent.putExtra("name",single_adversiment_model.getUser_name());
+
+                startActivity(intent);
+            }}
+        });
     }
 
     private void comment(String query) {
