@@ -428,7 +428,7 @@ Log.e("kkkkk",single_adversiment_model.getUser_id()+"");
         if(body.getUser_id()==userModel.getUser().getId()){
             binding.cardrepor.setVisibility(View.GONE);
             binding.follow.setVisibility(View.GONE);
-
+binding.chat.setVisibility(View.GONE);
         }
         binding.setAdsmodel(body);
         commentsList.clear();
@@ -437,6 +437,7 @@ Log.e("kkkkk",single_adversiment_model.getUser_id()+"");
         binding.llAds.setVisibility(View.GONE);
             comments_adapter.notifyDataSetChanged();
             binding.reccomment.setVisibility(View.VISIBLE);
+
       //      Log.e("llll",body.getComments().get(0).getComment()+"");
 
         }
