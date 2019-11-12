@@ -646,7 +646,7 @@
                                 android:paddingRight="8dp"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/gray3"
-                                android:imeOptions="actionDone"
+                                android:imeOptions="actionSend"
                                 android:textSize="12sp" />
 
                         </LinearLayout>

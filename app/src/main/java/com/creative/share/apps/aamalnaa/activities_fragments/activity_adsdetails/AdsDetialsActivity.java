@@ -147,7 +147,7 @@ binding.setAdsmodel(single_adversiment_model);
             }
         });
         binding.edtComment.setOnEditorActionListener((v, actionId, event) -> {
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            if (actionId == EditorInfo.IME_ACTION_SEND) {
                 String query = binding.edtComment.getText().toString();
                 if (!TextUtils.isEmpty(query)) {
                     Common.CloseKeyBoard(AdsDetialsActivity.this,binding.edtComment);
