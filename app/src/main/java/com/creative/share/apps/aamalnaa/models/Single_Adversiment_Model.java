@@ -238,4 +238,16 @@ public class Comments implements Serializable{
     public List<Comments> getComments() {
         return comments;
     }
+
+    public void setLike_ad(int like_ad) {
+        this.like_ad = like_ad;
+    }
+
+    public void setFollow(int follow) {
+        this.follow = follow;
+    }
+
+    public void setReport(int report) {
+        this.report = report;
+    }
 }

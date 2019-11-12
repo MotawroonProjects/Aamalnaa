@@ -478,6 +478,7 @@
                     app:cardElevation="2dp">
 
                     <LinearLayout
+                        android:id="@+id/ll_chat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -646,8 +647,11 @@
                                 android:paddingRight="8dp"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/gray3"
-                                android:imeOptions="actionSend"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"
+                                android:imeOptions="actionDone"
+
+                                />
+
 
                         </LinearLayout>
 

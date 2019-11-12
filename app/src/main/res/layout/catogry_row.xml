@@ -22,7 +22,7 @@
     >
     <TextView
         android:id="@+id/tv_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -46,6 +46,7 @@
         app:el_duration="500"
         app:el_parallax=".5"
         app:el_expanded="false"
+        android:orientation="horizontal"
         >
 
             <androidx.recyclerview.widget.RecyclerView

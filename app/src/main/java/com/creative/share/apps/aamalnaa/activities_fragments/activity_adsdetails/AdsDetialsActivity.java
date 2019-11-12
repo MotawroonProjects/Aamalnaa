@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -146,9 +147,13 @@ binding.setAdsmodel(single_adversiment_model);
                 becustomer();
             }
         });
+
+        binding.edtComment.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        binding.edtComment.setRawInputType(InputType.TYPE_CLASS_TEXT);
         binding.edtComment.setOnEditorActionListener((v, actionId, event) -> {
-            if (actionId == EditorInfo.IME_ACTION_SEND) {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
                 String query = binding.edtComment.getText().toString();
+                binding.edtComment.setText("");
                 if (!TextUtils.isEmpty(query)) {
                     Common.CloseKeyBoard(AdsDetialsActivity.this,binding.edtComment);
                     comment(query);
@@ -293,7 +298,16 @@ dialog.dismiss();
                             if (response.isSuccessful() && response.body() != null && response.body() != null) {
                                 //binding.coord1.scrollTo(0,0);
 
-getsingleads();                            } else {
+//getsingleads();
+
+                                if(single_adversiment_model.getLike_ad()==1){
+                                    single_adversiment_model.setLike_ad(0);
+                                }
+                                else {
+                                    single_adversiment_model.setLike_ad(1);
+                                }
+                                update(single_adversiment_model);
+                            } else {
 
 
                                 Toast.makeText(AdsDetialsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
@@ -340,10 +354,20 @@ getsingleads();                            } else {
                             dialog.dismiss();
 
                             //  binding.progBar.setVisibility(View.GONE);
-                            if (response.isSuccessful() && response.body() != null && response.body() != null) {
+                            if (response.isSuccessful()) {
                                 //binding.coord1.scrollTo(0,0);
 
-                                getsingleads();                            } else {
+                               // getsingleads();
+                               if(single_adversiment_model.getReport()==1){
+                                   single_adversiment_model.setReport(0);
+                               }
+                               else {
+                                   single_adversiment_model.setReport(1);
+                               }
+                               update(single_adversiment_model);
+
+                            }
+                            else {
 
 
                                 Toast.makeText(AdsDetialsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
@@ -392,8 +416,19 @@ Log.e("kkkkk",single_adversiment_model.getUser_id()+"");
                             //  binding.progBar.setVisibility(View.GONE);
                             if (response.isSuccessful() && response.body() != null && response.body() != null) {
                                 //binding.coord1.scrollTo(0,0);
+                                if(single_adversiment_model.getFollow()==1){
+                                    single_adversiment_model.setFollow(0);
+                                }
+                                else {
+                                    single_adversiment_model.setFollow(1);
+                                }
+                                update(single_adversiment_model);
 
-                                getsingleads();                            } else {
+
+                                //getsingleads();
+
+                            } else {
+
 
 
                                 Toast.makeText(AdsDetialsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
@@ -428,7 +463,7 @@ Log.e("kkkkk",single_adversiment_model.getUser_id()+"");
         if(body.getUser_id()==userModel.getUser().getId()){
             binding.cardrepor.setVisibility(View.GONE);
             binding.follow.setVisibility(View.GONE);
-binding.chat.setVisibility(View.GONE);
+binding.llChat.setVisibility(View.GONE);
         }
         binding.setAdsmodel(body);
         commentsList.clear();
