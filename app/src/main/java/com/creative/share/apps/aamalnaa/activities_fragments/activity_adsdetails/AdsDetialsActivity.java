@@ -149,7 +149,7 @@ binding.setAdsmodel(single_adversiment_model);
         });
 
         binding.edtComment.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        //binding.edtComment.setRawInputType(InputType.TYPE_CLASS_TEXT);
+        binding.edtComment.setRawInputType(InputType.TYPE_CLASS_TEXT);
         binding.edtComment.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 String query = binding.edtComment.getText().toString();
