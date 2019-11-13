@@ -32,6 +32,8 @@ import com.creative.share.apps.aamalnaa.databinding.FragmentMoreBinding;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
 import com.creative.share.apps.aamalnaa.share.Common;
+import com.creative.share.apps.aamalnaa.tags.Tags;
+import com.squareup.picasso.Picasso;
 
 import java.util.Locale;
 
@@ -65,9 +67,11 @@ public class Fragment_More extends Fragment {
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         userModel = preferences.getUserData(activity);
-
+        if (userModel != null) {
+            Picasso.with(activity).load(Tags.IMAGE_user_URL + userModel.getUser().getAvatar()).placeholder(R.drawable.user_profile).fit().into(binding.image);
+            binding.tvName.setText(userModel.getUser().getName());
+        }
         binding.image.setOnClickListener(view -> {
-
 
 
             if (userModel != null) {
@@ -89,12 +93,11 @@ public class Fragment_More extends Fragment {
         });
 
         binding.llAds.setOnClickListener(view -> {
-            if(userModel!=null){
+            if (userModel != null) {
                 Intent intent = new Intent(activity, MyAdsActivity.class);
                 startActivity(intent);
 
-            }
-            else {
+            } else {
                 Common.CreateNoSignAlertDialog(activity);
             }
 
@@ -102,19 +105,20 @@ public class Fragment_More extends Fragment {
         });
 
         binding.llWallet.setOnClickListener(view -> {
-            if(userModel!=null){
-            Intent intent = new Intent(activity, WalletActivity.class);
-            startActivity(intent);}
-            else {
+            if (userModel != null) {
+                Intent intent = new Intent(activity, WalletActivity.class);
+                startActivity(intent);
+            } else {
                 Common.CreateNoSignAlertDialog(activity);
 
             }
         });
 
         binding.llprofit.setOnClickListener(view -> {
-            if(userModel!=null){
-            Intent intent = new Intent(activity, ProfitActivity.class);
-            startActivity(intent);}
+            if (userModel != null) {
+                Intent intent = new Intent(activity, ProfitActivity.class);
+                startActivity(intent);
+            }
         });
 
         binding.llTerm.setOnClickListener(view -> {
@@ -162,10 +166,10 @@ public class Fragment_More extends Fragment {
         });
 
         binding.llLogout.setOnClickListener(view -> {
-            if(userModel!=null){
+            if (userModel != null) {
 
-                activity.logout();}
-            else {
+                activity.logout();
+            } else {
                 Common.CreateNoSignAlertDialog(activity);
             }
         });
