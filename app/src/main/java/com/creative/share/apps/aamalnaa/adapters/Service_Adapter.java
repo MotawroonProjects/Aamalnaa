@@ -82,6 +82,7 @@ if(context instanceof  AddAdsActivity){
 
     }
 else if(context instanceof  UpdateAdsActivity){
+
     if(orderlist.get(eventHolder.getLayoutPosition()).getCoun()==1){
         updateAdsActivity.setcommented();
     }else  if(orderlist.get(eventHolder.getLayoutPosition()).getCoun()==2){
@@ -97,7 +98,7 @@ else if(context instanceof  UpdateAdsActivity){
 });
 if(i==position){
     eventHolder.binding.checkbox.setChecked(true);
-
+if(context instanceof  UpdateAdsActivity){
     if(orderlist.get(i).getCoun()==1){
         updateAdsActivity.setcommented();
     }else  if(orderlist.get(i).getCoun()==2){
@@ -106,7 +107,8 @@ if(i==position){
         updateAdsActivity.setviews();
     }else  if(orderlist.get(i).getCoun()==4){
         updateAdsActivity.setisinstall();
-    }
+    }}
+
 }
     }
 

@@ -66,7 +66,7 @@ public class AboutActivity extends AppCompatActivity implements Listeners.BackLi
                     @Override
                     public void onResponse(Call<App_Data_Model> call, Response<App_Data_Model> response) {
                         binding.progBar.setVisibility(View.GONE);
-                        if (response.isSuccessful() && response.body() != null && response.body().getAdvantages() != null && response.body().getAdvantages() != null) {
+                        if (response.isSuccessful() && response.body() != null && response.body().getAbout() != null && response.body().getAbout() != null) {
 
                             binding.setAppdatamodel(response.body());
                         } else {

@@ -91,6 +91,7 @@ binding.llEdit.setOnClickListener(new View.OnClickListener() {
     public void onClick(View view) {
         Intent intent=new Intent(ProfileActivity.this, Edit_Profile_Activity.class);
         startActivityForResult(intent,1002);
+
     }
 });
 
@@ -124,9 +125,9 @@ binding.llEdit.setOnClickListener(new View.OnClickListener() {
         tvTitle3.setText(getString(R.string.rated));
         binding.tab.getTabAt(0).setCustomView(tab_item0);
 
-        binding.tab.getTabAt(1).setCustomView(tab_item1);
+        binding.tab.getTabAt(2).setCustomView(tab_item1);
 
-        binding.tab.getTabAt(2).setCustomView(tab_item2);
+        binding.tab.getTabAt(1).setCustomView(tab_item2);
         binding.tab.getTabAt(3).setCustomView(tab_item3);
 
         updateWorkCount(0);
@@ -223,8 +224,8 @@ Log.e(";;llll",tab.getPosition()+"");
     private List<Fragment> getFragments() {
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(Fragment_Ads.newInstance());
-        fragmentList.add(Fragment_Works.newInstance());
         fragmentList.add(Fragment_Clients.newInstance());
+        fragmentList.add(Fragment_Works.newInstance());
         fragmentList.add(Fragment_Rated.newInstance());
 
         return fragmentList;
@@ -234,8 +235,9 @@ Log.e(";;llll",tab.getPosition()+"");
     private List<String> getTitles() {
         List<String> titles = new ArrayList<>();
         titles.add(getString(R.string.my_ads));
-        titles.add(getString(R.string.works));
         titles.add(getString(R.string.clients));
+        titles.add(getString(R.string.works));
+
         titles.add(getString(R.string.rated));
         return titles;
 
@@ -325,15 +327,15 @@ Log.e(";;llll",tab.getPosition()+"");
     }
 
     public void changetoworks(int layoutPosition) {
-        if(pagerAdapter!=null&&pagerAdapter.getItem(2)!=null){
-            Fragment_Clients fragment_clients= (Fragment_Clients) pagerAdapter.getItem(2);
+        if(pagerAdapter!=null&&pagerAdapter.getItem(1)!=null){
+            Fragment_Clients fragment_clients= (Fragment_Clients) pagerAdapter.getItem(1);
             fragment_clients.changeitem(layoutPosition);
         }
     }
 
     public void delte(int layoutPosition) {
-        if(pagerAdapter!=null&&pagerAdapter.getItem(2)!=null){
-            Fragment_Clients fragment_clients= (Fragment_Clients) pagerAdapter.getItem(2);
+        if(pagerAdapter!=null&&pagerAdapter.getItem(1)!=null){
+            Fragment_Clients fragment_clients= (Fragment_Clients) pagerAdapter.getItem(1);
             fragment_clients.delte(layoutPosition);
         }
     }
