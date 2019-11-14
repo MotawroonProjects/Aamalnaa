@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_map.MapActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.chat_activity.ChatActivity;
 import com.creative.share.apps.aamalnaa.adapters.Comments_Adapter;
 import com.creative.share.apps.aamalnaa.adapters.SingleAdsSlidingImage_Adapter;
@@ -173,6 +174,27 @@ binding.setAdsmodel(single_adversiment_model);
 
                 startActivity(intent);
             }}
+        });
+        binding.llAdversitor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (userModel != null) {
+
+                    if(userModel.getUser().getId()==single_adversiment_model.getUser_id()){
+                        Intent intent = new Intent(AdsDetialsActivity.this, ProfileActivity.class);
+                        startActivity(intent);
+                    }
+
+                else {
+                        Intent intent = new Intent(AdsDetialsActivity.this, ProfileActivity.class);
+                        intent.putExtra("data",single_adversiment_model.getUser_id()+"");
+                        startActivity(intent);
+                }}
+                else {
+                    Common.CreateNoSignAlertDialog(AdsDetialsActivity.this);
+
+                }
+            }
         });
     }
 

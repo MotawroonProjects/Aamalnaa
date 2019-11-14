@@ -46,6 +46,7 @@ public class Fragment_Ads extends Fragment {
 
     private List<UserModel.Ads> adsList;
     private My_Ads_Adapter ads_adapter;
+    private String id;
 
     public static Fragment_Ads newInstance() {
         return new Fragment_Ads();
@@ -63,6 +64,7 @@ public class Fragment_Ads extends Fragment {
     private void initView() {
         adsList = new ArrayList<>();
         activity = (ProfileActivity) getActivity();
+        id=activity.getId();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         ads_adapter = new My_Ads_Adapter(adsList, activity);
@@ -84,7 +86,7 @@ public class Fragment_Ads extends Fragment {
         try {
 
             Api.getService(Tags.base_url)
-                    .getmyprofile(userModel.getUser().getId() + "")
+                    .getmyprofile(id)
                     .enqueue(new Callback<UserModel>() {
                         @Override
                         public void onResponse(Call<UserModel> call, Response<UserModel> response) {

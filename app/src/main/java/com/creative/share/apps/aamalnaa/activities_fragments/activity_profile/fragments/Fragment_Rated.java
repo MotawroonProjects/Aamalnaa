@@ -41,6 +41,7 @@ public class Fragment_Rated extends Fragment {
     private UserModel userModel;
     private List<UserModel.Rateds> ratedsList;
     private Rated_Adapter rated_adapter;
+    private String id;
 
     public static Fragment_Rated newInstance() {
         return new Fragment_Rated();
@@ -60,6 +61,7 @@ public class Fragment_Rated extends Fragment {
 
         ratedsList = new ArrayList<>();
         activity = (ProfileActivity) getActivity();
+        id=activity.getId();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         rated_adapter = new Rated_Adapter(ratedsList, activity);
@@ -79,7 +81,7 @@ public class Fragment_Rated extends Fragment {
         try {
 
             Api.getService(Tags.base_url)
-                    .getmyprofile(userModel.getUser().getId() + "")
+                    .getmyprofile(id)
                     .enqueue(new Callback<UserModel>() {
                         @Override
                         public void onResponse(Call<UserModel> call, Response<UserModel> response) {

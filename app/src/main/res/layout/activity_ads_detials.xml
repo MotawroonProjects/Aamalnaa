@@ -282,6 +282,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/ll_adversitor"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
@@ -311,6 +312,7 @@
 
 
                                 <TextView
+
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"

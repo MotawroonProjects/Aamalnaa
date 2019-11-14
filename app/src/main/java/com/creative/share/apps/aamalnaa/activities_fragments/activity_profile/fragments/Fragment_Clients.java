@@ -46,6 +46,7 @@ public class Fragment_Clients extends Fragment {
     private Customer_Adapter customer_adapter;
     private Preferences preferences;
     private UserModel userModel;
+    private String id;
 
     public static Fragment_Clients newInstance() {
         return new Fragment_Clients();
@@ -63,6 +64,7 @@ public class Fragment_Clients extends Fragment {
     private void initView() {
         adsList = new ArrayList<>();
         activity = (ProfileActivity) getActivity();
+        id=activity.getId();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         customer_adapter = new Customer_Adapter(adsList, activity);
@@ -83,7 +85,7 @@ public class Fragment_Clients extends Fragment {
         try {
 
             Api.getService(Tags.base_url)
-                    .getmyprofile(userModel.getUser().getId() + "")
+                    .getmyprofile(id)
                     .enqueue(new Callback<UserModel>() {
                         @Override
                         public void onResponse(Call<UserModel> call, Response<UserModel> response) {

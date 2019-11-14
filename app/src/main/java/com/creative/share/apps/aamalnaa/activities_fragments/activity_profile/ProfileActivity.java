@@ -53,6 +53,11 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
     private TextView tvads, tvWorkCount, tvClientCount, tvratedcount;
     private Preferences preferences;
     private UserModel userModel;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -73,7 +78,14 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
 
     private void initView() {
         preferences = Preferences.getInstance();
+
         userModel = preferences.getUserData(this);
+        if(getIntent().getStringExtra("data")!=null){
+            id=getIntent().getStringExtra("data");
+        }
+        else {
+            id=userModel.getUser().getId()+"";
+        }
 //    Log.e("y",userModel.getUser().getId()+"");
 binding.tvinfo.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -256,7 +268,7 @@ Log.e(";;llll",tab.getPosition()+"");
         try {
 
             Api.getService(Tags.base_url)
-                    .getmyprofile(userModel.getUser().getId() + "")
+                    .getmyprofile(id+ "")
                     .enqueue(new Callback<UserModel>() {
                         @Override
                         public void onResponse(Call<UserModel> call, Response<UserModel> response) {

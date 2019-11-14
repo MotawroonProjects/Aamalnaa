@@ -45,6 +45,7 @@ public class Fragment_Works extends Fragment {
     private Work_Adapter work_adapter;
     private Preferences preferences;
     private UserModel userModel;
+    private String id;
 
     public static Fragment_Works newInstance() {
         return new Fragment_Works();
@@ -62,9 +63,11 @@ public class Fragment_Works extends Fragment {
     private void initView() {
         adsList = new ArrayList<>();
         activity = (ProfileActivity) getActivity();
+
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         work_adapter = new Work_Adapter(adsList, activity);
+        id=activity.getId();
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.progBar.setVisibility(View.GONE);
         binding.recView.setItemViewCacheSize(25);
@@ -83,7 +86,7 @@ public class Fragment_Works extends Fragment {
         try {
 
             Api.getService(Tags.base_url)
-                    .getmyprofile(userModel.getUser().getId() + "")
+                    .getmyprofile(id)
                     .enqueue(new Callback<UserModel>() {
                         @Override
                         public void onResponse(Call<UserModel> call, Response<UserModel> response) {
