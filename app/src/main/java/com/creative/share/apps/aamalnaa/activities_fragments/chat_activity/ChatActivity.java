@@ -172,7 +172,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
                         @Override
                         public void onResponse(Call<AllMessageModel> call, Response<AllMessageModel> response) {
                             binding.progBar.setVisibility(View.GONE);
-                            // binding.swipeRefresh.setRefreshing(false);
+                           //  binding.swipeRefresh.setRefreshing(false);
                             if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
                                 messagedatalist.clear();
                                 messagedatalist.addAll(response.body().getData());

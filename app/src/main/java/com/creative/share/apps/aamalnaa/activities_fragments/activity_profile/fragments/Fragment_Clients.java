@@ -154,7 +154,7 @@ public class Fragment_Clients extends Fragment {
 
 
             Api.getService(Tags.base_url)
-                    .precustomer(adsList.get(layoutPosition).getFollower_id() + "", userModel.getUser().getId() + "")
+                    .precustomer(adsList.get(layoutPosition).getId() + "", userModel.getUser().getId() + "")
                     .enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -165,7 +165,8 @@ public class Fragment_Clients extends Fragment {
                                 //binding.coord1.scrollTo(0,0);
                                 adsList.remove(layoutPosition);
                                 customer_adapter.notifyItemRemoved(layoutPosition);
-
+                                  activity.updateClientCount(adsList.size()-1);
+                                  activity.updateWorkCount(adsList.size()-1);
                                                            } else {
 
 
@@ -207,7 +208,7 @@ public class Fragment_Clients extends Fragment {
 
 
             Api.getService(Tags.base_url)
-                    .deltecustomer(adsList.get(layoutPosition).getFollower_id() + "", userModel.getUser().getId() + "")
+                    .deltecustomer(adsList.get(layoutPosition).getId() + "", userModel.getUser().getId() + "")
                     .enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -218,6 +219,7 @@ public class Fragment_Clients extends Fragment {
                                 //binding.coord1.scrollTo(0,0);
                                 adsList.remove(layoutPosition);
                                 customer_adapter.notifyItemRemoved(layoutPosition);
+                                activity.updateClientCount(adsList.size()-1);
 
                                                          } else {
 

@@ -280,10 +280,12 @@ updatesublist(dataList2.get(i).getSubcategory());
                     city_id = "";
 
                 } else {
-                    city_id = String.valueOf(dataList.get(i).getId());
+                    city_id = String.valueOf(cDataList.get(i).getId());
+
 
 
                 }
+                Log.e("cc",city_id);
                 order_upload_model.setCity_id(city_id);
                 binding.setOrderModel(order_upload_model);
             }
@@ -387,10 +389,11 @@ RequestBody views_num_part=Common.getRequestBodyText(views_num+"");
                         startActivity(intent);
                         finish();
                     } else {
+
                         try {
 
                             Toast.makeText(AddAdsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                            Log.e("Error", response.toString()+" "+response.code() + "" + response.message() + "" + response.errorBody() + response.raw() + response.body() + response.headers()+" "+response.errorBody().toString());
+                            Log.e("Error", response.toString()+" "+response.code() + "" + response.message() + "" + response.errorBody().string() + response.raw() + response.body() + response.headers()+" "+response.errorBody().toString());
                         } catch (Exception e) {
 
 

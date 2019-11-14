@@ -47,6 +47,7 @@
         app:el_parallax=".5"
         app:el_expanded="false"
         android:orientation="horizontal"
+        android:visibility="gone"
         >
 
             <androidx.recyclerview.widget.RecyclerView

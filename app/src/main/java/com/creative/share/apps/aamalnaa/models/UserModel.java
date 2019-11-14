@@ -181,8 +181,8 @@ private int id;
         private int followed_id;
         private String created_at;
         private String updated_at;
-        private String user_name;
-        private String user_avatar;
+        private String name;
+        private String avatar;
 
         public int getId() {
             return id;
@@ -205,11 +205,11 @@ private int id;
         }
 
         public String getUser_name() {
-            return user_name;
+            return name;
         }
 
         public String getUser_avatar() {
-            return user_avatar;
+            return avatar;
         }
     }
      public class Ads implements Serializable
@@ -420,8 +420,8 @@ private int id;
             private int user_id;
             private int follower_id;
 
-            private String user_name;
-        private String user_avatar;
+            private String name;
+        private String avatar;
 
         public int getId() {
             return id;
@@ -436,11 +436,11 @@ private int id;
         }
 
         public String getUser_name() {
-            return user_name;
+            return name;
         }
 
         public String getUser_avatar() {
-            return user_avatar;
+            return avatar;
         }
     }
 }
