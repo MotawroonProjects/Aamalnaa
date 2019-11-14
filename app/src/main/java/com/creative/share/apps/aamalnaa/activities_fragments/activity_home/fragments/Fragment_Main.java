@@ -1,7 +1,9 @@
 package com.creative.share.apps.aamalnaa.activities_fragments.activity_home.fragments;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -48,7 +53,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Fragment_Main extends Fragment {
-    private static AlertDialog dialog;
+    private static Dialog dialog;
     private HomeActivity activity;
     private FragmentMainBinding binding;
     private LinearLayoutManager manager, manager2;
@@ -372,19 +377,22 @@ public class Fragment_Main extends Fragment {
         getAds();
     }
     public static void CreateNoSignAlertDialog(Fragment fragment, Context context, List<Catogries_Model.Data.Subcategory>subcategories) {
-        dialog = new AlertDialog.Builder(context)
-                .create();
+
+        dialog = new Dialog(context);
       SubCategoryAdapter subCategoryAdapter;
 
         DialogSubCatogryBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_sub_catogry, null, false);
         subCategoryAdapter = new SubCategoryAdapter(context, subcategories,fragment );
         binding.recViewsub.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
         binding.recViewsub.setAdapter(subCategoryAdapter);
-
+        //int width = (int)(getResources().getDisplayMetrics().widthPixels*0.90);
+       // int height = (int)(getResources().getDisplayMetrics().heightPixels*0.90);
+        binding.ll.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
         dialog.setCanceledOnTouchOutside(false);
-        dialog.setView(binding.getRoot());
+        dialog.setContentView(binding.getRoot());
+        //dialog.getWindow().setAttributes(new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT));
         dialog.show();
     }
 

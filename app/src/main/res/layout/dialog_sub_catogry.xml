@@ -5,16 +5,19 @@
 
     >
     <LinearLayout
+        android:id="@+id/ll"
          android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/custom_bg">
+        android:background="@drawable/custom_bg"
+        android:gravity="center"
+        >
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recViewsub"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+
+
 
             >
 

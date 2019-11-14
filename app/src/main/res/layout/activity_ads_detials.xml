@@ -205,6 +205,44 @@
                                     android:textColor="@color/black"
                                     android:textSize="13sp" />
                             </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:orientation="horizontal"
+                                android:padding="8dp"
+                                android:weightSum="1">
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".1"
+                                    android:padding="3dp"
+                                    android:src="@drawable/ic_map"
+                                    android:tint="@color/secondColor"
+
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".1"
+                                    android:text="@string/address_detials"
+                                    android:textColor="@color/textColor"
+                                    android:textSize="12sp" />
+
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".9"
+                                    android:text="@{adsmodel.address}"
+                                    android:textColor="@color/black"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
 
 
                             <LinearLayout
@@ -448,7 +486,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_weight=".9"
-                                android:text="@string/address_detials"
+                                android:text="@string/ad_details"
                                 android:textColor="@color/textColor"
                                 android:textSize="12sp" />
 
@@ -459,7 +497,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:text="@{adsmodel.address}"
+                            android:text="@{adsmodel.details}"
                             android:textColor="@color/black"
                             android:textSize="13sp" />
 

@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeActivity;
 import com.creative.share.apps.aamalnaa.databinding.SliderBinding;
 import com.creative.share.apps.aamalnaa.models.Slider_Model;
 import com.creative.share.apps.aamalnaa.tags.Tags;
@@ -28,11 +29,12 @@ public class SlidingImage_Adapter extends PagerAdapter {
     private LayoutInflater inflater;
      Context context;
 
-
+HomeActivity activity;
     public SlidingImage_Adapter(Context context, List<Slider_Model.Data> IMAGES) {
         this.context = context;
         this.IMAGES=IMAGES;
         inflater = LayoutInflater.from(context);
+        activity=(HomeActivity)context;
     }
 
     @Override
@@ -58,6 +60,12 @@ else {
 
 }
         Picasso.with(context).load(Uri.parse(Tags.IMAGE_Ads_URL+IMAGES.get(position).getImage())).fit().into(rowBinding.image);
+rowBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        activity.showdetials(IMAGES.get(position).getId());
+    }
+});
         view.addView(rowBinding.getRoot());
         return rowBinding.getRoot();
     }

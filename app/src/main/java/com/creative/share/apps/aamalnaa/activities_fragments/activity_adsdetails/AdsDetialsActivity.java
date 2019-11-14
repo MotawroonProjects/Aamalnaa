@@ -516,4 +516,10 @@ else {
     public void back() {
         finish();
     }
+
+    public void displayimage(Single_Adversiment_Model.Images images) {
+        Intent intent=new Intent(AdsDetialsActivity.this,Order_Image_Activity.class);
+        intent.putExtra("detials",images);
+
+        startActivityForResult(intent, 1003);    }
 }

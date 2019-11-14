@@ -18,10 +18,10 @@
 
     <TextView
         android:id="@+id/tv_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:paddingTop="3dp"
         android:paddingBottom="3dp"
         android:gravity="center"
@@ -31,9 +31,11 @@
         android:layout_marginTop="5dp"
         android:layout_marginRight="3dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/linear_bg_white"
+        android:background="@color/white"
         android:textColor="@color/black"
-        android:textSize="13sp" />
+        android:textSize="13sp"
+
+        />
 
 
 

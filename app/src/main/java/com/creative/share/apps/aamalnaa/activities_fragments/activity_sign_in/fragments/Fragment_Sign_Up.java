@@ -263,9 +263,9 @@ if(body.getData()!=null){
 
     @Override
     public void checkDataSignUp(String name, String phone_code, String phone,String email, String password) {
-        if (phone.startsWith("0")) {
+     /*   if (phone.startsWith("0")) {
             phone = phone.replaceFirst("0", "");
-        }
+        }*/
         signUpModel = new SignUpModel(name,city_id,phone_code,phone,email,password,isAcceptTerms);
         binding.setSignUpModel(signUpModel);
         if (signUpModel.isDataValid(activity))

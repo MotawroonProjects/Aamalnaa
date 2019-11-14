@@ -111,9 +111,9 @@ public class Fragment_Sign_In extends Fragment implements Listeners.LoginListene
 
     @Override
     public void checkDataLogin(String phone_code, String phone, String password) {
-        if (phone.startsWith("0")) {
+      /*  if (phone.startsWith("0")) {
             phone = phone.replaceFirst("0", "");
-        }
+        }*/
         loginModel = new LoginModel(phone_code,phone,password);
         binding.setLoginModel(loginModel);
 

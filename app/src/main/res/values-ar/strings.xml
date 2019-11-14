@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">عالم أعمالنا</string>
+    <string name="app_name"> أعمالنا</string>
     <string name="map_api_key">AIzaSyCbc2Y5AIwZ8uUeHRUXiozGN3CnpjKT0oI</string>
     <string name="log_in">تسجيل الدخول</string>
     <string name="email">البريد الالكترونى</string>
@@ -124,7 +124,7 @@
     <string name="rated">التقيمات</string>
     <string name="work">عميلي</string>
     <string name="ads">اعلان</string>
-    <string name="news">جديد</string>
+    <string name="news">الاحدث</string>
     <string name="just_now">الان</string>
     <string name="a_minute_ago">منذ دقيقة</string>
     <string name="min">د</string>
@@ -144,7 +144,7 @@
     <string name="views">عدد المشاهدات</string>
     <string name="address_detials">تفاصيل العنوان</string>
     <string name="email_the_advertiser">ارسل بريد الى المعلن</string>
-    <string name="delete_reporting">احذف الريبورت</string>
+    <string name="delete_reporting">احذف الابلاغ</string>
     <string name="transactions">معاملاتى</string>
     <string name="profits">الارباح</string>
     <string name="the_bouquet">الباقه</string>
@@ -178,6 +178,7 @@
     <string name="application_mechanism">الية عمل التطبيق</string>
     <string name="delete_customer">حذف العميل</string>
     <string name="type_amessage">اكتب الرساله</string>
+    <string name="image">Image</string>
 
     <string-array name="models">
 

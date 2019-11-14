@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_adsdetails.AdsDetialsActivity;
 import com.creative.share.apps.aamalnaa.databinding.SliderBinding;
 import com.creative.share.apps.aamalnaa.models.Single_Adversiment_Model;
 import com.creative.share.apps.aamalnaa.models.Slider_Model;
@@ -29,11 +30,12 @@ public class SingleAdsSlidingImage_Adapter extends PagerAdapter {
     private LayoutInflater inflater;
      Context context;
 
-
+private AdsDetialsActivity adsDetialsActivity;
     public SingleAdsSlidingImage_Adapter(Context context, List<Single_Adversiment_Model.Images> IMAGES) {
         this.context = context;
         this.IMAGES=IMAGES;
         inflater = LayoutInflater.from(context);
+        adsDetialsActivity=(AdsDetialsActivity)context;
     }
 
     @Override
@@ -53,6 +55,12 @@ rowBinding.tvDetials.setVisibility(View.GONE);
 rowBinding.tvTitle.setVisibility(View.GONE);
 
         Picasso.with(context).load(Uri.parse(Tags.IMAGE_Ads_URL+IMAGES.get(position).getImage())).fit().into(rowBinding.image);
+        rowBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adsDetialsActivity.displayimage(IMAGES.get(position));
+            }
+        });
         view.addView(rowBinding.getRoot());
         return rowBinding.getRoot();
     }

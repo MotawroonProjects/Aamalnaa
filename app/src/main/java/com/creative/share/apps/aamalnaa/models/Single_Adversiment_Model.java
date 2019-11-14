@@ -28,7 +28,7 @@ public class Single_Adversiment_Model implements Serializable {
 private String created_at;
         private int ads_type;
             private String image;
-            private String city_name;
+            private String city;
         private String category_name;
         private String sub_category_name;
             private int is_like;
@@ -171,7 +171,7 @@ public class Comments implements Serializable{
         }
 
         public String getCity_name() {
-            return city_name;
+            return city;
         }
 
         public int getCode() {
