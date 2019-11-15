@@ -172,8 +172,9 @@ public class Fragment_Clients extends Fragment {
                                 //binding.coord1.scrollTo(0,0);
                                 adsList.remove(layoutPosition);
                                 customer_adapter.notifyItemRemoved(layoutPosition);
-                                activity.updateClientCount(adsList.size() - 1);
-                                activity.updateWorkCount(adsList.size() - 1);
+                                activity.updateClientCount(adsList.size() );
+                                activity.updateWork(1);
+
                             } else {
 
 
@@ -226,7 +227,7 @@ public class Fragment_Clients extends Fragment {
                                 //binding.coord1.scrollTo(0,0);
                                 adsList.remove(layoutPosition);
                                 customer_adapter.notifyItemRemoved(layoutPosition);
-                                activity.updateClientCount(adsList.size() - 1);
+                                activity.updateClientCount(adsList.size());
 
                             } else {
 

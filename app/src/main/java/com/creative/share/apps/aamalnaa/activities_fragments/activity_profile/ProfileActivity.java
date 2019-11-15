@@ -54,7 +54,7 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
     private Preferences preferences;
     private UserModel userModel;
     private String id;
-
+int work_count;
     public String getId() {
         return id;
     }
@@ -223,6 +223,7 @@ Log.e(";;llll",tab.getPosition()+"");
 
     public void updateWorkCount(int count) {
         tvWorkCount.setText(String.format("%s%s%s", "(", String.valueOf(count), ")"));
+        work_count=count;
     }
 
     public void updateClientCount(int count) {
@@ -359,5 +360,10 @@ Log.e(";;llll",tab.getPosition()+"");
             userModel=preferences.getUserData(this);
             updateprofile(userModel);
         }
+    }
+
+    public void updateWork(int i) {
+
+        updateWorkCount(i+work_count);
     }
 }
