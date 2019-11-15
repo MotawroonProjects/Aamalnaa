@@ -32,13 +32,15 @@ public class My_Ads_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private String lang;
     private ProfileActivity activity;
     private int i = -1;
-    public My_Ads_Adapter(List<UserModel.Ads> orderlist, Context context) {
+    int type;
+    public My_Ads_Adapter(List<UserModel.Ads> orderlist, Context context,int type) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         this.activity = (ProfileActivity) context;
+        this.type=type;
     }
 
     @NonNull
@@ -66,10 +68,14 @@ eventHolder.binding.expandLayout.setOrientation(ExpandableLayout.HORIZONTAL);
 eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
+        if(type==1){
         i=position;
-        notifyDataSetChanged();
+        notifyDataSetChanged();}
     }
 });
+if(type==2){
+    eventHolder.binding.expandLayout.setVisibility(View.GONE);
+}
 eventHolder.binding.imageedit.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {

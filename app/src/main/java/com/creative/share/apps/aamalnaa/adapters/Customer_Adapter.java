@@ -28,14 +28,15 @@ public class Customer_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private String lang;
     private ProfileActivity activity;
     private int i = 0;
-
-    public Customer_Adapter(List<UserModel.Customers> orderlist, Context context) {
+int type;
+    public Customer_Adapter(List<UserModel.Customers> orderlist, Context context,int type) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         this.activity = (ProfileActivity) context;
+        this.type=type;
     }
 
     @NonNull
@@ -68,6 +69,10 @@ eventHolder.binding.btDelte.setOnClickListener(new View.OnClickListener() {
 
     }
 });
+if(type==2){
+    eventHolder.binding.btDelte.setVisibility(View.GONE);
+    eventHolder.binding.btWork.setVisibility(View.GONE);
+}
     }
 
     @Override

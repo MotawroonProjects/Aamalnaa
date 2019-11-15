@@ -67,7 +67,11 @@ public class Fragment_Ads extends Fragment {
         id=activity.getId();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
-        ads_adapter = new My_Ads_Adapter(adsList, activity);
+        if(id.equals(userModel.getUser().getId()+"")){
+        ads_adapter = new My_Ads_Adapter(adsList, activity,1);}
+        else {
+            ads_adapter = new My_Ads_Adapter(adsList, activity,2);
+        }
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.progBar.setVisibility(View.GONE);
         binding.recView.setItemViewCacheSize(25);

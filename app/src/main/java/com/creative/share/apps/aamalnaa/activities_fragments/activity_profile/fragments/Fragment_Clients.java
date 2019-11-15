@@ -55,7 +55,7 @@ public class Fragment_Clients extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_clients,container,false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_clients, container, false);
         initView();
         getprofiledata();
         return binding.getRoot();
@@ -64,10 +64,15 @@ public class Fragment_Clients extends Fragment {
     private void initView() {
         adsList = new ArrayList<>();
         activity = (ProfileActivity) getActivity();
-        id=activity.getId();
+        id = activity.getId();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
-        customer_adapter = new Customer_Adapter(adsList, activity);
+        if (id.equals(userModel.getUser().getId() + "")) {
+            customer_adapter = new Customer_Adapter(adsList, activity, 1);
+        } else {
+
+            customer_adapter = new Customer_Adapter(adsList, activity, 2);
+        }
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.progBar.setVisibility(View.GONE);
         binding.recView.setItemViewCacheSize(25);
@@ -151,7 +156,7 @@ public class Fragment_Clients extends Fragment {
         dialog.setCancelable(false);
         dialog.show();
         // rec_sent.setVisibility(View.GONE);
-        Log.e("mmmm",userModel.getUser().getId()+" "+adsList.get(layoutPosition).getId());
+        Log.e("mmmm", userModel.getUser().getId() + " " + adsList.get(layoutPosition).getId());
         try {
 
 
@@ -167,9 +172,9 @@ public class Fragment_Clients extends Fragment {
                                 //binding.coord1.scrollTo(0,0);
                                 adsList.remove(layoutPosition);
                                 customer_adapter.notifyItemRemoved(layoutPosition);
-                                  activity.updateClientCount(adsList.size()-1);
-                                  activity.updateWorkCount(adsList.size()-1);
-                                                           } else {
+                                activity.updateClientCount(adsList.size() - 1);
+                                activity.updateWorkCount(adsList.size() - 1);
+                            } else {
 
 
                                 Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
@@ -203,7 +208,7 @@ public class Fragment_Clients extends Fragment {
         ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
-        Log.e("mmmm",userModel.getUser().getId()+" "+adsList.get(layoutPosition).getId());
+        Log.e("mmmm", userModel.getUser().getId() + " " + adsList.get(layoutPosition).getId());
 
         // rec_sent.setVisibility(View.GONE);
         try {
@@ -221,9 +226,9 @@ public class Fragment_Clients extends Fragment {
                                 //binding.coord1.scrollTo(0,0);
                                 adsList.remove(layoutPosition);
                                 customer_adapter.notifyItemRemoved(layoutPosition);
-                                activity.updateClientCount(adsList.size()-1);
+                                activity.updateClientCount(adsList.size() - 1);
 
-                                                         } else {
+                            } else {
 
 
                                 Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
