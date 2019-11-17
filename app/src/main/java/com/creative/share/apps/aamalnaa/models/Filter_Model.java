@@ -6,6 +6,15 @@ public class Filter_Model {
     private static String lng;
     private static int is_new;
     private static int photo;
+    private static String id;
+
+    public static String getId() {
+        return id;
+    }
+
+    public static void setId(String id) {
+        Filter_Model.id = id;
+    }
 
     public static int getPhoto() {
         return photo;

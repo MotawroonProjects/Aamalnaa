@@ -1,5 +1,6 @@
 package com.creative.share.apps.aamalnaa.activities_fragments.activity_home.fragments;
 
+import android.app.ProgressDialog;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_transaction.TransactionActivity;
 import com.creative.share.apps.aamalnaa.adapters.Notification_Adapter;
 import com.creative.share.apps.aamalnaa.adapters.Room_Adapter;
 import com.creative.share.apps.aamalnaa.databinding.FragmentNotificationBinding;
@@ -28,12 +30,14 @@ import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.models.UserRoomModelData;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
 import com.creative.share.apps.aamalnaa.remote.Api;
+import com.creative.share.apps.aamalnaa.share.Common;
 import com.creative.share.apps.aamalnaa.tags.Tags;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -211,4 +215,55 @@ binding.recView.setAdapter(notification_adapter);
             isLoading = false;
         }
     }
+    public void deletenotification(int layoutPosition) {
+        //   Common.CloseKeyBoard(homeActivity, edt_name);
+
+        ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        // rec_sent.setVisibility(View.GONE);
+        try {
+
+
+            Api.getService(Tags.base_url)
+                    .Deltenotes(notificationModelList.get(layoutPosition).getId() + "")
+                    .enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            dialog.dismiss();
+
+                            //  binding.progBar.setVisibility(View.GONE);
+                            if (response.isSuccessful() && response.body() != null && response.body() != null) {
+                                //binding.coord1.scrollTo(0,0);
+                                notificationModelList.remove(layoutPosition);
+                                notification_adapter.notifyItemRemoved(layoutPosition);
+                                //  getsingleads();                            } else {
+
+
+                                Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                try {
+                                    Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                                } catch (Exception e) {
+                                    Log.e("Error_code", response.code()+"");                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            try {
+
+                                dialog.dismiss();
+
+                                Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                Log.e("error", t.getMessage());
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+
+            dialog.dismiss();
+        }
+    }
+
 }

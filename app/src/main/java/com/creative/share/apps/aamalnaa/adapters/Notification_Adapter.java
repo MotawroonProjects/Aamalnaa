@@ -17,6 +17,7 @@ import com.creative.share.apps.aamalnaa.activities_fragments.activity_favorite.F
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_my_ads.MyAdsActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_search.Search_Activity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_transaction.TransactionActivity;
 import com.creative.share.apps.aamalnaa.databinding.AdsRowBinding;
 import com.creative.share.apps.aamalnaa.databinding.LoadMoreBinding;
 import com.creative.share.apps.aamalnaa.databinding.NotificationRowBinding;
@@ -35,13 +36,15 @@ public class Notification_Adapter extends RecyclerView.Adapter<RecyclerView.View
     private Context context;
     private LayoutInflater inflater;
     private String lang;
-
+private TransactionActivity transactionActivity;
+private HomeActivity homeActivity;
     public Notification_Adapter(List<NotificationDataModel.NotificationModel> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+
 
     }
 
@@ -69,7 +72,20 @@ public class Notification_Adapter extends RecyclerView.Adapter<RecyclerView.View
             EventHolder eventHolder = (EventHolder) holder;
 
             eventHolder.binding.setNotificationModel(order_data);
+eventHolder.binding.imdelete.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        if(context instanceof  TransactionActivity){
+            transactionActivity=(TransactionActivity)context;
+            transactionActivity.deletenotification(eventHolder.getLayoutPosition());
 
+        }
+        else if(context instanceof  HomeActivity ){
+            homeActivity=(HomeActivity)context;
+            homeActivity.deletenotification(eventHolder.getLayoutPosition());
+        }
+    }
+});
 
 
         }else

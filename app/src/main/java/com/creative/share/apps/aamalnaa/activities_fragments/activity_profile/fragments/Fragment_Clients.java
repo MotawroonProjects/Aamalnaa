@@ -23,6 +23,7 @@ import com.creative.share.apps.aamalnaa.adapters.Customer_Adapter;
 import com.creative.share.apps.aamalnaa.adapters.Work_Adapter;
 import com.creative.share.apps.aamalnaa.databinding.FragmentClientsBinding;
 import com.creative.share.apps.aamalnaa.databinding.FragmentWorksBinding;
+import com.creative.share.apps.aamalnaa.models.Filter_Model;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
 import com.creative.share.apps.aamalnaa.remote.Api;
@@ -64,7 +65,9 @@ public class Fragment_Clients extends Fragment {
     private void initView() {
         adsList = new ArrayList<>();
         activity = (ProfileActivity) getActivity();
-        id = activity.getId();
+        id = Filter_Model.getId();
+        Log.e("hhhh",id);
+
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         if (id.equals(userModel.getUser().getId() + "")) {
@@ -90,7 +93,7 @@ public class Fragment_Clients extends Fragment {
         try {
 
             Api.getService(Tags.base_url)
-                    .getmyprofile(id)
+                    .getmyprofile(id+ "",userModel.getUser().getId()+"")
                     .enqueue(new Callback<UserModel>() {
                         @Override
                         public void onResponse(Call<UserModel> call, Response<UserModel> response) {
@@ -103,7 +106,7 @@ public class Fragment_Clients extends Fragment {
 
                                 try {
 
-                                    Log.e("error", response.code() + "_" + response.errorBody().string());
+                                    Log.e("error_data3", response.code() + "_" + response.errorBody().string());
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -216,7 +219,7 @@ public class Fragment_Clients extends Fragment {
 
 
             Api.getService(Tags.base_url)
-                    .deltecustomer(adsList.get(layoutPosition).getId() + "", userModel.getUser().getId() + "")
+                    .delteworks(adsList.get(layoutPosition).getId() + "", userModel.getUser().getId() + "")
                     .enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -227,7 +230,7 @@ public class Fragment_Clients extends Fragment {
                                 //binding.coord1.scrollTo(0,0);
                                 adsList.remove(layoutPosition);
                                 customer_adapter.notifyItemRemoved(layoutPosition);
-                                activity.updateClientCount(adsList.size());
+                                activity.updateWorkCount(adsList.size());
 
                             } else {
 

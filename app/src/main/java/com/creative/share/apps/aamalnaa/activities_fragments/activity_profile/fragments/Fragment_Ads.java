@@ -22,6 +22,7 @@ import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.Pr
 import com.creative.share.apps.aamalnaa.adapters.My_Ads_Adapter;
 import com.creative.share.apps.aamalnaa.adapters.Rated_Adapter;
 import com.creative.share.apps.aamalnaa.databinding.FragmentAdsBinding;
+import com.creative.share.apps.aamalnaa.models.Filter_Model;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
 import com.creative.share.apps.aamalnaa.remote.Api;
@@ -64,13 +65,15 @@ public class Fragment_Ads extends Fragment {
     private void initView() {
         adsList = new ArrayList<>();
         activity = (ProfileActivity) getActivity();
-        id=activity.getId();
+        id = Filter_Model.getId();
+        Log.e("hhhh", id);
+
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
-        if(id.equals(userModel.getUser().getId()+"")){
-        ads_adapter = new My_Ads_Adapter(adsList, activity,1);}
-        else {
-            ads_adapter = new My_Ads_Adapter(adsList, activity,2);
+        if (id.equals(userModel.getUser().getId() + "")) {
+            ads_adapter = new My_Ads_Adapter(adsList, activity, 1);
+        } else {
+            ads_adapter = new My_Ads_Adapter(adsList, activity, 2);
         }
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.progBar.setVisibility(View.GONE);
@@ -90,7 +93,7 @@ public class Fragment_Ads extends Fragment {
         try {
 
             Api.getService(Tags.base_url)
-                    .getmyprofile(id)
+                    .getmyprofile(id + "", userModel.getUser().getId() + "")
                     .enqueue(new Callback<UserModel>() {
                         @Override
                         public void onResponse(Call<UserModel> call, Response<UserModel> response) {
@@ -103,7 +106,7 @@ public class Fragment_Ads extends Fragment {
 
                                 try {
 
-                                    Log.e("error", response.code() + "_" + response.errorBody().string());
+                                    Log.e("error_data4", response.code() + "_" + response.errorBody().string());
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -177,14 +180,16 @@ public class Fragment_Ads extends Fragment {
                                 //binding.coord1.scrollTo(0,0);
                                 adsList.remove(layoutPosition);
                                 ads_adapter.notifyItemRemoved(layoutPosition);
-                                //  getsingleads();                            } else {
+                                activity.updateadsCount(adsList.size());
+                            } else {
 
 
                                 Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                                 try {
                                     Log.e("Error_code", response.code() + "_" + response.errorBody().string());
                                 } catch (Exception e) {
-                                    Log.e("Error_code", response.code()+"");                                }
+                                    Log.e("Error_code", response.code() + "");
+                                }
                             }
                         }
 
@@ -207,4 +212,57 @@ public class Fragment_Ads extends Fragment {
     }
 
 
+    public void update(int layoutPosition) {
+
+        ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        // rec_sent.setVisibility(View.GONE);
+        try {
+
+
+            Api.getService(Tags.base_url)
+                    .updateAdstime(adsList.get(layoutPosition).getId() + "")
+                    .enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            dialog.dismiss();
+
+                            //  binding.progBar.setVisibility(View.GONE);
+                            if (response.isSuccessful() && response.body() != null && response.body() != null) {
+                                //binding.coord1.scrollTo(0,0);
+                                getprofiledata();
+                            } else {
+
+                                if (response.code() == 422) {
+
+                                    Toast.makeText(activity, response.message(), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                }
+                                try {
+                                    Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                                } catch (Exception e) {
+                                    Log.e("Error_code", response.code() + "");
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            try {
+
+                                dialog.dismiss();
+
+                                Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                Log.e("error", t.getMessage());
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+
+            dialog.dismiss();
+        }
+    }
 }

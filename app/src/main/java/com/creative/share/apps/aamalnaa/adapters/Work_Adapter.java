@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
-import com.creative.share.apps.aamalnaa.databinding.AdsUserRowBinding;
 import com.creative.share.apps.aamalnaa.databinding.WorkRowBinding;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 
@@ -56,7 +55,12 @@ public class Work_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         EventHolder eventHolder = (EventHolder) holder;
         eventHolder.binding.setLang(lang);
         eventHolder.binding.setWorkmodel(orderlist.get(position));
-eventHolder.binding.btWork.setVisibility(View.INVISIBLE);
+        eventHolder.binding.btDelte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.deletework(eventHolder.getLayoutPosition());
+            }
+        });
     }
 
     @Override

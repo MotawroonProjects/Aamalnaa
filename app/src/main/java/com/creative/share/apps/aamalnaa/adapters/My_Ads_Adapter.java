@@ -10,10 +10,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.creative.share.apps.aamalnaa.R;
-import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
 import com.creative.share.apps.aamalnaa.databinding.AdsUserRowBinding;
-import com.creative.share.apps.aamalnaa.databinding.ReatedRowBinding;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
 
@@ -82,10 +80,17 @@ eventHolder.binding.imageedit.setOnClickListener(new View.OnClickListener() {
         activity.editads(orderlist.get(eventHolder.getLayoutPosition()));
     }
 });
+eventHolder.binding.imagenew.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        activity.updateads(eventHolder.getLayoutPosition());
+
+    }
+});
 eventHolder.binding.imageDelete.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-        activity.delete(eventHolder.getLayoutPosition());
+        activity.deleteads(eventHolder.getLayoutPosition());
     }
 });
 

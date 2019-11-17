@@ -48,7 +48,8 @@ public class ProfitActivity extends AppCompatActivity implements Listeners.BackL
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profit);
         initView();
-        getmyprofit();
+        if(userModel!=null){
+        getmyprofit();}
     }
 
     private void initView() {

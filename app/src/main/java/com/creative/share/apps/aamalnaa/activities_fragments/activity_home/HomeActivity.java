@@ -708,4 +708,9 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
         startActivity(intent);
     }
 
+    public void deletenotification(int id) {
+        if(fragment_notifications!=null&&fragment_notifications.isAdded()){
+            fragment_notifications.deletenotification(id);
+        }
+    }
 }

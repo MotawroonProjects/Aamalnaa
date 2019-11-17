@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+    <variable
+        name="usermodel"
+        type="com.creative.share.apps.aamalnaa.models.UserModel.User" />
+    </data>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/user_profile"
+            app:civ_border_color="@color/colorPrimary"
+            app:civ_border_width="1dp"
+            imageUserEndPoint="@{usermodel.avatar}"
+            type="@{2}"
+            app:civ_circle_background_color="@color/white" />
+
+
+        <LinearLayout
+            android:padding="8dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            >
+
+            <ImageView
+                android:id="@+id/imlike"
+                android:layout_width="70dp"
+                android:layout_height="37dp"
+                android:padding="3dp"
+                android:src="@drawable/ic_like"
+                android:tint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/btn_sign_up"
+                />
+
+            <ImageView
+                android:id="@+id/imdislike"
+                android:layout_width="70dp"
+                android:layout_height="37dp"
+                android:padding="3dp"
+                android:src="@drawable/ic_like"
+                android:tint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/like_bg"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:rotation="180"
+                />
+
+
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/edtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/edt_bg"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:singleLine="true"
+            android:scrollHorizontally="true"
+            android:textColor="@color/black"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:textSize="13sp"
+            tools:ignore="RtlCompat"
+            android:hint="@string/reasson"
+            />
+
+        <Button
+                android:id="@+id/btnrate"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@color/colorPrimary"
+                android:text="@string/rate"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+                />
+
+
+    </LinearLayout>
+</layout>

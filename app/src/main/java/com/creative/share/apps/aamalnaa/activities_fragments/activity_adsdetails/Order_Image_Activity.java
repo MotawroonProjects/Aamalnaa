@@ -45,10 +45,11 @@ public class Order_Image_Activity extends AppCompatActivity implements Listeners
 
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.setBackListener(this);
 
         data = (Single_Adversiment_Model.Images) getIntent().getExtras().getSerializable("detials");
        binding.setOrderImageModel(data);
+       binding.setBackListener(this);
+       binding.setLang(lang);
 
     }
 

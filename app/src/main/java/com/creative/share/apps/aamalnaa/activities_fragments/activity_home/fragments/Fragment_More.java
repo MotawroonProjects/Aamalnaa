@@ -115,10 +115,9 @@ public class Fragment_More extends Fragment {
         });
 
         binding.llprofit.setOnClickListener(view -> {
-            if (userModel != null) {
                 Intent intent = new Intent(activity, ProfitActivity.class);
                 startActivity(intent);
-            }
+
         });
 
         binding.llTerm.setOnClickListener(view -> {

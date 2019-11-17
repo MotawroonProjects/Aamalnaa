@@ -176,9 +176,14 @@
     <string name="total">المجموع الكلى</string>
     <string name="transformation">تحويل</string>
     <string name="application_mechanism">الية عمل التطبيق</string>
-    <string name="delete_customer">حذف العميل</string>
+    <string name="delete_customer">حذف </string>
     <string name="type_amessage">اكتب الرساله</string>
-    <string name="image">Image</string>
+    <string name="image">الصوره</string>
+    <string name="be_my_business">كن اعمالى</string>
+    <string name="packages">الباقات</string>
+    <string name="edit_show_info">ُتعديل ظهور البيانات</string>
+    <string name="rate">تقييم</string>
+    <string name="reasson">Reasson</string>
 
     <string-array name="models">
 

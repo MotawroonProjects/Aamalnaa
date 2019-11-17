@@ -29,6 +29,7 @@ private String created_at;
         private int ads_type;
             private String image;
             private String city;
+            private String user_about;
         private String category_name;
         private String sub_category_name;
             private int is_like;
@@ -38,7 +39,7 @@ private String created_at;
             private int is_reported;
             private int user_is_login;
                     private long user_current_sing_in_at;
-private String user_name;
+private String user;
 private long date;
 private List<Images> images;
 private List<Comments> comments;
@@ -174,7 +175,11 @@ public class Comments implements Serializable{
             return city;
         }
 
-        public int getCode() {
+    public String getUser_about() {
+        return user_about;
+    }
+
+    public int getCode() {
             return code;
         }
 
@@ -228,7 +233,7 @@ public class Comments implements Serializable{
     }
 
     public String getUser_name() {
-            return user_name;
+            return user;
         }
 
     public List<Images> getImages() {

@@ -20,6 +20,7 @@ import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
 import com.creative.share.apps.aamalnaa.adapters.Rated_Adapter;
 import com.creative.share.apps.aamalnaa.databinding.FragmentRatedBinding;
+import com.creative.share.apps.aamalnaa.models.Filter_Model;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
 import com.creative.share.apps.aamalnaa.remote.Api;
@@ -61,7 +62,9 @@ public class Fragment_Rated extends Fragment {
 
         ratedsList = new ArrayList<>();
         activity = (ProfileActivity) getActivity();
-        id=activity.getId();
+        id= Filter_Model.getId();
+        Log.e("hhhh",id);
+
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         rated_adapter = new Rated_Adapter(ratedsList, activity);
@@ -81,7 +84,7 @@ public class Fragment_Rated extends Fragment {
         try {
 
             Api.getService(Tags.base_url)
-                    .getmyprofile(id)
+                    .getmyprofile(id+ "",userModel.getUser().getId()+"")
                     .enqueue(new Callback<UserModel>() {
                         @Override
                         public void onResponse(Call<UserModel> call, Response<UserModel> response) {
@@ -94,7 +97,7 @@ public class Fragment_Rated extends Fragment {
 
                                 try {
 
-                                    Log.e("error", response.code() + "_" + response.errorBody().string());
+                                    Log.e("error_data2", response.code() + "_" + response.errorBody().string());
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }

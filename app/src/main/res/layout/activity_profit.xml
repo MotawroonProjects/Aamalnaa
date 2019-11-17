@@ -62,7 +62,7 @@
                     android:clickable="false"
                     android:longClickable="false"
                     android:textSize="16sp"
-                    android:text="@string/profits"
+                    android:text="@string/packages"
                     />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
@@ -141,8 +141,17 @@
                     android:background="@color/gray3"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:weightSum="3">
+                    android:weightSum="3.2">
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight=".2"
+                        android:padding="3dp"
+                        android:src="@drawable/ic_like"
+                        android:tint="@color/secondColor"
 
+                        />
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -178,6 +187,61 @@
                         android:textColor="@color/textColor"
                         android:textSize="15sp" />
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="3.2">
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight=".2"
+                        android:padding="3dp"
+                        android:src="@drawable/ic_office"
+                        android:tint="@color/secondColor"
+
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/_20_acts"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/one_point"
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text='@{profitmodel.pre_price+""}'
+                        android:textColor="@color/textColor"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -185,7 +249,19 @@
                     android:layout_marginTop="5dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:weightSum="3">
+                    android:weightSum="3.2"
+                    android:background="@color/gray3"
+                    >
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight=".2"
+                        android:padding="3dp"
+                        android:src="@drawable/ic_ads"
+                        android:tint="@color/secondColor"
+
+                        />
 
                     <TextView
                         android:layout_width="0dp"
@@ -224,51 +300,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/gray3"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:clickable="false"
-                        android:longClickable="false"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text="@string/_20_acts"
-                        android:textColor="@color/textColor"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:clickable="false"
-                        android:longClickable="false"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text="@string/one_point"
-                        android:textColor="@color/textColor"
-                        android:textSize="15sp" />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:clickable="false"
-                        android:longClickable="false"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text='@{profitmodel.pre_price+""}'
-                        android:textColor="@color/textColor"
-                        android:textSize="15sp" />
-
-                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"

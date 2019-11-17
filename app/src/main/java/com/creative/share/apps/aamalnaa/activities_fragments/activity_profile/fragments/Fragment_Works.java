@@ -22,6 +22,7 @@ import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.Pr
 import com.creative.share.apps.aamalnaa.adapters.My_Ads_Adapter;
 import com.creative.share.apps.aamalnaa.adapters.Work_Adapter;
 import com.creative.share.apps.aamalnaa.databinding.FragmentWorksBinding;
+import com.creative.share.apps.aamalnaa.models.Filter_Model;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
 import com.creative.share.apps.aamalnaa.remote.Api;
@@ -32,6 +33,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -67,7 +69,8 @@ public class Fragment_Works extends Fragment {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         work_adapter = new Work_Adapter(adsList, activity);
-        id=activity.getId();
+        id= Filter_Model.getId();
+        Log.e("hhhh",id);
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.progBar.setVisibility(View.GONE);
         binding.recView.setItemViewCacheSize(25);
@@ -86,7 +89,7 @@ public class Fragment_Works extends Fragment {
         try {
 
             Api.getService(Tags.base_url)
-                    .getmyprofile(id)
+                    .getmyprofile(id+ "",userModel.getUser().getId()+"")
                     .enqueue(new Callback<UserModel>() {
                         @Override
                         public void onResponse(Call<UserModel> call, Response<UserModel> response) {
@@ -99,7 +102,7 @@ public class Fragment_Works extends Fragment {
 
                                 try {
 
-                                    Log.e("error", response.code() + "_" + response.errorBody().string());
+                                    Log.e("error_data", response.code() + "_" + response.errorBody().string());
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -146,6 +149,59 @@ public class Fragment_Works extends Fragment {
         adsList.clear();
         adsList.addAll(ads);
         work_adapter.notifyDataSetChanged();
+    }
+    public void delte(int layoutPosition) {
+        ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Log.e("mmmm", userModel.getUser().getId() + " " + adsList.get(layoutPosition).getId());
+
+        // rec_sent.setVisibility(View.GONE);
+        try {
+
+
+            Api.getService(Tags.base_url)
+                    .deltecustomer(adsList.get(layoutPosition).getId() + "", userModel.getUser().getId() + "")
+                    .enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            dialog.dismiss();
+
+                            //  binding.progBar.setVisibility(View.GONE);
+                            if (response.isSuccessful() && response.body() != null && response.body() != null) {
+                                //binding.coord1.scrollTo(0,0);
+                                adsList.remove(layoutPosition);
+                                work_adapter.notifyItemRemoved(layoutPosition);
+                                activity.updateClientCount(adsList.size());
+
+                            } else {
+
+
+                                Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                try {
+                                    Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            try {
+
+                                dialog.dismiss();
+
+                                Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                Log.e("error", t.getMessage());
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+
+            dialog.dismiss();
+        }
     }
 
 }

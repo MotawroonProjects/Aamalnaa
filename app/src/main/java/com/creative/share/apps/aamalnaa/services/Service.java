@@ -204,7 +204,18 @@ public interface Service {
             @Field("ad_id") String ad_id,
             @Field("user_id") String user_id
     );
+    @FormUrlEncoded
+    @POST("api/update_ad_time")
+    Call<ResponseBody> updateAdstime(
 
+            @Field("ad_id") String ad_id
+    );
+    @FormUrlEncoded
+    @POST("api/delete_nots")
+    Call<ResponseBody> Deltenotes(
+
+            @Field("not_id") String not_id
+    );
     @FormUrlEncoded
     @POST("api/my_pre_customer")
     Call<ResponseBody> precustomer(
@@ -220,7 +231,13 @@ public interface Service {
             @Field("follower_id") String follower_id,
             @Field("user_id") String user_id
     );
+    @FormUrlEncoded
+    @POST("api/delete_pre")
+    Call<ResponseBody> delteworks(
 
+            @Field("follower_id") String follower_id,
+            @Field("user_id") String user_id
+    );
     @FormUrlEncoded
     @POST("api/follow")
     Call<ResponseBody> becustomer(
@@ -255,7 +272,10 @@ public interface Service {
     @FormUrlEncoded
     @POST("api/my_account")
     Call<UserModel> getmyprofile(
-            @Field("user_id") String user_id);
+            @Field("user_id") String user_id,
+            @Field("register_id") String register_id
+
+            );
 
     @FormUrlEncoded
     @POST("api/my_wallet")
@@ -407,7 +427,11 @@ public interface Service {
 
             @Field("room_id") String room_id
     );
-
+    @FormUrlEncoded
+    @POST("api/toggle_show_info")
+    Call<ResponseBody> showinfo(
+            @Field("user_id") String user_id
+    );
 }
 
 

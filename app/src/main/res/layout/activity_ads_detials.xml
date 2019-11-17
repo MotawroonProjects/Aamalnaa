@@ -162,7 +162,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:layout_weight=".9"
-                                    android:text="@{adsmodel.category_name}"
+                                    android:text="@{adsmodel.user_about}"
                                     android:textColor="@color/black"
                                     android:textSize="13sp" />
                             </LinearLayout>
@@ -402,6 +402,45 @@
                                     android:layout_gravity="center_vertical"
                                     android:layout_weight=".9"
                                     android:text='@{lang.equals("ar")?adsmodel.views_num+"مشاهدة":adsmodel.views_num+"views"}'
+                                    android:textColor="@color/black"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="20dp"
+                                android:orientation="horizontal"
+                                android:padding="8dp"
+                                android:weightSum="1">
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".1"
+                                    android:padding="3dp"
+                                    android:src="@drawable/info"
+                                    android:tint="@color/secondColor"
+
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".1"
+                                    android:text="@string/price"
+                                    android:textColor="@color/textColor"
+                                    android:textSize="12sp" />
+
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight=".9"
+                                    android:text='@{adsmodel.price+""}'
                                     android:textColor="@color/black"
                                     android:textSize="13sp" />
                             </LinearLayout>

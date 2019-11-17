@@ -52,7 +52,7 @@ private int id;
     private int is_login;
     private String created_at;
     private String updated_at;
-
+private int showinfo;
     private String city_name;
     private double total;
     private double Evaluation;
@@ -60,7 +60,7 @@ private int id;
     private int postivesRate;
     private int is_follow;
     private String lastSeen;
-
+private long date;
     public int getId() {
         return id;
     }
@@ -145,7 +145,11 @@ private int id;
         return updated_at;
     }
 
-    public String getCity_name() {
+        public int getShowinfo() {
+            return showinfo;
+        }
+
+        public String getCity_name() {
         return city_name;
     }
 
@@ -169,6 +173,10 @@ private int id;
     public String getLastSeen() {
         return lastSeen;
     }
+
+        public long getDate() {
+            return date;
+        }
 
         public double getTotal() {
             return total;

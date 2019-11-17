@@ -76,8 +76,52 @@
                                 android:layout_marginTop="8dp"
                                 android:gravity="center"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="15sp" />
+                                android:textSize="15sp"
+                                android:text="@{usermodel.name}"
+                                />
 
+                            <LinearLayout
+                                android:id="@+id/ll_show"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                android:background="@drawable/sp_bg"
+                                android:orientation="horizontal"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:layout_gravity="center"
+                             >
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:padding="3dp"
+                                    android:src="@drawable/ic_edit"
+                                    android:tint="@color/textColor" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:text="@string/edit_show_info"
+                                    android:textColor="@color/black"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
+                            <Button
+                                android:id="@+id/btnSend"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:layout_gravity="end"
+                                android:layout_marginTop="30dp"
+                                android:textColor="@color/white"
+                                android:textSize="15sp"
+                                android:text="@string/rate"
+                                android:background="@drawable/btn_login_bg"
+                                android:paddingLeft="50dp"
+                                android:paddingRight="50dp"
+                                android:layout_marginBottom="30dp"
+
+                                />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -136,7 +180,7 @@
                                     android:id="@+id/expandLayout"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    app:el_expanded="false"
+                                    app:el_expanded="true"
                                     app:el_duration="500"
                                     app:el_parallax=".5"
                                     >
@@ -147,6 +191,7 @@
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/consinfo"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -259,6 +304,7 @@
 
 
                                     <LinearLayout
+                                        android:id="@+id/llAbout"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:orientation="horizontal"
@@ -297,6 +343,7 @@
                                     </LinearLayout>
 
                                     <LinearLayout
+                                        android:id="@+id/llcity"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:orientation="horizontal"
@@ -338,6 +385,7 @@
                                     </LinearLayout>
 
                                     <LinearLayout
+                                        android:id="@+id/llphone"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:orientation="horizontal"
@@ -379,6 +427,7 @@
                                     </LinearLayout>
 
                                     <LinearLayout
+                                        android:id="@+id/ll_email"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:orientation="horizontal"
@@ -419,6 +468,48 @@
                                             android:text="@{usermodel.email}"
                                             />
                                     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:weightSum="1"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp"
+        >
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight=".1"
+            android:layout_height="20dp"
+            android:src="@drawable/clock"
+            android:tint="@color/secondColor"
+            android:layout_gravity="center_vertical"
+            android:padding="3dp"
+
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".3"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="12sp"
+            android:textColor="@color/textColor"
+            android:text="@string/last_seen"
+            />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".6"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="13sp"
+            android:textColor="@color/black"
+         islogin="@{usermodel.is_login}"
+            date="@{usermodel.date}"
+            />
+    </LinearLayout>
+
 </LinearLayout>
                                 </net.cachapa.expandablelayout.ExpandableLayout>
 
@@ -460,6 +551,7 @@
                             android:tint="@color/white" />
 
                         <TextView
+                            android:id="@+id/tvTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"

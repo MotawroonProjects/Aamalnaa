@@ -181,7 +181,7 @@
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
                     android:inputType="numberDecimal"
-                    android:text="@{orderModel.price}"
+                    android:text="@={orderModel.price}"
                     />
                 <EditText
                     android:id="@+id/edtAdDetails"

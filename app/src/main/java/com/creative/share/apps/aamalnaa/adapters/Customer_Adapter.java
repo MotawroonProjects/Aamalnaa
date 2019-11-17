@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
 import com.creative.share.apps.aamalnaa.databinding.CustomerRowBinding;
-import com.creative.share.apps.aamalnaa.databinding.WorkRowBinding;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 
 import java.util.List;
@@ -56,22 +55,22 @@ int type;
         EventHolder eventHolder = (EventHolder) holder;
         eventHolder.binding.setLang(lang);
         eventHolder.binding.setWorkmodel(orderlist.get(position));
-eventHolder.binding.btWork.setOnClickListener(new View.OnClickListener() {
+eventHolder.binding.btBecustomer.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
         activity.changetoworks(eventHolder.getLayoutPosition());
     }
 });
-eventHolder.binding.btDelte.setOnClickListener(new View.OnClickListener() {
+eventHolder.binding.btDelete.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-        activity.delte(eventHolder.getLayoutPosition());
+        activity.delteclients(eventHolder.getLayoutPosition());
 
     }
 });
 if(type==2){
-    eventHolder.binding.btDelte.setVisibility(View.GONE);
-    eventHolder.binding.btWork.setVisibility(View.GONE);
+    eventHolder.binding.btDelete.setVisibility(View.GONE);
+    eventHolder.binding.btBecustomer.setVisibility(View.GONE);
 }
     }
 
