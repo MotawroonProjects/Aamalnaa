@@ -129,6 +129,54 @@ binding.setUsermodel(userModel.getUser());
     }
 
     private void rateuser(String reason, int like) {
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+
+        // rec_sent.setVisibility(View.GONE);
+        try {
+
+
+            Api.getService(Tags.base_url)
+                    .rateuser( userModel.getUser().getId() + "",id,like+"",reason)
+                    .enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            dialog.dismiss();
+
+                            //  binding.progBar.setVisibility(View.GONE);
+                            if (response.isSuccessful() && response.body() != null && response.body() != null) {
+                                //binding.coord1.scrollTo(0,0);
+                                Toast.makeText(ProfileActivity.this,getResources().getString(R.string.suc),Toast.LENGTH_LONG).show();
+
+                            } else {
+
+
+                                Toast.makeText(ProfileActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                try {
+                                    Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            try {
+
+                                dialog.dismiss();
+
+                                Toast.makeText(ProfileActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                Log.e("error", t.getMessage());
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+
+            dialog.dismiss();
+        }
     }
 
     private void initView() {
