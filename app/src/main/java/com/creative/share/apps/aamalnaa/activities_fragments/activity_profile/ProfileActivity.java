@@ -187,9 +187,11 @@ binding.setUsermodel(userModel.getUser());
             id=getIntent().getStringExtra("data");
             binding.llEdit.setVisibility(View.GONE);
             binding.llShow.setVisibility(View.GONE);
+
         }
         else {
             id=userModel.getUser().getId()+"";
+            binding.btnSend.setVisibility(View.GONE);
         }
 
         Filter_Model.setId(id);
@@ -219,6 +221,12 @@ binding.llShow.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         show();
+    }
+});
+binding.btnSend.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Createratedialog(ProfileActivity.this);
     }
 });
 
@@ -448,6 +456,12 @@ Log.e(";;llll",tab.getPosition()+"");
                  binding.llcity.setVisibility(View.VISIBLE);
                  binding.llEmail.setVisibility(View.VISIBLE);
                  binding.llphone.setVisibility(View.VISIBLE);
+             }
+             if(userModel.getUser().getCan_rate()==0){
+                 binding.btnSend.setVisibility(View.GONE);
+             }
+             else {
+                 binding.btnSend.setVisibility(View.VISIBLE);
              }
         }
 

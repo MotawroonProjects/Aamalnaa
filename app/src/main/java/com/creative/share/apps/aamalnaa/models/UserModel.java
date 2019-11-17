@@ -47,6 +47,7 @@ private int id;
         private int star_user;
     private int accepted;
     private int amount;
+    private int can_rate;
     private String last_sing_in_at;
     private String current_sing_in_at;
     private int is_login;
@@ -125,7 +126,11 @@ private long date;
         return amount;
     }
 
-    public String getLast_sing_in_at() {
+        public int getCan_rate() {
+            return can_rate;
+        }
+
+        public String getLast_sing_in_at() {
         return last_sing_in_at;
     }
 
