@@ -217,6 +217,7 @@ public class Fragment_Ads extends Fragment {
         ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
+        Log.e("idsssss",adsList.get(layoutPosition).getId()+"");
         // rec_sent.setVisibility(View.GONE);
         try {
 
@@ -236,7 +237,14 @@ public class Fragment_Ads extends Fragment {
 
                                 if (response.code() == 422) {
 
-                                    Toast.makeText(activity, response.message(), Toast.LENGTH_SHORT).show();
+                                    try {
+                                        Toast.makeText(activity, response.errorBody().string(), Toast.LENGTH_SHORT).show();
+
+                                        Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+
                                 } else {
                                     Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                                 }

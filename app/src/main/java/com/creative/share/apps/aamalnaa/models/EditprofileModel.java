@@ -30,7 +30,7 @@ public class EditprofileModel extends BaseObservable implements Serializable {
 
     public EditprofileModel() {
         this.name = "";
-        about = "";
+        this.about = "";
         this.phone="";
         this.email = "";
         this.city_id = "";
@@ -38,7 +38,7 @@ public class EditprofileModel extends BaseObservable implements Serializable {
 
     public EditprofileModel(String name, String city_id, String phone, String email,String about) {
         setName(name);
-        setabout(about);
+        setAbout(about);
         setPhone(phone);
         setEmail(email);
         setCity_id(city_id);
@@ -57,11 +57,11 @@ public class EditprofileModel extends BaseObservable implements Serializable {
     }
 
     @Bindable
-    public String getabout() {
+    public String getAbout() {
         return about;
     }
 
-    public void setabout(String about) {
+    public void setAbout(String about) {
         this.about = about;
         notifyPropertyChanged(BR.about);
 

@@ -338,7 +338,7 @@
                 android:layout_marginTop="50dp"
                 android:layout_marginRight="100dp"
                 android:background="@drawable/btn_login_bg"
-                android:onClick="@{()->editprofilelistner.Editprofile(viewModel.name,viewModel.phone,viewModel.email)}"
+                android:onClick="@{()->editprofilelistner.Editprofile(viewModel.name,viewModel.phone,viewModel.email,viewModel.about)}"
                 android:text="@string/edit_profile"
                 android:textColor="@color/white"
                 android:textSize="15sp"

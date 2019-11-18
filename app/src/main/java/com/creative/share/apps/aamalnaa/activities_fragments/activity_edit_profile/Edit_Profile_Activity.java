@@ -103,7 +103,7 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
         editprofileModel.setName(this.userModel.getUser().getName());
         editprofileModel.setPhone(this.userModel.getUser().getMobile());
         editprofileModel.setEmail(this.userModel.getUser().getEmail());
-        editprofileModel.setabout(this.userModel.getUser().getAbout());
+        editprofileModel.setAbout(this.userModel.getUser().getAbout());
         binding.setUserModel(userModel);
         binding.setViewModel(editprofileModel);
     }
@@ -293,7 +293,7 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
             dialog.setCancelable(false);
             dialog.show();
             Api.getService(Tags.base_url)
-                    .editprofile(editprofileModel.getName(), editprofileModel.getPhone(), editprofileModel.getEmail(), editprofileModel.getCity_id(), userModel.getUser().getId(),editprofileModel.getabout())
+                    .editprofile(editprofileModel.getName(), editprofileModel.getPhone(), editprofileModel.getEmail(), editprofileModel.getCity_id(), userModel.getUser().getId(),editprofileModel.getAbout())
                     .enqueue(new Callback<UserModel>() {
                         @Override
                         public void onResponse(Call<UserModel> call, Response<UserModel> response) {
