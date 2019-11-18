@@ -112,12 +112,16 @@ binding.setUsermodel(userModel.getUser());
         binding.imlike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                binding.imdislike.setBackgroundDrawable(getResources().getDrawable(R.drawable.like_bg));
+                binding.imlike.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_sign_up));
                 like=1;
             }
         });
         binding.imdislike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                binding.imlike.setBackgroundDrawable(getResources().getDrawable(R.drawable.like_bg));
+                binding.imdislike.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_sign_up));
                 like=0;
             }
         });

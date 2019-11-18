@@ -32,7 +32,7 @@ public interface Listeners {
     }
     interface EditprofileListener
     {
-        void Editprofile(String name,  String phone,String email);
+        void Editprofile(String name,  String phone,String email,String about);
 
     }
 

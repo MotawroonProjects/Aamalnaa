@@ -17,12 +17,12 @@ import java.io.Serializable;
 public class EditprofileModel extends BaseObservable implements Serializable {
 
     private String name;
-   // private String phone_code;
+   private String about;
     private String phone;
     private String email;
     private String city_id;
     public ObservableField<String> error_name = new ObservableField<>();
-   // public ObservableField<String> error_phone_code = new ObservableField<>();
+    public ObservableField<String> error_about = new ObservableField<>();
     public ObservableField<String> error_phone = new ObservableField<>();
     public ObservableField<String> error_email = new ObservableField<>();
 
@@ -30,15 +30,15 @@ public class EditprofileModel extends BaseObservable implements Serializable {
 
     public EditprofileModel() {
         this.name = "";
-     //   this.phone_code = "";
+        about = "";
         this.phone="";
         this.email = "";
         this.city_id = "";
     }
 
-    public EditprofileModel(String name, String city_id, String phone, String email) {
+    public EditprofileModel(String name, String city_id, String phone, String email,String about) {
         setName(name);
-        //setPhone_code(phone_code);
+        setabout(about);
         setPhone(phone);
         setEmail(email);
         setCity_id(city_id);
@@ -56,16 +56,16 @@ public class EditprofileModel extends BaseObservable implements Serializable {
 
     }
 
-  /*  @Bindable
-    public String getPhone_code() {
-        return phone_code;
+    @Bindable
+    public String getabout() {
+        return about;
     }
 
-    public void setPhone_code(String phone_code) {
-        this.phone_code = phone_code;
-        notifyPropertyChanged(BR.phone_code);
+    public void setabout(String about) {
+        this.about = about;
+        notifyPropertyChanged(BR.about);
 
-    }*/
+    }
 
     @Bindable
 

@@ -68,7 +68,8 @@ public interface Service {
 
                                 @Field("email") String email,
                                 @Field("city_id") String city_id,
-                                @Field("id") int id
+                                @Field("id") int id,
+                                @Field("about") String about
     );
 
     @Multipart

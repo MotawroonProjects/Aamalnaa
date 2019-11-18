@@ -103,6 +103,7 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
         editprofileModel.setName(this.userModel.getUser().getName());
         editprofileModel.setPhone(this.userModel.getUser().getMobile());
         editprofileModel.setEmail(this.userModel.getUser().getEmail());
+        editprofileModel.setabout(this.userModel.getUser().getAbout());
         binding.setUserModel(userModel);
         binding.setViewModel(editprofileModel);
     }
@@ -275,11 +276,11 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
     }
 
     @Override
-    public void Editprofile(String name, String phone, String email) {
+    public void Editprofile(String name, String phone, String email,String about) {
         if (phone.startsWith("0")) {
             phone = phone.replaceFirst("0", "");
         }
-        editprofileModel = new EditprofileModel(name, city_id, phone, email);
+        editprofileModel = new EditprofileModel(name, city_id, phone, email,about);
         binding.setViewModel(editprofileModel);
         if (editprofileModel.isDataValid(this)) {
             signUp(editprofileModel);
@@ -292,7 +293,7 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
             dialog.setCancelable(false);
             dialog.show();
             Api.getService(Tags.base_url)
-                    .editprofile(editprofileModel.getName(), editprofileModel.getPhone(), editprofileModel.getEmail(), editprofileModel.getCity_id(), userModel.getUser().getId())
+                    .editprofile(editprofileModel.getName(), editprofileModel.getPhone(), editprofileModel.getEmail(), editprofileModel.getCity_id(), userModel.getUser().getId(),editprofileModel.getabout())
                     .enqueue(new Callback<UserModel>() {
                         @Override
                         public void onResponse(Call<UserModel> call, Response<UserModel> response) {
