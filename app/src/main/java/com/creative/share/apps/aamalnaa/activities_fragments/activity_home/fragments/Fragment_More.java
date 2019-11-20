@@ -82,7 +82,17 @@ public class Fragment_More extends Fragment {
 
             }
         });
+        binding.tvName.setOnClickListener(view -> {
 
+
+            if (userModel != null) {
+                Intent intent = new Intent(activity, ProfileActivity.class);
+                startActivity(intent);
+            } else {
+                Common.CreateNoSignAlertDialog(activity);
+
+            }
+        });
         binding.llFavorite.setOnClickListener(view -> {
             if (userModel != null) {
                 Intent intent = new Intent(activity, FavoriteActivity.class);
