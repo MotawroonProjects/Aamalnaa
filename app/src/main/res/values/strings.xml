@@ -33,7 +33,7 @@
     <string name="em_exist">Phone number is exist</string>
     <string name="profile">Profile</string>
     <string name="general_settings">General Settings</string>
-    <string name="edit_profile">Edit Profile</string>
+    <string name="edit_profile">Edit My Information</string>
     <string name="language_settings">Language Settings</string>
     <string name="sar">point</string>
     <string name="no_details">No details</string>
@@ -183,7 +183,7 @@
     <string name="image">Image</string>
     <string name="be_my_business">Be my business</string>
     <string name="packages">Packages</string>
-    <string name="edit_show_info">ُEdit Show Info</string>
+    <string name="edit_show_info">ُEdit Show My Info</string>
     <string name="rate">rate</string>
     <string name="reasson">Reasson</string>
     <string-array name="models">

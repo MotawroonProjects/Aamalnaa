@@ -32,7 +32,7 @@
     <string name="em_exist"> رقم الجوال موجود مسبقا</string>
     <string name="profile">حسابي</string>
     <string name="general_settings">الإعدادت العامة</string>
-    <string name="edit_profile">تعديل الملف الشخصي</string>
+    <string name="edit_profile">تعديل معلوماتى</string>
     <string name="language_settings">إعدادات اللغة</string>
     <string name="sar">نقطه</string>
     <string name="no_details">لا توجد تفاصيل</string>
@@ -122,7 +122,7 @@
     <string name="price">السعر</string>
     <string name="info">معلوماتى</string>
     <string name="rated">التقيمات</string>
-    <string name="work">عميلي</string>
+    <string name="work">عملي</string>
     <string name="ads">اعلان</string>
     <string name="news">الاحدث</string>
     <string name="just_now">الان</string>
@@ -179,9 +179,9 @@
     <string name="delete_customer">حذف </string>
     <string name="type_amessage">اكتب الرساله</string>
     <string name="image">الصوره</string>
-    <string name="be_my_business">كن اعمالى</string>
+    <string name="be_my_business">كن عملى</string>
     <string name="packages">الباقات</string>
-    <string name="edit_show_info">ُتعديل ظهور البيانات</string>
+    <string name="edit_show_info">ُتعديل ظهور معلوماتى</string>
     <string name="rate">تقييم</string>
     <string name="reasson">Reasson</string>
 

@@ -223,44 +223,44 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                                <LinearLayout
-                                    android:padding="8dp"
+    <LinearLayout
+        android:layout_width="match_parent"
 
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="8dp">
 
-                                    <ImageView
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
-                                        android:padding="3dp"
-                                        android:src="@drawable/ic_like"
-                                        android:tint="@color/secondColor"
-                                        app:layout_constraintBottom_toBottomOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:padding="3dp"
+            android:src="@drawable/ic_like"
+            android:tint="@color/secondColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
 
-                                        />
+            />
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_marginStart="5dp"
-                                        android:layout_marginEnd="5dp"
-                                        android:text='@{usermodel.postivesRate+""}'
-                                        android:textColor="@color/textColor"
-                                        android:textSize="13sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:text='@{usermodel.postivesRate+""}'
+            android:textColor="@color/textColor"
+            android:textSize="13sp" />
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:text="@string/positive_evaluation"
-                                        android:textColor="@color/black"
-                                        android:textSize="13sp" />
-                                </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/positive_evaluation"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+    </LinearLayout>
 
-                                <LinearLayout
+    <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
