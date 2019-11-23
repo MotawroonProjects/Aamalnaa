@@ -412,7 +412,7 @@ public class Fragment_Main extends Fragment {
         );
         params.setMargins(0,0,0,0);
         binding.expandLayout.setLayoutParams(params);
-        params.setMargins(0,0,0,width*(count/pos));
+        params.setMargins((count*width)-((count-pos)*(width)),0,0,0);
         binding.expandLayout.setLayoutParams(params);
 
         if (binding.expandLayout.isExpanded()) {
