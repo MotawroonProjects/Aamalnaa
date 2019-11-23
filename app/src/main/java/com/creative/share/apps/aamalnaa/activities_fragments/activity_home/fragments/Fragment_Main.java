@@ -129,6 +129,7 @@ public class Fragment_Main extends Fragment {
         binding.recViewCategory.setItemViewCacheSize(25);
         binding.recViewCategory.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         binding.recViewCategory.setDrawingCacheEnabled(true);
+
         binding.recViewCategory.setAdapter(catogries_adapter);
         ads_adapter = new Ads_Adapter(advesriment_data_list, activity);
         binding.recView.setItemViewCacheSize(25);
@@ -379,6 +380,12 @@ public class Fragment_Main extends Fragment {
         if(dialog!=null){
             dialog.dismiss();
         }
+        if(binding.expandLayout.isExpanded()){
+            binding.expandLayout.collapse(true);
+        }
+        else {
+            binding.expandLayout.expand(true);
+        }
         getAds();
     }
     public static void CreateNoSignAlertDialog(Fragment fragment, Context context, List<Catogries_Model.Data.Subcategory>subcategories) {
@@ -412,7 +419,7 @@ public class Fragment_Main extends Fragment {
         );
         params.setMargins(0,0,0,0);
         binding.expandLayout.setLayoutParams(params);
-        params.setMargins((count*width)-((count-pos)*(width)),0,0,0);
+        params.setMargins(0,0,(count*width)-((count-pos)*(width)),0);
         binding.expandLayout.setLayoutParams(params);
 
         if (binding.expandLayout.isExpanded()) {

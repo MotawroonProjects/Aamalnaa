@@ -165,7 +165,7 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:padding="5dp"
-                            android:src="@drawable/info"
+                            android:src="@drawable/ic_dollar_sign"
                             android:tint="@color/endColor"
 
                             app:layout_constraintBottom_toBottomOf="parent"

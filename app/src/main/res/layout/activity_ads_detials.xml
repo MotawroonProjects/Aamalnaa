@@ -420,7 +420,7 @@
                                     android:layout_gravity="center_vertical"
                                     android:layout_weight=".1"
                                     android:padding="3dp"
-                                    android:src="@drawable/info"
+                                    android:src="@drawable/ic_dollar_sign"
                                     android:tint="@color/secondColor"
 
                                     />
@@ -746,7 +746,9 @@
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/reccomment"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+                                android:layout_height="match_parent">
+
+                            </androidx.recyclerview.widget.RecyclerView>
 
                             <LinearLayout
                                 android:id="@+id/llAds"
