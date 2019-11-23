@@ -415,7 +415,7 @@ updatesublist(dataList2.get(i).getSubcategory());
         final Dialog dialog = Common.createProgressDialog(UpdateAdsActivity.this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
-        Log.e("data",userModel.getUser().getId()+" "+order_upload_model.getCategory_id()+" "+order_upload_model.getSubcategory_id()+" "+order_upload_model.getCity_id()+" "+type_id+" "+order_upload_model.getTitle()+" "+order_upload_model.getDetails()+" "+order_upload_model.getAddress()+" "+order_upload_model.getLongitude()+" "+order_upload_model.getLatitude()+" "+views_num+" "+is_Special+" "+is_Install+" "+commented);
+       // Log.e("data",userModel.getUser().getId()+" "+order_upload_model.getCategory_id()+" "+order_upload_model.getSubcategory_id()+" "+order_upload_model.getCity_id()+" "+type_id+" "+order_upload_model.getTitle()+" "+order_upload_model.getDetails()+" "+order_upload_model.getAddress()+" "+order_upload_model.getLongitude()+" "+order_upload_model.getLatitude()+" "+views_num+" "+is_Special+" "+is_Install+" "+commented);
         RequestBody ad_part = Common.getRequestBodyText(ads.getId() + "");
 
         RequestBody user_part = Common.getRequestBodyText(userModel.getUser().getId() + "");

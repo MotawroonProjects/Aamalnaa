@@ -169,9 +169,9 @@
     <string name="treatment">المعاملة</string>
     <string name="the_value">القيمه</string>
     <string name="current_profit">الربح الحالى</string>
-    <string name="_30_positive_evaluation">30 تقييم ايجابى</string>
+    <string name="_30_positive_evaluation">10 تقييم </string>
     <string name="one_point">نقطه واحده</string>
-    <string name="_10_ads">10 اعلانات</string>
+    <string name="_10_ads">30 اعلانات</string>
     <string name="_20_acts">20 اعمال</string>
     <string name="total">المجموع الكلى</string>
     <string name="transformation">تحويل</string>
@@ -180,10 +180,12 @@
     <string name="type_amessage">اكتب الرساله</string>
     <string name="image">الصوره</string>
     <string name="be_my_business">كن عملى</string>
-    <string name="packages">الباقات</string>
+    <string name="packages">الارباح</string>
     <string name="edit_show_info">ُتعديل ظهور معلوماتى</string>
     <string name="rate">تقييم</string>
-    <string name="reasson">Reasson</string>
+    <string name="reasson">السبب</string>
+    <string name="department">القسم</string>
+    <string name="my_ads2">اعلاناتى</string>
 
     <string-array name="models">
 

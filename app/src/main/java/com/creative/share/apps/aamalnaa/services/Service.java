@@ -321,6 +321,28 @@ public interface Service {
 
 //
             );
+    @FormUrlEncoded
+    @POST("api/update_ad")
+    Call<ResponseBody> sendorderwithoutimage
+            (
+                    @Field("user_id") String user_id,
+                    @Field("category_id") String category_id,
+                    @Field("subcategory_id") String subcategory_id,
+                    @Field("city_id") String city_id,
+                    @Field("ads_type") String ads_type,
+                    @Field("title") String title,
+                    @Field("details") String details,
+                    @Field("price") String price,
+                    @Field("address") String address,
+                    @Field("lng") String lng,
+                    @Field("lat") String lat,
+                    @Field("views_num") String views_num,
+                    @Field("is_Special") String is_Special,
+                    @Field("is_Install") String is_Install,
+                    @Field("commented") String commented
+
+//
+            );
 
     @Multipart
     @POST("api/update_ad")

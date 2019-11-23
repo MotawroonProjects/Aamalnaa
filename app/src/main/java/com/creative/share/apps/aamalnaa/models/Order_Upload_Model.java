@@ -38,7 +38,6 @@ public class Order_Upload_Model extends BaseObservable implements Serializable {
         if (!category_id.equals("")&&
                 !subcategory_id.equals("")&&
                 !city_id.equals("")&&
-                !TextUtils.isEmpty(address)&&
                 !TextUtils.isEmpty(title)&&
                 !TextUtils.isEmpty(details)
 
@@ -69,14 +68,7 @@ public class Order_Upload_Model extends BaseObservable implements Serializable {
                     Toast.makeText(context, R.string.ch_city, Toast.LENGTH_SHORT).show();
                 }
 
-                if (address==null||TextUtils.isEmpty(address))
-                {
-                    address_error.set(context.getString(R.string.field_req));
-                }else
-                    {
-                        address_error.set(null);
 
-                    }
 
                 if (TextUtils.isEmpty(title))
                 {

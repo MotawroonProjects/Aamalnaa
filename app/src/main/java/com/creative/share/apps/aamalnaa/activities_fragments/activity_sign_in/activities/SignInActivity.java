@@ -56,9 +56,20 @@ public class SignInActivity extends AppCompatActivity {
 
         }
 
-
+getDataFromIntent();
     }
+    private void getDataFromIntent() {
+        Intent intent = getIntent();
+        if (intent!=null && intent.hasExtra("sign_up"))
+        {
+            boolean isSign_in = intent.getBooleanExtra("sign_up",true);
+            if (!isSign_in)
+            {
+                DisplayFragmentSignUp();
 
+            }
+        }
+    }
     private void initView() {
         Paper.init(this);
         preferences = Preferences.getInstance();

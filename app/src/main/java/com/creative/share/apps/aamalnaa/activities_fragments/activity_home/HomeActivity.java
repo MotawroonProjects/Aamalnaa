@@ -321,6 +321,9 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
             if (fragment_main == null) {
                 fragment_main = Fragment_Main.newInstance();
             }
+            else {
+                fragment_main.setcat_id("all");
+            }
             if (fragment_messages != null && fragment_messages.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_messages).commit();
             }
@@ -712,5 +715,13 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
         if(fragment_notifications!=null&&fragment_notifications.isAdded()){
             fragment_notifications.deletenotification(id);
         }
+    }
+    public void NavigateToSignInActivity(boolean isSignIn) {
+
+        Intent intent = new Intent(this, SignInActivity.class);
+        intent.putExtra("sign_up", isSignIn);
+        startActivity(intent);
+        finish();
+
     }
 }

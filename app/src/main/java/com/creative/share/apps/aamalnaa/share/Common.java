@@ -19,12 +19,15 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeActivity;
 import com.creative.share.apps.aamalnaa.databinding.DialogCustom2Binding;
+import com.creative.share.apps.aamalnaa.databinding.DialogCustomBinding;
 
 import java.io.File;
 
@@ -50,7 +53,7 @@ public class Common {
     }
 
 
-/*
+
     public static void CreateNoSignAlertDialog(Context context) {
         final AlertDialog dialog = new AlertDialog.Builder(context)
                 .create();
@@ -63,7 +66,7 @@ public class Common {
 
             if (activity instanceof HomeActivity) {
                 HomeActivity homeActivity = (HomeActivity) activity;
-                homeActivity.finish();
+                homeActivity.NavigateToSignInActivity(false);
             }
         });
         binding.btnSignIn.setOnClickListener((v) -> {
@@ -71,7 +74,7 @@ public class Common {
 
             if (activity instanceof HomeActivity) {
                 HomeActivity homeActivity = (HomeActivity) activity;
-                homeActivity.finish();
+                homeActivity.NavigateToSignInActivity(true);
             }
 
         });
@@ -86,9 +89,9 @@ public class Common {
         dialog.setView(binding.getRoot());
         dialog.show();
     }
-*/
 
-    public static void CreateNoSignAlertDialog(Context context) {
+
+    public static void CreateNoSignAlertDialogs(Context context) {
         final AlertDialog dialog = new AlertDialog.Builder(context)
                 .create();
 

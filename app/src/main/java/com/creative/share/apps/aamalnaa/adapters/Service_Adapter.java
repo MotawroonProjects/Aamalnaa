@@ -65,6 +65,20 @@ public class Service_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         EventHolder eventHolder = (EventHolder) holder;
+        if(lang.equals("ar")){
+            if(orderlist.get(position).getName().equals("commented")){
+                orderlist.get(position).setName("غلق التعليقات");
+            }
+            if(orderlist.get(position).getName().equals("is_Special")){
+                orderlist.get(position).setName("تمييز الاعلان");
+            }
+            if(orderlist.get(position).getName().equals("views_num")){
+                orderlist.get(position).setName("اضافة 100 مشاهدة");
+            }
+            if(orderlist.get(position).getName().equals("is_Install")){
+                orderlist.get(position).setName(" تثبيت الاعلان");
+            }
+        }
         eventHolder.binding.setServicemodel(orderlist.get(position));
 eventHolder.binding.checkbox.setOnClickListener(new View.OnClickListener() {
     @Override

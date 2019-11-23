@@ -196,7 +196,7 @@ private long date;
         private String updated_at;
         private String name;
         private String avatar;
-
+private int by_my_previous;
         public int getId() {
             return id;
         }
@@ -223,6 +223,10 @@ private long date;
 
         public String getUser_avatar() {
             return avatar;
+        }
+
+        public int getBy_my_previous() {
+            return by_my_previous;
         }
     }
      public class Ads implements Serializable

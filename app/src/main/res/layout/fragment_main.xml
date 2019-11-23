@@ -42,7 +42,11 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
 
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recViewCategory"
 
@@ -51,7 +55,30 @@
                     android:background="@color/gray3">
 
                 </androidx.recyclerview.widget.RecyclerView>
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:id="@+id/expandLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:el_duration="500"
+        app:el_parallax=".5"
+        app:el_expanded="false"
+        >
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recViewsub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </net.cachapa.expandablelayout.ExpandableLayout>
+
+</LinearLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
         <FrameLayout

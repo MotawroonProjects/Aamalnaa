@@ -72,6 +72,13 @@ if(type==2){
     eventHolder.binding.btDelete.setVisibility(View.GONE);
     eventHolder.binding.btBecustomer.setVisibility(View.GONE);
 }
+if(orderlist.get(position).getBy_my_previous()==0){
+    eventHolder.binding.btBecustomer.setVisibility(View.GONE);
+}
+else {
+    eventHolder.binding.btBecustomer.setVisibility(View.VISIBLE);
+
+}
     }
 
     @Override

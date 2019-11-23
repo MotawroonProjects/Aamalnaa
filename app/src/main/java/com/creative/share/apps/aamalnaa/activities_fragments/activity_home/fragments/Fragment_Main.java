@@ -68,6 +68,8 @@ public class Fragment_Main extends Fragment {
     private Category_Adapter catogries_adapter;
     private Ads_Adapter ads_adapter;
     private List<Adversiment_Model.Data> advesriment_data_list;
+    private SubCategoryAdapter subCategoryAdapter;
+    private List<Catogries_Model.Data.Subcategory> subcategories;
 
     public static Fragment_Main newInstance() {
         return new Fragment_Main();
@@ -108,6 +110,7 @@ public class Fragment_Main extends Fragment {
 
     private void initView() {
         dataList = new ArrayList<>();
+        subcategories=new ArrayList<>();
         advesriment_data_list = new ArrayList<>();
         activity = (HomeActivity) getActivity();
         preferences = Preferences.getInstance();
@@ -136,7 +139,9 @@ public class Fragment_Main extends Fragment {
 
         binding.recView.setAdapter(ads_adapter);
         binding.recView.setNestedScrollingEnabled(true);
-
+        subCategoryAdapter = new SubCategoryAdapter(activity, subcategories,this );
+        binding.recViewsub.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false));
+        binding.recViewsub.setAdapter(subCategoryAdapter);
         binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -396,4 +401,34 @@ public class Fragment_Main extends Fragment {
         dialog.show();
     }
 
+
+    public void setsublist( List<Catogries_Model.Data.Subcategory> subcategory,int pos,int count,int width) {
+        this.subcategories.clear();
+        this.subcategories.addAll(subcategory);
+        subCategoryAdapter.notifyDataSetChanged();
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(0,0,0,0);
+        binding.expandLayout.setLayoutParams(params);
+        params.setMargins(0,0,0,width*(count/pos));
+        binding.expandLayout.setLayoutParams(params);
+
+        if (binding.expandLayout.isExpanded()) {
+
+          binding.expandLayout.collapse(true);
+
+
+
+        }
+        else {
+
+            //  ((EventHolder) holder).binding.tvTitle.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+
+           binding.expandLayout.expand(true);
+        }
+
+    }
 }

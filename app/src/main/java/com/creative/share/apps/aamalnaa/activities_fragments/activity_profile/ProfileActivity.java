@@ -374,7 +374,7 @@ Log.e(";;llll",tab.getPosition()+"");
 
     private List<String> getTitles() {
         List<String> titles = new ArrayList<>();
-        titles.add(getString(R.string.my_ads));
+        titles.add(getString(R.string.my_ads2));
         titles.add(getString(R.string.clients));
         titles.add(getString(R.string.works));
 

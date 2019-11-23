@@ -171,9 +171,9 @@
     <string name="treatment">Treatment</string>
     <string name="the_value">the value</string>
     <string name="current_profit">Current profit</string>
-    <string name="_30_positive_evaluation">30 Positive evaluation</string>
+    <string name="_30_positive_evaluation">10  evaluation</string>
     <string name="one_point">one point</string>
-    <string name="_10_ads">10 Ads</string>
+    <string name="_10_ads">30 Ads</string>
     <string name="_20_acts">20 acts</string>
     <string name="total">Total</string>
     <string name="transformation">Transformation</string>
@@ -186,6 +186,8 @@
     <string name="edit_show_info">ُEdit Show My Info</string>
     <string name="rate">rate</string>
     <string name="reasson">Reasson</string>
+    <string name="department">Department</string>
+    <string name="my_ads2">My Ads</string>
     <string-array name="models">
 
         <item>ِAds</item>

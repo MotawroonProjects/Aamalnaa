@@ -88,8 +88,10 @@ eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
             }
             else {
                 if(orderlist.get(eventHolder.getLayoutPosition()).getSubcategory()!=null){
-                fragment_main.CreateNoSignAlertDialog(fragment,activity,orderlist.get(eventHolder.getLayoutPosition()).getSubcategory());
-            }}
+              //  fragment_main.CreateNoSignAlertDialog(fragment,activity,orderlist.get(eventHolder.getLayoutPosition()).getSubcategory());
+                    fragment_main.setsublist(orderlist.get(eventHolder.getLayoutPosition()).getSubcategory(),eventHolder.getLayoutPosition(),orderlist.size(),eventHolder.itemView.getWidth());
+
+                }}
 
         }
         notifyDataSetChanged();

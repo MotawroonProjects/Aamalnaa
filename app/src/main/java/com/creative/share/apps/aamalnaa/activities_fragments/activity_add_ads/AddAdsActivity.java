@@ -33,9 +33,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_map.MapActivity;
-import com.creative.share.apps.aamalnaa.activities_fragments.activity_my_ads.MyAdsActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
-import com.creative.share.apps.aamalnaa.activities_fragments.activity_transfer.TransferActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_update_ads.UpdateAdsActivity;
 import com.creative.share.apps.aamalnaa.adapters.CityAdapter;
 import com.creative.share.apps.aamalnaa.adapters.ImagesAdapter;
 import com.creative.share.apps.aamalnaa.adapters.Service_Adapter;
@@ -53,7 +52,6 @@ import com.creative.share.apps.aamalnaa.models.Service_Model;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
 import com.creative.share.apps.aamalnaa.remote.Api;
-import com.creative.share.apps.aamalnaa.share.App;
 import com.creative.share.apps.aamalnaa.share.Common;
 import com.creative.share.apps.aamalnaa.tags.Tags;
 
@@ -315,9 +313,14 @@ updatesublist(dataList2.get(i).getSubcategory());
             }
         });
         binding.btnSend.setOnClickListener(view -> {
-            if (order_upload_model.isDataValidStep1(this)&&urlList!=null&&urlList.size()!=0) {
+            if (order_upload_model.isDataValidStep1(this)) {
                 if (userModel != null) {
-                   sendorder(order_upload_model);
+                    if(urlList!=null&&urlList.size()>0){
+                   sendorderWithImage(order_upload_model);}
+                    else {
+                        sendorderwithoutimage(order_upload_model);
+                    }
+
                 } else {
                     Common.CreateNoSignAlertDialog(this);
                 }
@@ -341,12 +344,60 @@ updatesublist(dataList2.get(i).getSubcategory());
         }
         return partList;
     }
-
-    private void sendorder(Order_Upload_Model order_upload_model) {
+    private void sendorderwithoutimage(Order_Upload_Model order_upload_model) {
         final Dialog dialog = Common.createProgressDialog(AddAdsActivity.this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
-        Log.e("data",userModel.getUser().getId()+" "+order_upload_model.getCategory_id()+" "+order_upload_model.getSubcategory_id()+" "+order_upload_model.getCity_id()+" "+type_id+" "+order_upload_model.getTitle()+" "+order_upload_model.getDetails()+" "+order_upload_model.getAddress()+" "+order_upload_model.getLongitude()+" "+order_upload_model.getLatitude()+" "+views_num+" "+is_Special+" "+is_Install+" "+commented);
+
+        try {
+            Api.getService(Tags.base_url)
+                    .sendorderwithoutimage(userModel.getUser().getId()+"", order_upload_model.getCategory_id(),order_upload_model.getSubcategory_id(),order_upload_model.getCity_id(),type_id, order_upload_model.getTitle(), order_upload_model.getDetails(),order_upload_model.getPrice(),order_upload_model.getAddress(),order_upload_model.getLongitude(),order_upload_model.getLongitude(),views_num+"",is_Special+"",is_Install+"",commented+"").enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    dialog.dismiss();
+                    if (response.isSuccessful()) {
+                        // Common.CreateSignAlertDialog(adsActivity,getResources().getString(R.string.suc));
+                        Toast.makeText(AddAdsActivity.this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+
+                        //  adsActivity.finish(response.body().getId_advertisement());
+                        Intent intent = new Intent(AddAdsActivity.this, ProfileActivity.class);
+
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        try {
+
+                            Toast.makeText(AddAdsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            Log.e("Error", response.toString()+" "+response.code() + "" + response.message() + "" + response.errorBody() + response.raw() + response.body() + response.headers()+" "+response.errorBody().toString());
+                        } catch (Exception e) {
+
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    dialog.dismiss();
+                    try {
+                        Toast.makeText(AddAdsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                        Log.e("Error", t.getMessage());
+                    } catch (Exception e) {
+
+                    }
+                }
+            });
+        } catch (Exception e) {
+            dialog.dismiss();
+            Log.e("error", e.getMessage().toString());
+        }
+    }
+
+    private void sendorderWithImage(Order_Upload_Model order_upload_model) {
+        final Dialog dialog = Common.createProgressDialog(AddAdsActivity.this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+      //  Log.e("data",userModel.getUser().getId()+" "+order_upload_model.getCategory_id()+" "+order_upload_model.getSubcategory_id()+" "+order_upload_model.getCity_id()+" "+type_id+" "+order_upload_model.getTitle()+" "+order_upload_model.getDetails()+" "+order_upload_model.getAddress()+" "+order_upload_model.getLongitude()+" "+order_upload_model.getLatitude()+" "+views_num+" "+is_Special+" "+is_Install+" "+commented);
         RequestBody user_part = Common.getRequestBodyText(userModel.getUser().getId() + "");
 
         RequestBody category_part = Common.getRequestBodyText(order_upload_model.getCategory_id());
@@ -364,9 +415,19 @@ updatesublist(dataList2.get(i).getSubcategory());
                  price_part   = Common.getRequestBodyText(order_upload_model.getPrice()+"");
 
         }
-        RequestBody address_part = Common.getRequestBodyText(order_upload_model.getAddress());
-        RequestBody long_part = Common.getRequestBodyText(order_upload_model.getLongitude());
-        RequestBody lat_part = Common.getRequestBodyText(order_upload_model.getLatitude());
+        RequestBody address_part;
+        RequestBody long_part;
+        RequestBody lat_part;
+        if(order_upload_model.getAddress()!=null){
+         address_part = Common.getRequestBodyText(order_upload_model.getAddress());
+         long_part = Common.getRequestBodyText(order_upload_model.getLongitude());
+    lat_part = Common.getRequestBodyText(order_upload_model.getLatitude());}
+    else {
+            address_part = Common.getRequestBodyText("");
+            long_part = Common.getRequestBodyText("");
+            lat_part = Common.getRequestBodyText("");
+        }
+
 RequestBody views_num_part=Common.getRequestBodyText(views_num+"");
         RequestBody is_Special_part=Common.getRequestBodyText(is_Special+"");
         RequestBody is_Install_part=Common.getRequestBodyText(is_Install+"");

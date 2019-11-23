@@ -32,5 +32,9 @@ public class Service_Model  implements Serializable {
         public String getPrice() {
             return price;
         }
+
+        public void setName(String name) {
+            this.name=name;
+        }
     }
 }
