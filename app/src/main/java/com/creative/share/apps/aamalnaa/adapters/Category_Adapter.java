@@ -79,7 +79,7 @@ if(orderlist.get(position).getSubcategory()!=null) {
 eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-       //i=position;
+       i=position;
         if(fragment instanceof  Fragment_Main){
             fragment_main=(Fragment_Main)fragment;
 
@@ -94,7 +94,7 @@ eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 }}
 
         }
-        //notifyDataSetChanged();
+        notifyDataSetChanged();
 
 
     }
@@ -139,11 +139,12 @@ if(i!=position) {
 }*/
 if(i==position){
     eventHolder.binding.tvTitle.setBackground(activity.getResources().getDrawable(R.drawable.linear_bg_green));
-
+eventHolder.binding.tvTitle.setTextColor(activity.getResources().getColor(R.color.white));
 
 }
 else {
     eventHolder.binding.tvTitle.setBackground(activity.getResources().getDrawable(R.drawable.linear_bg_white));
+    eventHolder.binding.tvTitle.setTextColor(activity.getResources().getColor(R.color.black));
 
 
 }

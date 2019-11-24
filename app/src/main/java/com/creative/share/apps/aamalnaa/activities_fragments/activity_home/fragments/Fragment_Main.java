@@ -70,7 +70,7 @@ public class Fragment_Main extends Fragment {
     private List<Adversiment_Model.Data> advesriment_data_list;
     private SubCategoryAdapter subCategoryAdapter;
     private List<Catogries_Model.Data.Subcategory> subcategories;
-
+private int pos=-1;
     public static Fragment_Main newInstance() {
         return new Fragment_Main();
     }
@@ -381,12 +381,15 @@ public class Fragment_Main extends Fragment {
         if(dialog!=null){
             dialog.dismiss();
         }
+        if(subcategories.size()>0){
+        subcategories.clear();
+        subCategoryAdapter.notifyDataSetChanged();
         if(binding.expandLayout.isExpanded()){
             binding.expandLayout.collapse(true);
         }
         else {
             binding.expandLayout.expand(true);
-        }
+        }}
         getAds();
     }
     public static void CreateNoSignAlertDialog(Fragment fragment, Context context, List<Catogries_Model.Data.Subcategory>subcategories) {
@@ -425,10 +428,10 @@ public class Fragment_Main extends Fragment {
         params.setMargins(0,0,(count*width)-((count-pos)*(width)),0);
         //binding.expandLayout.setLayoutParams(params);
 
-        if (binding.expandLayout.isExpanded()) {
+        if (binding.expandLayout.isExpanded()&&this.pos==pos) {
 
           binding.expandLayout.collapse(true);
-
+this.pos=pos;
 
 
         }
@@ -438,6 +441,7 @@ public class Fragment_Main extends Fragment {
 
 
            binding.expandLayout.expand(true);
+           this.pos=pos;
         }
 
     }
