@@ -70,8 +70,7 @@ public class Fragment_Main extends Fragment {
     private List<Adversiment_Model.Data> advesriment_data_list;
     private SubCategoryAdapter subCategoryAdapter;
     private List<Catogries_Model.Data.Subcategory> subcategories;
-private int pos;
-private int width;
+
     public static Fragment_Main newInstance() {
         return new Fragment_Main();
     }
@@ -165,22 +164,7 @@ private int width;
                 }
             }
         });
-        binding.recViewCategory.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-int first=manager2.findFirstVisibleItemPosition();
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                );
-                params.setMargins(0,0,0,0);
-                binding.expandLayout.setLayoutParams(params);
-if(pos>first){
-                params.setMargins(0,0,(catogries_adapter.getItemCount()*width)-((catogries_adapter.getItemCount()-(pos-first))*(width)),0);
-                binding.expandLayout.setLayoutParams(params);
-            }}
-        });
+
 
     }
 
@@ -429,17 +413,17 @@ if(pos>first){
     public void setsublist( List<Catogries_Model.Data.Subcategory> subcategory,int pos,int count,int width) {
         this.subcategories.clear();
         this.subcategories.addAll(subcategory);
-        this.pos=pos;
-        this.width=width;
+    //    this.pos=pos;
+      //  this.width=width;
         subCategoryAdapter.notifyDataSetChanged();
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
         params.setMargins(0,0,0,0);
-        binding.expandLayout.setLayoutParams(params);
+        //binding.expandLayout.setLayoutParams(params);
         params.setMargins(0,0,(count*width)-((count-pos)*(width)),0);
-        binding.expandLayout.setLayoutParams(params);
+        //binding.expandLayout.setLayoutParams(params);
 
         if (binding.expandLayout.isExpanded()) {
 

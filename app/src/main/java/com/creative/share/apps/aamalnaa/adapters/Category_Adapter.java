@@ -79,11 +79,11 @@ if(orderlist.get(position).getSubcategory()!=null) {
 eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-       i=position;
+       //i=position;
         if(fragment instanceof  Fragment_Main){
             fragment_main=(Fragment_Main)fragment;
 
-            if(position==0) {
+            if(eventHolder.getLayoutPosition()==0) {
                 fragment_main.setcat_id("all");
             }
             else {
@@ -94,7 +94,7 @@ eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 }}
 
         }
-        notifyDataSetChanged();
+        //notifyDataSetChanged();
 
 
     }
