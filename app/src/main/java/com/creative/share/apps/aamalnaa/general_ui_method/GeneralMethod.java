@@ -45,8 +45,12 @@ public class GeneralMethod {
 if(type==1) {
     Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_Ads_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 }
-else {
+else if(type==2){
     Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_user_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+
+}
+else {
+    Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_message_URL+ imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 
 }
     }
@@ -68,10 +72,14 @@ else {
     public static void displayImage3(CircleImageView imageView, String imageEndPoint,int type)
     {
         if(type==1) {
-            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_Ads_URL + imageEndPoint)).placeholder(R.drawable.ic_user).fit().into(imageView);
+            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_Ads_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+        }
+        else if(type==2){
+            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_user_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+
         }
         else {
-            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_user_URL + imageEndPoint)).placeholder(R.drawable.ic_user).fit().into(imageView);
+            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_message_URL+ imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 
         }
     }
@@ -91,13 +99,17 @@ else {
     @BindingAdapter({"imageEventEndPoint","type"})
     public static void displayImage(RoundedImageView imageView, String imageEndPoint,int type)
     {
-if(type==1) {
-    Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_Ads_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
-}
-else {
-    Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_user_URL + imageEndPoint)).placeholder(R.drawable.ic_user).fit().into(imageView);
+        if(type==1) {
+            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_Ads_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+        }
+        else if(type==2){
+            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_user_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 
-}
+        }
+        else {
+            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_message_URL+ imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+
+        }
     }
 
     @BindingAdapter("rate")
