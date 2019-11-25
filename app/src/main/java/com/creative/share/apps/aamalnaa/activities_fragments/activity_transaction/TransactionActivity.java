@@ -68,7 +68,8 @@ public class TransactionActivity extends AppCompatActivity implements Listeners.
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_transactions);
         initView();
-        getnotification();
+        if(userModel!=null){
+        getnotification();}
     }
 
     private void initView() {

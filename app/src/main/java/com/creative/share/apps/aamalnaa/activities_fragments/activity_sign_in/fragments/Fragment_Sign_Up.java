@@ -162,6 +162,7 @@ if(body.getData()!=null){
                                 try {
 
                                     Log.e("error",response.code()+"_"+response.errorBody().string());
+
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -169,7 +170,11 @@ if(body.getData()!=null){
                                     Toast.makeText(activity, "Server Error", Toast.LENGTH_SHORT).show();
 
 
-                                }else
+
+                                }
+                                else  if(response.code()==422){
+                                    Common.CreateAlertDialog(activity,getResources().getString(R.string.em_exist));}
+                                else
                                 {
                                     Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
 

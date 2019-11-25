@@ -62,7 +62,8 @@ public class MyAdsActivity extends AppCompatActivity implements Listeners.BackLi
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_my_ads);
         initView();
-        getAds();
+        if(userModel!=null){
+        getAds();}
 
     }
 

@@ -338,7 +338,8 @@ Log.e(";;llll",tab.getPosition()+"");
 
             }
         });
-        getprofiledata();
+        if(userModel!=null){
+        getprofiledata();}
 
 
     }
@@ -473,6 +474,7 @@ Log.e(";;llll",tab.getPosition()+"");
     }
 
     public void showdetials(int id) {
+
         Intent intent=new Intent(ProfileActivity.this, AdsDetialsActivity.class);
         intent.putExtra("search",id);
         startActivity(intent);

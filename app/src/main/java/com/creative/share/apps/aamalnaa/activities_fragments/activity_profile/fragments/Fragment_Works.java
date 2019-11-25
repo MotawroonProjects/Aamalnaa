@@ -58,7 +58,8 @@ public class Fragment_Works extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_works,container,false);
         initView();
-        getprofiledata();
+        if(userModel!=null){
+            getprofiledata();}
         return binding.getRoot();
     }
 

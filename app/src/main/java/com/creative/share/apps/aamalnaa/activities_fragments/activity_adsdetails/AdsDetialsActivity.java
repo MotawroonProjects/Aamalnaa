@@ -118,6 +118,11 @@ if(getIntent().getIntExtra("search",-1)!=0){
         if(userModel!=null){
         binding.setUsermodel(userModel.getUser());
         }
+        else {
+            binding.cardChat.setVisibility(View.GONE);
+            binding.cardrepor.setVisibility(View.GONE);
+            binding.follow.setVisibility(View.GONE);
+        }
         manager = new LinearLayoutManager(this);
 binding.setAdsmodel(single_adversiment_model);
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
@@ -139,7 +144,12 @@ binding.setAdsmodel(single_adversiment_model);
         binding.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Likeads();
+
+                if(userModel!=null){
+                Likeads();}
+                else {
+                    Common.CreateNoSignAlertDialog(AdsDetialsActivity.this);
+                }
             }
         });
         binding.follow.setOnClickListener(new View.OnClickListener() {
@@ -153,11 +163,16 @@ binding.setAdsmodel(single_adversiment_model);
         binding.edtComment.setRawInputType(InputType.TYPE_CLASS_TEXT);
         binding.edtComment.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
+
                 String query = binding.edtComment.getText().toString();
                 binding.edtComment.setText("");
                 if (!TextUtils.isEmpty(query)) {
                     Common.CloseKeyBoard(AdsDetialsActivity.this,binding.edtComment);
-                    comment(query);
+                    if(userModel!=null){
+                    comment(query);}
+                    else {
+                        Common.CreateNoSignAlertDialog(this);
+                    }
                     return false;
                 }
             }
@@ -170,7 +185,7 @@ binding.setAdsmodel(single_adversiment_model);
                 if(userModel.getUser().getId()!=single_adversiment_model.getUser_id()){
                 Intent intent=new Intent(AdsDetialsActivity.this, ChatActivity.class);
                 intent.putExtra("data",single_adversiment_model.getUser_id()+"");
-                intent.putExtra("name",single_adversiment_model.getUser_name());
+                intent.putExtra("name",single_adversiment_model.getUser());
 
                 startActivity(intent);
             }}
@@ -256,10 +271,12 @@ binding.setAdsmodel(single_adversiment_model);
         dialog.show();
         // rec_sent.setVisibility(View.GONE);
         try {
-
+            String id=null;
+if(userModel!=null){
+    id=userModel.getUser().getId()+"";}
 
             Api.getService( Tags.base_url)
-                    .getSingleAds(search_id,userModel.getUser().getId()+"")
+                    .getSingleAds(search_id,id)
                     .enqueue(new Callback<Single_Adversiment_Model>() {
                         @Override
                         public void onResponse(Call<Single_Adversiment_Model> call, Response<Single_Adversiment_Model> response) {
@@ -482,11 +499,14 @@ Log.e("kkkkk",single_adversiment_model.getUser_id()+"");
 
     private void update(Single_Adversiment_Model body) {
         this.single_adversiment_model=body;
+        if(userModel!=null){
         if(body.getUser_id()==userModel.getUser().getId()){
             binding.cardrepor.setVisibility(View.GONE);
             binding.follow.setVisibility(View.GONE);
-binding.llChat.setVisibility(View.GONE);
-        }
+binding.cardChat.setVisibility(View.GONE);
+        }}
+      //  Log.e("body",body.toString());
+        //Common.CreateAlertDialog(this,body.toString());
         binding.setAdsmodel(body);
         commentsList.clear();
         if(body.getComments()!=null&&body.getCommented()==0&&body.getComments().size()>0){

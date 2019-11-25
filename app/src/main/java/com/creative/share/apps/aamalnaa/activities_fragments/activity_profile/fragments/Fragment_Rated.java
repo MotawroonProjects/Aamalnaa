@@ -54,7 +54,8 @@ public class Fragment_Rated extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_rated,container,false);
 
         initView();
-        getprofiledata();
+        if(userModel!=null){
+            getprofiledata();}
         return binding.getRoot();
     }
 

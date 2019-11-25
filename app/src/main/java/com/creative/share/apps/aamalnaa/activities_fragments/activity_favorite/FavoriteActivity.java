@@ -62,7 +62,8 @@ public class FavoriteActivity extends AppCompatActivity implements Listeners.Bac
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_favorite);
         initView();
-        getAds();
+        if(userModel!=null){
+        getAds();}
 
     }
 

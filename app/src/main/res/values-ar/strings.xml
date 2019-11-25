@@ -29,7 +29,7 @@
     <string name="inv_em_ps">البريد الالكتروني او كلمة المرور غير صحيحة</string>
     <string name="failed">فشل حاول مرة اخرى لاحقا</string>
     <string name="something">تحقق من الاتصال بالانترنت</string>
-    <string name="em_exist"> رقم الجوال موجود مسبقا</string>
+    <string name="em_exist"> رقم الجوال او البريد موجود مسبقا</string>
     <string name="profile">حسابي</string>
     <string name="general_settings">الإعدادت العامة</string>
     <string name="edit_profile">تعديل معلوماتى</string>

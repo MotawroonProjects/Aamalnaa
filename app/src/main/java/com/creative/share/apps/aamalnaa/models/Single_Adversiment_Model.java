@@ -30,8 +30,8 @@ private String created_at;
             private String image;
             private String city;
             private String user_about;
-        private String category_name;
-        private String sub_category_name;
+        private String category;
+        private String subcategory;
             private int is_like;
             private int like_ad;
              private int follow;
@@ -171,9 +171,6 @@ public class Comments implements Serializable{
             return lng;
         }
 
-        public String getCity_name() {
-            return city;
-        }
 
     public String getUser_about() {
         return user_about;
@@ -196,15 +193,23 @@ public class Comments implements Serializable{
         }
 
 
-        public String getCategory_name() {
-            return category_name;
-        }
+    public String getCity() {
+        return city;
+    }
 
-        public String getSub_category_name() {
-            return sub_category_name;
-        }
+    public String getCategory() {
+        return category;
+    }
 
-        public int getIs_like() {
+    public String getSubcategory() {
+        return subcategory;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public int getIs_like() {
             return is_like;
         }
 
@@ -232,9 +237,6 @@ public class Comments implements Serializable{
         return user_current_sing_in_at;
     }
 
-    public String getUser_name() {
-            return user;
-        }
 
     public List<Images> getImages() {
         return images;
