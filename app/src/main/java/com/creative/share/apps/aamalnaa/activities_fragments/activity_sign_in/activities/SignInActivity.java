@@ -139,7 +139,7 @@ getDataFromIntent();
 
             } else  {
 
-                finish();
+                finishAffinity();
 
             }
         }

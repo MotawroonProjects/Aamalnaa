@@ -70,7 +70,7 @@ public class Comments implements Serializable{
 
           private String user_name;
           private String user_image;
-
+private long date;
     public int getId() {
         return id;
     }
@@ -89,6 +89,10 @@ public class Comments implements Serializable{
 
     public String getUser_name() {
         return user_name;
+    }
+
+    public long getDate() {
+        return date;
     }
 
     public String getUser_image() {

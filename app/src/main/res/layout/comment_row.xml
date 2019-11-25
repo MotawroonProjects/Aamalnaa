@@ -30,19 +30,18 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/image"
+            imageUserEndPoint="@{commentmodel.user_image}"
+            type="@{2}"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginTop="8dp"
             android:src="@drawable/logo"
+            app:civ_border_color="@color/colorPrimary"
+            app:civ_border_width="1px"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:riv_border_width="1dp"
-            app:riv_corner_radius="10dp"
-            app:civ_border_width="1px"
-            app:civ_border_color="@color/colorPrimary"
-            imageUserEndPoint="@{commentmodel.user_image}"
-type="@{2}"
-            />
+            app:riv_corner_radius="10dp" />
 
         <LinearLayout
             android:id="@+id/ll"
@@ -69,11 +68,12 @@ type="@{2}"
 
 
             <TextView
+                date="@{commentmodel.date}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/phone"
-                android:textColor="@color/gray4"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+
+                />
 
 
             <TextView

@@ -717,8 +717,8 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
         }
     }
     public void NavigateToSignInActivity(boolean isSignIn) {
-
-        Intent intent = new Intent(this, SignInActivity.class);
+//Log.e("data",isSignIn+"");
+        Intent intent = new Intent(HomeActivity.this, SignInActivity.class);
         intent.putExtra("sign_up", isSignIn);
         startActivity(intent);
         finish();

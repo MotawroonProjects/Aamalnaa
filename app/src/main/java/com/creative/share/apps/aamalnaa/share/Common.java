@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -26,6 +27,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_sign_in.activities.SignInActivity;
 import com.creative.share.apps.aamalnaa.databinding.DialogCustom2Binding;
 import com.creative.share.apps.aamalnaa.databinding.DialogCustomBinding;
 
@@ -53,7 +55,6 @@ public class Common {
     }
 
 
-
     public static void CreateNoSignAlertDialog(Context context) {
         final AlertDialog dialog = new AlertDialog.Builder(context)
                 .create();
@@ -67,6 +68,11 @@ public class Common {
             if (activity instanceof HomeActivity) {
                 HomeActivity homeActivity = (HomeActivity) activity;
                 homeActivity.NavigateToSignInActivity(false);
+            } else {
+                Intent intent = new Intent(context, SignInActivity.class);
+                intent.putExtra("sign_up", false);
+                context.startActivity(intent);
+                ((AppCompatActivity) context).finish();
             }
         });
         binding.btnSignIn.setOnClickListener((v) -> {
@@ -75,6 +81,13 @@ public class Common {
             if (activity instanceof HomeActivity) {
                 HomeActivity homeActivity = (HomeActivity) activity;
                 homeActivity.NavigateToSignInActivity(true);
+            } else {
+                Intent intent = new Intent(context, SignInActivity.class);
+                intent.putExtra("sign_up", true);
+                context.startActivity(intent);
+                ((AppCompatActivity) context).finish();
+
+
             }
 
         });
@@ -112,7 +125,7 @@ public class Common {
         dialog.show();
     }
 
-    public static void CreateAlertDialog(Context context,String msg) {
+    public static void CreateAlertDialog(Context context, String msg) {
         final AlertDialog dialog = new AlertDialog.Builder(context)
                 .create();
 
