@@ -48,6 +48,7 @@ public class Fragment_Works extends Fragment {
     private Preferences preferences;
     private UserModel userModel;
     private String id;
+    private int can_rate;
 
     public static Fragment_Works newInstance() {
         return new Fragment_Works();
@@ -69,8 +70,14 @@ public class Fragment_Works extends Fragment {
 
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
-        work_adapter = new Work_Adapter(adsList, activity);
         id= Filter_Model.getId();
+
+        if (id.equals(userModel.getUser().getId() + "")) {
+
+            work_adapter = new Work_Adapter(adsList, activity,1,can_rate);}
+        else {
+            work_adapter = new Work_Adapter(adsList, activity,2,can_rate);}
+
         Log.e("hhhh",id);
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.progBar.setVisibility(View.GONE);
@@ -143,6 +150,7 @@ public class Fragment_Works extends Fragment {
             activity.updateWorkCount(userModel.getPrevious().size());
 
         }
+        can_rate=userModel.getUser().getCan_rate();
 
     }
 

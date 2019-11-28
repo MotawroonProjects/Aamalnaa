@@ -13,6 +13,8 @@ import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
 import com.creative.share.apps.aamalnaa.databinding.WorkRowBinding;
 import com.creative.share.apps.aamalnaa.models.UserModel;
+import com.creative.share.apps.aamalnaa.preferences.Preferences;
+import com.creative.share.apps.aamalnaa.share.Common;
 
 import java.util.List;
 import java.util.Locale;
@@ -27,14 +29,21 @@ public class Work_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private String lang;
     private ProfileActivity activity;
     private int i = 0;
-
-    public Work_Adapter(List<UserModel.Previous> orderlist, Context context) {
+private int type;
+private Preferences preferences;
+private UserModel userModel;
+private int can_rate;
+    public Work_Adapter(List<UserModel.Previous> orderlist, Context context,int type,int can_rate) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         this.activity = (ProfileActivity) context;
+        this.type=type;
+        preferences=Preferences.getInstance();
+        userModel=preferences.getUserData(activity);
+        this.can_rate=can_rate;
 
     }
 
@@ -55,10 +64,27 @@ public class Work_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         EventHolder eventHolder = (EventHolder) holder;
         eventHolder.binding.setLang(lang);
         eventHolder.binding.setWorkmodel(orderlist.get(position));
+        if(type==2){
+            eventHolder.binding.btDelte.setText(activity.getResources().getString(R.string.rate));
+        }
+     //   Common.CreateAlertDialog(activity,orderlist.get(position).getUser_id()+" "+ userModel.getUser().getId());
+        if((orderlist.get(position).getUser_id()!=userModel.getUser().getId()||can_rate==0)&&type==2){
+            eventHolder.binding.btDelte.setVisibility(View.GONE);
+        }
+        else {
+            eventHolder.binding.btDelte.setVisibility(View.VISIBLE);
+
+        }
         eventHolder.binding.btDelte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.deletework(eventHolder.getLayoutPosition());
+
+                if(type==1){
+                activity.deletework(eventHolder.getLayoutPosition());}
+                else if(type==2){
+                    activity.Createratedialog(context);
+                }
+
             }
         });
     }

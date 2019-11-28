@@ -62,6 +62,7 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
     private String id;
 int work_count;
 private       int like=-1;
+private int can_rate;
 
     public String getId() {
         return id;
@@ -233,6 +234,7 @@ binding.btnSend.setOnClickListener(new View.OnClickListener() {
         Createratedialog(ProfileActivity.this);
     }
 });
+binding.btnSend.setVisibility(View.GONE);
 
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
@@ -464,9 +466,11 @@ Log.e(";;llll",tab.getPosition()+"");
              }
              if(userModel.getUser().getCan_rate()==0){
                  binding.btnSend.setVisibility(View.GONE);
+                 can_rate=0;
              }
              else {
-                 binding.btnSend.setVisibility(View.VISIBLE);
+               //  binding.btnSend.setVisibility(View.VISIBLE);
+                 can_rate=1;
              }
         }
 

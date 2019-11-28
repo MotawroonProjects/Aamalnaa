@@ -72,6 +72,8 @@ public class Fragment_Clients extends Fragment {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         if (id.equals(userModel.getUser().getId() + "")) {
+          //  Log.e("id",id+" "+userModel.getUser().getId());
+
             customer_adapter = new Customer_Adapter(adsList, activity, 1);
         } else {
 

@@ -75,7 +75,7 @@ if(type==2){
 if(orderlist.get(position).getBy_my_previous()==0){
     eventHolder.binding.btBecustomer.setVisibility(View.GONE);
 }
-else {
+else  if(type==1){
     eventHolder.binding.btBecustomer.setVisibility(View.VISIBLE);
 
 }
