@@ -54,5 +54,33 @@ public class UserRoomModelData implements Serializable {
             public String getReceiver_avatar() {
                 return receiver_avatar;
             }
+
+            public void setSender_id(int sender_id) {
+                this.sender_id = sender_id;
+            }
+
+            public void setReceiver_id(int receiver_id) {
+                this.receiver_id = receiver_id;
+            }
+
+            public void setSender_name(String sender_name) {
+                this.sender_name = sender_name;
+            }
+
+            public void setSender_avatar(String sender_avatar) {
+                this.sender_avatar = sender_avatar;
+            }
+
+            public void setReceiver_name(String receiver_name) {
+                this.receiver_name = receiver_name;
+            }
+
+            public void setReceiver_avatar(String receiver_avatar) {
+                this.receiver_avatar = receiver_avatar;
+            }
+
+            public void setLast_message(String last_message) {
+                this.last_message = last_message;
+            }
         }
 }

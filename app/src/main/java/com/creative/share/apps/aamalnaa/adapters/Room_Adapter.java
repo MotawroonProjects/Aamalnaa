@@ -17,7 +17,9 @@ import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.fragm
 import com.creative.share.apps.aamalnaa.databinding.CommentRowBinding;
 import com.creative.share.apps.aamalnaa.databinding.UserSearchRowBinding;
 import com.creative.share.apps.aamalnaa.models.Single_Adversiment_Model;
+import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.models.UserRoomModelData;
+import com.creative.share.apps.aamalnaa.preferences.Preferences;
 
 import java.util.List;
 import java.util.Locale;
@@ -34,6 +36,8 @@ public class Room_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 private int i=-1;
 private Fragment_Messages fragment_messages;
 private Fragment fragment;
+private UserModel userModel;
+private Preferences preferences;
     public Room_Adapter(List<UserRoomModelData.UserRoomModel> userRoomModels, Context context, Fragment fragment) {
         this.userRoomModels = userRoomModels;
         this.context = context;
@@ -42,6 +46,8 @@ private Fragment fragment;
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         this.activity = (HomeActivity) context;
         this.fragment=fragment;
+        preferences=Preferences.getInstance();
+        userModel=preferences.getUserData(activity);
     }
 
     @NonNull
@@ -59,6 +65,16 @@ private Fragment fragment;
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         EventHolder eventHolder = (EventHolder) holder;
+        if(userRoomModels.get(position).getReceiver_id()==userModel.getUser().getId()){
+            userRoomModels.get(position).setReceiver_avatar(userRoomModels.get(position).getSender_avatar());
+            userRoomModels.get(position).setReceiver_id(userRoomModels.get(position).getSender_id());
+            userRoomModels.get(position).setReceiver_name(userRoomModels.get(position).getSender_name());
+            userRoomModels.get(position).setSender_id(userModel.getUser().getId());
+            userRoomModels.get(position).setSender_avatar(userModel.getUser().getAvatar());
+            userRoomModels.get(position).setSender_name(userModel.getUser().getName());
+            userRoomModels.get(position).setLast_message(userRoomModels.get(position).getLast_message());
+
+        }
 eventHolder.binding.setUserroommodel(userRoomModels.get(position));
 eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -77,6 +93,7 @@ if(i==position){
     }
 
 }
+
 eventHolder.binding.imageedit.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {

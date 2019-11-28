@@ -57,7 +57,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            android:singleLine="true"
             android:text="@{userroommodel.last_message}"
             android:textColor="@color/black"
             android:textSize="14sp"
