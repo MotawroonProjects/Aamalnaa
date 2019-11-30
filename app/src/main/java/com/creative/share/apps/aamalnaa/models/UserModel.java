@@ -459,5 +459,6 @@ private int by_my_previous;
         public String getUser_avatar() {
             return avatar;
         }
+
     }
 }
