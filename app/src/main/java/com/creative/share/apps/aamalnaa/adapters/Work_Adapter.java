@@ -69,7 +69,7 @@ private int can_rate;
         }
 
         //Common.CreateAlertDialog(activity,orderlist.get(position).getId()+" "+ userModel.getUser().getId());
-        if((orderlist.get(position).getId()!=userModel.getUser().getId())&&type==2){
+        if((orderlist.get(position).getId()!=userModel.getUser().getId())&&can_rate==0&&type==2){
             eventHolder.binding.btDelte.setVisibility(View.GONE);
         }
         else {

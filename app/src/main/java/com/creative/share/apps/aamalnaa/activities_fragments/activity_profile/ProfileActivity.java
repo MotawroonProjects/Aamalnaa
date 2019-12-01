@@ -156,8 +156,11 @@ binding.setUsermodel(userModel.getUser());
 
                             } else {
 
-
-                                Toast.makeText(ProfileActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+if(response.code()==422){
+    Toast.makeText(ProfileActivity.this, getString(R.string.you_rate_this_user_before), Toast.LENGTH_SHORT).show();
+}
+else {
+                                Toast.makeText(ProfileActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();}
                                 try {
                                     Log.e("Error_code", response.code() + "_" + response.errorBody().string());
                                 } catch (IOException e) {
