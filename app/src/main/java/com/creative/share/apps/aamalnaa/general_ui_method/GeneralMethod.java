@@ -49,6 +49,10 @@ else if(type==2){
     Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_user_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 
 }
+else if(type==4){
+    Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_banks_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+
+}
 else {
     Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_message_URL+ imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 
@@ -78,6 +82,10 @@ else {
             Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_user_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 
         }
+        else if(type==4){
+            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_banks_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+
+        }
         else {
             Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_message_URL+ imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 
@@ -104,6 +112,10 @@ else {
         }
         else if(type==2){
             Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_user_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+
+        }
+        else if(type==4){
+            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_banks_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 
         }
         else {

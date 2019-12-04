@@ -34,7 +34,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:riv_corner_radius="5dp"
         tools:ignore="RtlCompat"
-        type="@{1}"
+        type="@{4}"
         />
 
     <LinearLayout
