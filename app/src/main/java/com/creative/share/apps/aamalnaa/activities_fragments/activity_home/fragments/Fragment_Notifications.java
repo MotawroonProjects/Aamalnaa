@@ -237,7 +237,7 @@ binding.recView.setAdapter(notification_adapter);
                                 //binding.coord1.scrollTo(0,0);
                                 notificationModelList.remove(layoutPosition);
                                 notification_adapter.notifyItemRemoved(layoutPosition);
-                                //  getsingleads();                            } else {
+                                                          } else {
 
 
                                 Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();

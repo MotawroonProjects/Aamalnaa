@@ -173,9 +173,10 @@ android:orientation="horizontal"
         android:id="@+id/imageSelectPhoto"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/gray0"
         android:src="@drawable/ic_camera"
-        android:tint="@color/gray3"
+
+        android:tint="@color/colorPrimary"
 
         />
 </LinearLayout>

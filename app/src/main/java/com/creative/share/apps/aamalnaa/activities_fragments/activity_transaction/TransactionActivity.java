@@ -252,7 +252,7 @@ public class TransactionActivity extends AppCompatActivity implements Listeners.
                                 //binding.coord1.scrollTo(0,0);
                                 notificationModelList.remove(layoutPosition);
                                 notification_adapter.notifyItemRemoved(layoutPosition);
-                                //  getsingleads();                            } else {
+                                                           } else {
 
 
                                 Toast.makeText(TransactionActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
