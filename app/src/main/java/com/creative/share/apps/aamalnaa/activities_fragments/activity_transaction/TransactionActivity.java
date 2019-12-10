@@ -80,7 +80,6 @@ public class TransactionActivity extends AppCompatActivity implements Listeners.
         binding.recView.setLayoutManager(manager);
         notificationModelList = new ArrayList<>();
         notification_adapter = new Notification_Adapter(notificationModelList, this);
-        binding.recView.setLayoutManager(new GridLayoutManager(this, 1));
         binding.recView.setAdapter(notification_adapter);
         binding.setBackListener(this);
         Paper.init(this);
