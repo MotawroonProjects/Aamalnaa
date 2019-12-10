@@ -614,6 +614,7 @@ RequestBody views_num_part=Common.getRequestBodyText(views_num+"");
     }
 
     private void updatesublist(List<Catogries_Model.Data.Subcategory> subcategory) {
+        subcategories.clear();
         subcategories.add(new Catogries_Model.Data.Subcategory("إختر القسم الفرعى"));
         if (subcategory != null) {
             subcategories.addAll(subcategory);
