@@ -75,7 +75,6 @@ public class Fragment_Notifications extends Fragment {
         binding.recView.setLayoutManager(manager);
 notificationModelList=new ArrayList<>();
 notification_adapter=new Notification_Adapter(notificationModelList,activity);
-binding.recView.setLayoutManager(new GridLayoutManager(activity,1));
 binding.recView.setAdapter(notification_adapter);
 
         binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
