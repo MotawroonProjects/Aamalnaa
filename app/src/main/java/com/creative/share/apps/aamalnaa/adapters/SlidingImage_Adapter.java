@@ -52,8 +52,8 @@ HomeActivity activity;
         SliderBinding rowBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.slider,view,false);
 
 rowBinding.tvTitle.setText(IMAGES.get(position).getTitle());
-if(IMAGES.get(position).getDetails().length()>10){
-    rowBinding.tvDetials.setText(IMAGES.get(position).getDetails().substring(0,9)+"...");
+if(IMAGES.get(position).getDetails().length()>20){
+    rowBinding.tvDetials.setText(IMAGES.get(position).getDetails().substring(0,19)+"...");
 }
 else {
     rowBinding.tvDetials.setText(IMAGES.get(position).getDetails());

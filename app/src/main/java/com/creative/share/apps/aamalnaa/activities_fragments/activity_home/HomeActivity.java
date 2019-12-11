@@ -703,10 +703,11 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
         startActivity(intent);
     }
 
-    public void gotomessage(int receiver_id, String receiver_name) {
+    public void gotomessage(int receiver_id, String receiver_name, String receiver_mobile) {
         Intent intent=new Intent(HomeActivity.this, ChatActivity.class);
         intent.putExtra("data",receiver_id+"");
         intent.putExtra("name",receiver_name);
+        intent.putExtra("phone",receiver_mobile);
 
         startActivity(intent);
     }

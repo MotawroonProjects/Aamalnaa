@@ -146,7 +146,7 @@ binding.llAddBalance.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onResponse(Call<Wallet_Model> call, Response<Wallet_Model> response) {
                             dialog.dismiss();
-                            if (response.isSuccessful() && response.body() != null) {
+                            if (response.isSuccessful() && response.body() != null&&response.body().getData()!=null) {
                                 updatewallet(response.body());
                             } else {
 

@@ -90,7 +90,7 @@ public class Fragment_Works extends Fragment {
 
     }
 
-    private void getprofiledata() {
+    public void getprofiledata() {
         ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
@@ -170,7 +170,7 @@ public class Fragment_Works extends Fragment {
 
 
             Api.getService(Tags.base_url)
-                    .deltecustomer(adsList.get(layoutPosition).getId() + "", userModel.getUser().getId() + "")
+                    .delteworks(adsList.get(layoutPosition).getId() + "", userModel.getUser().getId() + "")
                     .enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -181,7 +181,7 @@ public class Fragment_Works extends Fragment {
                                 //binding.coord1.scrollTo(0,0);
                                 adsList.remove(layoutPosition);
                                 work_adapter.notifyItemRemoved(layoutPosition);
-                                activity.updateClientCount(adsList.size());
+                                activity.updateWorkCount(adsList.size());
 
                             } else {
 

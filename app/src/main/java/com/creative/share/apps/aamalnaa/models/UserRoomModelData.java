@@ -23,6 +23,9 @@ public class UserRoomModelData implements Serializable {
             private String sender_avatar;
             private String receiver_name;
             private String receiver_avatar;
+            private String receiver_mobile;
+            private String sender_mobile;
+
             public int getId() {
                 return id;
             }
@@ -81,6 +84,22 @@ public class UserRoomModelData implements Serializable {
 
             public void setLast_message(String last_message) {
                 this.last_message = last_message;
+            }
+
+            public void setReceiver_mobile(String receiver_mobile) {
+                this.receiver_mobile = receiver_mobile;
+            }
+
+            public void setSender_mobile(String sender_mobile) {
+                this.sender_mobile = sender_mobile;
+            }
+
+            public String getReceiver_mobile() {
+                return receiver_mobile;
+            }
+
+            public String getSender_mobile() {
+                return sender_mobile;
             }
         }
 }

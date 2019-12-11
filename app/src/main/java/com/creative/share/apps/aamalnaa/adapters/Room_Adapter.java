@@ -69,9 +69,13 @@ private Preferences preferences;
             userRoomModels.get(position).setReceiver_avatar(userRoomModels.get(position).getSender_avatar());
             userRoomModels.get(position).setReceiver_id(userRoomModels.get(position).getSender_id());
             userRoomModels.get(position).setReceiver_name(userRoomModels.get(position).getSender_name());
+            userRoomModels.get(position).setReceiver_mobile(userRoomModels.get(position).getSender_mobile());
+
             userRoomModels.get(position).setSender_id(userModel.getUser().getId());
             userRoomModels.get(position).setSender_avatar(userModel.getUser().getAvatar());
             userRoomModels.get(position).setSender_name(userModel.getUser().getName());
+            userRoomModels.get(position).setSender_mobile(userModel.getUser().getMobile());
+
             userRoomModels.get(position).setLast_message(userRoomModels.get(position).getLast_message());
 
         }
@@ -97,7 +101,7 @@ if(i==position){
 eventHolder.binding.imageedit.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-        activity.gotomessage(userRoomModels.get(eventHolder.getLayoutPosition()).getReceiver_id(),userRoomModels.get(eventHolder.getLayoutPosition()).getReceiver_name());
+        activity.gotomessage(userRoomModels.get(eventHolder.getLayoutPosition()).getReceiver_id(),userRoomModels.get(eventHolder.getLayoutPosition()).getReceiver_name(),userRoomModels.get(eventHolder.getLayoutPosition()).getReceiver_mobile());
     }
 });
 eventHolder.binding.imageDelete.setOnClickListener(new View.OnClickListener() {

@@ -41,6 +41,9 @@ import com.creative.share.apps.aamalnaa.share.Common;
 import com.creative.share.apps.aamalnaa.tags.Tags;
 import com.google.android.material.tabs.TabLayout;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -264,7 +267,7 @@ binding.btnSend.setVisibility(View.GONE);
         TextView tvTitle2 = tab_item2.findViewById(R.id.tvTitle);
         tvTitle2.setText(getString(R.string.clients));
         TextView tvTitle0 = tab_item0.findViewById(R.id.tvTitle);
-        tvTitle0.setText(getString(R.string.my_ads));
+        tvTitle0.setText(getString(R.string.my_ads2));
         TextView tvTitle3 = tab_item3.findViewById(R.id.tvTitle);
         tvTitle3.setText(getString(R.string.rated));
         binding.tab.getTabAt(0).setCustomView(tab_item0);
@@ -526,6 +529,11 @@ Log.e(";;llll",tab.getPosition()+"");
     public void updateWork(int i) {
 
         updateWorkCount(i+work_count);
+        if(pagerAdapter!=null&&pagerAdapter.getItem(2)!=null){
+            Fragment_Works fragment_works= (Fragment_Works) pagerAdapter.getItem(2);
+            fragment_works.getprofiledata();
+        }
+
     }
 
     public void deletework(int layoutPosition) {
@@ -553,7 +561,18 @@ Log.e(";;llll",tab.getPosition()+"");
                             //  binding.progBar.setVisibility(View.GONE);
                             if (response.isSuccessful() && response.body() != null && response.body() != null) {
                                 //binding.coord1.scrollTo(0,0);
-                           Toast.makeText(ProfileActivity.this,getResources().getString(R.string.suc),Toast.LENGTH_LONG).show();
+                                try {
+                                    JSONObject obj = null;
+                                    try {
+                                        obj = new JSONObject(response.body().string());
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }Toast.makeText(ProfileActivity.this,obj.get("message").toString(),Toast.LENGTH_LONG).show();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
 
                             } else {
 

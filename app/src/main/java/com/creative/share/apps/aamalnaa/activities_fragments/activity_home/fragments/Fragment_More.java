@@ -71,6 +71,9 @@ public class Fragment_More extends Fragment {
             Picasso.with(activity).load(Tags.IMAGE_user_URL + userModel.getUser().getAvatar()).placeholder(R.drawable.user_profile).fit().into(binding.image);
             binding.tvName.setText(userModel.getUser().getName());
         }
+        if(userModel==null){
+            binding.tvLogout.setText(activity.getResources().getString(R.string.login));
+        }
         binding.image.setOnClickListener(view -> {
 
 

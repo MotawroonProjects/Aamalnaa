@@ -152,7 +152,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:layout_weight=".1"
-                                    android:text="@string/about"
+                                    android:text="@string/advertising_section"
                                     android:textColor="@color/textColor"
                                     android:textSize="12sp" />
 
@@ -162,7 +162,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:layout_weight=".9"
-                                    android:text="@{adsmodel.user_about}"
+                                    android:text="@{adsmodel.category}"
                                     android:textColor="@color/black"
                                     android:textSize="13sp" />
                             </LinearLayout>

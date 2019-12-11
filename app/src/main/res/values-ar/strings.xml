@@ -187,6 +187,7 @@
     <string name="department">القسم</string>
     <string name="my_ads2">اعلاناتى</string>
     <string name="you_rate_this_user_before">لقد قمت بتقييم هذا المستخدم من قبل </string>
+    <string name="advertising_section">قسم الاعلان</string>
 
     <string-array name="models">
 

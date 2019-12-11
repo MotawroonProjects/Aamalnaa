@@ -71,13 +71,16 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
     private LinearLayoutManager manager;
     private Preferences preferences;
     private UserModel userModel;
-    private String reciver_id = "0",reciver_name;
+    private String reciver_id = "0",reciver_name,phone;
     private SelectedLocation selectedLocation;
     private final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
     private final String write_permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
     private final String camera_permission = Manifest.permission.CAMERA;
     private final int IMG_REQ1 = 3, IMG_REQ2 = 2;
     private Uri url = null;
+    Intent intent ;
+    private static final int REQUEST_PHONE_CALL = 1;
+
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -106,7 +109,9 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
         binding.setName(reciver_name);
         binding.setBackListener(this);
         manager = new LinearLayoutManager(this);
-
+        if(phone!=null) {
+            intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "0"+phone, null));
+        }
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.recView.setLayoutManager(manager);
         chat_adapter = new Chat_Adapter(messagedatalist, userModel.getUser().getId(), this);
@@ -115,7 +120,22 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
         binding.recView.setDrawingCacheEnabled(true);
         binding.progBar.setVisibility(View.GONE);
         // binding.llMsgContainer.setVisibility(View.GONE);
-
+binding.imageCall.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        if(intent!=null){
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (ContextCompat.checkSelfPermission(ChatActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(ChatActivity.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
+                } else {
+                    startActivity(intent);
+                }
+            } else {
+                startActivity(intent);
+            }
+        }
+    }
+});
         binding.recView.setAdapter(chat_adapter);
         binding.imageSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,6 +160,9 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
         }
         if (getIntent().getStringExtra("name") != null) {
             reciver_name = getIntent().getStringExtra("name");
+        }
+        if (getIntent().getStringExtra("phone") != null) {
+            phone = getIntent().getStringExtra("phone");
         }
     }
 
@@ -513,5 +536,32 @@ binding.recView.scrollToPosition(messagedatalist.size()-1);
         }
         return null;
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_PHONE_CALL: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            // TODO: Consider calling
+                            //    Activity#requestPermissions
+                            // here to request the missing permissions, and then overriding
+                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                            //                                          int[] grantResults)
+                            // to handle the case where the user grants the permission. See the documentation
+                            // for Activity#requestPermissions for more details.
+                            return;
+                        }
+                    }
+                    startActivity(intent);
+                }
+                else {
+
+                }
+                return;
+            }
+        }
+    }
 }

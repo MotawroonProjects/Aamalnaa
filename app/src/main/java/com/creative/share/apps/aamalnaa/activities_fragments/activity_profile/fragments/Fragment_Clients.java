@@ -222,7 +222,7 @@ public class Fragment_Clients extends Fragment {
 
 
             Api.getService(Tags.base_url)
-                    .delteworks(adsList.get(layoutPosition).getId() + "", userModel.getUser().getId() + "")
+                    .deltecustomer(adsList.get(layoutPosition).getId() + "", userModel.getUser().getId() + "")
                     .enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -233,7 +233,7 @@ public class Fragment_Clients extends Fragment {
                                 //binding.coord1.scrollTo(0,0);
                                 adsList.remove(layoutPosition);
                                 customer_adapter.notifyItemRemoved(layoutPosition);
-                                activity.updateWorkCount(adsList.size());
+                                activity.updateClientCount(adsList.size());
 
                             } else {
 
