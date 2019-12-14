@@ -75,6 +75,14 @@ private Search_Activity search_activity;
             if(order_data.getIs_Special()==0){
                 eventHolder.binding.imstar.setVisibility(View.GONE);
             }
+            if(context instanceof FavoriteActivity){
+                eventHolder.binding.imFav.setVisibility(View.VISIBLE);
+
+            }
+            else {
+                eventHolder.binding.imFav.setVisibility(View.GONE);
+
+            }
 eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
