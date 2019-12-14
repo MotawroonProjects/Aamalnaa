@@ -19,6 +19,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.databinding.ActivityVideoBinding;
+import com.creative.share.apps.aamalnaa.interfaces.Listeners;
 import com.creative.share.apps.aamalnaa.language.Language;
 
 import java.io.IOException;
@@ -29,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VideoActivity extends AppCompatActivity {
+public class VideoActivity extends AppCompatActivity implements Listeners.BackListener {
     private ActivityVideoBinding binding;
     private String videoPath="";
     private String lang;
@@ -48,6 +49,7 @@ public class VideoActivity extends AppCompatActivity {
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
+        binding.setBackListener(this);
         initView();
     }
 
@@ -101,5 +103,10 @@ videoPath="https://www.youtube.com/watch?v=b1Y6UiQxpHk";
     protected void onResume() {
         super.onResume();
         binding.webView.onResume();
+    }
+
+    @Override
+    public void back() {
+        finish();
     }
 }
