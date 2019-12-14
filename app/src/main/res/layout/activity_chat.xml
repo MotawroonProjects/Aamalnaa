@@ -15,13 +15,9 @@
         <variable
             name="name"
             type="String" />
-        <variable
-            name="contactUs"
-            type="com.creative.share.apps.aamalnaa.models.ContactUsModel" />
 
-        <variable
-            name="contactListener"
-            type="com.creative.share.apps.aamalnaa.interfaces.Listeners.ContactListener" />
+
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
