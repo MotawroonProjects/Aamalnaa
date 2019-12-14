@@ -528,11 +528,12 @@ Log.e(";;llll",tab.getPosition()+"");
 
     public void updateWork(int i) {
 
-        updateWorkCount(i+work_count);
+      /*  updateWorkCount(i+work_count);
         if(pagerAdapter!=null&&pagerAdapter.getItem(2)!=null){
             Fragment_Works fragment_works= (Fragment_Works) pagerAdapter.getItem(2);
             fragment_works.getprofiledata();
-        }
+        }*/
+      binding.pager.setCurrentItem(2);
 
     }
 
