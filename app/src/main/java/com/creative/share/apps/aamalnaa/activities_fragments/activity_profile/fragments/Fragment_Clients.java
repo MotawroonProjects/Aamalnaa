@@ -179,7 +179,7 @@ public class Fragment_Clients extends Fragment {
                                // adsList.remove(layoutPosition);
                                 //customer_adapter.notifyItemRemoved(layoutPosition);
                                 //activity.updateClientCount(adsList.size() );
-                                activity.updateWork(1);
+                               // activity.updateWork(1);
 
                             } else {
 
