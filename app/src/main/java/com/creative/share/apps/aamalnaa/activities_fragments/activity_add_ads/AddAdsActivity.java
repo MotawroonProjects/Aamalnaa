@@ -351,7 +351,7 @@ updatesublist(dataList2.get(i).getSubcategory());
 
         try {
             Api.getService(Tags.base_url)
-                    .sendorderwithoutimage(userModel.getUser().getId()+"", order_upload_model.getCategory_id(),order_upload_model.getSubcategory_id(),order_upload_model.getCity_id(),type_id, order_upload_model.getTitle(), order_upload_model.getDetails(),order_upload_model.getPrice(),order_upload_model.getAddress(),order_upload_model.getLongitude(),order_upload_model.getLongitude(),views_num+"",is_Special+"",is_Install+"",commented+"").enqueue(new Callback<ResponseBody>() {
+                    .sendorderwithoutimage(userModel.getUser().getId()+"", order_upload_model.getCategory_id(),order_upload_model.getSubcategory_id(),order_upload_model.getCity_id(),type_id, order_upload_model.getTitle(), order_upload_model.getDetails(),order_upload_model.getPrice(),order_upload_model.getAddress(),order_upload_model.getLongitude(),order_upload_model.getLatitude(),views_num+"",is_Special+"",is_Install+"",commented+"").enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     dialog.dismiss();
