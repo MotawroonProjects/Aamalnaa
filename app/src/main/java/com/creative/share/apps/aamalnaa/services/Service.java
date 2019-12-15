@@ -322,7 +322,7 @@ public interface Service {
 //
             );
     @FormUrlEncoded
-    @POST("api/update_ad")
+    @POST("api/add_ad")
     Call<ResponseBody> sendorderwithoutimage
             (
                     @Field("user_id") String user_id,
