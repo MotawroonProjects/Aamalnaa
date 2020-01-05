@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="@{ratedmodel.created_at}"
+                    android:text='@{ratedmodel.updated_at!=null?ratedmodel.updated_at:ratedmodel.created_at}'
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp"
 

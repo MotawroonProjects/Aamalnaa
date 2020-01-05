@@ -394,7 +394,7 @@ private int by_my_previous;
 
            private String user_name;
         private String user_avatar;
-
+private String updated_at;
         public int getId() {
             return id;
         }
@@ -421,6 +421,10 @@ private int by_my_previous;
 
         public String getCreated_at() {
             return created_at;
+        }
+
+        public String getUpdated_at() {
+            return updated_at;
         }
 
         public String getUser_name() {
