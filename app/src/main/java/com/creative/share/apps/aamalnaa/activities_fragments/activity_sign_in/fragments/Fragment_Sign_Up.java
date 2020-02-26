@@ -173,7 +173,8 @@ if(body.getData()!=null){
 
                                 }
                                 else  if(response.code()==422){
-                                    Common.CreateAlertDialog(activity,getResources().getString(R.string.em_exist));}
+                                  //  Common.CreateAlertDialog(activity,getResources().getString(R.string.em_exist));
+                                     }
                                 else
                                 {
                                     Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
