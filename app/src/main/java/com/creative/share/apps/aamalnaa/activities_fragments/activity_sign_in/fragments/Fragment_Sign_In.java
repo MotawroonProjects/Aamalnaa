@@ -31,6 +31,9 @@ import com.mukesh.countrypicker.Country;
 import com.mukesh.countrypicker.CountryPicker;
 import com.mukesh.countrypicker.listeners.OnCountryPickerListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.Locale;
 
@@ -69,7 +72,12 @@ public class Fragment_Sign_In extends Fragment implements Listeners.LoginListene
         binding.setShowDialogListener(this);
         createCountryDialog();
 
-
+binding.tvForget.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        activity.displayFragmentForgetpass();
+    }
+});
 
 
     }
@@ -156,7 +164,22 @@ public class Fragment_Sign_In extends Fragment implements Listeners.LoginListene
                                 {
                                     Toast.makeText(activity, R.string.inc_phone_pas, Toast.LENGTH_SHORT).show();
 
-                                }else
+                                }
+                                else if(response.code()==406){
+
+                                        UserModel userModel=new UserModel();
+
+
+
+                                        userModel.setUser(new UserModel.User());
+                                        userModel.getUser().setMobile(phone);
+                                        activity.displayFragmentCodeVerification(userModel,2);
+
+                                    }
+
+
+
+                                else
                                 {
                                     Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
 

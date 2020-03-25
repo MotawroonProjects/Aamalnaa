@@ -191,6 +191,12 @@
     <string name="you_rate_this_user_before">You Rate This User Before</string>
     <string name="advertising_section">Advertising section</string>
     <string name="work2">Work</string>
+    <string name="reser_pass">Reset Password</string>
+    <string name="resend">Resend</string>
+    <string name="enter_code">Enter Code</string>
+    <string name="confirm">Confirm</string>
+    <string name="inc_code">Incorrect Code</string>
+    <string name="confirm_musr_equal">Confirm Pass Must Equal Pass</string>
     <string-array name="models">
 
         <item>ِAds</item>

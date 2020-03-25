@@ -14,6 +14,10 @@ private List<Previous> previous;
         return user;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public List<Customers> getCustomers() {
         return customers;
     }
@@ -30,7 +34,7 @@ private List<Previous> previous;
         return previous;
     }
 
-    public class User implements Serializable{
+    public static class User implements Serializable{
 private int id;
         private String user_type;
     private String avatar;
@@ -62,7 +66,12 @@ private int showinfo;
     private int is_follow;
     private String lastSeen;
 private long date;
-    public int getId() {
+
+        public void setMobile(String mobile) {
+            this.mobile = mobile;
+        }
+
+        public int getId() {
         return id;
     }
 

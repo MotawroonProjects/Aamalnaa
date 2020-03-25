@@ -15,6 +15,13 @@ public interface Listeners {
     {
         void skip();
     }
+
+    interface PasswordListner {
+        void checkDatapass(String pass);
+    }
+    interface ForgetpasswordListner {
+        void checkDataForget(String phone_code, String phone);
+    }
     interface CreateAccountListener
     {
         void createNewAccount();

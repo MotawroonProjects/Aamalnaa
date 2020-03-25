@@ -85,6 +85,24 @@ public interface Service {
     );
 
     @FormUrlEncoded
+    @POST("api/confirm-code")
+    Call<UserModel> confirmCode(@Field("mobile") String mobile,
+                                @Field("confirm_code") String confirm_code
+    );
+
+    @FormUrlEncoded
+    @POST("api/rest-pass")
+    Call<UserModel> changpass(
+            @Field("mobile") String mobile,
+            @Field("confirm_code") String confirm_code,
+            @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("api/resend-code")
+    Call<ResponseBody> resendCode(@Field("mobile") String mobile
+    );
+
+    @FormUrlEncoded
     @POST("api/logout")
     Call<ResponseBody> Logout(@Field("id") String id
 
@@ -321,6 +339,7 @@ public interface Service {
 
 //
             );
+
     @FormUrlEncoded
     @POST("api/add_ad")
     Call<ResponseBody> sendorderwithoutimage
@@ -471,7 +490,6 @@ public interface Service {
             @Field("rated_id") String rated_id,
             @Field("liked") String liked,
             @Field("reason") String reason
-
 
 
     );

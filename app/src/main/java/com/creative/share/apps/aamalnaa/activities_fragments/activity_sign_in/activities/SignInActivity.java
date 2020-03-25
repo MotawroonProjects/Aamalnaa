@@ -5,13 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_sign_in.fragments.Fragment_Code_Verification;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_sign_in.fragments.Fragment_ForgetPassword;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_sign_in.fragments.Fragment_Language;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_sign_in.fragments.Fragment_Newpass;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_sign_in.fragments.Fragment_Sign_In;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_sign_in.fragments.Fragment_Sign_Up;
 import com.creative.share.apps.aamalnaa.language.Language;
+import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
 
 import java.util.Locale;
@@ -28,6 +33,10 @@ public class SignInActivity extends AppCompatActivity {
     private Fragment_Language fragment_language;
     private String cuurent_language;
     private Preferences preferences;
+    private Fragment_Code_Verification fragment_code_verification;
+    private Fragment_ForgetPassword fragment_forgetpass;
+    private Fragment_Newpass fragment_newpass;
+
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -97,7 +106,12 @@ getDataFromIntent();
             fragmentManager.beginTransaction().add(R.id.fragment_sign_in_container, fragment_sign_up, "fragment_sign_up").addToBackStack("fragment_sign_up").commit();
         }
     }
+    public void displayFragmentCodeVerification(UserModel userModel, int type) {
+        fragment_count ++;
+        fragment_code_verification = Fragment_Code_Verification.newInstance(userModel,type);
+        fragmentManager.beginTransaction().add(R.id.fragment_sign_in_container, fragment_code_verification, "fragment_code_verification").addToBackStack("fragment_code_verification").commit();
 
+    }
     public void DisplayFragmentLanguage() {
         fragment_language = Fragment_Language.newInstance();
         if (fragment_language.isAdded()) {
@@ -107,7 +121,20 @@ getDataFromIntent();
         }
     }
 
+    public void displayFragmentForgetpass() {
+        fragment_count ++;
+        fragment_forgetpass = Fragment_ForgetPassword.newInstance();
 
+        fragmentManager.beginTransaction().add(R.id.fragment_sign_in_container, fragment_forgetpass, "fragment_forgetpass").addToBackStack("fragment_forgetpass").commit();
+
+    }
+    public void displayFragmentNewpass(UserModel userModel) {
+        fragment_count ++;
+        fragment_newpass = Fragment_Newpass.newInstance(userModel,1);
+
+        fragmentManager.beginTransaction().add(R.id.fragment_sign_in_container, fragment_newpass, "fragment_newpass").addToBackStack("fragment_newpass").commit();
+
+    }
     public void RefreshActivity(String selected_language) {
         Paper.book().write("lang", selected_language);
         Language.setNewLocale(this, selected_language);

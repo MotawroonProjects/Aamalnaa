@@ -189,6 +189,12 @@
     <string name="you_rate_this_user_before">لقد قمت بتقييم هذا المستخدم من قبل </string>
     <string name="advertising_section">قسم الاعلان</string>
     <string name="work2">عملى</string>
+    <string name="reser_pass">تغيير كلمة المرور</string>
+    <string name="resend">اعادة ارسال</string>
+    <string name="enter_code">ادخل الكود</string>
+    <string name="confirm">تاكيد</string>
+    <string name="inc_code">كزد خاطئ</string>
+    <string name="confirm_musr_equal">تاكيد كلمة المرور يجب ان يساوى كلمة المرور</string>
 
     <string-array name="models">
 
