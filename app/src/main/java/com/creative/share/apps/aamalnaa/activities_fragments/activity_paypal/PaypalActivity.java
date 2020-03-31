@@ -32,6 +32,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activities_fragments.PaypalwebviewActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_addbalance.AddBalanceActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_map.MapActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_my_wallet.WalletActivity;
@@ -58,6 +59,9 @@ import com.creative.share.apps.aamalnaa.preferences.Preferences;
 import com.creative.share.apps.aamalnaa.remote.Api;
 import com.creative.share.apps.aamalnaa.share.Common;
 import com.creative.share.apps.aamalnaa.tags.Tags;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -142,12 +146,30 @@ private UserModel userModel;
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     dialog.dismiss();
                     if (response.isSuccessful()) {
+
+
+                            JSONObject obj = null;
+
+                            try {
+                                String re=response.body().string();
+                                Log.e("data",re);
+                                obj = new JSONObject(re);
+                                // Log.e("data",obj.stri);
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                Log.e("data",e.getMessage());
+                            }
                         // Common.CreateSignAlertDialog(adsActivity,getResources().getString(R.string.suc));
                         Toast.makeText(PaypalActivity.this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
 
                         //  adsActivity.finish(response.body().getId_advertisement());
-                        Intent intent = new Intent(PaypalActivity.this, WalletActivity.class);
-
+                        Intent intent = new Intent(PaypalActivity.this, PaypalwebviewActivity.class);
+                        try {
+                            intent.putExtra("url",obj.get("url").toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                         startActivity(intent);
                         finish();
