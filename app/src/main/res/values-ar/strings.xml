@@ -195,13 +195,13 @@
     <string name="confirm">تاكيد</string>
     <string name="inc_code">كزد خاطئ</string>
     <string name="confirm_musr_equal">تاكيد كلمة المرور يجب ان يساوى كلمة المرور</string>
-
+    <string name="paypal">باى بال</string>
+    <string name="paypal_from_here_you_can_pay_by_paypal">يمكنك من هنا الدفع عن طريق الباى بال</string>
+    <string name="enter_amount">ادخل القيمه</string>
+    <string name="complete_operation">تأكيد العمليه</string>
     <string-array name="models">
-
         <item>اعلان</item>
         <item>دعايه</item>
         <item>دعايه واعلان </item>
-
-
     </string-array>
 </resources>

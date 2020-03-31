@@ -426,7 +426,15 @@ public interface Service {
 
 //
             );
+    @FormUrlEncoded
+    @POST("api/payWithpaypalMobile")
+    Call<ResponseBody> Payment
+            (
+                    @Field("amount") String amount,
+                    @Field("user_id") String user_id
 
+//
+            );
     @FormUrlEncoded
     @POST("api/allRoms")
     Call<UserRoomModelData> getRooms(@Field("user_id") String user_id

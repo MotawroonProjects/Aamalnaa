@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_addbalance.AddBalanceActivity;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_paypal.PaypalActivity;
 import com.creative.share.apps.aamalnaa.adapters.BankAdapter;
 import com.creative.share.apps.aamalnaa.databinding.ActivityBankBinding;
 import com.creative.share.apps.aamalnaa.interfaces.Listeners;
@@ -70,7 +71,14 @@ public class BanksActivity extends AppCompatActivity implements Listeners.BackLi
         binding.recbank.setAdapter(bankAdapter);
         getBankAccount();
 
-
+binding.cardPaypal.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent=new Intent(BanksActivity.this, PaypalActivity.class);
+        startActivity(intent);
+        finish();
+    }
+});
 
     }
     private void getBankAccount() {

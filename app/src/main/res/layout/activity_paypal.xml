@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="lang"
+            type="String" />
+        <variable
+            name="addbalancemodel"
+            type="com.creative.share.apps.aamalnaa.models.PayPal_Model" />
+        <variable
+            name="backListener"
+            type="com.creative.share.apps.aamalnaa.interfaces.Listeners.BackListener"
+            />
+
+
+
+
+
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray0"
+        android:orientation="vertical"
+
+        >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/colorPrimary"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:onClick="@{()->backListener.back()}"
+            >
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_left_arrow"
+                android:tint="@color/white"
+                android:padding="8dp"
+                android:clickable="false"
+                android:longClickable="false"
+                android:rotation='@{lang.equals("ar")?180:0}'
+                />
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:textColor="@color/white"
+                android:clickable="false"
+                android:longClickable="false"
+                android:textSize="16sp"
+                android:text="@string/paypal"
+                />
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:fillViewport="true"
+            android:fitsSystemWindows="true"
+            android:scrollbars="none"
+            android:background="@drawable/bg"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                >
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/logo"
+                    android:padding="20dp"
+
+                    />
+
+                <LinearLayout
+                    android:id="@+id/ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/logo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_bias=".2"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    >
+
+
+
+                    <EditText
+                        android:id="@+id/edt_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:hint="@string/enter_amount"
+                        android:itemBackground="@color/colorAccent"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/gray4"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/logo"
+                        android:layout_marginTop="25dp"
+                        android:background="@color/transparent"
+                        android:text="@={addbalancemodel.amount}"
+                        error="@{addbalancemodel.amount_error}"
+                        />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/colorPrimary"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        />
+
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnLogin"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/btn_sign_up"
+                    app:layout_constraintVertical_bias="0"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:text="@string/complete_operation"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</layout>
