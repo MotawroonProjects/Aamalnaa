@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "118898646430",
+    "firebase_url": "https://aamalnaaapp.firebaseio.com",
+    "project_id": "aamalnaaapp",
+    "storage_bucket": "aamalnaaapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:118898646430:android:e93acefb19cde5cf9a4a8f",
+        "android_client_info": {
+          "package_name": "com.creative.share.apps.aamalnaa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "118898646430-4ejbhj5jl56i42n357fv46pcagig2li3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5Vw8MVgalDL_Jpy_0BiVerSxFPw7sWJA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "118898646430-4ejbhj5jl56i42n357fv46pcagig2li3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "118898646430-5c049igrpfsi9iaf8bu8bcd9q2k6mcem.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.creativeShare.AamalnaaApp",
+                "app_store_id": "45545645"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

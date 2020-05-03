@@ -107,6 +107,17 @@ if(getIntent().getIntExtra("search",-1)!=0){
     search_id=getIntent().getIntExtra("search",-1)+"";
 }
 
+binding.llShare.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        String app_url = Tags.base_url+"ad/" + search_id;
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TITLE, "تطبيق عالم أعمالنا");
+        intent.putExtra(Intent.EXTRA_TEXT, app_url);
+        startActivity(intent);
+    }
+});
         commentsList=new ArrayList<>();
         single_adversiment_model=new Single_Adversiment_Model();
         preferences= Preferences.getInstance();
@@ -122,6 +133,7 @@ if(getIntent().getIntExtra("search",-1)!=0){
             binding.cardChat.setVisibility(View.GONE);
             binding.cardrepor.setVisibility(View.GONE);
             binding.follow.setVisibility(View.GONE);
+            binding.llShare.setVisibility(View.GONE);
         }
         manager = new LinearLayoutManager(this);
 binding.setAdsmodel(single_adversiment_model);

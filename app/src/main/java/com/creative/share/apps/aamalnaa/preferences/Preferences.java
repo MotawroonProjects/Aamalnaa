@@ -3,6 +3,7 @@ package com.creative.share.apps.aamalnaa.preferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.creative.share.apps.aamalnaa.models.ChatUserModel;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.tags.Tags;
 import com.google.gson.Gson;
@@ -106,5 +107,28 @@ public class Preferences {
         create_update_session(context, Tags.session_logout);
     }
 
+    public void create_update_ChatUserData(Context context , ChatUserModel chatUserModel)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("chatUserPref",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        Gson gson = new Gson();
+        String userDataGson = gson.toJson(chatUserModel);
+        editor.putString("chat_user_data",userDataGson);
+        editor.apply();
+    }
 
+    public ChatUserModel getChatUserData(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("chatUserPref",Context.MODE_PRIVATE);
+        String userDataGson = preferences.getString("chat_user_data","");
+        return new Gson().fromJson(userDataGson, ChatUserModel.class);
+    }
+
+    public void clearChatUserData(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("chatUserPref",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+    }
 }

@@ -41,12 +41,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="@{()->backListener.back()}"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
 
                 <ImageView
                     android:layout_width="35dp"
@@ -70,6 +76,20 @@
                     android:textColor="@color/white"
                     android:textSize="16sp" />
             </LinearLayout>
+            <ImageView
+                android:id="@+id/llShare"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:clickable="false"
+                android:longClickable="false"
+                android:padding="8dp"
+           android:src="@drawable/ic_share"
+                android:tint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+</androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.core.widget.NestedScrollView

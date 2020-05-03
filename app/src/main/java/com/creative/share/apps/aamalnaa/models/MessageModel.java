@@ -10,7 +10,7 @@ public class MessageModel  implements Serializable {
         return data;
     }
 
-    public class SingleMessageModel implements Serializable {
+    public static class SingleMessageModel implements Serializable {
         private int id;
         private int sender_id;
         private int receiver_id;
@@ -23,6 +23,15 @@ public class MessageModel  implements Serializable {
 
         private String user_name;
         private String user_avatar;
+
+        public SingleMessageModel(int sender_id, int receiver_id, String message, String type, double lat, double lng) {
+            this.sender_id = sender_id;
+            this.receiver_id = receiver_id;
+            this.message = message;
+            this.type = type;
+            this.lat = lat;
+            this.lng = lng;
+        }
 
         public int getId() {
             return id;

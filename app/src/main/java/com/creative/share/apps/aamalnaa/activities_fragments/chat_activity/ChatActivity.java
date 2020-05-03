@@ -12,6 +12,7 @@ import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -38,6 +39,7 @@ import com.creative.share.apps.aamalnaa.databinding.DialogSelectImageBinding;
 import com.creative.share.apps.aamalnaa.interfaces.Listeners;
 import com.creative.share.apps.aamalnaa.language.Language;
 import com.creative.share.apps.aamalnaa.models.AllMessageModel;
+import com.creative.share.apps.aamalnaa.models.ChatUserModel;
 import com.creative.share.apps.aamalnaa.models.MessageModel;
 import com.creative.share.apps.aamalnaa.models.Order_Upload_Model;
 import com.creative.share.apps.aamalnaa.models.SelectedLocation;
@@ -48,6 +50,9 @@ import com.creative.share.apps.aamalnaa.share.Common;
 import com.creative.share.apps.aamalnaa.tags.Tags;
 
 import org.checkerframework.checker.units.qual.C;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -98,6 +103,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
     }
 
     private void initView() {
+        getDataFromIntent();
        getdataintent();
         messagedatalist = new ArrayList<>();
 
@@ -165,6 +171,19 @@ binding.imageCall.setOnClickListener(new View.OnClickListener() {
             phone = getIntent().getStringExtra("phone");
         }
     }
+    private void getDataFromIntent()
+    {
+        Intent intent = getIntent();
+        if (intent != null&&intent.getSerializableExtra("chat_user_data")!=null) {
+
+           ChatUserModel chatUserModel = (ChatUserModel) intent.getSerializableExtra("chat_user_data");
+            binding.setName(chatUserModel.getName());
+            reciver_id=chatUserModel.getId()+"";
+            reciver_name=chatUserModel.getName();
+            phone=chatUserModel.getPhone();
+
+        }
+    }
 
     private void checkdata() {
         String message = binding.edtMsgContent.getText().toString();
@@ -177,7 +196,27 @@ binding.imageCall.setOnClickListener(new View.OnClickListener() {
             binding.edtMsgContent.setError(getResources().getString(R.string.field_req));
         }
     }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void listenToNewMessage(MessageModel.SingleMessageModel messageModel)
+    {
+        messagedatalist.add(messageModel);
+        scrollToLastPosition();
+    }
+    private void scrollToLastPosition()
+    {
 
+        new Handler()
+                .postDelayed(() -> binding.recView.scrollToPosition(messagedatalist.size()-1),10);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this))
+        {
+            EventBus.getDefault().unregister(this);
+        }
+        preferences.clearChatUserData(this);
+    }
     public void getmessge() {
         //   Common.CloseKeyBoard(homeActivity, edt_name);
         Log.e("lkk", reciver_id + " " + userModel.getUser().getId());
@@ -205,8 +244,7 @@ binding.imageCall.setOnClickListener(new View.OnClickListener() {
 
                                     // binding.llMsgContainer.setVisibility(View.GONE);
                                     chat_adapter.notifyDataSetChanged();
-                                    binding.recView.scrollToPosition(messagedatalist.size() - 1);
-
+                                    scrollToLastPosition();
                                     //   total_page = response.body().getMeta().getLast_page();
 
                                 } else {
@@ -272,7 +310,7 @@ binding.imageCall.setOnClickListener(new View.OnClickListener() {
 
                       messagedatalist.add(response.body().getData());
                       chat_adapter.notifyDataSetChanged();
-binding.recView.scrollToPosition(messagedatalist.size()-1);
+                            scrollToLastPosition();
                         } else {
                             Log.e("codeimage", response.code() + "_");
                             try {
@@ -316,8 +354,7 @@ binding.recView.scrollToPosition(messagedatalist.size()-1);
 
                         messagedatalist.add(response.body().getData());
                         chat_adapter.notifyDataSetChanged();
-                        binding.recView.scrollToPosition(messagedatalist.size() - 1);
-                    } else {
+                        scrollToLastPosition();                    } else {
                         try {
 
                             Toast.makeText(ChatActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
@@ -364,6 +401,7 @@ binding.recView.scrollToPosition(messagedatalist.size()-1);
                         messagedatalist.add(response.body().getData());
                         chat_adapter.notifyDataSetChanged();
                         binding.recView.scrollToPosition(messagedatalist.size() - 1);
+                        scrollToLastPosition();
                     } else {
                         try {
 

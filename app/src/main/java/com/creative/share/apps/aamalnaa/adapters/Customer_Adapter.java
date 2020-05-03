@@ -1,6 +1,7 @@
 package com.creative.share.apps.aamalnaa.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_adsdetails.AdsDetialsActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
 import com.creative.share.apps.aamalnaa.databinding.CustomerRowBinding;
 import com.creative.share.apps.aamalnaa.models.UserModel;
@@ -66,6 +68,14 @@ eventHolder.binding.btDelete.setOnClickListener(new View.OnClickListener() {
     public void onClick(View view) {
         activity.delteclients(eventHolder.getLayoutPosition());
 
+    }
+});
+eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(context, ProfileActivity.class);
+        intent.putExtra("data",orderlist.get(eventHolder.getLayoutPosition()).getId()+"");
+        context.startActivity(intent);
     }
 });
 if(type==2){

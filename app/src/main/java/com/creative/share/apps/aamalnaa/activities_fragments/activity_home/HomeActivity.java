@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
@@ -43,8 +44,10 @@ import com.creative.share.apps.aamalnaa.activities_fragments.chat_activity.ChatA
 import com.creative.share.apps.aamalnaa.adapters.CityAdapter;
 import com.creative.share.apps.aamalnaa.databinding.ActivityHomeBinding;
 import com.creative.share.apps.aamalnaa.language.Language;
+import com.creative.share.apps.aamalnaa.models.ChatUserModel;
 import com.creative.share.apps.aamalnaa.models.Cities_Model;
 import com.creative.share.apps.aamalnaa.models.Filter_Model;
+import com.creative.share.apps.aamalnaa.models.MessageModel;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
 import com.creative.share.apps.aamalnaa.remote.Api;
@@ -63,7 +66,14 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -99,6 +109,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
     private LocationCallback locationCallback;
     private Location location;
     private ProgressDialog dialog;
+    private String token;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -107,7 +118,14 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
 
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void listenToNewMessage(MessageModel.SingleMessageModel messageModel) {
+        Intent intent = new Intent(this, ChatActivity.class);
+        intent.putExtra("data",messageModel.getSender_id()+"");
+        intent.putExtra("name",messageModel.getUser_name());
+        startActivityForResult(intent,1000);
 
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,10 +136,57 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
 
             displayFragmentMain();
         }
+        if (userModel != null) {
+            updateToken();
 
+        }
 
     }
+    private void updateToken() {
+        FirebaseInstanceId.getInstance()
+                .getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (task.isSuccessful()) {
+                             token = task.getResult().getToken();
+                            task.getResult().getId();
+                            Log.e("sssssss", token);
+                            Api.getService(Tags.base_url)
+                                    .updateToken(userModel.getUser().getId(), token, "android")
+                                    .enqueue(new Callback<ResponseBody>() {
+                                        @Override
+                                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
+                                            if (response.isSuccessful()) {
+                                                try {
+                                                    Log.e("Success", "token updated");
+                                                } catch (Exception e) {
+                                                    //  e.printStackTrace();
+                                                }
+                                            } else {
+                                                try {
+                                                    Log.e("error", response.code() + "_" + response.errorBody().string());
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+
+
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                            try {
+                                                Log.e("Error", t.getMessage());
+                                            } catch (Exception e) {
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
+    }
     @SuppressLint("RestrictedApi")
     private void initView() {
         dataList=new ArrayList<>();
@@ -443,7 +508,7 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
         if (userModel == null) {
             NavigateToSignInActivity();
         } else {
-            Logout();
+            deletetoken();
         }
     }
 
@@ -469,6 +534,37 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
             }
         }
 
+    }
+    public void deletetoken() {
+        final ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .delteToken(userModel.getUser().getId() ,token)
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+                            /*new Handler()
+                                    .postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                                            manager.cancelAll();
+                                        }
+                                    },1);
+                            userSingleTone.clear(ClientHomeActivity.this);*/
+                         Logout();
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
     }
 
     public void Logout() {

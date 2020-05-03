@@ -65,13 +65,24 @@ public interface Service {
     @POST("api/user_profile_update")
     Call<UserModel> editprofile(@Field("name") String name,
                                 @Field("mobile") String mobile,
-
                                 @Field("email") String email,
                                 @Field("city_id") String city_id,
                                 @Field("id") int id,
                                 @Field("about") String about
     );
-
+    @FormUrlEncoded
+    @POST("api/firebase-tokens")
+    Call<ResponseBody> updateToken(
+            @Field("user_id_fk") int user_id_fk,
+            @Field("phone_token") String phone_token,
+            @Field("software_type") String software_type
+    );
+    @FormUrlEncoded
+    @POST("api/firebase-tokens-delete")
+    Call<ResponseBody> delteToken(
+            @Field("user_id_fk") int user_id_fk,
+            @Field("phone_token") String phone_token
+    );
     @Multipart
     @POST("api/user_image")
     Call<UserModel> editUserImage(@Part("id") RequestBody id,
