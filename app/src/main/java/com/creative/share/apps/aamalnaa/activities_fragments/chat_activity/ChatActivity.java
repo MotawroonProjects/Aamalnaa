@@ -103,6 +103,8 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
     }
 
     private void initView() {
+        EventBus.getDefault().register(this);
+
         getDataFromIntent();
        getdataintent();
         messagedatalist = new ArrayList<>();
