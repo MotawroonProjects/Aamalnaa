@@ -32,7 +32,7 @@ import retrofit2.Response;
 
 public class VideoActivity extends AppCompatActivity implements Listeners.BackListener {
     private ActivityVideoBinding binding;
-    private String videoPath="";
+    private String videoPath = "";
     private String lang;
 
 
@@ -42,6 +42,7 @@ public class VideoActivity extends AppCompatActivity implements Listeners.BackLi
         super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", "ar")));
 
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,17 +55,13 @@ public class VideoActivity extends AppCompatActivity implements Listeners.BackLi
     }
 
 
-
     private void initView() {
         Paper.init(this);
-        lang = Paper.book().read("lang",Locale.getDefault().getLanguage());
-videoPath="https://www.youtube.com/watch?v=b1Y6UiQxpHk";
-      setUpWebView();
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        videoPath = "https://www.youtube.com/watch?v=X2Md_NgRSqI&feature=youtu.be";
+        setUpWebView();
 
     }
-
-
-
 
 
     private void setUpWebView() {
@@ -83,6 +80,7 @@ videoPath="https://www.youtube.com/watch?v=b1Y6UiQxpHk";
                                                  super.onReceivedError(view, request, error);
                                                  binding.webView.setVisibility(View.INVISIBLE);
                                              }
+
                                              @Override
                                              public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
                                                  super.onReceivedHttpError(view, request, errorResponse);
