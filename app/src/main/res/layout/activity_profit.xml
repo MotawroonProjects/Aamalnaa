@@ -187,118 +187,119 @@
                         android:textColor="@color/textColor"
                         android:textSize="15sp" />
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="3.2">
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight=".2"
-                        android:padding="3dp"
-                        android:src="@drawable/ic_office"
-                        android:tint="@color/secondColor"
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="45dp"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:background="@color/white"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:weightSum="3.2">-->
 
-                        />
+<!--                    <ImageView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="14dp"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:layout_weight=".2"-->
+<!--                        android:padding="3dp"-->
+<!--                        android:src="@drawable/ic_office"-->
+<!--                        android:tint="@color/secondColor"-->
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:clickable="false"
-                        android:longClickable="false"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text="@string/_20_acts"
-                        android:textColor="@color/textColor"
-                        android:textSize="15sp" />
+<!--                        />-->
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:clickable="false"
-                        android:longClickable="false"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text="@string/one_point"
-                        android:textColor="@color/textColor"
-                        android:textSize="15sp" />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:clickable="false"
-                        android:longClickable="false"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text='@{profitmodel.pre_price+""}'
-                        android:textColor="@color/textColor"
-                        android:textSize="15sp" />
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:clickable="false"-->
+<!--                        android:longClickable="false"-->
+<!--                        android:paddingLeft="10dp"-->
+<!--                        android:paddingRight="10dp"-->
+<!--                        android:text="@string/_20_acts"-->
+<!--                        android:textColor="@color/textColor"-->
+<!--                        android:textSize="15sp" />-->
 
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:clickable="false"-->
+<!--                        android:longClickable="false"-->
+<!--                        android:paddingLeft="10dp"-->
+<!--                        android:paddingRight="10dp"-->
+<!--                        android:text="@string/one_point"-->
+<!--                        android:textColor="@color/textColor"-->
+<!--                        android:textSize="15sp" />-->
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:clickable="false"-->
+<!--                        android:longClickable="false"-->
+<!--                        android:paddingLeft="10dp"-->
+<!--                        android:paddingRight="10dp"-->
+<!--                        android:text='@{profitmodel.pre_price+""}'-->
+<!--                        android:textColor="@color/textColor"-->
+<!--                        android:textSize="15sp" />-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:weightSum="3.2"
-                    android:background="@color/gray3"
-                    >
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight=".2"
-                        android:padding="3dp"
-                        android:src="@drawable/ic_ads"
-                        android:tint="@color/secondColor"
+<!--                </LinearLayout>-->
 
-                        />
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="45dp"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:weightSum="3.2"-->
+<!--                    android:background="@color/gray3"-->
+<!--                    >-->
+<!--                    <ImageView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="20dp"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:layout_weight=".2"-->
+<!--                        android:padding="3dp"-->
+<!--                        android:src="@drawable/ic_ads"-->
+<!--                        android:tint="@color/secondColor"-->
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:clickable="false"
-                        android:longClickable="false"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text="@string/_10_ads"
-                        android:textColor="@color/textColor"
-                        android:textSize="15sp" />
+<!--                        />-->
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:clickable="false"
-                        android:longClickable="false"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text="@string/one_point"
-                        android:textColor="@color/textColor"
-                        android:textSize="15sp" />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:clickable="false"
-                        android:longClickable="false"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text='@{profitmodel.ads_price+""}'
-                        android:textColor="@color/textColor"
-                        android:textSize="15sp" />
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:clickable="false"-->
+<!--                        android:longClickable="false"-->
+<!--                        android:paddingLeft="10dp"-->
+<!--                        android:paddingRight="10dp"-->
+<!--                        android:text="@string/_10_ads"-->
+<!--                        android:textColor="@color/textColor"-->
+<!--                        android:textSize="15sp" />-->
 
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:clickable="false"-->
+<!--                        android:longClickable="false"-->
+<!--                        android:paddingLeft="10dp"-->
+<!--                        android:paddingRight="10dp"-->
+<!--                        android:text="@string/one_point"-->
+<!--                        android:textColor="@color/textColor"-->
+<!--                        android:textSize="15sp" />-->
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:clickable="false"-->
+<!--                        android:longClickable="false"-->
+<!--                        android:paddingLeft="10dp"-->
+<!--                        android:paddingRight="10dp"-->
+<!--                        android:text='@{profitmodel.ads_price+""}'-->
+<!--                        android:textColor="@color/textColor"-->
+<!--                        android:textSize="15sp" />-->
+
+<!--                </LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"

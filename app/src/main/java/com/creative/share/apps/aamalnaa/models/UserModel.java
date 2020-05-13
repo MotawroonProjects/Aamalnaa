@@ -66,6 +66,14 @@ private int showinfo;
     private int is_follow;
     private String lastSeen;
 private long date;
+private long logout_time;
+
+        public User() {
+        }
+
+        public long getLogout_time() {
+            return logout_time;
+        }
 
         public void setMobile(String mobile) {
             this.mobile = mobile;
