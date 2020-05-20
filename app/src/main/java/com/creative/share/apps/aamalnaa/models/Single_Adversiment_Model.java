@@ -24,7 +24,9 @@ public class Single_Adversiment_Model implements Serializable {
         private int price;
         private double lat;
         private double lng;
-            private int code;
+    private String mobile;
+
+    private int code;
 private String created_at;
         private int ads_type;
             private String image;
@@ -260,5 +262,9 @@ private long date;
 
     public void setReport(int report) {
         this.report = report;
+    }
+
+    public String getMobile() {
+        return mobile;
     }
 }

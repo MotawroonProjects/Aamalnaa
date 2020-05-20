@@ -120,10 +120,12 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void listenToNewMessage(MessageModel.SingleMessageModel messageModel) {
-        Intent intent = new Intent(this, ChatActivity.class);
-        intent.putExtra("data",messageModel.getSender_id()+"");
-        intent.putExtra("name",messageModel.getUser_name());
-        startActivityForResult(intent,1000);
+//        Intent intent = new Intent(this, ChatActivity.class);
+//        intent.putExtra("data",messageModel.getSender_id()+"");
+//        intent.putExtra("name",messageModel.getUser_name());
+//      ///  intent.putExtra("phone",messageModel.);
+//
+//        startActivityForResult(intent,1000);
 
     }
     @Override
