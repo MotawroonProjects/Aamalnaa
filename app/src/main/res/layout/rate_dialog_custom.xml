@@ -7,6 +7,12 @@
         name="usermodel"
         type="com.creative.share.apps.aamalnaa.models.UserModel.User" />
     </data>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -102,4 +108,18 @@
 
 
     </LinearLayout>
+        <ImageView
+            android:id="@+id/imdclose"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:rotation="180"
+            />
+    </FrameLayout>
 </layout>

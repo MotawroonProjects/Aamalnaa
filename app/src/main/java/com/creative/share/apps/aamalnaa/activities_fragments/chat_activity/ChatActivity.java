@@ -142,6 +142,10 @@ binding.imageCall.setOnClickListener(new View.OnClickListener() {
                 startActivity(intent);
             }
         }
+        else {
+            Common.CreateAlertDialog(this,getResources().getString(R.string.phone_not_found));
+        }
+
     }
 });
         binding.recView.setAdapter(chat_adapter);

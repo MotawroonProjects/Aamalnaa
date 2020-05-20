@@ -727,10 +727,13 @@ private double total=0;
     public void setcommented() {
         if (commented == 0) {
             commented = 1;
+            total+=dataList.get(0).getCoun();
+
         } else {
             commented = 0;
+            total-=dataList.get(0).getCoun();
+
         }
-        total+=dataList.get(0).getCoun();
         binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
 
     }
@@ -738,20 +741,27 @@ private double total=0;
     public void setspicial() {
         if (is_Special == 0) {
             is_Special = 1;
+            total+=dataList.get(1).getCoun();
+
         } else {
             is_Special = 0;
+            total-=dataList.get(1).getCoun();
+
         }
-        total+=dataList.get(1).getCoun();
+
         binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
     }
 
     public void setviews() {
         if (views_num == 0) {
             views_num = 1;
+            total+=dataList.get(2).getCoun();
+
         } else {
             views_num = 0;
+            total-=dataList.get(2).getCoun();
+
         }
-        total+=dataList.get(2).getCoun();
         binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
 
     }
@@ -759,10 +769,13 @@ private double total=0;
     public void setisinstall() {
         if (is_Install == 0) {
             is_Install = 1;
+            total+=dataList.get(3).getCoun();
+
         } else {
             is_Install = 0;
+            total-=dataList.get(3).getCoun();
+
         }
-        total+=dataList.get(4).getCoun();
         binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
 
     }

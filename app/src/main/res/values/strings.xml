@@ -201,6 +201,7 @@
     <string name="paypal_from_here_you_can_pay_by_paypal">Paypal From here you can pay by Paypal</string>
     <string name="enter_amount">Enter Amount</string>
     <string name="complete_operation">Complete operation</string>
+    <string name="phone_not_found">Phone Not Found</string>
     <string-array name="models">
 
         <item>ِAds</item>

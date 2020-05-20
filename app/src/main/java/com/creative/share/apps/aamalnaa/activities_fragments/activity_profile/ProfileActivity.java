@@ -129,6 +129,12 @@ binding.setUsermodel(userModel.getUser());
                 like=0;
             }
         });
+        binding.imdclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
         dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
         dialog.setCanceledOnTouchOutside(false);
