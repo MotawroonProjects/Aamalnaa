@@ -143,7 +143,7 @@ binding.imageCall.setOnClickListener(new View.OnClickListener() {
             }
         }
         else {
-            Common.CreateAlertDialog(this,getResources().getString(R.string.phone_not_found));
+            Common.CreateAlertDialog(ChatActivity.this,getResources().getString(R.string.phone_not_found));
         }
 
     }
