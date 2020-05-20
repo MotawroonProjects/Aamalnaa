@@ -34,7 +34,7 @@ public class Service_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private AddAdsActivity activity;
     private UpdateAdsActivity updateAdsActivity;
 
-    private int i = 0;
+    private int i = -1;
 
     public Service_Adapter(List<Service_Model.Data> orderlist, Context context) {
         this.orderlist = orderlist;

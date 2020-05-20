@@ -82,7 +82,7 @@ public class Fragment_Sign_Up extends Fragment implements Listeners.SignUpListen
 adapter=new CityAdapter(dataList,activity);
 binding.spinnerCity.setAdapter(adapter);
         binding.checkbox.setOnClickListener(view -> {
-            navigateToTermsActivity();
+           // navigateToTermsActivity();
 
             if (binding.checkbox.isChecked())
             {

@@ -100,7 +100,7 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
     private Order_Upload_Model order_upload_model;
     private Preferences preferences;
     private UserModel userModel;
-
+private double total=0;
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -730,6 +730,9 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
         } else {
             commented = 0;
         }
+        total+=dataList.get(0).getCoun();
+        binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
+
     }
 
     public void setspicial() {
@@ -738,6 +741,8 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
         } else {
             is_Special = 0;
         }
+        total+=dataList.get(1).getCoun();
+        binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
     }
 
     public void setviews() {
@@ -746,6 +751,9 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
         } else {
             views_num = 0;
         }
+        total+=dataList.get(2).getCoun();
+        binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
+
     }
 
     public void setisinstall() {
@@ -754,6 +762,9 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
         } else {
             is_Install = 0;
         }
+        total+=dataList.get(4).getCoun();
+        binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
+
     }
 
     private void getservice() {
@@ -811,11 +822,11 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
         dataList.clear();
         dataList.addAll(body.getData());
         service_adapter.notifyDataSetChanged();
-        double totla = 0;
-        for (int i = 0; i < body.getData().size(); i++) {
-            totla += body.getData().get(i).getCoun();
-        }
-        binding.tvtotal.setText(totla + " " + getResources().getString(R.string.sar));
+//        double totla = 0;
+//        for (int i = 0; i < body.getData().size(); i++) {
+//            totla += body.getData().get(i).getCoun();
+//        }
+//        binding.tvtotal.setText(totla + " " + getResources().getString(R.string.sar));
     }
 
 }
