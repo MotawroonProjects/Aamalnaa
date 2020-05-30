@@ -324,6 +324,63 @@
                           />
                   </LinearLayout>
                   <LinearLayout
+                      android:id="@+id/llTerm"
+
+                      android:layout_width="match_parent"
+                      android:layout_height="40dp"
+                      android:orientation="horizontal"
+                      android:gravity="center_vertical"
+                      android:layout_marginTop="5dp"
+                      >
+                      <ImageView
+                          android:layout_width="25dp"
+                          android:layout_height="25dp"
+                          android:src="@drawable/ic_accept"
+                          android:tint="@color/secondColor"
+                          android:padding="3dp"
+
+                          />
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="10dp"
+                          android:layout_marginRight="10dp"
+                          android:textSize="13sp"
+                          android:textColor="@color/colorPrimary"
+                          android:text="@string/terms_and_conditions"
+                          />
+                  </LinearLayout>
+                  <LinearLayout
+                      android:id="@+id/llAbout"
+
+                      android:layout_width="match_parent"
+                      android:layout_height="40dp"
+                      android:orientation="horizontal"
+                      android:gravity="center_vertical"
+                      android:layout_marginTop="5dp"
+                      >
+                      <ImageView
+                          android:layout_width="25dp"
+                          android:layout_height="25dp"
+                          android:src="@drawable/ic_info"
+                          android:tint="@color/secondColor"
+                          android:padding="3dp"
+
+                          />
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="10dp"
+                          android:layout_marginRight="10dp"
+                          android:textSize="13sp"
+                          android:textColor="@color/colorPrimary"
+                          android:text="@string/about_tour"
+                          />
+                  </LinearLayout>
+
+                  <LinearLayout
                       android:id="@+id/llvideo"
 
                       android:layout_width="match_parent"
@@ -360,6 +417,7 @@
                       android:orientation="horizontal"
                       android:gravity="center_vertical"
                       android:layout_marginTop="5dp"
+                      android:visibility="gone"
                       >
                       <ImageView
                           android:layout_width="25dp"
@@ -381,63 +439,9 @@
                           />
                   </LinearLayout>
 
-                  <LinearLayout
-                      android:id="@+id/llTerm"
 
-                      android:layout_width="match_parent"
-                      android:layout_height="40dp"
-                      android:orientation="horizontal"
-                      android:gravity="center_vertical"
-                      android:layout_marginTop="5dp"
-                      >
-                      <ImageView
-                          android:layout_width="25dp"
-                          android:layout_height="25dp"
-                          android:src="@drawable/ic_accept"
-                          android:tint="@color/secondColor"
-                          android:padding="3dp"
 
-                          />
-                      <TextView
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_gravity="center_vertical"
-                          android:layout_marginLeft="10dp"
-                          android:layout_marginRight="10dp"
-                          android:textSize="13sp"
-                          android:textColor="@color/colorPrimary"
-                          android:text="@string/terms_and_conditions"
-                          />
-                  </LinearLayout>
 
-                  <LinearLayout
-                      android:id="@+id/llAbout"
-
-                      android:layout_width="match_parent"
-                      android:layout_height="40dp"
-                      android:orientation="horizontal"
-                      android:gravity="center_vertical"
-                      android:layout_marginTop="5dp"
-                      >
-                      <ImageView
-                          android:layout_width="25dp"
-                          android:layout_height="25dp"
-                          android:src="@drawable/ic_info"
-                          android:tint="@color/secondColor"
-                          android:padding="3dp"
-
-                          />
-                      <TextView
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_gravity="center_vertical"
-                          android:layout_marginLeft="10dp"
-                          android:layout_marginRight="10dp"
-                          android:textSize="13sp"
-                          android:textColor="@color/colorPrimary"
-                          android:text="@string/about_tour"
-                          />
-                  </LinearLayout>
 
                   <LinearLayout
                       android:id="@+id/llLogout"

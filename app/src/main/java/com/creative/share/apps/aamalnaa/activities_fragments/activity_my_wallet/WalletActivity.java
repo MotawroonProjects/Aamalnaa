@@ -150,13 +150,13 @@ binding.llAddBalance.setOnClickListener(new View.OnClickListener() {
                                 updatewallet(response.body());
                             } else {
 
-                                Toast.makeText(WalletActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                              //  Toast.makeText(WalletActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
 
                                 try {
 
                                     Log.e("error", response.code() + "_" + response.errorBody().string());
-                                } catch (IOException e) {
-                                    e.printStackTrace();
+                                } catch (Exception e) {
+                                 //   e.printStackTrace();
                                 }
 
                             }

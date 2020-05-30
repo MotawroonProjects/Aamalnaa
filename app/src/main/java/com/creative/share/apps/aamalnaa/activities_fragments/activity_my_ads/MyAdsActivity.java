@@ -1,5 +1,6 @@
 package com.creative.share.apps.aamalnaa.activities_fragments.activity_my_ads;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -18,8 +19,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_adsdetails.AdsDetialsActivity;
-import com.creative.share.apps.aamalnaa.activities_fragments.activity_favorite.FavoriteActivity;
-import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
 import com.creative.share.apps.aamalnaa.adapters.Ads_Adapter;
 import com.creative.share.apps.aamalnaa.databinding.ActivityMyAdsBinding;
 import com.creative.share.apps.aamalnaa.interfaces.Listeners;
@@ -28,6 +27,7 @@ import com.creative.share.apps.aamalnaa.models.Adversiment_Model;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
 import com.creative.share.apps.aamalnaa.remote.Api;
+import com.creative.share.apps.aamalnaa.share.Common;
 import com.creative.share.apps.aamalnaa.tags.Tags;
 
 import java.io.IOException;
@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -242,4 +243,76 @@ public class MyAdsActivity extends AppCompatActivity implements Listeners.BackLi
     public void back() {
         finish();
     }
+    public void DeleteMYAd(int id, int layoutPosition) {
+        try {
+
+
+            ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
+            dialog.setCancelable(false);
+            dialog.show();
+            Api.getService(Tags.base_url).DeleteMyAd(id,userModel.getUser().getId()).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    dialog.dismiss();
+                    if(response.isSuccessful()){
+                        advesriment_data_list.remove(layoutPosition);
+                        ads_adapter.notifyItemRemoved(layoutPosition);
+                    }
+                    else {
+                        if (response.code() == 422) {
+                            Toast.makeText(MyAdsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            //  Log.e("error",response.code()+"_"+response.errorBody()+response.message()+password+phone+phone_code);
+                            try {
+
+                                Log.e("error",response.code()+"_"+response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        else if (response.code() == 500) {
+                            try {
+
+                                Log.e("error",response.code()+"_"+response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                           // Toast.makeText(MyAdsActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+
+                        }
+                        else {
+                            try {
+
+                                Log.e("error",response.code()+"_"+response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            Toast.makeText(MyAdsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    try {
+                        dialog.dismiss();
+                        if (t.getMessage()!=null)
+                        {
+                            Log.e("error",t.getMessage());
+                            if (t.getMessage().toLowerCase().contains("failed to connect")||t.getMessage().toLowerCase().contains("unable to resolve host"))
+                            {
+                                Toast.makeText(MyAdsActivity.this,R.string.something, Toast.LENGTH_SHORT).show();
+                            }else
+                            {
+                                Toast.makeText(MyAdsActivity.this,t.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    }catch (Exception e){}
+                }
+            });}
+        catch (Exception e){
+
+        }
+    }
+
 }

@@ -8,6 +8,7 @@ import com.creative.share.apps.aamalnaa.models.BankDataModel;
 import com.creative.share.apps.aamalnaa.models.Catogries_Model;
 import com.creative.share.apps.aamalnaa.models.Cities_Model;
 import com.creative.share.apps.aamalnaa.models.MessageModel;
+import com.creative.share.apps.aamalnaa.models.NotificationCount;
 import com.creative.share.apps.aamalnaa.models.NotificationDataModel;
 import com.creative.share.apps.aamalnaa.models.PlaceGeocodeData;
 import com.creative.share.apps.aamalnaa.models.PlaceMapDetailsData;
@@ -512,6 +513,23 @@ public interface Service {
 
 
     );
+    @FormUrlEncoded
+    @POST("api/unSeenNotifications")
+    Call<NotificationCount> getUnreadNotificationCount(
+            @Field("user_id") String user_id
 
 
+    );
+    @FormUrlEncoded
+    @POST("api/unSeenMessages")
+    Call<NotificationCount> getUnreadMeaasgeCount(
+            @Field("user_id") String user_id
+
+
+    );
+    @FormUrlEncoded
+    @POST("api/ad/delete")
+    Call<ResponseBody> DeleteMyAd(@Field("ad_id") int ad_id,
+                                  @Field("user_id")int user_id
+    );
 }

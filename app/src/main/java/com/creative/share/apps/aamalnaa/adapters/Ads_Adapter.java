@@ -72,6 +72,12 @@ private Search_Activity search_activity;
             EventHolder eventHolder = (EventHolder) holder;
             eventHolder.binding.setLang(lang);
             eventHolder.binding.setAdversimentmodel(order_data);
+            if(context instanceof MyAdsActivity){
+                eventHolder.binding.fl.setVisibility(View.VISIBLE);
+            }
+            else {
+                eventHolder.binding.fl.setVisibility(View.GONE);
+            }
             if(order_data.getIs_Special()==0){
                 eventHolder.binding.imstar.setVisibility(View.GONE);
             }
@@ -112,7 +118,15 @@ else if(context instanceof  Search_Activity){
     }
 });
 
-
+            eventHolder.binding.fl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(context instanceof  MyAdsActivity){
+                        myAdsActivity=(MyAdsActivity)context;
+                        myAdsActivity.DeleteMYAd(orderlist.get(holder.getLayoutPosition()).getId(),holder.getLayoutPosition());
+                    }
+                }
+            });
 
 
         }else

@@ -18,7 +18,7 @@
     <string name="bank_account">الحسابات البنكية</string>
     <string name="terms_and_conditions">الشروط والاحكام</string>
     <string name="about_app">عن التطبيق</string>
-    <string name="contact_us">اتصل بنا</string>
+    <string name="contact_us">تواصل معنا</string>
     <string name="logout">تسجيل الخروج</string>
     <string name="send">ارسال</string>
     <string name="skip">تخطي</string>
@@ -84,11 +84,11 @@
     <string name="favorite">المفضلة</string>
     <string name="my_ads">دعاياتى</string>
     <string name="i_m_a_golden_client">الإشتراك كعميل ذهبي</string>
-    <string name="my_wallet">المحفظة</string>
+    <string name="my_wallet">محفظتى</string>
     <string name="transfer_accounts">حساب العمولة</string>
     <string name="share_app">مشاركة التطبيق</string>
     <string name="rate_app">تقييم التطبيق</string>
-    <string name="about_tour">عن التطبيق</string>
+    <string name="about_tour">من نحن</string>
     <string name="balance">الرصيد النقاطى الحالي</string>
     <string name="add_balance">إضافة رصيد لمحفظتى</string>
     <string name="app_commission">عمولة التطبيق</string>
@@ -169,11 +169,11 @@
     <string name="treatment">المعاملة</string>
     <string name="the_value">القيمه</string>
     <string name="current_profit">الربح الحالى</string>
-    <string name="_30_positive_evaluation">30 تقييم </string>
+    <string name="_30_positive_evaluation">10 تقييم </string>
     <string name="one_point">نقطه واحده</string>
     <string name="_10_ads">30 اعلانات</string>
     <string name="_20_acts">20 اعمال</string>
-    <string name="total">المجموع الكلى</string>
+    <string name="total">الربح الكلى</string>
     <string name="transformation">تحويل</string>
     <string name="application_mechanism">الية عمل التطبيق</string>
     <string name="delete_customer">حذف </string>
@@ -200,6 +200,8 @@
     <string name="enter_amount">ادخل القيمه</string>
     <string name="complete_operation">تأكيد العمليه</string>
     <string name="phone_not_found">رقم االجوال غير موجود</string>
+    <string name="contact_on_whatsapp_number">تواصل على الواتساب على رقم : 00966553160311</string>
+    <string name="point">النقطه = ريال </string>
     <string-array name="models">
         <item>اعلان</item>
         <item>دعايه</item>

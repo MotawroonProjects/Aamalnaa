@@ -171,7 +171,7 @@
     <string name="treatment">Treatment</string>
     <string name="the_value">the value</string>
     <string name="current_profit">Current profit</string>
-    <string name="_30_positive_evaluation">30  evaluation</string>
+    <string name="_30_positive_evaluation">10  evaluation</string>
     <string name="one_point">one point</string>
     <string name="_10_ads">30 Ads</string>
     <string name="_20_acts">20 acts</string>
@@ -202,6 +202,8 @@
     <string name="enter_amount">Enter Amount</string>
     <string name="complete_operation">Complete operation</string>
     <string name="phone_not_found">Phone Not Found</string>
+    <string name="contact_on_whatsapp_number">Contact on whatsapp number : 00966553160311</string>
+    <string name="point">Point = Ryal</string>
     <string-array name="models">
 
         <item>ِAds</item>

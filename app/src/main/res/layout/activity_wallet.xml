@@ -202,7 +202,17 @@
                         android:src="@drawable/ic_arrow_right"
                         android:tint="@color/colorPrimary" />
                 </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:text="@string/point"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
 
+                    />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -212,13 +222,16 @@
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:textStyle="bold"
+                    android:visibility="gone"
 
                     />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/textColor" />
+                    android:background="@color/textColor"
+                    android:visibility="gone"
+                    />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -226,7 +239,9 @@
                     android:layout_marginTop="5dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:weightSum="2"
+android:visibility="gone"
+                    >
 
                     <TextView
                         android:layout_width="0dp"
@@ -260,7 +275,9 @@
                     android:background="@color/gray3"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:weightSum="2"
+                    android:visibility="gone"
+                    >
 
                     <TextView
                         android:layout_width="0dp"
@@ -293,7 +310,9 @@
                     android:layout_marginTop="5dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:weightSum="2"
+                    android:visibility="gone"
+                    >
 
                     <TextView
                         android:layout_width="0dp"
@@ -327,7 +346,9 @@
                     android:background="@color/gray3"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:weightSum="2"
+                     android:visibility="gone"
+                    >
 
                     <TextView
                         android:layout_width="0dp"

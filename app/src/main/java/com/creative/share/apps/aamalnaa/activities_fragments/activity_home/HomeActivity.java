@@ -29,6 +29,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_add_ads.AddAdsActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_ads.Ads_Activity;
@@ -48,6 +49,7 @@ import com.creative.share.apps.aamalnaa.models.ChatUserModel;
 import com.creative.share.apps.aamalnaa.models.Cities_Model;
 import com.creative.share.apps.aamalnaa.models.Filter_Model;
 import com.creative.share.apps.aamalnaa.models.MessageModel;
+import com.creative.share.apps.aamalnaa.models.NotificationCount;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
 import com.creative.share.apps.aamalnaa.remote.Api;
@@ -86,7 +88,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks, LocationListener {
+public class HomeActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, LocationListener {
     private ActivityHomeBinding binding;
     private FragmentManager fragmentManager;
     private Fragment_Main fragment_main;
@@ -99,7 +101,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
     private View root;
     private Button btnNearby, btnFurthest, btnWithImage, btcancel, btfilter;
     private Spinner spinner;
-    private String lat="0.0", lng="0.0";
+    private String lat = "0.0", lng = "0.0";
     private CityAdapter adapter;
     private List<Cities_Model.Data> dataList;
     private final String gps_perm = Manifest.permission.ACCESS_FINE_LOCATION;
@@ -128,6 +130,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
 //        startActivityForResult(intent,1000);
 
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,10 +143,12 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
         }
         if (userModel != null) {
             updateToken();
-
+            getNotificationCount();
+            getMessageCount();
         }
 
     }
+
     private void updateToken() {
         FirebaseInstanceId.getInstance()
                 .getInstanceId()
@@ -151,7 +156,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
                     @Override
                     public void onComplete(@NonNull Task<InstanceIdResult> task) {
                         if (task.isSuccessful()) {
-                             token = task.getResult().getToken();
+                            token = task.getResult().getToken();
                             task.getResult().getId();
                             Log.e("sssssss", token);
                             Api.getService(Tags.base_url)
@@ -189,9 +194,10 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
                     }
                 });
     }
+
     @SuppressLint("RestrictedApi")
     private void initView() {
-        dataList=new ArrayList<>();
+        dataList = new ArrayList<>();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
         fragmentManager = getSupportFragmentManager();
@@ -202,13 +208,13 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
         btnWithImage = findViewById(R.id.btnWithImage);
         btcancel = findViewById(R.id.btnCancel);
         btfilter = findViewById(R.id.btnfilter);
-        spinner=findViewById(R.id.spinner);
+        spinner = findViewById(R.id.spinner);
         Filter_Model.setCity_id("all");
         Filter_Model.setLat("all");
         Filter_Model.setLng("all");
         Filter_Model.setIs_new(0);
         Filter_Model.setphoto(0);
-        adapter=new CityAdapter(dataList,this);
+        adapter = new CityAdapter(dataList, this);
         spinner.setAdapter(adapter);
         getCities();
 
@@ -218,7 +224,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
                 if (i == 0) {
                     Filter_Model.setCity_id("all");
                 } else {
-                  Filter_Model.setCity_id(dataList.get(i).getId()+"");
+                    Filter_Model.setCity_id(dataList.get(i).getId() + "");
 
                 }
             }
@@ -233,13 +239,13 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
             if (Filter_Model.getLat().equals("all")) {
                 btnNearby.setBackgroundResource(R.drawable.selected_filter);
                 btnNearby.setTextColor(ContextCompat.getColor(this, R.color.white));
-             dialog = Common.createProgressDialog(this, getString(R.string.wait));
+                dialog = Common.createProgressDialog(this, getString(R.string.wait));
 
                 dialog.show();
                 CheckPermission();
                 Filter_Model.setLat(lat);
                 Filter_Model.setLng(lng);
-                Log.e("lat",lat+"  "+lng);
+                Log.e("lat", lat + "  " + lng);
             } else {
                 btnNearby.setBackgroundResource(R.drawable.un_selected_filter);
                 btnNearby.setTextColor(ContextCompat.getColor(this, R.color.textColor));
@@ -294,27 +300,27 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
             startActivityForResult(intent, 1);
 
         });
-btcancel.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        binding.fab.setVisibility(View.VISIBLE);
-        behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-    }
-});
-btfilter.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        Intent intent=new Intent(HomeActivity.this, Ads_Activity.class);
-        startActivity(intent);
-    }
-});
-binding.imageSearch.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        Intent intent=new Intent(HomeActivity.this, Search_Activity.class);
-        startActivity(intent);
-    }
-});
+        btcancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.fab.setVisibility(View.VISIBLE);
+                behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        });
+        btfilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, Ads_Activity.class);
+                startActivity(intent);
+            }
+        });
+        binding.imageSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, Search_Activity.class);
+                startActivity(intent);
+            }
+        });
         setSupportActionBar(binding.toolbar);
         setUpBottomNavigation();
         setUpBottomSheet();
@@ -353,16 +359,16 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
                     displayFragmentMain();
                     break;
                 case 1:
-                    if(userModel!=null){
-                    displayFragmentMessages();}
-                    else {
+                    if (userModel != null) {
+                        displayFragmentMessages();
+                    } else {
                         Common.CreateNoSignAlertDialog(this);
                     }
                     break;
                 case 2:
-                    if(userModel!=null){
-                    displayFragmentNotification();}
-                    else {
+                    if (userModel != null) {
+                        displayFragmentNotification();
+                    } else {
                         Common.CreateNoSignAlertDialog(this);
 
                     }
@@ -387,8 +393,7 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
         try {
             if (fragment_main == null) {
                 fragment_main = Fragment_Main.newInstance();
-            }
-            else {
+            } else {
                 fragment_main.setcat_id("all");
             }
             if (fragment_messages != null && fragment_messages.isAdded()) {
@@ -515,8 +520,6 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
     }
 
 
-
-
     @SuppressLint("RestrictedApi")
     @Override
     public void onBackPressed() {
@@ -537,12 +540,13 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
         }
 
     }
+
     public void deletetoken() {
         final ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
 
         dialog.show();
         Api.getService(Tags.base_url)
-                .delteToken(userModel.getUser().getId() ,token)
+                .delteToken(userModel.getUser().getId(), token)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -557,7 +561,7 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
                                         }
                                     },1);
                             userSingleTone.clear(ClientHomeActivity.this);*/
-                         Logout();
+                            Logout();
 
                         }
                     }
@@ -604,12 +608,14 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
                     }
                 });
     }
+
     private void updateCityAdapter(Cities_Model body) {
 
         dataList.add(new Cities_Model.Data("إختر"));
-        if(body.getData()!=null){
+        if (body.getData() != null) {
             dataList.addAll(body.getData());
-            adapter.notifyDataSetChanged();}
+            adapter.notifyDataSetChanged();
+        }
     }
 
     private void getCities() {
@@ -624,10 +630,10 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
                         public void onResponse(Call<Cities_Model> call, Response<Cities_Model> response) {
                             dialog.dismiss();
                             if (response.isSuccessful() && response.body() != null) {
-                                if(response.body().getData()!=null){
-                                    updateCityAdapter(response.body());}
-                                else {
-                                    Log.e("error",response.code()+"_"+response.errorBody());
+                                if (response.body().getData() != null) {
+                                    updateCityAdapter(response.body());
+                                } else {
+                                    Log.e("error", response.code() + "_" + response.errorBody());
 
                                 }
 
@@ -635,7 +641,7 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
 
                                 try {
 
-                                    Log.e("error",response.code()+"_"+response.errorBody().string());
+                                    Log.e("error", response.code() + "_" + response.errorBody().string());
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -643,8 +649,7 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
                                     Toast.makeText(HomeActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
 
 
-                                }else
-                                {
+                                } else {
                                     Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
 
 
@@ -721,8 +726,8 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onLocationChanged(Location location) {
         this.location = location;
-        lat = location.getLatitude()+"";
-        lng = location.getLongitude()+"";
+        lat = location.getLatitude() + "";
+        lng = location.getLongitude() + "";
 
         //AddMarker(lat, lang);
 
@@ -733,8 +738,9 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
         {
             LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(locationCallback);
         }
-        if(dialog!=null){
-        dialog.dismiss();}
+        if (dialog != null) {
+            dialog.dismiss();
+        }
     }
 
 
@@ -795,26 +801,28 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
         };
         LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
     }
+
     public void showdetials(int id) {
-        Intent intent=new Intent(HomeActivity.this, AdsDetialsActivity.class);
-        intent.putExtra("search",id);
+        Intent intent = new Intent(HomeActivity.this, AdsDetialsActivity.class);
+        intent.putExtra("search", id);
         startActivity(intent);
     }
 
     public void gotomessage(int receiver_id, String receiver_name, String receiver_mobile) {
-        Intent intent=new Intent(HomeActivity.this, ChatActivity.class);
-        intent.putExtra("data",receiver_id+"");
-        intent.putExtra("name",receiver_name);
-        intent.putExtra("phone",receiver_mobile);
+        Intent intent = new Intent(HomeActivity.this, ChatActivity.class);
+        intent.putExtra("data", receiver_id + "");
+        intent.putExtra("name", receiver_name);
+        intent.putExtra("phone", receiver_mobile);
 
         startActivity(intent);
     }
 
     public void deletenotification(int id) {
-        if(fragment_notifications!=null&&fragment_notifications.isAdded()){
+        if (fragment_notifications != null && fragment_notifications.isAdded()) {
             fragment_notifications.deletenotification(id);
         }
     }
+
     public void NavigateToSignInActivity(boolean isSignIn) {
 //Log.e("data",isSignIn+"");
         Intent intent = new Intent(HomeActivity.this, SignInActivity.class);
@@ -822,5 +830,111 @@ binding.imageSearch.setOnClickListener(new View.OnClickListener() {
         startActivity(intent);
         finish();
 
+    }
+
+    private void getNotificationCount() {
+        Api.getService(Tags.base_url)
+                .getUnreadNotificationCount(userModel.getUser().getId() + "")
+                .enqueue(new Callback<NotificationCount>() {
+                    @Override
+                    public void onResponse(Call<NotificationCount> call, Response<NotificationCount> response) {
+                        if (response.isSuccessful()) {
+                            updateNotificationCount(response.body());
+                        } else {
+                            try {
+                                Log.e("errorNotCode", response.code() + "__" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            if (response.code() == 500) {
+                                Toast.makeText(HomeActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<NotificationCount> call, Throwable t) {
+                        try {
+                            if (t.getMessage() != null) {
+                                Log.e("error_not_code", t.getMessage() + "__");
+
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                    Toast.makeText(HomeActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        } catch (Exception e) {
+                            Log.e("Error", e.getMessage() + "__");
+                        }
+                    }
+                });
+    }
+
+    private void updateNotificationCount(NotificationCount body) {
+        AHNotification.Builder builder = new AHNotification.Builder();
+        builder.setTextColor(ContextCompat.getColor(this, R.color.white));
+        builder.setBackgroundColor(ContextCompat.getColor(this, R.color.golden_stars));
+        binding.ahBottomNav.setNotification(builder.build(), 3);
+        if (body.getCount() > 0) {
+            builder.setText(body.getCount() + "");
+            binding.ahBottomNav.setNotification(builder.build(), 2);
+        }
+    }
+
+    private void getMessageCount() {
+        Api.getService(Tags.base_url)
+                .getUnreadMeaasgeCount(userModel.getUser().getId() + "")
+                .enqueue(new Callback<NotificationCount>() {
+                    @Override
+                    public void onResponse(Call<NotificationCount> call, Response<NotificationCount> response) {
+                        if (response.isSuccessful()) {
+                            updateMessgeCount(response.body());
+                        } else {
+                            try {
+                                Log.e("errorNotCode", response.code() + "__" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            if (response.code() == 500) {
+                                Toast.makeText(HomeActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<NotificationCount> call, Throwable t) {
+                        try {
+                            if (t.getMessage() != null) {
+                                Log.e("error_not_code", t.getMessage() + "__");
+
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                    Toast.makeText(HomeActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        } catch (Exception e) {
+                            Log.e("Error", e.getMessage() + "__");
+                        }
+                    }
+                });
+    }
+
+    private void updateMessgeCount(NotificationCount body) {
+        AHNotification.Builder builder = new AHNotification.Builder();
+        builder.setTextColor(ContextCompat.getColor(this, R.color.white));
+        builder.setBackgroundColor(ContextCompat.getColor(this, R.color.golden_stars));
+        binding.ahBottomNav.setNotification(builder.build(), 2);
+        if (body.getCount() > 0) {
+            builder.setText(body.getCount() + "");
+            binding.ahBottomNav.setNotification(builder.build(), 1);
+        }
     }
 }

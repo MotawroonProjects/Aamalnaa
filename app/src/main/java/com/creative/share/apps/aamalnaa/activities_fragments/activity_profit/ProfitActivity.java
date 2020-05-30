@@ -144,7 +144,7 @@ public class ProfitActivity extends AppCompatActivity implements Listeners.BackL
                                 udateprofit(response.body());
                             } else {
 
-                                Toast.makeText(ProfitActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(ProfitActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
 
                                 try {
 

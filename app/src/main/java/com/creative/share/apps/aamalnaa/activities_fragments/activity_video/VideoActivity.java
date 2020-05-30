@@ -58,7 +58,7 @@ public class VideoActivity extends AppCompatActivity implements Listeners.BackLi
     private void initView() {
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        videoPath = "https://www.youtube.com/watch?v=X2Md_NgRSqI&feature=youtu.be";
+        videoPath = "https://youtu.be/I4yckeyap-A";
         setUpWebView();
 
     }
