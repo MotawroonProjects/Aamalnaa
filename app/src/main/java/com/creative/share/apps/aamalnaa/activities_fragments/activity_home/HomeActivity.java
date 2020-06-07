@@ -367,6 +367,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
                     break;
                 case 2:
                     if (userModel != null) {
+
                         displayFragmentNotification();
                     } else {
                         Common.CreateNoSignAlertDialog(this);
@@ -878,7 +879,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
         AHNotification.Builder builder = new AHNotification.Builder();
         builder.setTextColor(ContextCompat.getColor(this, R.color.white));
         builder.setBackgroundColor(ContextCompat.getColor(this, R.color.golden_stars));
-        binding.ahBottomNav.setNotification(builder.build(), 3);
+        binding.ahBottomNav.setNotification(builder.build(), 2);
         if (body.getCount() > 0) {
             builder.setText(body.getCount() + "");
             binding.ahBottomNav.setNotification(builder.build(), 2);
@@ -931,7 +932,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
         AHNotification.Builder builder = new AHNotification.Builder();
         builder.setTextColor(ContextCompat.getColor(this, R.color.white));
         builder.setBackgroundColor(ContextCompat.getColor(this, R.color.golden_stars));
-        binding.ahBottomNav.setNotification(builder.build(), 2);
+        binding.ahBottomNav.setNotification(builder.build(), 1);
         if (body.getCount() > 0) {
             builder.setText(body.getCount() + "");
             binding.ahBottomNav.setNotification(builder.build(), 1);

@@ -243,10 +243,12 @@ binding.imageCall.setOnClickListener(new View.OnClickListener() {
                            //  binding.swipeRefresh.setRefreshing(false);
                             if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
                                 messagedatalist.clear();
+
                                 messagedatalist.addAll(response.body().getData());
                                 if (response.body().getData().size() > 0) {
                                     // rec_sent.setVisibility(View.VISIBLE);
-                                    //  Log.e("data",response.body().getData().get(0).getAr_title());
+                                    Log.e("data",response.body().getData().size()
+                                    +"");
 
                                     // binding.llMsgContainer.setVisibility(View.GONE);
                                     chat_adapter.notifyDataSetChanged();

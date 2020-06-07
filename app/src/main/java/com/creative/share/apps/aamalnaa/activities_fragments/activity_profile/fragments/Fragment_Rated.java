@@ -94,7 +94,7 @@ public class Fragment_Rated extends Fragment {
                                 updateprofile(response.body());
                             } else {
 
-                                Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                             //   Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
 
                                 try {
 
