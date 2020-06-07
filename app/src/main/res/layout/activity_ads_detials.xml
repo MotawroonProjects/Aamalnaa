@@ -73,7 +73,7 @@
                     android:clickable="false"
                     android:longClickable="false"
                     android:lines="2"
-                    android:text="@{adsmodel.title}"
+                    android:text='@{adsmodel.title+"#"+adsmodel.id}'
                     android:textColor="@color/white"
                     android:textSize="14sp"
 
