@@ -381,6 +381,9 @@ private int pos=-1;
         if(dialog!=null){
             dialog.dismiss();
         }
+        if(cat_id==null){
+            cat_id="all";
+        }
         if(subcategories.size()>0){
         subcategories.clear();
         subCategoryAdapter.notifyDataSetChanged();

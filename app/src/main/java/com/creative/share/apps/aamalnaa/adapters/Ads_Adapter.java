@@ -2,6 +2,7 @@ package com.creative.share.apps.aamalnaa.adapters;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,6 +79,7 @@ private Search_Activity search_activity;
             else {
                 eventHolder.binding.fl.setVisibility(View.GONE);
             }
+            Log.e("kkdkk",order_data.getIs_Special()+"");
             if(order_data.getIs_Special()==0){
                 eventHolder.binding.imstar.setVisibility(View.GONE);
             }

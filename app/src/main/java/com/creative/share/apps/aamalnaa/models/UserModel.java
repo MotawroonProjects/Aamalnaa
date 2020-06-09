@@ -8,7 +8,7 @@ public class UserModel implements Serializable {
     private List<Customers> customers;
     private List<Ads> ads;
     private List<Rateds> rateds;
-private List<Previous> previous;
+    private List<Previous> previous;
 
     public User getUser() {
         return user;
@@ -34,39 +34,39 @@ private List<Previous> previous;
         return previous;
     }
 
-    public static class User implements Serializable{
-private int id;
+    public static class User implements Serializable {
+        private int id;
         private String user_type;
-    private String avatar;
-    private String name;
-    private String full_name;
-    private String iban;
-    private String mobile;
-    private String email;
-       private int role_id;
+        private String avatar;
+        private String name;
+        private String full_name;
+        private String iban;
+        private String mobile;
+        private String email;
+        private int role_id;
         private int is_Admin;
-    private String msg;
-    private String about;
+        private String msg;
+        private String about;
         private int city_id;
         private int star_user;
-    private int accepted;
-    private int amount;
-    private int can_rate;
-    private String last_sing_in_at;
-    private String current_sing_in_at;
-    private int is_login;
-    private String created_at;
-    private String updated_at;
-private int showinfo;
-    private String city_name;
-    private double total;
-    private double Evaluation;
-    private int negativeRate;
-    private int postivesRate;
-    private int is_follow;
-    private String lastSeen;
-private long date;
-private long logout_time;
+        private int accepted;
+        private int amount;
+        private int can_rate;
+        private String last_sing_in_at;
+        private String current_sing_in_at;
+        private int is_login;
+        private String created_at;
+        private String updated_at;
+        private int showinfo;
+        private String city_name;
+        private double total;
+        private double Evaluation;
+        private int negativeRate;
+        private int postivesRate;
+        private int is_follow;
+        private String lastSeen;
+        private long date;
+        private long logout_time;
 
         public User() {
         }
@@ -80,121 +80,121 @@ private long logout_time;
         }
 
         public int getId() {
-        return id;
-    }
+            return id;
+        }
 
-    public String getUser_type() {
-        return user_type;
-    }
+        public String getUser_type() {
+            return user_type;
+        }
 
-    public String getAvatar() {
-        return avatar;
-    }
+        public String getAvatar() {
+            return avatar;
+        }
 
-    public String getName() {
-        return name;
-    }
+        public String getName() {
+            return name;
+        }
 
-    public String getFull_name() {
-        return full_name;
-    }
+        public String getFull_name() {
+            return full_name;
+        }
 
-    public String getIban() {
-        return iban;
-    }
+        public String getIban() {
+            return iban;
+        }
 
-    public String getMobile() {
-        return mobile;
-    }
+        public String getMobile() {
+            return mobile;
+        }
 
-    public String getEmail() {
-        return email;
-    }
+        public String getEmail() {
+            return email;
+        }
 
-    public int getRole_id() {
-        return role_id;
-    }
+        public int getRole_id() {
+            return role_id;
+        }
 
-    public int getIs_Admin() {
-        return is_Admin;
-    }
+        public int getIs_Admin() {
+            return is_Admin;
+        }
 
-    public String getMsg() {
-        return msg;
-    }
+        public String getMsg() {
+            return msg;
+        }
 
-    public String getAbout() {
-        return about;
-    }
+        public String getAbout() {
+            return about;
+        }
 
-    public int getCity_id() {
-        return city_id;
-    }
+        public int getCity_id() {
+            return city_id;
+        }
 
-    public int getStar_user() {
-        return star_user;
-    }
+        public int getStar_user() {
+            return star_user;
+        }
 
-    public int getAccepted() {
-        return accepted;
-    }
+        public int getAccepted() {
+            return accepted;
+        }
 
-    public int getAmount() {
-        return amount;
-    }
+        public int getAmount() {
+            return amount;
+        }
 
         public int getCan_rate() {
             return can_rate;
         }
 
         public String getLast_sing_in_at() {
-        return last_sing_in_at;
-    }
+            return last_sing_in_at;
+        }
 
-    public String getCurrent_sing_in_at() {
-        return current_sing_in_at;
-    }
+        public String getCurrent_sing_in_at() {
+            return current_sing_in_at;
+        }
 
-    public int getIs_login() {
-        return is_login;
-    }
+        public int getIs_login() {
+            return is_login;
+        }
 
-    public String getCreated_at() {
-        return created_at;
-    }
+        public String getCreated_at() {
+            return created_at;
+        }
 
-    public String getUpdated_at() {
-        return updated_at;
-    }
+        public String getUpdated_at() {
+            return updated_at;
+        }
 
         public int getShowinfo() {
             return showinfo;
         }
 
         public String getCity_name() {
-        return city_name;
-    }
+            return city_name;
+        }
 
 
-    public double getEvaluation() {
-        return Evaluation;
-    }
+        public double getEvaluation() {
+            return Evaluation;
+        }
 
-    public int getNegativeRate() {
-        return negativeRate;
-    }
+        public int getNegativeRate() {
+            return negativeRate;
+        }
 
-    public int getPostivesRate() {
-        return postivesRate;
-    }
+        public int getPostivesRate() {
+            return postivesRate;
+        }
 
-    public int getIs_follow() {
-        return is_follow;
-    }
+        public int getIs_follow() {
+            return is_follow;
+        }
 
-    public String getLastSeen() {
-        return lastSeen;
-    }
+        public String getLastSeen() {
+            return lastSeen;
+        }
 
         public long getDate() {
             return date;
@@ -204,8 +204,8 @@ private long logout_time;
             return total;
         }
     }
- public class Customers implements Serializable
-    {
+
+    public class Customers implements Serializable {
         private int id;
         private int follower_id;
         private int followed_id;
@@ -213,7 +213,8 @@ private long logout_time;
         private String updated_at;
         private String name;
         private String avatar;
-private int by_my_previous;
+        private int by_my_previous;
+
         public int getId() {
             return id;
         }
@@ -246,9 +247,9 @@ private int by_my_previous;
             return by_my_previous;
         }
     }
-     public class Ads implements Serializable
-    {
-        private int  id;
+
+    public class Ads implements Serializable {
+        private int id;
         private int category_id;
         private int subcategory_id;
         private int user_id;
@@ -399,8 +400,8 @@ private int by_my_previous;
             return user_name;
         }
     }
-     public class Rateds implements Serializable
-    {
+
+    public class Rateds implements Serializable {
         private int id;
         private int user_id;
         private int ad_id;
@@ -408,10 +409,11 @@ private int by_my_previous;
         private int rated_id;
         private String reason;
         private String created_at;
-private long date;
-           private String user_name;
+        private long date;
+        private String user_name;
         private String user_avatar;
-private String updated_at;
+        private String updated_at;
+
         public int getId() {
             return id;
         }
@@ -456,13 +458,13 @@ private String updated_at;
             return user_avatar;
         }
     }
-    public class Previous implements Serializable
-    {
-        private int id;
-            private int user_id;
-            private int follower_id;
 
-            private String name;
+    public class Previous implements Serializable {
+        private int id;
+        private int user_id;
+        private int follower_id;
+
+        private String name;
         private String avatar;
 
         public int getId() {

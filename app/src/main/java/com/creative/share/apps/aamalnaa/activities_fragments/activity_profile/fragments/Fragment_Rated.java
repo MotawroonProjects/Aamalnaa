@@ -111,7 +111,7 @@ public class Fragment_Rated extends Fragment {
                             try {
                                 dialog.dismiss();
                                 if (t.getMessage() != null) {
-                                    Log.e("error", t.getMessage());
+                                    Log.e("error", t.getCause().toString());
                                     if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
                                         Toast.makeText(activity, R.string.something, Toast.LENGTH_SHORT).show();
                                     } else {

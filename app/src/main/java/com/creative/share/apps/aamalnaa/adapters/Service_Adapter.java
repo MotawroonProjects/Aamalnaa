@@ -73,7 +73,7 @@ public class Service_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 orderlist.get(position).setName("تمييز الاعلان");
             }
             if(orderlist.get(position).getName().equals("views_num")){
-                orderlist.get(position).setName("اضافة 100 مشاهدة");
+                orderlist.get(position).setName("اضافة 30 مشاهدة");
             }
             if(orderlist.get(position).getName().equals("is_Install")){
                 orderlist.get(position).setName(" تثبيت الاعلان");
