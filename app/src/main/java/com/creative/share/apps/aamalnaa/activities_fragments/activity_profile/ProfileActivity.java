@@ -421,7 +421,7 @@ Log.e(";;llll",tab.getPosition()+"");
                                 updateprofile(response.body());
                             } else {
 
-                                Toast.makeText(ProfileActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(ProfileActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
 
                                 try {
 
@@ -440,9 +440,9 @@ Log.e(";;llll",tab.getPosition()+"");
                                 if (t.getMessage() != null) {
                                     Log.e("error", t.getMessage());
                                     if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-                                        Toast.makeText(ProfileActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                  //      Toast.makeText(ProfileActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(ProfileActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    //    Toast.makeText(ProfileActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
 

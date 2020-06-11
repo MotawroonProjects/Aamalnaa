@@ -67,7 +67,7 @@ public class UserModel implements Serializable {
         private String lastSeen;
         private long date;
         private long logout_time;
-
+        private String balance;
         public User() {
         }
 
@@ -203,6 +203,10 @@ public class UserModel implements Serializable {
         public double getTotal() {
             return total;
         }
+
+        public String getBalance() {
+            return balance;
+        }
     }
 
     public class Customers implements Serializable {
@@ -266,6 +270,7 @@ public class UserModel implements Serializable {
         private int my_work;
         private int accepted;
         private int price;
+        private double total_points;
         private double lat;
         private double lng;
         private int code;
@@ -350,6 +355,10 @@ public class UserModel implements Serializable {
 
         public int getPrice() {
             return price;
+        }
+
+        public double getTotal_points() {
+            return total_points;
         }
 
         public double getLat() {

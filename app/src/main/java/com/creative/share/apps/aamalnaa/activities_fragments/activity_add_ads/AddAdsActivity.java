@@ -100,7 +100,9 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
     private Order_Upload_Model order_upload_model;
     private Preferences preferences;
     private UserModel userModel;
-private double total=0;
+    private double total = 0;
+    private double balance;
+
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -114,7 +116,7 @@ private double total=0;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_ads);
         initView();
         getCities();
-
+        getprofiledata();
         getservice();
         getDepartments();
     }
@@ -126,6 +128,62 @@ private double total=0;
             dataList2.addAll(body.getData());
             adapter.notifyDataSetChanged();
 
+        }
+    }
+
+    private void getprofiledata() {
+        final ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        try {
+            //Log.e("data_f",id);
+
+            Api.getService(Tags.base_url)
+                    .getmyprofile(userModel.getUser().getId() + "", userModel.getUser().getId() + "")
+                    .enqueue(new Callback<UserModel>() {
+                        @Override
+                        public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                            dialog.dismiss();
+                            if (response.isSuccessful() && response.body() != null) {
+                                // updatepruofile(response.body());
+                                balance = Double.parseDouble(response.body().getUser().getBalance());
+                            } else {
+
+                                //Toast.makeText(WalletActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+                                try {
+
+                                    Log.e("error_data5", response.code() + "_" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<UserModel> call, Throwable t) {
+                            try {
+                                dialog.dismiss();
+                                if (t.getMessage() != null) {
+                                    Log.e("error", t.getMessage());
+                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                        //   Toast.makeText(WalletActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        // Toast.makeText(WalletActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            if (dialog != null) {
+                dialog.dismiss();
+            }
+
+            // Log.e("err", e.getMessage());
         }
     }
 
@@ -351,7 +409,7 @@ private double total=0;
 
         try {
             Api.getService(Tags.base_url)
-                    .sendorderwithoutimage(userModel.getUser().getId() + "", order_upload_model.getCategory_id(), order_upload_model.getSubcategory_id(), order_upload_model.getCity_id(), type_id, order_upload_model.getTitle(), order_upload_model.getDetails(), order_upload_model.getPrice(), order_upload_model.getAddress(), order_upload_model.getLongitude(), order_upload_model.getLatitude(), views_num + "", is_Special + "", is_Install + "", commented + "").enqueue(new Callback<ResponseBody>() {
+                    .sendorderwithoutimage(userModel.getUser().getId() + "", order_upload_model.getCategory_id(), order_upload_model.getSubcategory_id(), order_upload_model.getCity_id(), type_id, order_upload_model.getTitle(), order_upload_model.getDetails(), order_upload_model.getPrice(), order_upload_model.getAddress(), order_upload_model.getLongitude(), order_upload_model.getLatitude(), views_num + "", is_Special + "", is_Install + "", commented + "",total+"").enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     dialog.dismiss();
@@ -431,11 +489,12 @@ private double total=0;
         RequestBody is_Special_part = Common.getRequestBodyText(is_Special + "");
         RequestBody is_Install_part = Common.getRequestBodyText(is_Install + "");
         RequestBody commented_part = Common.getRequestBodyText(commented + "");
+        RequestBody totla_part = Common.getRequestBodyText(total + "");
 
         List<MultipartBody.Part> partimageList = getMultipartBodyList(urlList, "image[]");
         try {
             Api.getService(Tags.base_url)
-                    .Sendorder(user_part, category_part, subcategory_part, city_part, type_part, title_part, detials_part, price_part, address_part, long_part, lat_part, views_num_part, is_Special_part, is_Install_part, commented_part, partimageList).enqueue(new Callback<ResponseBody>() {
+                    .Sendorder(user_part, category_part, subcategory_part, city_part, type_part, title_part, detials_part, price_part, address_part, long_part, lat_part, views_num_part, is_Special_part, is_Install_part, commented_part,totla_part, partimageList).enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     dialog.dismiss();
@@ -724,60 +783,84 @@ private double total=0;
     }
 
 
-    public void setcommented() {
-        if (commented == 0) {
-            commented = 1;
-            total+=dataList.get(0).getCoun();
+    public int setcommented() {
 
+        if (commented == 0) {
+            if (balance > total && (total + dataList.get(0).getPrice() <= balance)) {
+                commented = 1;
+                total += dataList.get(0).getPrice();
+            } else {
+                Toast.makeText(this, "رصيد نقاطك غير كافى", Toast.LENGTH_LONG).show();
+                return 0;
+            }
         } else {
             commented = 0;
-            total-=dataList.get(0).getCoun();
+            total -= dataList.get(0).getPrice();
 
         }
         binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
-
+        return 1;
     }
 
-    public void setspicial() {
+    public int setspicial() {
         if (is_Special == 0) {
-            is_Special = 1;
-            total+=dataList.get(1).getCoun();
+            if (balance > total && (total + dataList.get(1).getPrice() <= balance)) {
+
+                is_Special = 1;
+                total += dataList.get(1).getPrice();
+            } else {
+                Toast.makeText(this, "رصيد نقاطك غير كافى", Toast.LENGTH_LONG).show();
+                return 0;
+            }
 
         } else {
             is_Special = 0;
-            total-=dataList.get(1).getCoun();
+            total -= dataList.get(1).getPrice();
 
         }
 
         binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
+        return 1;
     }
 
-    public void setviews() {
+    public int setviews() {
         if (views_num == 0) {
-            views_num = 1;
-            total+=dataList.get(2).getCoun();
+            if (balance > total && (total + dataList.get(2).getPrice() <= balance)) {
+
+                views_num = 1;
+                total += dataList.get(2).getPrice();
+            } else {
+                Toast.makeText(this, "رصيد نقاطك غير كافى", Toast.LENGTH_LONG).show();
+                return 0;
+            }
 
         } else {
             views_num = 0;
-            total-=dataList.get(2).getCoun();
+            total -= dataList.get(2).getPrice();
 
         }
         binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
-
+        return 1;
     }
 
-    public void setisinstall() {
+    public int setisinstall() {
         if (is_Install == 0) {
-            is_Install = 1;
-            total+=dataList.get(3).getCoun();
+            if (balance > total && (total + dataList.get(3).getPrice() <= balance)) {
+
+                is_Install = 1;
+                total += dataList.get(3).getPrice();
+            } else {
+                Toast.makeText(this, "رصيد نقاطك غير كافى", Toast.LENGTH_LONG).show();
+                return 0;
+            }
 
         } else {
             is_Install = 0;
-            total-=dataList.get(3).getCoun();
+            total -= dataList.get(3).getPrice();
 
         }
         binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
-
+        return 1;
     }
 
     private void getservice() {
@@ -837,7 +920,7 @@ private double total=0;
         service_adapter.notifyDataSetChanged();
 //        double totla = 0;
 //        for (int i = 0; i < body.getData().size(); i++) {
-//            totla += body.getData().get(i).getCoun();
+//            totla += body.getData().get(i).getPrice();
 //        }
 //        binding.tvtotal.setText(totla + " " + getResources().getString(R.string.sar));
     }

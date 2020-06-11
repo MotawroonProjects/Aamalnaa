@@ -286,7 +286,7 @@
                     android:layout_marginTop="30dp"
                     android:textColor="@color/white"
                     android:textSize="15sp"
-                    android:text="edit"
+                    android:text="تعديل"
                     android:background="@drawable/btn_login_bg"
                     android:paddingLeft="50dp"
                     android:paddingRight="50dp"

@@ -20,6 +20,8 @@ import com.creative.share.apps.aamalnaa.databinding.ServiceRowBinding;
 import com.creative.share.apps.aamalnaa.models.Service_Model;
 import com.creative.share.apps.aamalnaa.models.UserModel;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -34,7 +36,7 @@ public class Service_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private AddAdsActivity activity;
     private UpdateAdsActivity updateAdsActivity;
 
-    private int i = -1;
+    private List<Integer> integers;
 
     public Service_Adapter(List<Service_Model.Data> orderlist, Context context) {
         this.orderlist = orderlist;
@@ -42,7 +44,7 @@ public class Service_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-
+integers=new ArrayList<>();
         if(context instanceof  AddAdsActivity){
             activity=(AddAdsActivity)context;
         }
@@ -85,45 +87,69 @@ eventHolder.binding.checkbox.setOnClickListener(new View.OnClickListener() {
     public void onClick(View view) {
 if(context instanceof  AddAdsActivity){
         if(orderlist.get(eventHolder.getLayoutPosition()).getCoun()==1){
-            activity.setcommented();
+           int data= activity.setcommented();
+           if(data==0){
+               eventHolder.binding.checkbox.setChecked(false);
+           }
         }else  if(orderlist.get(eventHolder.getLayoutPosition()).getCoun()==2){
-            activity.setspicial();
+            int data= activity.setspicial();
+            if(data==0){
+                eventHolder.binding.checkbox.setChecked(false);
+            }
         }else  if(orderlist.get(eventHolder.getLayoutPosition()).getCoun()==3){
-            activity.setviews();
+            int data=activity.setviews();
+            if(data==0){
+                eventHolder.binding.checkbox.setChecked(false);
+            }
         }else  if(orderlist.get(eventHolder.getLayoutPosition()).getCoun()==4){
-            activity.setisinstall();
+            int data= activity.setisinstall();
+            if(data==0){
+                eventHolder.binding.checkbox.setChecked(false);
+            }
         }
 
     }
 else if(context instanceof  UpdateAdsActivity){
 
     if(orderlist.get(eventHolder.getLayoutPosition()).getCoun()==1){
-        updateAdsActivity.setcommented();
+        int data= updateAdsActivity.setcommented();
+        if(data==0){
+            eventHolder.binding.checkbox.setChecked(false);
+        }
     }else  if(orderlist.get(eventHolder.getLayoutPosition()).getCoun()==2){
-        updateAdsActivity.setspicial();
+        int data= updateAdsActivity.setspicial();
+        if(data==0){
+            eventHolder.binding.checkbox.setChecked(false);
+        }
     }else  if(orderlist.get(eventHolder.getLayoutPosition()).getCoun()==3){
-        updateAdsActivity.setviews();
+        int data=updateAdsActivity.setviews();
+        if(data==0){
+            eventHolder.binding.checkbox.setChecked(false);
+        }
     }else  if(orderlist.get(eventHolder.getLayoutPosition()).getCoun()==4){
-        updateAdsActivity.setisinstall();
+        int data= updateAdsActivity.setisinstall();
+        if(data==0){
+            eventHolder.binding.checkbox.setChecked(false);
+        }
     }
-
 }
     }
 });
-if(i==position){
+if(integers.contains(position)){
     eventHolder.binding.checkbox.setChecked(true);
-if(context instanceof  UpdateAdsActivity){
-    if(orderlist.get(i).getCoun()==1){
-        updateAdsActivity.setcommented();
-    }else  if(orderlist.get(i).getCoun()==2){
-        updateAdsActivity.setspicial();
-    }else  if(orderlist.get(i).getCoun()==3){
-        updateAdsActivity.setviews();
-    }else  if(orderlist.get(i).getCoun()==4){
-        updateAdsActivity.setisinstall();
-    }}
+//if(context instanceof  UpdateAdsActivity){
+//    if(orderlist.get(position).getCoun()==1){
+//        updateAdsActivity.setcommented();
+//    }else  if(orderlist.get(position).getCoun()==2){
+//        updateAdsActivity.setspicial();
+//    }else  if(orderlist.get(position).getCoun()==3){
+//        updateAdsActivity.setviews();
+//    }else  if(orderlist.get(position).getCoun()==4){
+//        updateAdsActivity.setisinstall();
+//    }}
 
 }
+
     }
 
     @Override
@@ -142,7 +168,8 @@ if(context instanceof  UpdateAdsActivity){
     }
     public void setSelection(int selected_pos)
     {
-        this.i = selected_pos;
+
+      integers.add(selected_pos);
         notifyDataSetChanged();
     }
 

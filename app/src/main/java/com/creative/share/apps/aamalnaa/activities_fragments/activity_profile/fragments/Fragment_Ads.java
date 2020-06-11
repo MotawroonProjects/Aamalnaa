@@ -122,9 +122,9 @@ public class Fragment_Ads extends Fragment {
                                 if (t.getMessage() != null) {
                                     Log.e("error", t.getMessage());
                                     if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-                                        Toast.makeText(activity, R.string.something, Toast.LENGTH_SHORT).show();
+                                      //  Toast.makeText(activity, R.string.something, Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(activity, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                      //  Toast.makeText(activity, t.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
 

@@ -71,6 +71,7 @@ public interface Service {
                                 @Field("id") int id,
                                 @Field("about") String about
     );
+
     @FormUrlEncoded
     @POST("api/firebase-tokens")
     Call<ResponseBody> updateToken(
@@ -78,12 +79,14 @@ public interface Service {
             @Field("phone_token") String phone_token,
             @Field("software_type") String software_type
     );
+
     @FormUrlEncoded
     @POST("api/firebase-tokens-delete")
     Call<ResponseBody> delteToken(
             @Field("user_id_fk") int user_id_fk,
             @Field("phone_token") String phone_token
     );
+
     @Multipart
     @POST("api/user_image")
     Call<UserModel> editUserImage(@Part("id") RequestBody id,
@@ -347,6 +350,7 @@ public interface Service {
              @Part("is_Special") RequestBody is_Special,
              @Part("is_Install") RequestBody is_Install,
              @Part("commented") RequestBody commented,
+             @Part("total") RequestBody total,
              @Part List<MultipartBody.Part> partimageInsideList
 
 //
@@ -370,7 +374,9 @@ public interface Service {
                     @Field("views_num") String views_num,
                     @Field("is_Special") String is_Special,
                     @Field("is_Install") String is_Install,
-                    @Field("commented") String commented
+                    @Field("commented") String commented,
+                    @Field("total") String total
+
 
 //
             );
@@ -396,6 +402,7 @@ public interface Service {
                     @Part("is_Special") RequestBody is_Special,
                     @Part("is_Install") RequestBody is_Install,
                     @Part("commented") RequestBody commented,
+                    @Part("total") RequestBody total,
                     @Part List<MultipartBody.Part> partimageInsideList
 
 //
@@ -420,7 +427,8 @@ public interface Service {
                     @Field("views_num") String views_num,
                     @Field("is_Special") String is_Special,
                     @Field("is_Install") String is_Install,
-                    @Field("commented") String commented
+                    @Field("commented") String commented,
+                    @Field("total") String total
 
 //
             );
@@ -438,6 +446,7 @@ public interface Service {
 
 //
             );
+
     @FormUrlEncoded
     @POST("api/payWithpaypalMobile")
     Call<ResponseBody> Payment
@@ -447,6 +456,7 @@ public interface Service {
 
 //
             );
+
     @FormUrlEncoded
     @POST("api/allRoms")
     Call<UserRoomModelData> getRooms(@Field("user_id") String user_id
@@ -513,6 +523,7 @@ public interface Service {
 
 
     );
+
     @FormUrlEncoded
     @POST("api/unSeenNotifications")
     Call<NotificationCount> getUnreadNotificationCount(
@@ -520,6 +531,7 @@ public interface Service {
 
 
     );
+
     @FormUrlEncoded
     @POST("api/unSeenMessages")
     Call<NotificationCount> getUnreadMeaasgeCount(
@@ -527,9 +539,10 @@ public interface Service {
 
 
     );
+
     @FormUrlEncoded
     @POST("api/ad/delete")
     Call<ResponseBody> DeleteMyAd(@Field("ad_id") int ad_id,
-                                  @Field("user_id")int user_id
+                                  @Field("user_id") int user_id
     );
 }

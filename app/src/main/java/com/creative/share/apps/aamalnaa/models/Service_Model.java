@@ -15,7 +15,7 @@ public class Service_Model  implements Serializable {
         private int id;
         private int coun;
            private String name;
-            private String price;
+            private double price;
 
         public int getId() {
             return id;
@@ -29,7 +29,7 @@ public class Service_Model  implements Serializable {
             return name;
         }
 
-        public String getPrice() {
+        public double getPrice() {
             return price;
         }
 

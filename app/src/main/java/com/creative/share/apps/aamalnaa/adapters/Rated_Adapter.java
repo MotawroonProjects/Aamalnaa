@@ -1,6 +1,7 @@
 package com.creative.share.apps.aamalnaa.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,15 @@ public class Rated_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         EventHolder eventHolder = (EventHolder) holder;
 eventHolder.binding.setRatedmodel(orderlist.get(position));
+        Log.e("llll",orderlist.get(position).getLiked()+"");
+if(orderlist.get(position).getLiked()==0){
+    eventHolder.binding.imagelike.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_dislike));
+}
+else {
+    eventHolder.binding.imagelike.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_like));
+
+}
+
 
     }
 
