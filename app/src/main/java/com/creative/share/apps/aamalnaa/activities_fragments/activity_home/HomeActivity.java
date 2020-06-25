@@ -333,7 +333,9 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     private void setUpBottomNavigation() {
-
+        AHNotification.Builder builder = new AHNotification.Builder();
+        builder.setTextColor(ContextCompat.getColor(this, R.color.white));
+        builder.setBackgroundColor(ContextCompat.getColor(this, R.color.golden_stars));
         AHBottomNavigationItem item1 = new AHBottomNavigationItem("", R.drawable.ic_nav_home);
         AHBottomNavigationItem item2 = new AHBottomNavigationItem("", R.drawable.ic_nav_mail);
         AHBottomNavigationItem item3 = new AHBottomNavigationItem("", R.drawable.ic_nav_notification);
@@ -354,20 +356,25 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
         updateBottomNavigationPosition(0);
 
         binding.ahBottomNav.setOnTabSelectedListener((position, wasSelected) -> {
+
             switch (position) {
                 case 0:
                     displayFragmentMain();
                     break;
                 case 1:
                     if (userModel != null) {
+                        builder.setText("");
+                        binding.ahBottomNav.setNotification(builder.build(), 1);
                         displayFragmentMessages();
+
                     } else {
                         Common.CreateNoSignAlertDialog(this);
                     }
                     break;
                 case 2:
                     if (userModel != null) {
-
+                        builder.setText("");
+                        binding.ahBottomNav.setNotification(builder.build(), 2);
                         displayFragmentNotification();
                     } else {
                         Common.CreateNoSignAlertDialog(this);
