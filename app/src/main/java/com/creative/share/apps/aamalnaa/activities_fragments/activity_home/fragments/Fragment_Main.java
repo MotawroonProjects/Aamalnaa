@@ -221,7 +221,7 @@ private int pos=-1;
 
 
                                 Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
-                                Log.e("error", t.getMessage());
+                                Log.e("errorsssss", t.getMessage());
                             } catch (Exception e) {
                             }
                         }
@@ -269,7 +269,7 @@ private int pos=-1;
                                 ads_adapter.notifyItemRemoved(advesriment_data_list.size() - 1);
                                 isLoading = false;
                                 // Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
-                                Log.e("error", t.getMessage());
+                                Log.e("errorsssss", t.getMessage());
                             } catch (Exception e) {
                             }
                         }

@@ -63,9 +63,9 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
     private Preferences preferences;
     private UserModel userModel;
     private String id;
-int work_count;
-private       int like=-1;
-private int can_rate;
+    int work_count;
+    private int like = -1;
+    private int can_rate;
 
     public String getId() {
         return id;
@@ -87,30 +87,31 @@ private int can_rate;
 
 
     }
-    public  void Createratedialog(Context context) {
+
+    public void Createratedialog(Context context) {
         final AlertDialog dialog = new AlertDialog.Builder(context)
                 .create();
 
         RateDialogCustomBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.rate_dialog_custom, null, false);
-binding.setUsermodel(userModel.getUser());
+        binding.setUsermodel(userModel.getUser());
         binding.btnrate.setOnClickListener(new View.OnClickListener() {
-                                                 @Override
-                                                 public void onClick(View v) {
-                                                     String reason=binding.edtSearch.getText().toString();
-                                                     if(reason!=null&&like!=-1&&! TextUtils.isEmpty(reason)){
-                                                         rateuser(reason,like);
-                                                         dialog.dismiss();
+                                               @Override
+                                               public void onClick(View v) {
+                                                   String reason = binding.edtSearch.getText().toString();
+                                                   if (reason != null && like != -1 && !TextUtils.isEmpty(reason)) {
+                                                       rateuser(reason, like);
+                                                       dialog.dismiss();
 
-                                                     }
-                                                     else {
-                                                         if(TextUtils.isEmpty(reason)){
-                                                         binding.edtSearch.setError(getResources().getString(R.string.field_req));}
-                                                         if(like==-1){
-                                                             Toast.makeText(context,getResources().getString(R.string.rate),Toast.LENGTH_LONG).show();
-                                                         }
-                                                     }
-                                                 }
-                                             }
+                                                   } else {
+                                                       if (TextUtils.isEmpty(reason)) {
+                                                           binding.edtSearch.setError(getResources().getString(R.string.field_req));
+                                                       }
+                                                       if (like == -1) {
+                                                           Toast.makeText(context, getResources().getString(R.string.rate), Toast.LENGTH_LONG).show();
+                                                       }
+                                                   }
+                                               }
+                                           }
 
         );
         binding.imlike.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +119,7 @@ binding.setUsermodel(userModel.getUser());
             public void onClick(View v) {
                 binding.imdislike.setBackgroundDrawable(getResources().getDrawable(R.drawable.like_bg));
                 binding.imlike.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_sign_up));
-                like=1;
+                like = 1;
             }
         });
         binding.imdislike.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +127,7 @@ binding.setUsermodel(userModel.getUser());
             public void onClick(View v) {
                 binding.imlike.setBackgroundDrawable(getResources().getDrawable(R.drawable.like_bg));
                 binding.imdislike.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_sign_up));
-                like=0;
+                like = 0;
             }
         });
         binding.imdclose.setOnClickListener(new View.OnClickListener() {
@@ -146,13 +147,13 @@ binding.setUsermodel(userModel.getUser());
         ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
-
+Log.e("ldllflfl",userModel.getUser().getId()+" "+id);
         // rec_sent.setVisibility(View.GONE);
         try {
 
 
             Api.getService(Tags.base_url)
-                    .rateuser( userModel.getUser().getId() + "",id,like+"",reason)
+                    .rateuser(userModel.getUser().getId() + "", id, like + "", reason)
                     .enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -161,15 +162,15 @@ binding.setUsermodel(userModel.getUser());
                             //  binding.progBar.setVisibility(View.GONE);
                             if (response.isSuccessful() && response.body() != null && response.body() != null) {
                                 //binding.coord1.scrollTo(0,0);
-                                Toast.makeText(ProfileActivity.this,getResources().getString(R.string.suc),Toast.LENGTH_LONG).show();
+                                Toast.makeText(ProfileActivity.this, getResources().getString(R.string.suc), Toast.LENGTH_LONG).show();
 
                             } else {
 
-if(response.code()==422){
-    Toast.makeText(ProfileActivity.this, getString(R.string.you_rate_this_user_before), Toast.LENGTH_SHORT).show();
-}
-else {
-                                Toast.makeText(ProfileActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();}
+                                if (response.code() == 422) {
+                                    Toast.makeText(ProfileActivity.this, getString(R.string.you_rate_this_user_before), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(ProfileActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                }
                                 try {
                                     Log.e("Error_code", response.code() + "_" + response.errorBody().string());
                                 } catch (IOException e) {
@@ -200,53 +201,51 @@ else {
         preferences = Preferences.getInstance();
 
         userModel = preferences.getUserData(this);
-        if(getIntent().getStringExtra("data")!=null){
-            id=getIntent().getStringExtra("data");
+        if (getIntent().getStringExtra("data") != null) {
+            id = getIntent().getStringExtra("data");
             binding.llEdit.setVisibility(View.GONE);
             binding.llShow.setVisibility(View.GONE);
 
-        }
-        else {
-            id=userModel.getUser().getId()+"";
+        } else {
+            id = userModel.getUser().getId() + "";
             binding.btnSend.setVisibility(View.GONE);
         }
 
         Filter_Model.setId(id);
-        Log.e("data_id",id);
+        Log.e("data_id", id);
 
 //    Log.e("y",userModel.getUser().getId()+"");
-binding.tvinfo.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        if(binding.expandLayout.isExpanded()){
-            binding.expandLayout.collapse(true);
-        }
-        else {
-            binding.expandLayout.expand(true);
-        }
-    }
-});
-binding.llEdit.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        Intent intent=new Intent(ProfileActivity.this, Edit_Profile_Activity.class);
-        startActivityForResult(intent,1002);
+        binding.tvinfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (binding.expandLayout.isExpanded()) {
+                    binding.expandLayout.collapse(true);
+                } else {
+                    binding.expandLayout.expand(true);
+                }
+            }
+        });
+        binding.llEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this, Edit_Profile_Activity.class);
+                startActivityForResult(intent, 1002);
 
-    }
-});
-binding.llShow.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        show();
-    }
-});
-binding.btnSend.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Createratedialog(ProfileActivity.this);
-    }
-});
-binding.btnSend.setVisibility(View.GONE);
+            }
+        });
+        binding.llShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show();
+            }
+        });
+        binding.btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Createratedialog(ProfileActivity.this);
+            }
+        });
+        binding.btnSend.setVisibility(View.GONE);
 
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
@@ -285,13 +284,13 @@ binding.btnSend.setVisibility(View.GONE);
 
         updateWorkCount(0);
         updateClientCount(0);
-updateratedCount(0);
+        updateratedCount(0);
         updateadsCount(0);
 
         binding.tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-Log.e(";;llll",tab.getPosition()+"");
+                Log.e(";;llll", tab.getPosition() + "");
                 if (tab.getPosition() == 1) {
                     TextView tvTitle = tab.getCustomView().findViewById(R.id.tvTitle);
                     tvTitle.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.colorPrimary));
@@ -300,8 +299,7 @@ Log.e(";;llll",tab.getPosition()+"");
                     tvTitle2.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
 
 
-                }
-                else if (tab.getPosition() == 0) {
+                } else if (tab.getPosition() == 0) {
                     TextView tvTitle = tab.getCustomView().findViewById(R.id.tvTitle);
                     tvTitle.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.colorPrimary));
 
@@ -309,8 +307,7 @@ Log.e(";;llll",tab.getPosition()+"");
                     tvTitle2.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
 
 
-                }
-                else if (tab.getPosition() == 2) {
+                } else if (tab.getPosition() == 2) {
                     TextView tvTitle = tab.getCustomView().findViewById(R.id.tvTitle);
                     tvTitle.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.colorPrimary));
 
@@ -318,8 +315,7 @@ Log.e(";;llll",tab.getPosition()+"");
                     tvTitle2.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
 
 
-                }
-                else if (tab.getPosition() == 3) {
+                } else if (tab.getPosition() == 3) {
                     TextView tvTitle = tab.getCustomView().findViewById(R.id.tvTitle);
                     tvTitle.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.colorPrimary));
 
@@ -327,8 +323,7 @@ Log.e(";;llll",tab.getPosition()+"");
                     tvTitle2.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
 
 
-                }
-                else {
+                } else {
                     TextView tvTitle = binding.tab.getTabAt(1).getCustomView().findViewById(R.id.tvTitle);
                     tvTitle.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
 
@@ -352,8 +347,9 @@ Log.e(";;llll",tab.getPosition()+"");
 
             }
         });
-        if(userModel!=null){
-        getprofiledata();}
+        if (userModel != null) {
+            getprofiledata();
+        }
 
 
     }
@@ -365,7 +361,7 @@ Log.e(";;llll",tab.getPosition()+"");
 
     public void updateWorkCount(int count) {
         tvWorkCount.setText(String.format("%s%s%s", "(", String.valueOf(count), ")"));
-        work_count=count;
+        work_count = count;
     }
 
     public void updateClientCount(int count) {
@@ -405,14 +401,14 @@ Log.e(";;llll",tab.getPosition()+"");
     }
 
     private void getprofiledata() {
-       final ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        final ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
         try {
-            Log.e("data_f",id);
+            Log.e("data_f", id);
 
             Api.getService(Tags.base_url)
-                    .getmyprofile(id+ "",userModel.getUser().getId()+"")
+                    .getmyprofile(id + "", userModel.getUser().getId() + "")
                     .enqueue(new Callback<UserModel>() {
                         @Override
                         public void onResponse(Call<UserModel> call, Response<UserModel> response) {
@@ -440,9 +436,9 @@ Log.e(";;llll",tab.getPosition()+"");
                                 if (t.getMessage() != null) {
                                     Log.e("error", t.getMessage());
                                     if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-                                  //      Toast.makeText(ProfileActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                        //      Toast.makeText(ProfileActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
                                     } else {
-                                    //    Toast.makeText(ProfileActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                        //    Toast.makeText(ProfileActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
@@ -451,39 +447,62 @@ Log.e(";;llll",tab.getPosition()+"");
                         }
                     });
         } catch (Exception e) {
-            if(dialog!=null){
-            dialog.dismiss();}
+            if (dialog != null) {
+                dialog.dismiss();
+            }
 
-           // Log.e("err", e.getMessage());
+            // Log.e("err", e.getMessage());
         }
     }
 
     private void updateprofile(UserModel userModel) {
         binding.setUsermodel(userModel.getUser());
-        if(!id.equals(this.userModel.getUser().getId()+"")){
-             binding.tvTitle.setText(userModel.getUser().getName());
-             if(userModel.getUser().getShowinfo()==0){
-                 binding.consinfo.setVisibility(View.GONE);
-                 binding.llAbout.setVisibility(View.GONE);
-                 binding.llcity.setVisibility(View.GONE);
-                 binding.llEmail.setVisibility(View.GONE);
-                 binding.llphone.setVisibility(View.GONE);
-             }
-             else {
-                 binding.consinfo.setVisibility(View.VISIBLE);
-                 binding.llAbout.setVisibility(View.VISIBLE);
-                 binding.llcity.setVisibility(View.VISIBLE);
-                 binding.llEmail.setVisibility(View.VISIBLE);
-                 binding.llphone.setVisibility(View.VISIBLE);
-             }
-             if(userModel.getUser().getCan_rate()==0){
-                 binding.btnSend.setVisibility(View.GONE);
-                 can_rate=0;
-             }
-             else {
-               //  binding.btnSend.setVisibility(View.VISIBLE);
-                 can_rate=1;
-             }
+        if (!id.equals(this.userModel.getUser().getId() + "")) {
+            binding.tvTitle.setText(userModel.getUser().getName());
+            if (userModel.getUser().getShowinfo() == 0) {
+                binding.consinfo.setVisibility(View.GONE);
+                binding.llAbout.setVisibility(View.GONE);
+                binding.llcity.setVisibility(View.GONE);
+                binding.llEmail.setVisibility(View.GONE);
+                binding.llphone.setVisibility(View.GONE);
+            } else {
+                binding.consinfo.setVisibility(View.VISIBLE);
+                binding.llAbout.setVisibility(View.VISIBLE);
+                binding.llcity.setVisibility(View.VISIBLE);
+                binding.llEmail.setVisibility(View.VISIBLE);
+                binding.llphone.setVisibility(View.VISIBLE);
+            }
+            if (userModel.getUser().getCan_rate() == 0) {
+                binding.btnSend.setVisibility(View.GONE);
+                can_rate = 0;
+            } else {
+                //  binding.btnSend.setVisibility(View.VISIBLE);
+                can_rate = 1;
+            }
+            try {
+                updateadsCount(userModel.getAds().size());
+
+            }catch (Exception e){
+
+            }
+            try {
+                updateratedCount(userModel.getRateds().size());
+
+            }catch (Exception e){
+
+            }
+            try {
+                updateClientCount(userModel.getCustomers().size());
+
+            }catch (Exception e){
+
+            }
+            try {
+                updateWork(userModel.getPrevious().size());
+
+            }catch (Exception e){
+
+            }
         }
 
 
@@ -491,34 +510,34 @@ Log.e(";;llll",tab.getPosition()+"");
 
     public void showdetials(int id) {
 
-        Intent intent=new Intent(ProfileActivity.this, AdsDetialsActivity.class);
-        intent.putExtra("search",id);
+        Intent intent = new Intent(ProfileActivity.this, AdsDetialsActivity.class);
+        intent.putExtra("search", id);
         startActivity(intent);
     }
 
     public void editads(UserModel.Ads ads) {
-        Intent intent=new Intent(ProfileActivity.this, UpdateAdsActivity.class);
-        intent.putExtra("data",ads);
+        Intent intent = new Intent(ProfileActivity.this, UpdateAdsActivity.class);
+        intent.putExtra("data", ads);
         startActivity(intent);
     }
 
     public void deleteads(int layoutPosition) {
-        if(pagerAdapter!=null&&pagerAdapter.getItem(0)!=null){
-            Fragment_Ads fragment_ads= (Fragment_Ads) pagerAdapter.getItem(0);
+        if (pagerAdapter != null && pagerAdapter.getItem(0) != null) {
+            Fragment_Ads fragment_ads = (Fragment_Ads) pagerAdapter.getItem(0);
             fragment_ads.deleteitem(layoutPosition);
         }
     }
 
     public void changetoworks(int layoutPosition) {
-        if(pagerAdapter!=null&&pagerAdapter.getItem(1)!=null){
-            Fragment_Clients fragment_clients= (Fragment_Clients) pagerAdapter.getItem(1);
+        if (pagerAdapter != null && pagerAdapter.getItem(1) != null) {
+            Fragment_Clients fragment_clients = (Fragment_Clients) pagerAdapter.getItem(1);
             fragment_clients.changeitem(layoutPosition);
         }
     }
 
     public void delteclients(int layoutPosition) {
-        if(pagerAdapter!=null&&pagerAdapter.getItem(1)!=null){
-            Fragment_Clients fragment_clients= (Fragment_Clients) pagerAdapter.getItem(1);
+        if (pagerAdapter != null && pagerAdapter.getItem(1) != null) {
+            Fragment_Clients fragment_clients = (Fragment_Clients) pagerAdapter.getItem(1);
             fragment_clients.delte(layoutPosition);
         }
     }
@@ -526,8 +545,8 @@ Log.e(";;llll",tab.getPosition()+"");
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==1002){
-            userModel=preferences.getUserData(this);
+        if (requestCode == 1002) {
+            userModel = preferences.getUserData(this);
             updateprofile(userModel);
         }
     }
@@ -539,16 +558,17 @@ Log.e(";;llll",tab.getPosition()+"");
             Fragment_Works fragment_works= (Fragment_Works) pagerAdapter.getItem(2);
             fragment_works.getprofiledata();
         }*/
-      binding.pager.setCurrentItem(2);
+        binding.pager.setCurrentItem(2);
 
     }
 
     public void deletework(int layoutPosition) {
-        if(pagerAdapter!=null&&pagerAdapter.getItem(2)!=null){
-            Fragment_Works fragment_works= (Fragment_Works) pagerAdapter.getItem(2);
+        if (pagerAdapter != null && pagerAdapter.getItem(2) != null) {
+            Fragment_Works fragment_works = (Fragment_Works) pagerAdapter.getItem(2);
             fragment_works.delte(layoutPosition);
         }
     }
+
     public void show() {
         ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
@@ -559,7 +579,7 @@ Log.e(";;llll",tab.getPosition()+"");
 
 
             Api.getService(Tags.base_url)
-                    .showinfo( userModel.getUser().getId() + "")
+                    .showinfo(userModel.getUser().getId() + "")
                     .enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -574,7 +594,8 @@ Log.e(";;llll",tab.getPosition()+"");
                                         obj = new JSONObject(response.body().string());
                                     } catch (JSONException e) {
                                         e.printStackTrace();
-                                    }Toast.makeText(ProfileActivity.this,obj.get("message").toString(),Toast.LENGTH_LONG).show();
+                                    }
+                                    Toast.makeText(ProfileActivity.this, obj.get("message").toString(), Toast.LENGTH_LONG).show();
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 } catch (JSONException e) {
@@ -612,8 +633,8 @@ Log.e(";;llll",tab.getPosition()+"");
     }
 
     public void updateads(int layoutPosition) {
-        if(pagerAdapter!=null&&pagerAdapter.getItem(0)!=null){
-            Fragment_Ads fragment_ads= (Fragment_Ads) pagerAdapter.getItem(0);
+        if (pagerAdapter != null && pagerAdapter.getItem(0) != null) {
+            Fragment_Ads fragment_ads = (Fragment_Ads) pagerAdapter.getItem(0);
             fragment_ads.update(layoutPosition);
         }
     }

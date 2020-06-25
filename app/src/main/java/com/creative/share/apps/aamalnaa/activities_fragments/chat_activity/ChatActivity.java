@@ -29,6 +29,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_adsdetails.AdsDetialsActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_edit_profile.Edit_Profile_Activity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_map.MapActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
@@ -76,14 +77,14 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
     private LinearLayoutManager manager;
     private Preferences preferences;
     private UserModel userModel;
-    private String reciver_id = "0",reciver_name,phone;
+    private String reciver_id = "0", reciver_name, phone;
     private SelectedLocation selectedLocation;
     private final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
     private final String write_permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
     private final String camera_permission = Manifest.permission.CAMERA;
     private final int IMG_REQ1 = 3, IMG_REQ2 = 2;
     private Uri url = null;
-    Intent intent ;
+    Intent intent;
     private static final int REQUEST_PHONE_CALL = 1;
 
     @Override
@@ -106,7 +107,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
         EventBus.getDefault().register(this);
 
         getDataFromIntent();
-       getdataintent();
+        getdataintent();
         messagedatalist = new ArrayList<>();
 
         preferences = Preferences.getInstance();
@@ -117,8 +118,8 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
         binding.setName(reciver_name);
         binding.setBackListener(this);
         manager = new LinearLayoutManager(this);
-        if(phone!=null) {
-            intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "0"+phone, null));
+        if (phone != null) {
+            intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "0" + phone, null));
         }
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.recView.setLayoutManager(manager);
@@ -128,26 +129,35 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
         binding.recView.setDrawingCacheEnabled(true);
         binding.progBar.setVisibility(View.GONE);
         // binding.llMsgContainer.setVisibility(View.GONE);
-binding.imageCall.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        if(intent!=null){
-            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (ContextCompat.checkSelfPermission(ChatActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(ChatActivity.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
+        binding.imageCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (intent != null) {
+                    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (ContextCompat.checkSelfPermission(ChatActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(ChatActivity.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
+                        } else {
+                            startActivity(intent);
+                        }
+                    } else {
+                        startActivity(intent);
+                    }
                 } else {
+                    Common.CreateAlertDialog(ChatActivity.this, getResources().getString(R.string.phone_not_found));
+                }
+
+            }
+        });
+        binding.tvName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!reciver_id.equals(userModel.getUser().getId() + "")) {
+                    Intent intent = new Intent(ChatActivity.this, ProfileActivity.class);
+                    intent.putExtra("data", reciver_id + "");
                     startActivity(intent);
                 }
-            } else {
-                startActivity(intent);
             }
-        }
-        else {
-            Common.CreateAlertDialog(ChatActivity.this,getResources().getString(R.string.phone_not_found));
-        }
-
-    }
-});
+        });
         binding.recView.setAdapter(chat_adapter);
         binding.imageSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,16 +187,16 @@ binding.imageCall.setOnClickListener(new View.OnClickListener() {
             phone = getIntent().getStringExtra("phone");
         }
     }
-    private void getDataFromIntent()
-    {
-        Intent intent = getIntent();
-        if (intent != null&&intent.getSerializableExtra("chat_user_data")!=null) {
 
-           ChatUserModel chatUserModel = (ChatUserModel) intent.getSerializableExtra("chat_user_data");
+    private void getDataFromIntent() {
+        Intent intent = getIntent();
+        if (intent != null && intent.getSerializableExtra("chat_user_data") != null) {
+
+            ChatUserModel chatUserModel = (ChatUserModel) intent.getSerializableExtra("chat_user_data");
             binding.setName(chatUserModel.getName());
-            reciver_id=chatUserModel.getId()+"";
-            reciver_name=chatUserModel.getName();
-            phone=chatUserModel.getPhone();
+            reciver_id = chatUserModel.getId() + "";
+            reciver_name = chatUserModel.getName();
+            phone = chatUserModel.getPhone();
 
         }
     }
@@ -202,27 +212,28 @@ binding.imageCall.setOnClickListener(new View.OnClickListener() {
             binding.edtMsgContent.setError(getResources().getString(R.string.field_req));
         }
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void listenToNewMessage(MessageModel.SingleMessageModel messageModel)
-    {
+    public void listenToNewMessage(MessageModel.SingleMessageModel messageModel) {
         messagedatalist.add(messageModel);
         scrollToLastPosition();
     }
-    private void scrollToLastPosition()
-    {
+
+    private void scrollToLastPosition() {
 
         new Handler()
-                .postDelayed(() -> binding.recView.scrollToPosition(messagedatalist.size()-1),10);
+                .postDelayed(() -> binding.recView.scrollToPosition(messagedatalist.size() - 1), 10);
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (EventBus.getDefault().isRegistered(this))
-        {
+        if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
         preferences.clearChatUserData(this);
     }
+
     public void getmessge() {
         //   Common.CloseKeyBoard(homeActivity, edt_name);
         Log.e("lkk", reciver_id + " " + userModel.getUser().getId());
@@ -240,15 +251,15 @@ binding.imageCall.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onResponse(Call<AllMessageModel> call, Response<AllMessageModel> response) {
                             binding.progBar.setVisibility(View.GONE);
-                           //  binding.swipeRefresh.setRefreshing(false);
+                            //  binding.swipeRefresh.setRefreshing(false);
                             if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
                                 messagedatalist.clear();
 
                                 messagedatalist.addAll(response.body().getData());
                                 if (response.body().getData().size() > 0) {
                                     // rec_sent.setVisibility(View.VISIBLE);
-                                    Log.e("data",response.body().getData().size()
-                                    +"");
+                                    Log.e("data", response.body().getData().size()
+                                            + "");
 
                                     // binding.llMsgContainer.setVisibility(View.GONE);
                                     chat_adapter.notifyDataSetChanged();
@@ -296,19 +307,20 @@ binding.imageCall.setOnClickListener(new View.OnClickListener() {
 
         }
     }
+
     private void sendmessageimage() {
         ProgressDialog dialog = Common.createProgressDialog(this, getResources().getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
 
-        RequestBody user_part = Common.getRequestBodyText(userModel.getUser().getId()+"");
-        RequestBody reciver_part = Common.getRequestBodyText(reciver_id+"");
+        RequestBody user_part = Common.getRequestBodyText(userModel.getUser().getId() + "");
+        RequestBody reciver_part = Common.getRequestBodyText(reciver_id + "");
         RequestBody type_part = Common.getRequestBodyText("2");
 
         MultipartBody.Part image_part = Common.getMultiPart(this, Uri.parse(url.toString()), "message");
 
         Api.getService(Tags.base_url)
-                .sendmessagewithimage(user_part,reciver_part,type_part, image_part)
+                .sendmessagewithimage(user_part, reciver_part, type_part, image_part)
                 .enqueue(new Callback<MessageModel>() {
                     @Override
                     public void onResponse(Call<MessageModel> call, Response<MessageModel> response) {
@@ -316,8 +328,8 @@ binding.imageCall.setOnClickListener(new View.OnClickListener() {
                         if (response.isSuccessful() && response.body() != null) {
                             //listener.onSuccess(response.body());
 
-                      messagedatalist.add(response.body().getData());
-                      chat_adapter.notifyDataSetChanged();
+                            messagedatalist.add(response.body().getData());
+                            chat_adapter.notifyDataSetChanged();
                             scrollToLastPosition();
                         } else {
                             Log.e("codeimage", response.code() + "_");
@@ -362,7 +374,8 @@ binding.imageCall.setOnClickListener(new View.OnClickListener() {
 
                         messagedatalist.add(response.body().getData());
                         chat_adapter.notifyDataSetChanged();
-                        scrollToLastPosition();                    } else {
+                        scrollToLastPosition();
+                    } else {
                         try {
 
                             Toast.makeText(ChatActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
@@ -461,28 +474,24 @@ binding.imageCall.setOnClickListener(new View.OnClickListener() {
             sendmessageimage();
 
 
-
-        }
-        else
-        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+        } else if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
             if (data.hasExtra("location")) {
                 selectedLocation = (SelectedLocation) data.getSerializableExtra("location");
-                if(selectedLocation!=null) {
+                if (selectedLocation != null) {
                     sendmessageaddress(selectedLocation);
                 }
             }
         }
 
     }
-    private void CreateImageAlertDialog()
-    {
+
+    private void CreateImageAlertDialog() {
 
         final AlertDialog dialog = new AlertDialog.Builder(this)
                 .setCancelable(true)
                 .create();
 
-        DialogSelectImageBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this),R.layout.dialog_select_image,null,false);
-
+        DialogSelectImageBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.dialog_select_image, null, false);
 
 
         binding.btnCamera.setOnClickListener(v -> {
@@ -496,18 +505,17 @@ binding.imageCall.setOnClickListener(new View.OnClickListener() {
             CheckReadPermission();
 
 
-
         });
 
         binding.btnCancel.setOnClickListener(v -> dialog.dismiss());
 
-        dialog.getWindow().getAttributes().windowAnimations= R.style.dialog_congratulation_animation;
+        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
         dialog.setCanceledOnTouchOutside(false);
         dialog.setView(binding.getRoot());
         dialog.show();
     }
-    private void CheckReadPermission()
-    {
+
+    private void CheckReadPermission() {
         if (ActivityCompat.checkSelfPermission(this, READ_PERM) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{READ_PERM}, IMG_REQ1);
         } else {
@@ -515,56 +523,48 @@ binding.imageCall.setOnClickListener(new View.OnClickListener() {
         }
     }
 
-    private void Check_CameraPermission()
-    {
-        if (ContextCompat.checkSelfPermission(this,camera_permission)!= PackageManager.PERMISSION_GRANTED&&ContextCompat.checkSelfPermission(this,write_permission)!= PackageManager.PERMISSION_GRANTED)
-        {
-            ActivityCompat.requestPermissions(this,new String[]{camera_permission,write_permission},IMG_REQ2);
-        }else
-        {
+    private void Check_CameraPermission() {
+        if (ContextCompat.checkSelfPermission(this, camera_permission) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, write_permission) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{camera_permission, write_permission}, IMG_REQ2);
+        } else {
             SelectImage(IMG_REQ2);
 
         }
 
     }
+
     private void SelectImage(int img_req) {
 
         Intent intent = new Intent();
 
-        if (img_req == IMG_REQ1)
-        {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            {
+        if (img_req == IMG_REQ1) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
                 intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-            }else
-            {
+            } else {
                 intent.setAction(Intent.ACTION_GET_CONTENT);
 
             }
 
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.setType("image/*");
-            startActivityForResult(intent,img_req);
+            startActivityForResult(intent, img_req);
 
-        }else if (img_req ==IMG_REQ2)
-        {
+        } else if (img_req == IMG_REQ2) {
             try {
                 intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,img_req);
-            }catch (SecurityException e)
-            {
-                Toast.makeText(this,R.string.perm_image_denied, Toast.LENGTH_SHORT).show();
-            }
-            catch (Exception e)
-            {
-                Toast.makeText(this,R.string.perm_image_denied, Toast.LENGTH_SHORT).show();
+                startActivityForResult(intent, img_req);
+            } catch (SecurityException e) {
+                Toast.makeText(this, R.string.perm_image_denied, Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                Toast.makeText(this, R.string.perm_image_denied, Toast.LENGTH_SHORT).show();
 
             }
 
 
         }
     }
+
     private Uri getUriFromBitmap(Bitmap bitmap) {
         String path = "";
         try {
@@ -582,6 +582,7 @@ binding.imageCall.setOnClickListener(new View.OnClickListener() {
         }
         return null;
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -602,8 +603,7 @@ binding.imageCall.setOnClickListener(new View.OnClickListener() {
                         }
                     }
                     startActivity(intent);
-                }
-                else {
+                } else {
 
                 }
                 return;

@@ -6,8 +6,9 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Adversiment_Model implements Serializable {
-     private int current_page;
-     private List<Data> data;
+    private int current_page;
+
+    private List<Data> data;
 
     public int getCurrent_page() {
         return current_page;
@@ -17,15 +18,14 @@ public class Adversiment_Model implements Serializable {
         return data;
     }
 
-    public class Data implements Serializable
-    {
-       private int  id;
+    public class Data implements Serializable {
+        private int id;
         private int category_id;
         private int subcategory_id;
         private int user_id;
         private int city_id;
         private String title;
-            private String address;
+        private String address;
         private String details;
         private int views_num;
         private int is_Special;
@@ -38,17 +38,17 @@ public class Adversiment_Model implements Serializable {
         private int price;
         private double lat;
         private double lng;
-            private int code;
-private String created_at;
+        private int code;
+        private String created_at;
         private int ads_type;
-            private String image;
-            private String city_name;
+        private String image;
+        private String city_name;
         private String category_name;
         private String sub_category_name;
-            private int is_like;
-            private int is_reported;
-private String user_name;
-private long date;
+        private int is_like;
+        private int is_reported;
+        private String user_name;
+        private long date;
 
         public long getDate() {
             return date;
@@ -149,7 +149,6 @@ private long date;
         public String getImage() {
             return image;
         }
-
 
         public String getCategory_name() {
             return category_name;
