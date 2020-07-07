@@ -48,8 +48,9 @@ public class ProfitActivity extends AppCompatActivity implements Listeners.BackL
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profit);
         initView();
-        if(userModel!=null){
-        getmyprofit();}
+        if (userModel != null) {
+            getprofiledata();
+        }
     }
 
     private void initView() {
@@ -64,8 +65,15 @@ public class ProfitActivity extends AppCompatActivity implements Listeners.BackL
         binding.btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                transform();
+                if (userModel != null && (int)(userModel.getUser().getRate()/10) > 0) {
+                    transform();
+                } else {
+                    if (userModel != null) {
+                        Common.CreateAlertDialog(ProfitActivity.this, "لا يمكن تحويل صفر ");
+                    } else {
+                        Common.CreateNoSignAlertDialog(ProfitActivity.this);
+                    }
+                }
             }
         });
 
@@ -82,16 +90,17 @@ public class ProfitActivity extends AppCompatActivity implements Listeners.BackL
 
 
             Api.getService(Tags.base_url)
-                    .Transform(userModel.getUser().getId() + "")
-                    .enqueue(new Callback<Profit_Model>() {
+                    .Transform(userModel.getUser().getId() + "",(int)(userModel.getUser().getRate()/10))
+                    .enqueue(new Callback<UserModel>() {
                         @Override
-                        public void onResponse(Call<Profit_Model> call, Response<Profit_Model> response) {
+                        public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                             dialog.dismiss();
 
                             //  binding.progBar.setVisibility(View.GONE);
                             if (response.isSuccessful() && response.body() != null && response.body() != null) {
                                 //binding.coord1.scrollTo(0,0);
-                                udateprofit(response.body());
+                                userModel=response.body();
+                                binding.setUsermodel(response.body());
                                 Toast.makeText(ProfitActivity.this, getResources().getString(R.string.suc), Toast.LENGTH_LONG).show();
                             } else {
                                 Toast.makeText(ProfitActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
@@ -104,7 +113,7 @@ public class ProfitActivity extends AppCompatActivity implements Listeners.BackL
                         }
 
                         @Override
-                        public void onFailure(Call<Profit_Model> call, Throwable t) {
+                        public void onFailure(Call<UserModel> call, Throwable t) {
                             try {
 
                                 dialog.dismiss();
@@ -144,7 +153,7 @@ public class ProfitActivity extends AppCompatActivity implements Listeners.BackL
                                 udateprofit(response.body());
                             } else {
 
-                               // Toast.makeText(ProfitActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                // Toast.makeText(ProfitActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
 
                                 try {
 
@@ -185,6 +194,58 @@ public class ProfitActivity extends AppCompatActivity implements Listeners.BackL
     private void udateprofit(Profit_Model body) {
         profit_model = body.getData();
         binding.setProfitmodel(profit_model);
+    }
+
+    public void getprofiledata() {
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        try {
+
+            Api.getService(Tags.base_url)
+                    .getmyprofile(userModel.getUser().getId() + "", userModel.getUser().getId() + "")
+                    .enqueue(new Callback<UserModel>() {
+                        @Override
+                        public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                            dialog.dismiss();
+                            if (response.isSuccessful() && response.body() != null) {
+                                userModel = response.body();
+                                binding.setUsermodel(response.body());
+                            } else {
+
+                                // Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+                                try {
+
+                                    Log.e("error_data", response.code() + "_" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<UserModel> call, Throwable t) {
+                            try {
+                                dialog.dismiss();
+                                if (t.getMessage() != null) {
+                                    Log.e("error", t.getMessage());
+                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                        //   Toast.makeText(activity, R.string.something, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        // Toast.makeText(activity, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            dialog.dismiss();
+//            Log.e("err", e.getCause().toString());
+        }
     }
 
 

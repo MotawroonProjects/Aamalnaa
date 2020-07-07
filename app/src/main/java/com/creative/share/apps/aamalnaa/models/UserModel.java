@@ -68,6 +68,8 @@ public class UserModel implements Serializable {
         private long date;
         private long logout_time;
         private String balance;
+        private double rate;
+
         public User() {
         }
 
@@ -206,6 +208,10 @@ public class UserModel implements Serializable {
 
         public String getBalance() {
             return balance;
+        }
+
+        public double getRate() {
+            return rate;
         }
     }
 

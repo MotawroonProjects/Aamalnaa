@@ -226,9 +226,11 @@ public interface Service {
 
     @FormUrlEncoded
     @POST("api/changepr")
-    Call<Profit_Model> Transform(
+    Call<UserModel> Transform(
 
-            @Field("user_id") String user_id
+            @Field("user_id") String user_id,
+            @Field("rate") double rate
+
     );
 
     @FormUrlEncoded

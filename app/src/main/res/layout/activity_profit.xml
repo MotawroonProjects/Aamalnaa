@@ -18,6 +18,10 @@
             name="profitmodel"
             type="com.creative.share.apps.aamalnaa.models.Profit_Model.Data" />
 
+        <variable
+            name="usermodel"
+            type="com.creative.share.apps.aamalnaa.models.UserModel" />
+
     </data>
 
     <LinearLayout
@@ -173,7 +177,7 @@
                         android:longClickable="false"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:text="@string/one_point"
+                        android:text='@{usermodel.user.rate+""}'
                         android:textColor="@color/textColor"
                         android:textSize="15sp" />
 
@@ -185,7 +189,7 @@
                         android:longClickable="false"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:text='@{profitmodel.rate_price+""}'
+                        android:text='@{(int)(usermodel.user.rate/10)+""}'
                         android:textColor="@color/textColor"
                         android:textSize="15sp" />
                 </LinearLayout>
@@ -309,6 +313,7 @@
                     android:layout_marginTop="5dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     android:weightSum="2">
 
                     <TextView
