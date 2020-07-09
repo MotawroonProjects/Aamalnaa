@@ -1,86 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/filter_color"
-    app:layout_behavior="@string/bottom_sheet_behavior"
     app:behavior_hideable="false"
     app:behavior_peekHeight="0dp"
-    android:id="@+id/root"
-    >
+    app:layout_behavior="@string/bottom_sheet_behavior">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@drawable/filter_card_bg"
-        android:paddingRight="15dp"
-        android:paddingLeft="15dp"
         android:orientation="vertical"
-        >
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
+            android:layout_marginTop="10dp"
             android:text="@string/filter"
-            />
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:orientation="horizontal"
-            android:weightSum="4"
-            >
+            android:weightSum="4">
+
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:textColor="@color/textColor"
-                android:textSize="15sp"
+                android:layout_weight="1"
                 android:text="@string/filter_by"
-                />
+                android:textColor="@color/textColor"
+                android:textSize="15sp" />
+
             <Button
                 android:id="@+id/btnNearby"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_weight="1"
-                android:textSize="14sp"
-                android:text="@string/nearby"
-                android:background="@drawable/un_selected_filter"
-                android:textColor="@color/textColor"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
-                />
+                android:layout_weight="1"
+                android:background="@drawable/un_selected_filter"
+                android:text="@string/nearby"
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/btnNew"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_weight="1"
-                android:textSize="14sp"
-                android:text="@string/news"
-                android:background="@drawable/un_selected_filter"
-                android:textColor="@color/textColor"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
-                />
+                android:layout_weight="1"
+                android:background="@drawable/un_selected_filter"
+                android:text="@string/news"
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
+
             <Button
                 android:id="@+id/btnWithImage"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_weight="1"
-                android:textSize="14sp"
-                android:text="@string/pictured"
-                android:background="@drawable/un_selected_filter"
-                android:textColor="@color/textColor"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
-                />
+                android:layout_weight="1"
+                android:background="@drawable/un_selected_filter"
+                android:text="@string/pictured"
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/search"
+                android:textColor="@color/textColor" />
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="2"
+                android:background="@drawable/un_selected_filter"
+                android:padding="5dp">
+
+                <EditText
+                    android:id="@+id/edtSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:background="@color/unsel_color"
+                    android:hint="@string/search"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    tools:ignore="RtlCompat" />
+            </FrameLayout>
+
         </LinearLayout>
 
 
@@ -89,15 +127,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:orientation="horizontal"
-            android:weightSum="3"
-            >
+            android:weightSum="3">
+
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:textColor="@color/textColor"
+                android:layout_weight="1"
                 android:text="@string/city"
-                />
+                android:textColor="@color/textColor" />
 
             <FrameLayout
                 android:layout_width="0dp"
@@ -106,53 +143,53 @@
                 android:background="@drawable/un_selected_filter"
 
                 >
+
                 <Spinner
                     android:id="@+id/spinner"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
-                    app:backgroundTint="@color/colorPrimary"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    >
+                    app:backgroundTint="@color/colorPrimary">
 
                 </Spinner>
             </FrameLayout>
+
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:orientation="horizontal"
-            android:weightSum="2"
             android:layout_marginBottom="20dp"
-android:gravity="center"            >
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
             <Button
                 android:id="@+id/btnCancel"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_weight="1"
-                android:textSize="14sp"
-                android:text="@string/cancel"
-                android:background="@drawable/linear_bg_white"
-                android:textColor="@color/textColor"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
-                />
+                android:layout_weight="1"
+                android:background="@drawable/linear_bg_white"
+                android:text="@string/cancel"
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/btnfilter"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_weight="1"
-                android:textSize="14sp"
-                android:text="@string/filter"
-                android:background="@drawable/btn_login_bg"
-                android:textColor="@color/white"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
-                />
+                android:layout_weight="1"
+                android:background="@drawable/btn_login_bg"
+                android:text="@string/filter"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
         </LinearLayout>
 
     </LinearLayout>

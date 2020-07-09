@@ -7,6 +7,7 @@ public class Filter_Model {
     private static int is_new;
     private static int photo;
     private static String id;
+    private static String search;
 
     public static String getId() {
         return id;
@@ -53,6 +54,14 @@ public class Filter_Model {
     }
 
     public static void setphoto(int i) {
-        Filter_Model.photo=i;
+        Filter_Model.photo = i;
+    }
+
+    public static String getSearch() {
+        return search;
+    }
+
+    public static void setSearch(String search) {
+        Filter_Model.search = search;
     }
 }

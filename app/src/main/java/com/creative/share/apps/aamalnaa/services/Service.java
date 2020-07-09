@@ -166,8 +166,8 @@ public interface Service {
             @Field("city_id") String city_id,
             @Field("lat") String lat,
             @Field("lng") String lng,
-            @Field("is_new") int is_new
-
+            @Field("is_new") int is_new,
+            @Field("title") String title
     );
 
     @FormUrlEncoded
@@ -229,7 +229,7 @@ public interface Service {
     Call<UserModel> Transform(
 
             @Field("user_id") String user_id,
-            @Field("rate") double rate
+            @Field("points") double points
 
     );
 

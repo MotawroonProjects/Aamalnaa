@@ -56,12 +56,14 @@ public class Ads_Activity extends AppCompatActivity implements Listeners.BackLis
     private List<Adversiment_Model.Data> adsList;
     private Ads_Adapter ads_adapter;
     private LinearLayoutManager manager;
+
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
         super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", "ar")));
 
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +87,7 @@ public class Ads_Activity extends AppCompatActivity implements Listeners.BackLis
         binding.recView.setItemViewCacheSize(25);
         binding.recView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         binding.recView.setDrawingCacheEnabled(true);
-        manager=new LinearLayoutManager(this);
+        manager = new LinearLayoutManager(this);
         binding.recView.setLayoutManager(manager);
         binding.recView.setAdapter(ads_adapter);
        /* binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -111,6 +113,7 @@ public class Ads_Activity extends AppCompatActivity implements Listeners.BackLis
         });*/
 
     }
+
     private void getAds() {
         adsList.clear();
         ads_adapter.notifyDataSetChanged();
@@ -120,7 +123,7 @@ public class Ads_Activity extends AppCompatActivity implements Listeners.BackLis
 
 
             Api.getService(Tags.base_url)
-                    .getAds(Filter_Model.getCity_id(),Filter_Model.getLat(),Filter_Model.getLng(),Filter_Model.getIs_new())
+                    .getAds(Filter_Model.getCity_id(), Filter_Model.getLat(), Filter_Model.getLng(), Filter_Model.getIs_new(), Filter_Model.getSearch())
                     .enqueue(new Callback<Adversiment_Model>() {
                         @Override
                         public void onResponse(Call<Adversiment_Model> call, Response<Adversiment_Model> response) {
@@ -179,7 +182,7 @@ public class Ads_Activity extends AppCompatActivity implements Listeners.BackLis
 
 
             Api.getService(Tags.base_url)
-                    .getAds( Filter_Model.getCity_id(),Filter_Model.getLat(),Filter_Model.getLng(),Filter_Model.getIs_new())
+                    .getAds(Filter_Model.getCity_id(), Filter_Model.getLat(), Filter_Model.getLng(), Filter_Model.getIs_new(), Filter_Model.getSearch())
                     .enqueue(new Callback<Adversiment_Model>() {
                         @Override
                         public void onResponse(Call<Adversiment_Model> call, Response<Adversiment_Model> response) {
@@ -221,9 +224,10 @@ public class Ads_Activity extends AppCompatActivity implements Listeners.BackLis
             isLoading = false;
         }
     }
+
     public void showdetials(int id) {
-        Intent intent=new Intent(Ads_Activity.this, AdsDetialsActivity.class);
-        intent.putExtra("search",id);
+        Intent intent = new Intent(Ads_Activity.this, AdsDetialsActivity.class);
+        intent.putExtra("search", id);
         startActivity(intent);
     }
 

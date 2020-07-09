@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -99,6 +100,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
     private UserModel userModel;
     private BottomSheetBehavior behavior;
     private View root;
+    private EditText edt_search;
     private Button btnNearby, btnFurthest, btnWithImage, btcancel, btfilter;
     private Spinner spinner;
     private String lat = "0.0", lng = "0.0";
@@ -209,6 +211,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
         btcancel = findViewById(R.id.btnCancel);
         btfilter = findViewById(R.id.btnfilter);
         spinner = findViewById(R.id.spinner);
+        edt_search=findViewById(R.id.edtSearch);
         Filter_Model.setCity_id("all");
         Filter_Model.setLat("all");
         Filter_Model.setLng("all");
@@ -310,6 +313,8 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
         btfilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String search=edt_search.getText().toString();
+                Filter_Model.setSearch(search);
                 Intent intent = new Intent(HomeActivity.this, Ads_Activity.class);
                 startActivity(intent);
             }
@@ -317,6 +322,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
         binding.imageSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(HomeActivity.this, Search_Activity.class);
                 startActivity(intent);
             }

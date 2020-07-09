@@ -101,6 +101,7 @@ public class ProfitActivity extends AppCompatActivity implements Listeners.BackL
                                 //binding.coord1.scrollTo(0,0);
                                 userModel=response.body();
                                 binding.setUsermodel(response.body());
+                                preferences.create_update_userdata(ProfitActivity.this,response.body());
                                 Toast.makeText(ProfitActivity.this, getResources().getString(R.string.suc), Toast.LENGTH_LONG).show();
                             } else {
                                 Toast.makeText(ProfitActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();

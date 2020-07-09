@@ -41,58 +41,59 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-            <LinearLayout
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="@{()->backListener.back()}"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                >
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{()->backListener.back()}"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:padding="8dp"
+                        android:rotation='@{lang.equals("ar")?180:0}'
+                        android:src="@drawable/ic_left_arrow"
+                        android:tint="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:clickable="false"
+                        android:lines="2"
+                        android:longClickable="false"
+                        android:text='@{adsmodel.title+"#"+adsmodel.id}'
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+
+                        />
+                </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/llShare"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:clickable="false"
                     android:longClickable="false"
                     android:padding="8dp"
-                    android:rotation='@{lang.equals("ar")?180:0}'
-                    android:src="@drawable/ic_left_arrow"
-                    android:tint="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:clickable="false"
-                    android:longClickable="false"
-                    android:lines="2"
-                    android:text='@{adsmodel.title+"#"+adsmodel.id}'
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-
-                    />
-            </LinearLayout>
-            <ImageView
-                android:id="@+id/llShare"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:clickable="false"
-                android:longClickable="false"
-                android:padding="8dp"
-           android:src="@drawable/ic_share"
-                android:tint="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    android:src="@drawable/ic_share"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.core.widget.NestedScrollView
@@ -228,6 +229,7 @@
                                     android:textColor="@color/black"
                                     android:textSize="13sp" />
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -311,10 +313,10 @@
                                 android:layout_marginTop="5dp"
                                 android:orientation="horizontal"
                                 android:padding="8dp"
-                                android:weightSum="1">
+                                android:weightSum="1.1">
 
                                 <ImageView
-                                    android:layout_width="0dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="20dp"
                                     android:layout_gravity="center_vertical"
                                     android:layout_weight=".1"
@@ -336,7 +338,7 @@
 
                                 <TextView
 
-                                    android:layout_width="0dp"
+                                    android:layout_width="252dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:layout_weight=".9"
@@ -428,6 +430,7 @@
                                     android:textColor="@color/black"
                                     android:textSize="13sp" />
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -623,7 +626,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                   android:id="@+id/cardrepor"
+                    android:id="@+id/cardrepor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -746,13 +749,13 @@
                                 android:layout_weight="1"
                                 android:background="@color/white"
                                 android:hint="@string/write_your_comment_here"
+                                android:imeOptions="actionDone"
                                 android:inputType="textMultiLine"
                                 android:paddingLeft="8dp"
                                 android:paddingRight="8dp"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/gray3"
                                 android:textSize="12sp"
-                                android:imeOptions="actionDone"
 
                                 />
 
