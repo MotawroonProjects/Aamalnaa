@@ -49,6 +49,7 @@ public class Adversiment_Model implements Serializable {
         private int is_reported;
         private String user_name;
         private long date;
+        private String google_distance;
 
         public long getDate() {
             return date;
@@ -164,6 +165,10 @@ public class Adversiment_Model implements Serializable {
 
         public int getIs_reported() {
             return is_reported;
+        }
+
+        public String getGoogle_distance() {
+            return google_distance;
         }
 
         public String getUser_name() {
