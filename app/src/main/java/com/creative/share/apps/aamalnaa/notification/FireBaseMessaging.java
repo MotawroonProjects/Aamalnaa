@@ -36,6 +36,7 @@ import com.squareup.picasso.Target;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.Map;
+import java.util.Random;
 
 public class FireBaseMessaging extends FirebaseMessagingService {
 
@@ -66,6 +67,10 @@ public class FireBaseMessaging extends FirebaseMessagingService {
                 {
                     manageNotification(map);
                 }
+
+            }
+            else {
+                manageNotification(map);
             }
         }
 
@@ -148,6 +153,41 @@ public class FireBaseMessaging extends FirebaseMessagingService {
 
 
             }
+
+        }
+        else  {
+            String CHANNEL_ID = "my_channel_02";
+            CharSequence CHANNEL_NAME = "my_channel_name";
+            int IMPORTANCE = NotificationManager.IMPORTANCE_HIGH;
+
+            final NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+            final NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, IMPORTANCE);
+            channel.setShowBadge(true);
+            channel.setSound(Uri.parse(sound_Path), new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION_EVENT)
+                    .setLegacyStreamType(AudioManager.STREAM_NOTIFICATION)
+                    .build()
+            );
+
+            builder.setChannelId(CHANNEL_ID);
+            builder.setSound(Uri.parse(sound_Path), AudioManager.STREAM_NOTIFICATION);
+            builder.setSmallIcon(R.drawable.ic_nav_notification);
+
+
+            builder.setContentTitle(map.get("title"));
+
+
+            builder.setContentText(map.get("body"));
+
+
+            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+            builder.setLargeIcon(bitmap);
+            manager.createNotificationChannel(channel);
+            manager.notify(new Random().nextInt(200), builder.build());
+
 
         }
 
@@ -267,7 +307,28 @@ public class FireBaseMessaging extends FirebaseMessagingService {
             }
 
         }
+        else {
 
+
+            final NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+
+            builder.setSound(Uri.parse(sound_Path), AudioManager.STREAM_NOTIFICATION);
+            builder.setSmallIcon(R.drawable.ic_nav_notification);
+
+            builder.setContentTitle(map.get("title"));
+
+
+            builder.setContentText(map.get("body"));
+
+
+            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+            builder.setLargeIcon(bitmap);
+            manager.notify(new Random().nextInt(200), builder.build());
+
+
+        }
     }
 
 
