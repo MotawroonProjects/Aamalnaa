@@ -238,7 +238,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
                             android:singleLine="true"
-                            android:text="@{adversimentmodel.city_name}"
+                            android:text='@{adversimentmodel.google_distance==null?adversimentmodel.city_name:(int)Double.parseDouble(adversimentmodel.google_distance)+"K"}'
                             android:textColor="@color/gray7"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="parent"

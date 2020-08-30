@@ -45,6 +45,7 @@ private Search_Activity search_activity;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
+
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
 
     }
