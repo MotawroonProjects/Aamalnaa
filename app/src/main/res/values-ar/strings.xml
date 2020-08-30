@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name"> أعمالنا</string>
-    <string name="map_api_key">AIzaSyC4l5QxL27z4w0uuD_5X3g0IRhaUdvb0Q4</string>
+    <string name="map_api_key">AIzaSyAeyMUJgKAhnNXbILHONb1um72CNzELFRY</string>
     <string name="log_in">تسجيل الدخول</string>
     <string name="email">البريد الالكترونى</string>
     <string name="password">كلمة المرور</string>

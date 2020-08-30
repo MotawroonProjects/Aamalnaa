@@ -158,7 +158,7 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
                                 android:padding="8dp"
-                                android:weightSum="1">
+                                android:weightSum="2">
 
                                 <ImageView
                                     android:layout_width="0dp"
@@ -172,10 +172,10 @@
                                     />
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:layout_weight=".1"
+                                    android:layout_weight="1"
                                     android:text="@string/advertising_section"
                                     android:textColor="@color/textColor"
                                     android:textSize="12sp" />
@@ -197,7 +197,7 @@
                                 android:layout_marginTop="5dp"
                                 android:orientation="horizontal"
                                 android:padding="8dp"
-                                android:weightSum="1">
+                                android:weightSum="2">
 
                                 <ImageView
                                     android:layout_width="0dp"
@@ -211,10 +211,10 @@
                                     />
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:layout_weight=".1"
+                                    android:layout_weight="1"
                                     android:text="@string/city"
                                     android:textColor="@color/textColor"
                                     android:textSize="12sp" />
@@ -236,7 +236,7 @@
                                 android:layout_marginTop="5dp"
                                 android:orientation="horizontal"
                                 android:padding="8dp"
-                                android:weightSum="1">
+                                android:weightSum="2">
 
                                 <ImageView
                                     android:layout_width="0dp"
@@ -250,10 +250,10 @@
                                     />
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:layout_weight=".1"
+                                    android:layout_weight="1"
                                     android:text="@string/address_detials"
                                     android:textColor="@color/textColor"
                                     android:textSize="12sp" />
@@ -275,7 +275,7 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
                                 android:padding="8dp"
-                                android:weightSum="1">
+                                android:weightSum="2">
 
                                 <ImageView
                                     android:layout_width="0dp"
@@ -287,10 +287,10 @@
                                     android:tint="@color/secondColor" />
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:layout_weight=".1"
+                                    android:layout_weight="1"
                                     android:text="@string/time_of_ads"
                                     android:textColor="@color/textColor"
                                     android:textSize="12sp" />
@@ -313,10 +313,10 @@
                                 android:layout_marginTop="5dp"
                                 android:orientation="horizontal"
                                 android:padding="8dp"
-                                android:weightSum="1.1">
+                                android:weightSum="2">
 
                                 <ImageView
-                                    android:layout_width="20dp"
+                                    android:layout_width="0dp"
                                     android:layout_height="20dp"
                                     android:layout_gravity="center_vertical"
                                     android:layout_weight=".1"
@@ -327,10 +327,10 @@
                                     />
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:layout_weight=".1"
+                                    android:layout_weight="1"
                                     android:text="@string/advertiser"
                                     android:textColor="@color/textColor"
                                     android:textSize="12sp" />
@@ -338,7 +338,7 @@
 
                                 <TextView
 
-                                    android:layout_width="252dp"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:layout_weight=".9"
@@ -354,7 +354,7 @@
                                 android:layout_marginTop="5dp"
                                 android:orientation="horizontal"
                                 android:padding="8dp"
-                                android:weightSum="1">
+                                android:weightSum="2">
 
                                 <ImageView
                                     android:layout_width="0dp"
@@ -368,10 +368,10 @@
                                     />
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:layout_weight=".1"
+                                    android:layout_weight="1"
                                     android:text="@string/last_seen"
                                     android:textColor="@color/textColor"
                                     android:textSize="12sp" />
@@ -398,7 +398,7 @@
                                 android:layout_marginBottom="20dp"
                                 android:orientation="horizontal"
                                 android:padding="8dp"
-                                android:weightSum="1">
+                                android:weightSum="2">
 
                                 <ImageView
                                     android:layout_width="0dp"
@@ -412,10 +412,10 @@
                                     />
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:layout_weight=".1"
+                                    android:layout_weight="1"
                                     android:text="@string/views"
                                     android:textColor="@color/textColor"
                                     android:textSize="12sp" />
@@ -438,7 +438,7 @@
                                 android:layout_marginBottom="20dp"
                                 android:orientation="horizontal"
                                 android:padding="8dp"
-                                android:weightSum="1">
+                                android:weightSum="2">
 
                                 <ImageView
                                     android:layout_width="0dp"
@@ -452,10 +452,10 @@
                                     />
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
-                                    android:layout_weight=".1"
+                                    android:layout_weight="1"
                                     android:text="@string/price"
                                     android:textColor="@color/textColor"
                                     android:textSize="12sp" />
