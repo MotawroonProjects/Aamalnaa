@@ -70,7 +70,8 @@ public class Fragment_Main extends Fragment {
     private List<Adversiment_Model.Data> advesriment_data_list;
     private SubCategoryAdapter subCategoryAdapter;
     private List<Catogries_Model.Data.Subcategory> subcategories;
-private int pos=-1;
+    private int pos = -1;
+
     public static Fragment_Main newInstance() {
         return new Fragment_Main();
     }
@@ -110,7 +111,7 @@ private int pos=-1;
 
     private void initView() {
         dataList = new ArrayList<>();
-        subcategories=new ArrayList<>();
+        subcategories = new ArrayList<>();
         advesriment_data_list = new ArrayList<>();
         activity = (HomeActivity) getActivity();
         preferences = Preferences.getInstance();
@@ -140,7 +141,7 @@ private int pos=-1;
 
         binding.recView.setAdapter(ads_adapter);
         binding.recView.setNestedScrollingEnabled(true);
-        subCategoryAdapter = new SubCategoryAdapter(activity, subcategories,this );
+        subCategoryAdapter = new SubCategoryAdapter(activity, subcategories, this);
         binding.recViewsub.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false));
         binding.recViewsub.setAdapter(subCategoryAdapter);
         binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -148,8 +149,7 @@ private int pos=-1;
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                if (dy>0)
-                {
+                if (dy > 0) {
                     int totalItems = ads_adapter.getItemCount();
                     int lastVisiblePos = manager.findLastCompletelyVisibleItemPosition();
                     if (totalItems > 5 && (totalItems - lastVisiblePos) == 1 && !isLoading) {
@@ -288,7 +288,7 @@ private int pos=-1;
             public void onResponse(Call<Slider_Model> call, Response<Slider_Model> response) {
                 binding.progBar.setVisibility(View.GONE);
 
-                if (response.isSuccessful()&&response.body()!=null&&response.body().getData()!=null) {
+                if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
                     if (response.body().getData().size() > 0) {
                         NUM_PAGES = response.body().getData().size();
                         slidingImage__adapter = new SlidingImage_Adapter(activity, response.body().getData());
@@ -378,34 +378,35 @@ private int pos=-1;
 
     public void setcat_id(String id) {
         this.cat_id = id;
-        if(dialog!=null){
+        if (dialog != null) {
             dialog.dismiss();
         }
-        if(cat_id==null){
-            cat_id="all";
+        if (cat_id == null) {
+            cat_id = "all";
         }
-        if(subcategories.size()>0){
-        subcategories.clear();
-        subCategoryAdapter.notifyDataSetChanged();
-        if(binding.expandLayout.isExpanded()){
-            binding.expandLayout.collapse(true);
+        if (subcategories.size() > 0) {
+            subcategories.clear();
+            subCategoryAdapter.notifyDataSetChanged();
+            if (binding.expandLayout.isExpanded()) {
+                binding.expandLayout.collapse(true);
+            } else {
+                binding.expandLayout.expand(true);
+            }
         }
-        else {
-            binding.expandLayout.expand(true);
-        }}
         getAds();
     }
-    public static void CreateNoSignAlertDialog(Fragment fragment, Context context, List<Catogries_Model.Data.Subcategory>subcategories) {
+
+    public static void CreateNoSignAlertDialog(Fragment fragment, Context context, List<Catogries_Model.Data.Subcategory> subcategories) {
 
         dialog = new Dialog(context);
-      SubCategoryAdapter subCategoryAdapter;
+        SubCategoryAdapter subCategoryAdapter;
 
         DialogSubCatogryBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_sub_catogry, null, false);
-        subCategoryAdapter = new SubCategoryAdapter(context, subcategories,fragment );
+        subCategoryAdapter = new SubCategoryAdapter(context, subcategories, fragment);
         binding.recViewsub.setLayoutManager(new LinearLayoutManager(context, RecyclerView.VERTICAL, false));
         binding.recViewsub.setAdapter(subCategoryAdapter);
         //int width = (int)(getResources().getDisplayMetrics().widthPixels*0.90);
-       // int height = (int)(getResources().getDisplayMetrics().heightPixels*0.90);
+        // int height = (int)(getResources().getDisplayMetrics().heightPixels*0.90);
         binding.ll.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
@@ -416,35 +417,34 @@ private int pos=-1;
     }
 
 
-    public void setsublist( List<Catogries_Model.Data.Subcategory> subcategory,int pos,int count,int width) {
+    public void setsublist(List<Catogries_Model.Data.Subcategory> subcategory, int pos, int count, int width) {
         this.subcategories.clear();
         this.subcategories.addAll(subcategory);
-    //    this.pos=pos;
-      //  this.width=width;
+        //    this.pos=pos;
+        //  this.width=width;
         subCategoryAdapter.notifyDataSetChanged();
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        params.setMargins(0,0,0,0);
+        params.setMargins(0, 0, 0, 0);
         //binding.expandLayout.setLayoutParams(params);
-        params.setMargins(0,0,(count*width)-((count-pos)*(width)),0);
+        params.setMargins(0, 0, (count * width) - ((count - pos) * (width)), 0);
         //binding.expandLayout.setLayoutParams(params);
 
-        if (binding.expandLayout.isExpanded()&&this.pos==pos) {
+        if (binding.expandLayout.isExpanded() && this.pos == pos) {
 
-          binding.expandLayout.collapse(true);
-this.pos=pos;
+            binding.expandLayout.collapse(true);
+            this.pos = pos;
 
 
-        }
-        else {
+        } else {
 
             //  ((EventHolder) holder).binding.tvTitle.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
 
-           binding.expandLayout.expand(true);
-           this.pos=pos;
+            binding.expandLayout.expand(true);
+            this.pos = pos;
         }
 
     }

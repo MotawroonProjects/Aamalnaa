@@ -409,7 +409,7 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
 
         try {
             Api.getService(Tags.base_url)
-                    .sendorderwithoutimage(userModel.getUser().getId() + "", order_upload_model.getCategory_id(), order_upload_model.getSubcategory_id(), order_upload_model.getCity_id(), type_id, order_upload_model.getTitle(), order_upload_model.getDetails(), order_upload_model.getPrice(), order_upload_model.getAddress(), order_upload_model.getLongitude(), order_upload_model.getLatitude(), views_num + "", is_Special + "", is_Install + "", commented + "",total+"").enqueue(new Callback<ResponseBody>() {
+                    .sendorderwithoutimage(userModel.getUser().getId() + "", order_upload_model.getCategory_id(), order_upload_model.getSubcategory_id(), order_upload_model.getCity_id(), type_id, order_upload_model.getTitle(), order_upload_model.getDetails(), order_upload_model.getPrice(), order_upload_model.getAddress(), order_upload_model.getLongitude(), order_upload_model.getLatitude(), views_num + "", is_Special + "", is_Install + "", commented + "", total + "").enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     dialog.dismiss();
@@ -494,7 +494,7 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
         List<MultipartBody.Part> partimageList = getMultipartBodyList(urlList, "image[]");
         try {
             Api.getService(Tags.base_url)
-                    .Sendorder(user_part, category_part, subcategory_part, city_part, type_part, title_part, detials_part, price_part, address_part, long_part, lat_part, views_num_part, is_Special_part, is_Install_part, commented_part,totla_part, partimageList).enqueue(new Callback<ResponseBody>() {
+                    .Sendorder(user_part, category_part, subcategory_part, city_part, type_part, title_part, detials_part, price_part, address_part, long_part, lat_part, views_num_part, is_Special_part, is_Install_part, commented_part, totla_part, partimageList).enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     dialog.dismiss();
