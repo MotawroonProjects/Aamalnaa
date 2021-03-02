@@ -256,10 +256,12 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
 
         manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         manager2 = new GridLayoutManager(this,2);
+        subcategories.add(new Catogries_Model.Data.Subcategory("إختر القسم الفرعى"));
 
         binding.recView.setLayoutManager(manager);
         imagesAdapter = new ImagesAdapter(urlList, this);
         binding.recView.setAdapter(imagesAdapter);
+
         service_adapter = new Service_Adapter(dataList, this);
         binding.recService.setLayoutManager(manager2);
         binding.recService.setAdapter(service_adapter);
