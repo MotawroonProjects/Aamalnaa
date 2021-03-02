@@ -29,6 +29,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.creative.share.apps.aamalnaa.R;
@@ -81,7 +82,8 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
     private final int IMG_REQ1 = 3, IMG_REQ2 = 2;
     private Uri url = null;
     private List<Uri> urlList;
-    private LinearLayoutManager manager, manager2;
+    private LinearLayoutManager manager;
+    private GridLayoutManager manager2;
     private ImagesAdapter imagesAdapter;
     private List<Service_Model.Data> dataList;
     private List<Cities_Model.Data> cDataList;
@@ -253,7 +255,7 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
         binding.imageSelectPhoto.setOnClickListener(view -> CreateImageAlertDialog());
 
         manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        manager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        manager2 = new GridLayoutManager(this,2);
 
         binding.recView.setLayoutManager(manager);
         imagesAdapter = new ImagesAdapter(urlList, this);
