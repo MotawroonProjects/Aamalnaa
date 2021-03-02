@@ -205,6 +205,7 @@ Log.e("ldllflfl",userModel.getUser().getId()+" "+id);
             id = getIntent().getStringExtra("data");
             binding.llEdit.setVisibility(View.GONE);
             binding.llShow.setVisibility(View.GONE);
+            binding.tvinfo.setText(getResources().getString(R.string.personal));
 
         } else {
             id = userModel.getUser().getId() + "";

@@ -124,7 +124,7 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
 
     private void updateCatogryAdapter(Catogries_Model body) {
 
-        dataList2.add(new Catogries_Model.Data("إختر القسم"));
+        dataList2.add(new Catogries_Model.Data("إختر القسم الرئيسى"));
         if (body.getData() != null) {
             dataList2.addAll(body.getData());
             adapter.notifyDataSetChanged();
@@ -465,7 +465,7 @@ Log.e("lsllsl",ads.getCommented()+""+ads.getIs_Special()+""+ads.getViews_num()+"
                     dialog.dismiss();
                     if (response.isSuccessful()) {
                         // Common.CreateSignAlertDialog(adsActivity,getResources().getString(R.string.suc));
-                        Toast.makeText(UpdateAdsActivity.this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UpdateAdsActivity.this, getString(R.string.suc2), Toast.LENGTH_SHORT).show();
 
                         //  adsActivity.finish(response.body().getId_advertisement());
                         Intent intent = new Intent(UpdateAdsActivity.this, ProfileActivity.class);
@@ -514,7 +514,7 @@ Log.e("lsllsl",ads.getCommented()+""+ads.getIs_Special()+""+ads.getViews_num()+"
                     dialog.dismiss();
                     if (response.isSuccessful()) {
                         // Common.CreateSignAlertDialog(adsActivity,getResources().getString(R.string.suc));
-                        Toast.makeText(UpdateAdsActivity.this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UpdateAdsActivity.this, getString(R.string.suc2), Toast.LENGTH_SHORT).show();
 
                         //  adsActivity.finish(response.body().getId_advertisement());
                         Intent intent = new Intent(UpdateAdsActivity.this, ProfileActivity.class);

@@ -177,7 +177,7 @@
                         android:longClickable="false"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:text='@{usermodel.user.rate+""}'
+                        android:text='@{((int)usermodel.user.rate)+""}'
                         android:textColor="@color/textColor"
                         android:textSize="15sp" />
 

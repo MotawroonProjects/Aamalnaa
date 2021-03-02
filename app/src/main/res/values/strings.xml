@@ -145,7 +145,7 @@
     <string name="last_seen">Last seen</string>
     <string name="views">Views</string>
     <string name="address_detials">Address Detials</string>
-    <string name="email_the_advertiser">Email the advertiser</string>
+    <string name="email_the_advertiser">(Call-Send-Images-Location)</string>
     <string name="delete_reporting">Delete Reporting</string>
     <string name="transactions">Transactions</string>
     <string name="profits">Profits</string>
@@ -204,6 +204,10 @@
     <string name="phone_not_found">Phone Not Found</string>
     <string name="contact_on_whatsapp_number">Contact on whatsapp number : 00966553160311</string>
     <string name="point">Point = Ryal</string>
+    <string name="work4">Work</string>
+    <string name="their_ads_to_me">Their ads to me</string>
+    <string name="suc2">Your business has been successfully created</string>
+    <string name="personal">Personal Info</string>
     <string-array name="models">
 
         <item>ِAds</item>

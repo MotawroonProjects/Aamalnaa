@@ -99,6 +99,15 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <include layout="@layout/filter_content"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_anchorGravity="center_horizontal"
+            app:layout_anchor="@id/ah_bottom_nav"
+            android:orientation="vertical"
+            >
+
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
@@ -106,11 +115,21 @@
             app:backgroundTint="@color/secondColor"
             android:src="@drawable/ic_add"
             android:tint="@color/white"
-            app:layout_anchor="@id/ah_bottom_nav"
-            app:layout_anchorGravity="center_horizontal"
+
             app:elevation="3dp"
             app:borderWidth="2dp"
 
+
             />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:text="@string/work4"
+                />
+
+        </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

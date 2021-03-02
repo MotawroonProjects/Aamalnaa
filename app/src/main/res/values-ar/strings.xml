@@ -143,7 +143,7 @@
     <string name="last_seen">اخر ظهور</string>
     <string name="views">عدد المشاهدات</string>
     <string name="address_detials">تفاصيل العنوان</string>
-    <string name="email_the_advertiser">ارسل بريد الى المعلن</string>
+    <string name="email_the_advertiser">(اتصال - ارسال - صور -موقع)</string>
     <string name="delete_reporting">احذف الابلاغ</string>
     <string name="transactions">معاملاتى</string>
     <string name="profits">الارباح</string>
@@ -166,10 +166,10 @@
     <string name="edit">تعديل</string>
     <string name="be_my_customer">كن عميلى</string>
     <string name="report">ابلاغ</string>
-    <string name="treatment">المعاملة</string>
+    <string name="treatment">المعادله</string>
     <string name="the_value">التقييمات</string>
     <string name="current_profit">النقاط</string>
-    <string name="_30_positive_evaluation">10 تقييم يساوى نقطة  </string>
+    <string name="_30_positive_evaluation">10 تقييم = نقطة  </string>
     <string name="one_point">نقطه واحده</string>
     <string name="_10_ads">30 اعلانات</string>
     <string name="_20_acts">20 اعمال</string>
@@ -202,6 +202,10 @@
     <string name="phone_not_found">رقم االجوال غير موجود</string>
     <string name="contact_on_whatsapp_number">تواصل على الواتساب على رقم : 00966553160311</string>
     <string name="point">النقطه = ريال </string>
+    <string name="work4">عمل</string>
+    <string name="their_ads_to_me">إعلاناتهم لي</string>
+    <string name="suc2">تم انشاء عملك بنجاح</string>
+    <string name="personal">معلوماته</string>
     <string-array name="models">
         <item>اعلان</item>
         <item>دعايه</item>

@@ -17,6 +17,8 @@ import com.creative.share.apps.aamalnaa.databinding.ActivityContactBinding;
 import com.creative.share.apps.aamalnaa.interfaces.Listeners;
 import com.creative.share.apps.aamalnaa.language.Language;
 import com.creative.share.apps.aamalnaa.models.ContactUsModel;
+import com.creative.share.apps.aamalnaa.models.UserModel;
+import com.creative.share.apps.aamalnaa.preferences.Preferences;
 import com.creative.share.apps.aamalnaa.remote.Api;
 import com.creative.share.apps.aamalnaa.share.Common;
 import com.creative.share.apps.aamalnaa.tags.Tags;
@@ -30,10 +32,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ContactActivity extends AppCompatActivity implements Listeners.BackListener , Listeners.ContactListener {
+public class ContactActivity extends AppCompatActivity implements Listeners.BackListener, Listeners.ContactListener {
     private ActivityContactBinding binding;
     private String lang;
     private ContactUsModel contactUsModel;
+    private Preferences preferences;
+    private UserModel userModel;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -51,22 +55,28 @@ public class ContactActivity extends AppCompatActivity implements Listeners.Back
 
 
     private void initView() {
+        preferences=Preferences.getInstance();
+        userModel=preferences.getUserData(this);
         contactUsModel = new ContactUsModel();
+        if(userModel!=null){
+            contactUsModel.setEmail(userModel.getUser().getEmail());
+            contactUsModel.setName(userModel.getUser().getName());
+        }
         binding.setContactUs(contactUsModel);
         binding.setContactListener(this);
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
         binding.setBackListener(this);
-binding.btnsms.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
+        binding.btnsms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
 
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://api.whatsapp.com/send?phone="+"+966553160311"));
-        startActivity(intent);
-    }
-});
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://api.whatsapp.com/send?phone=" + "+966553160311"));
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -77,12 +87,10 @@ binding.btnsms.setOnClickListener(new View.OnClickListener() {
     }
 
     @Override
-    public void sendContact(ContactUsModel contactUsModel)
-    {
+    public void sendContact(ContactUsModel contactUsModel) {
 
-        if (contactUsModel.isDataValid(this))
-        {
-sendmessge(contactUsModel);
+        if (contactUsModel.isDataValid(this)) {
+            sendmessge(contactUsModel);
         }
 
     }
@@ -93,27 +101,26 @@ sendmessge(contactUsModel);
             dialog.setCancelable(false);
             dialog.show();
             Api.getService(Tags.base_url)
-                    .sendContact(contactUsModel.getName(),contactUsModel.getEmail(),contactUsModel.getSubject(),contactUsModel.getMessage())
+                    .sendContact(contactUsModel.getName(), contactUsModel.getEmail(), contactUsModel.getSubject(), contactUsModel.getMessage())
                     .enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             dialog.dismiss();
-                            if (response.isSuccessful() ) {
+                            if (response.isSuccessful()) {
                                 Toast.makeText(ContactActivity.this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
                                 finish();
                             } else {
                                 if (response.code() == 422) {
-                                    Toast.makeText(ContactActivity.this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ContactActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                                 } else if (response.code() == 500) {
                                     Toast.makeText(ContactActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
 
-                                }else
-                                {
+                                } else {
                                     Toast.makeText(ContactActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
 
                                     try {
 
-                                        Log.e("error",response.code()+"_"+response.errorBody().string());
+                                        Log.e("error", response.code() + "_" + response.errorBody().string());
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }

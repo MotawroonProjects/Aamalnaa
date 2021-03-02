@@ -123,7 +123,7 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
 
     private void updateCatogryAdapter(Catogries_Model body) {
 
-        dataList2.add(new Catogries_Model.Data("إختر"));
+        dataList2.add(new Catogries_Model.Data("إختر القسم الرئيسى"));
         if (body.getData() != null) {
             dataList2.addAll(body.getData());
             adapter.notifyDataSetChanged();
@@ -415,7 +415,7 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
                     dialog.dismiss();
                     if (response.isSuccessful()) {
                         // Common.CreateSignAlertDialog(adsActivity,getResources().getString(R.string.suc));
-                        Toast.makeText(AddAdsActivity.this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddAdsActivity.this, getString(R.string.suc2), Toast.LENGTH_SHORT).show();
 
                         //  adsActivity.finish(response.body().getId_advertisement());
                         Intent intent = new Intent(AddAdsActivity.this, ProfileActivity.class);
@@ -500,7 +500,7 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
                     dialog.dismiss();
                     if (response.isSuccessful()) {
                         // Common.CreateSignAlertDialog(adsActivity,getResources().getString(R.string.suc));
-                        Toast.makeText(AddAdsActivity.this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddAdsActivity.this, getString(R.string.suc2), Toast.LENGTH_SHORT).show();
 
                         //  adsActivity.finish(response.body().getId_advertisement());
                         Intent intent = new Intent(AddAdsActivity.this, ProfileActivity.class);
@@ -539,7 +539,7 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
 
     private void updateCityAdapter(Cities_Model body) {
 
-        cDataList.add(new Cities_Model.Data("إختر"));
+        cDataList.add(new Cities_Model.Data("إختر المدينه"));
         if (body.getData() != null) {
             cDataList.addAll(body.getData());
             cityadapter.notifyDataSetChanged();
@@ -609,7 +609,7 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
 
     private void updatesublist(List<Catogries_Model.Data.Subcategory> subcategory) {
         subcategories.clear();
-        subcategories.add(new Catogries_Model.Data.Subcategory("إختر"));
+        subcategories.add(new Catogries_Model.Data.Subcategory("إختر القسم الفرعى"));
         if (subcategory != null) {
             subcategories.addAll(subcategory);
             spinner_sub_category_adapters.notifyDataSetChanged();

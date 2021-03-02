@@ -342,6 +342,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:layout_weight=".9"
+                                    android:padding="8dp"
+                                    android:background="@drawable/linear_bg_white_green"
                                     android:text="@{adsmodel.user}"
                                     android:textColor="@color/black"
                                     android:textSize="13sp" />
@@ -471,9 +473,64 @@
                                     android:textSize="13sp" />
                             </LinearLayout>
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                >
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/card_chat"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginRight="15dp"
+                                    android:layout_weight="1"
+                                    app:cardBackgroundColor="@color/secondColor"
+                                    app:cardCornerRadius="20dp"
+                                    app:cardElevation="2dp">
+
+                                    <LinearLayout
+                                        android:id="@+id/ll_chat"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:padding="8dp"
+
+                                        >
+
+                                        <LinearLayout
+                                            android:id="@+id/chat"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:padding="8dp"
+                                            android:weightSum="1">
+
+                                            <ImageView
+                                                android:layout_width="0dp"
+                                                android:layout_height="20dp"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_weight=".1"
+                                                android:padding="3dp"
+                                                android:src="@drawable/ic_mail"
+                                                android:tint="@color/gray0" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_weight=".9"
+                                                android:text="@string/email_the_advertiser"
+                                                android:textColor="@color/white"
+                                                android:textSize="12sp" />
+
+
+                                        </LinearLayout>
+
+
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
 
 
                                 <Button
@@ -486,12 +543,10 @@
                                     android:text="@string/be_my_customer"
                                     android:textColor="@color/white"
                                     android:textSize="15sp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
+                               android:layout_gravity="center"
 
                                     />
-                            </androidx.constraintlayout.widget.ConstraintLayout>
+                            </LinearLayout>
 
                         </LinearLayout>
 
@@ -520,7 +575,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="15dp"
-                    app:cardBackgroundColor="@color/white"
+                    app:cardBackgroundColor="@color/gray0"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="2dp">
 
@@ -554,7 +609,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_weight=".9"
                                 android:text="@string/ad_details"
-                                android:textColor="@color/textColor"
+                                android:textColor="@color/black"
                                 android:textSize="12sp" />
 
 
@@ -572,58 +627,6 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_chat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="2dp">
-
-                    <LinearLayout
-                        android:id="@+id/ll_chat"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="8dp"
-
-                        >
-
-                        <LinearLayout
-                            android:id="@+id/chat"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="8dp"
-                            android:weightSum="1">
-
-                            <ImageView
-                                android:layout_width="0dp"
-                                android:layout_height="20dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_weight=".1"
-                                android:padding="3dp"
-                                android:src="@drawable/ic_mail"
-                                android:tint="@color/secondColor" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_weight=".9"
-                                android:text="@string/email_the_advertiser"
-                                android:textColor="@color/textColor"
-                                android:textSize="12sp" />
-
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardrepor"

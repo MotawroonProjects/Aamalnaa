@@ -61,9 +61,11 @@ eventHolder.binding.setRatedmodel(orderlist.get(position));
         Log.e("llll",orderlist.get(position).getLiked()+"");
 if(orderlist.get(position).getLiked()==0){
     eventHolder.binding.imagelike.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_dislike));
+    eventHolder.binding.imagelike.setColorFilter(context.getResources().getColor(R.color.delete));
 }
 else {
     eventHolder.binding.imagelike.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_like));
+    eventHolder.binding.imagelike.setColorFilter(context.getResources().getColor(R.color.end_color));
 
 }
 
