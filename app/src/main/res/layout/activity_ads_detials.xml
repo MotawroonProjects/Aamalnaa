@@ -343,6 +343,7 @@
                                     android:layout_gravity="center_vertical"
                                     android:layout_weight=".9"
                                     android:padding="8dp"
+                                    android:gravity="center"
                                     android:background="@drawable/linear_bg_white_green"
                                     android:text="@{adsmodel.user}"
                                     android:textColor="@color/black"
