@@ -25,7 +25,7 @@ public class Order_Upload_Model extends BaseObservable implements Serializable {
     private String address;
     private String details;
     private String price;
-
+    private String type_id;
 
 
     public ObservableField<String> address_error = new ObservableField<>();
@@ -33,68 +33,56 @@ public class Order_Upload_Model extends BaseObservable implements Serializable {
     public ObservableField<String> detials_error = new ObservableField<>();
 
 
-    public boolean isDataValidStep1(Context context)
-    {
-        if (!category_id.equals("")&&
-                !subcategory_id.equals("")&&
-                !city_id.equals("")&&
-                !TextUtils.isEmpty(title)&&
+    public boolean isDataValidStep1(Context context) {
+        if (!category_id.equals("") &&
+                !subcategory_id.equals("") &&
+                !city_id.equals("") &&
+                !TextUtils.isEmpty(title) &&
                 !TextUtils.isEmpty(details)
+                &&!type_id.equals("0")
 
 
-
-        )
-        {
+        ) {
             address_error.set(null);
             title_error.set(null);
             detials_error.set(null);
 
 
             return true;
-        }else
-            {
-                if (category_id==null||category_id.equals(""))
-                {
-                    Toast.makeText(context, R.string.Choose_Catogry, Toast.LENGTH_SHORT).show();
-                }
-
-                if (subcategory_id==null||subcategory_id.equals(""))
-                {
-                    Toast.makeText(context, R.string.Choose_Sub_Category, Toast.LENGTH_SHORT).show();
-                }
-
-                if (city_id==null||city_id.equals(""))
-                {
-                    Toast.makeText(context, R.string.ch_city, Toast.LENGTH_SHORT).show();
-                }
-
-
-
-                if (TextUtils.isEmpty(title))
-                {
-                    title_error.set(context.getString(R.string.field_req));
-                }else
-                {
-                    title_error.set(null);
-
-                }
-
-                if (TextUtils.isEmpty(details))
-                {
-                    detials_error.set(context.getString(R.string.field_req));
-                }else
-                {
-                    detials_error.set(null);
-
-                }
-
-                return false;
+        } else {
+            if (category_id == null || category_id.equals("")) {
+                Toast.makeText(context, R.string.Choose_Catogry, Toast.LENGTH_SHORT).show();
             }
+
+            if (subcategory_id == null || subcategory_id.equals("")) {
+                Toast.makeText(context, R.string.Choose_Sub_Category, Toast.LENGTH_SHORT).show();
+            }
+
+            if (city_id == null || city_id.equals("")) {
+                Toast.makeText(context, R.string.ch_city, Toast.LENGTH_SHORT).show();
+            }
+
+if(type_id.equals("0")){
+    Toast.makeText(context, "اختر نوع الاعلان", Toast.LENGTH_SHORT).show();
+
+}
+            if (TextUtils.isEmpty(title)) {
+                title_error.set(context.getString(R.string.field_req));
+            } else {
+                title_error.set(null);
+
+            }
+
+            if (TextUtils.isEmpty(details)) {
+                detials_error.set(context.getString(R.string.field_req));
+            } else {
+                detials_error.set(null);
+
+            }
+
+            return false;
+        }
     }
-
-
-
-
 
 
     @Bindable
@@ -107,6 +95,7 @@ public class Order_Upload_Model extends BaseObservable implements Serializable {
         notifyPropertyChanged(BR.category_id);
 
     }
+
     @Bindable
     public String getSubcategory_id() {
         return subcategory_id;
@@ -129,10 +118,6 @@ public class Order_Upload_Model extends BaseObservable implements Serializable {
     }
 
 
-
-
-
-
     @Bindable
     public String getTitle() {
         return title;
@@ -143,6 +128,7 @@ public class Order_Upload_Model extends BaseObservable implements Serializable {
         notifyPropertyChanged(BR.title);
 
     }
+
     @Bindable
     public String getLongitude() {
         return longitude;
@@ -175,6 +161,7 @@ public class Order_Upload_Model extends BaseObservable implements Serializable {
         notifyPropertyChanged(BR.address);
 
     }
+
     public String getDetails() {
         return details;
     }
@@ -194,6 +181,11 @@ public class Order_Upload_Model extends BaseObservable implements Serializable {
 
     }
 
+    public String getType_id() {
+        return type_id;
+    }
 
-
+    public void setType_id(String type_id) {
+        this.type_id = type_id;
+    }
 }

@@ -94,7 +94,7 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
     private String cat_id, sub_cat_id;
     private CityAdapter cityadapter;
     private String city_id;
-    private String type_id = "1";
+    private String type_id = "0";
     private List<String> type_ids;
     private ArrayAdapter<String> arrayAdapter;
     private Order_Upload_Model order_upload_model;
@@ -326,11 +326,14 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i==0){
-                    Toast.makeText(UpdateAdsActivity.this,"اختر نوع الاعلان",Toast.LENGTH_LONG).show();
+                 //   Toast.makeText(UpdateAdsActivity.this,"اختر نوع الاعلان",Toast.LENGTH_LONG).show();
+                    type_id = (i) + "";
+
                 }
                 else {
                     type_id = (i) + "";
                 }
+                order_upload_model.setType_id(type_id);
             }
 
             @Override
