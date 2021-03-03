@@ -397,7 +397,7 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
 
             } else {
                 if (urlList == null || urlList.size() == 0) {
-                    Toast.makeText(this, getResources().getString(R.string.upload_picture), Toast.LENGTH_LONG).show();
+                 //   Toast.makeText(this, getResources().getString(R.string.upload_picture), Toast.LENGTH_LONG).show();
                 }
             }
         });
