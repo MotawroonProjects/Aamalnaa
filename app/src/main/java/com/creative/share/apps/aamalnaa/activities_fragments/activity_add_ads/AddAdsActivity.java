@@ -358,8 +358,12 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
         binding.spinnerAdType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                type_id = (i + 1) + "";
-
+                if(i==0){
+                  Toast.makeText(AddAdsActivity.this,"اختر نوع الاعلان",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    type_id = (i ) + "";
+                }
             }
 
             @Override

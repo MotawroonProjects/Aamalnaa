@@ -32,6 +32,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.creative.share.apps.aamalnaa.R;
+import com.creative.share.apps.aamalnaa.activities_fragments.activity_add_ads.AddAdsActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_map.MapActivity;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
 import com.creative.share.apps.aamalnaa.adapters.CityAdapter;
@@ -324,8 +325,12 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
         binding.spinnerAdType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                type_id = (i + 1) + "";
-
+                if(i==0){
+                    Toast.makeText(UpdateAdsActivity.this,"اختر نوع الاعلان",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    type_id = (i) + "";
+                }
             }
 
             @Override
