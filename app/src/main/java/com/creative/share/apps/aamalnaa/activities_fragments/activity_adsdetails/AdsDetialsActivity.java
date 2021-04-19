@@ -1,5 +1,6 @@
 package com.creative.share.apps.aamalnaa.activities_fragments.activity_adsdetails;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +36,7 @@ import com.creative.share.apps.aamalnaa.preferences.Preferences;
 import com.creative.share.apps.aamalnaa.remote.Api;
 import com.creative.share.apps.aamalnaa.share.Common;
 import com.creative.share.apps.aamalnaa.tags.Tags;
+import com.kodmap.app.library.PopopDialogBuilder;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -148,6 +151,12 @@ public class AdsDetialsActivity extends AppCompatActivity implements Listeners.B
         comments_adapter = new Comments_Adapter(commentsList, this);
         binding.reccomment.setAdapter(comments_adapter);
         binding.llReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Report();
+            }
+        });
+        binding.imagereport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Report();
@@ -413,8 +422,12 @@ public class AdsDetialsActivity extends AppCompatActivity implements Listeners.B
                                 // getsingleads();
                                 if (single_adversiment_model.getReport() == 1) {
                                     single_adversiment_model.setReport(0);
+                                    Toast.makeText(AdsDetialsActivity.this, getString(R.string.unreport), Toast.LENGTH_SHORT).show();
+
                                 } else {
                                     single_adversiment_model.setReport(1);
+                                    Toast.makeText(AdsDetialsActivity.this, getString(R.string.report), Toast.LENGTH_SHORT).show();
+
                                 }
                                 update(single_adversiment_model);
 
@@ -566,10 +579,42 @@ public class AdsDetialsActivity extends AppCompatActivity implements Listeners.B
         finish();
     }
 
-    public void displayimage(Single_Adversiment_Model.Images images) {
-        Intent intent = new Intent(AdsDetialsActivity.this, Order_Image_Activity.class);
-        intent.putExtra("detials", images);
+    public void displayimage(List<Single_Adversiment_Model.Images> images) {
+//        Intent intent = new Intent(AdsDetialsActivity.this, Order_Image_Activity.class);
+//        intent.putExtra("detials", images);
+//
+//        startActivityForResult(intent, 1003);
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < images.size(); i++) {
+            list.add(Tags.IMAGE_Ads_URL + images.get(i).getImage());
+        }
+        Dialog dialog = new PopopDialogBuilder(this)
+                // Set list like as option1 or option2 or option3
+                .setList(list,list.size())
+                // or setList with initial position that like .setList(list,position)
+                // Set dialog header color
+                .setHeaderBackgroundColor(android.R.color.holo_blue_light)
+                // Set dialog background color
+                .setDialogBackgroundColor(R.color.color_dialog_bg)
+                // Set close icon drawable
+                .setCloseDrawable(R.drawable.ic_close_white_24dp)
+                // Set loading view for pager image and preview image
+                .setLoadingView(R.layout.loading_view)
+                // Set dialog style
+                .setDialogStyle(R.style.DialogStyle)
+                // Choose selector type, indicator or thumbnail
+                .showThumbSlider(true)
+                // Set image scale type for slider image
+                .setSliderImageScaleType(ImageView.ScaleType.FIT_CENTER)
+                // Set indicator drawable
+                // .setSelectorIndicator(R.drawable.sample_indicator_selector)
+                // Enable or disable zoomable
+                .setIsZoomable(true)
 
-        startActivityForResult(intent, 1003);
+                // Build Km Slider Popup Dialog
+                .build();
+        dialog.show();
+
     }
+
 }

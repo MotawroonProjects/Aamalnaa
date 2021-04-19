@@ -208,6 +208,7 @@
     <string name="their_ads_to_me">Their ads to me</string>
     <string name="suc2">Your business has been successfully created</string>
     <string name="personal">Personal Info</string>
+    <string name="unreport">Un Reported </string>
     <string-array name="models">
         <item>Choose Ads Type</item>
         <item>ِAds</item>

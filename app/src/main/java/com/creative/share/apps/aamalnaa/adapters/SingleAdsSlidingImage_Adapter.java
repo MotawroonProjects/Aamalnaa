@@ -58,7 +58,7 @@ rowBinding.tvTitle.setVisibility(View.GONE);
         rowBinding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adsDetialsActivity.displayimage(IMAGES.get(position));
+                adsDetialsActivity.displayimage(IMAGES);
             }
         });
         view.addView(rowBinding.getRoot());

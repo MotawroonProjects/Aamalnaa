@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -30,6 +31,8 @@ import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeA
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_sign_in.activities.SignInActivity;
 import com.creative.share.apps.aamalnaa.databinding.DialogCustom2Binding;
 import com.creative.share.apps.aamalnaa.databinding.DialogCustomBinding;
+
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 
@@ -170,13 +173,20 @@ public class Common {
                                 + split[1];
                     }
                 } else if (isDownloadsDocument(uri)) {
+                    try {
+                        final String id = DocumentsContract.getDocumentId(uri);
+                        if (id.startsWith("raw:")) {
+                            return id.replaceFirst("raw:", "");
+                        }
+                        final Uri contentUri = ContentUris.withAppendedId(
+                                Uri.parse("content://downloads/public_downloads"),
+                                ContentUris.parseId(uri));
 
-                    final String id = DocumentsContract.getDocumentId(uri);
-                    final Uri contentUri = ContentUris.withAppendedId(
-                            Uri.parse("content://downloads/public_downloads"),
-                            Long.valueOf(id));
+                        return getDataColumn(context, contentUri, null, null);
+                    } catch (Exception e) {
 
-                    return getDataColumn(context, contentUri, null, null);
+                    }
+
                 }
                 // MediaProvider
                 else if (isMediaDocument(uri)) {
@@ -296,6 +306,26 @@ public class Common {
 
     }
 
+
+
+    public static MultipartBody.Part getMultiPartAudio(Context context, String audio_path, String partName) {
+        File file = new File(audio_path);
+        String name = System.currentTimeMillis() + file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("."));
+        RequestBody requestBody = getRequestBodyAudio(file);
+        MultipartBody.Part part = MultipartBody.Part.createFormData(partName, name, requestBody);
+        return part;
+
+    }
+
+    public static MultipartBody.Part getMultiPartVideo(Context context, Uri uri, String partName) {
+        File file = getFileFromImagePath(getImagePath(context, uri));
+        String name = System.currentTimeMillis() + file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("."));
+        RequestBody requestBody = getRequestBodyVideo(file);
+        MultipartBody.Part part = MultipartBody.Part.createFormData(partName, name, requestBody);
+        return part;
+
+    }
+
     private static RequestBody getRequestBodyImage(File file) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
         return requestBody;
@@ -305,6 +335,17 @@ public class Common {
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), data);
         return requestBody;
     }
+
+    private static RequestBody getRequestBodyAudio(File file) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse("audio/*"), file);
+        return requestBody;
+    }
+
+    private static RequestBody getRequestBodyVideo(File file) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse("video/*"), file);
+        return requestBody;
+    }
+
 
     public static ProgressDialog createProgressDialog(Context context, String msg) {
         ProgressDialog dialog = new ProgressDialog(context);

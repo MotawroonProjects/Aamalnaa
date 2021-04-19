@@ -59,6 +59,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:20.0.1'
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'com.android.databinding:compiler:3.2.0-alpha10'
+    implementation 'com.github.smhdk:KM-Popup-Image-Slider:v1.2.1'
 
 }
 apply plugin: 'com.google.gms.google-services'

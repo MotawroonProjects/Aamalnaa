@@ -29,5 +29,6 @@
     <color name="filter_color">#552b8dcd</color>
     <color name="unsel_color">#dfe9f3</color>
     <color name="ll_balance">#ffdfe9f3</color>
+    <color name="addetialscolor">#faede6</color>
 
 </resources>

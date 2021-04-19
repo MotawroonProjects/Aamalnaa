@@ -47,10 +47,12 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/ll"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:onClick="@{()->backListener.back()}"
                     android:orientation="horizontal"
+                    app:layout_constraintEnd_toStartOf="@+id/llShare"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -66,19 +68,28 @@
                         android:tint="@color/white" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="15dp"
                         android:layout_marginEnd="15dp"
                         android:clickable="false"
                         android:lines="2"
+                        android:layout_weight="1"
                         android:longClickable="false"
                         android:text='@{adsmodel.title+"#"+adsmodel.id}'
                         android:textColor="@color/white"
                         android:textSize="14sp"
 
                         />
+                    <ImageView
+                        android:id="@+id/imagereport"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:padding="3dp"
+                        android:src="@drawable/ic_flag"
+                        android:tint="@color/secondColor" />
                 </LinearLayout>
 
                 <ImageView
@@ -90,6 +101,7 @@
                     android:padding="8dp"
                     android:src="@drawable/ic_share"
                     android:tint="@color/white"
+                    app:layout_constraintStart_toEndOf="@+id/ll"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -576,7 +588,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="15dp"
-                    app:cardBackgroundColor="@color/gray0"
+                    app:cardBackgroundColor="@color/addetialscolor"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="2dp">
 
@@ -611,7 +623,8 @@
                                 android:layout_weight=".9"
                                 android:text="@string/ad_details"
                                 android:textColor="@color/black"
-                                android:textSize="12sp" />
+                                android:textSize="17sp"
+                                />
 
 
                         </LinearLayout>
@@ -646,6 +659,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="8dp"
+                        android:visibility="gone"
 
                         >
 

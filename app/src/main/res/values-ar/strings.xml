@@ -206,6 +206,7 @@
     <string name="their_ads_to_me">دعاياتهم  لي</string>
     <string name="suc2">تم انشاء عملك بنجاح</string>
     <string name="personal">معلوماته</string>
+    <string name="unreport">تم حذف الابلاغ</string>
     <string-array name="models">
         <item>اختر نوع الاعلان</item>
         <item>اعلان</item>

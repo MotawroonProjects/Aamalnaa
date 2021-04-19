@@ -27,9 +27,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true"
 
-        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute"
-        tools:targetApi="m">
+        tools:targetApi="q">
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

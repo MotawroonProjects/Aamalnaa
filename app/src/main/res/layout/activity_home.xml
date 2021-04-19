@@ -115,18 +115,16 @@
             app:backgroundTint="@color/secondColor"
             android:src="@drawable/ic_add"
             android:tint="@color/white"
-
             app:elevation="3dp"
             app:borderWidth="2dp"
-
-
+app:fabCustomSize="40dp"
             />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="@color/colorPrimary"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:text="@string/work4"
                 />
 
