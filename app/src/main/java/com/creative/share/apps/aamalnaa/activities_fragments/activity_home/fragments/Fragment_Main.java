@@ -144,26 +144,26 @@ public class Fragment_Main extends Fragment {
         subCategoryAdapter = new SubCategoryAdapter(activity, subcategories, this);
         binding.recViewsub.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false));
         binding.recViewsub.setAdapter(subCategoryAdapter);
-        binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                if (dy > 0) {
-                    int totalItems = ads_adapter.getItemCount();
-                    int lastVisiblePos = manager.findLastCompletelyVisibleItemPosition();
-                    if (totalItems > 5 && (totalItems - lastVisiblePos) == 1 && !isLoading) {
-                        isLoading = true;
-                        advesriment_data_list.add(null);
-                        ads_adapter.notifyItemInserted(advesriment_data_list.size() - 1);
-                        int page = current_page2 + 1;
-                        loadMore(page);
-
-
-                    }
-                }
-            }
-        });
+//        binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//
+//                if (dy > 0) {
+//                    int totalItems = ads_adapter.getItemCount();
+//                    int lastVisiblePos = manager.findLastCompletelyVisibleItemPosition();
+//                    if (totalItems > 5 && (totalItems - lastVisiblePos) == 1 && !isLoading) {
+//                        isLoading = true;
+//                        advesriment_data_list.add(null);
+//                        ads_adapter.notifyItemInserted(advesriment_data_list.size() - 1);
+//                        int page = current_page2 + 1;
+//                        loadMore(page);
+//
+//
+//                    }
+//                }
+//            }
+//        });
 
 
     }
@@ -177,7 +177,7 @@ public class Fragment_Main extends Fragment {
 
 
             Api.getService(Tags.base_url)
-                    .getAds(1, cat_id)
+                    .getMAINAds( cat_id)
                     .enqueue(new Callback<Adversiment_Model>() {
                         @Override
                         public void onResponse(Call<Adversiment_Model> call, Response<Adversiment_Model> response) {
@@ -238,7 +238,7 @@ public class Fragment_Main extends Fragment {
 
 
             Api.getService(Tags.base_url)
-                    .getAds(page, cat_id)
+                    .getMAINAds( cat_id)
                     .enqueue(new Callback<Adversiment_Model>() {
                         @Override
                         public void onResponse(Call<Adversiment_Model> call, Response<Adversiment_Model> response) {

@@ -134,8 +134,8 @@ public interface Service {
 
     @FormUrlEncoded
     @POST("api/subs")
-    Call<Adversiment_Model> getAds(
-            @Field("page") int page,
+    Call<Adversiment_Model> getMAINAds(
+
             @Field("subcategory_id") String category_id
     );
 
