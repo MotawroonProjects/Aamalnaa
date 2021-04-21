@@ -213,7 +213,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
 
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
+            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
 
 
                 Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.logo);
@@ -236,7 +236,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
             }
         };
 
-        new Handler(Looper.getMainLooper()).postDelayed(() -> Picasso.with(FireBaseMessaging.this).load(Uri.parse(Tags.base_url+image)).into(target),100);
+        new Handler(Looper.getMainLooper()).postDelayed(() -> Picasso.get().load(Uri.parse(Tags.base_url+image)).into(target),100);
 
     }
 

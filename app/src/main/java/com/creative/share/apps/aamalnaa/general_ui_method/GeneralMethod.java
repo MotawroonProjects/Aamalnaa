@@ -43,25 +43,25 @@ public class GeneralMethod {
     public static void displayImage2(ImageView imageView, String imageEndPoint,int type)
     {
 if(type==1) {
-    Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_Ads_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+    Picasso.get().load(Uri.parse(Tags.IMAGE_Ads_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 }
 else if(type==2){
-    Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_user_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+    Picasso.get().load(Uri.parse(Tags.IMAGE_user_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 
 }
 else if(type==4){
-    Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_banks_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+    Picasso.get().load(Uri.parse(Tags.IMAGE_banks_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 
 }
 else {
-    Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_message_URL+ imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+    Picasso.get().load(Uri.parse(Tags.IMAGE_message_URL+ imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 
 }
     }
     @BindingAdapter("url")
     public static void imageUrl(RoundedImageView imageView,String url)
     {
-        Picasso.with(imageView.getContext()).load(Uri.parse(url)).fit().into(imageView);
+        Picasso.get().load(Uri.parse(url)).fit().into(imageView);
 
     }
     @BindingAdapter("date")
@@ -76,18 +76,18 @@ else {
     public static void displayImage3(CircleImageView imageView, String imageEndPoint,int type)
     {
         if(type==1) {
-            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_Ads_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+            Picasso.get().load(Uri.parse(Tags.IMAGE_Ads_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
         }
         else if(type==2){
-            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_user_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+            Picasso.get().load(Uri.parse(Tags.IMAGE_user_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 
         }
         else if(type==4){
-            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_banks_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+            Picasso.get().load(Uri.parse(Tags.IMAGE_banks_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 
         }
         else {
-            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_message_URL+ imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+            Picasso.get().load(Uri.parse(Tags.IMAGE_message_URL+ imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 
         }
     }
@@ -108,18 +108,18 @@ else {
     public static void displayImage(RoundedImageView imageView, String imageEndPoint,int type)
     {
         if(type==1) {
-            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_Ads_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+            Picasso.get().load(Uri.parse(Tags.IMAGE_Ads_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
         }
         else if(type==2){
-            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_user_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+            Picasso.get().load(Uri.parse(Tags.IMAGE_user_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 
         }
         else if(type==4){
-            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_banks_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+            Picasso.get().load(Uri.parse(Tags.IMAGE_banks_URL + imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 
         }
         else {
-            Picasso.with(imageView.getContext()).load(Uri.parse(Tags.IMAGE_message_URL+ imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
+            Picasso.get().load(Uri.parse(Tags.IMAGE_message_URL+ imageEndPoint)).placeholder(R.drawable.logo).fit().into(imageView);
 
         }
     }

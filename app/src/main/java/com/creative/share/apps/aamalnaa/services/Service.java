@@ -135,6 +135,7 @@ public interface Service {
     @FormUrlEncoded
     @POST("api/subs")
     Call<Adversiment_Model> getMAINAds(
+            @Field("page") int page,
 
             @Field("subcategory_id") String category_id
     );
@@ -187,7 +188,6 @@ public interface Service {
     @FormUrlEncoded
     @POST("api/my_ads")
     Call<Adversiment_Model> getMyAds(
-            @Field("page") int page,
             @Field("user_id") String user_id
     );
 

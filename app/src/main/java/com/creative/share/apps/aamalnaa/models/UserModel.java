@@ -282,7 +282,7 @@ public class UserModel implements Serializable {
         private int code;
         private String created_at;
         private int ads_type;
-        private String image;
+        private String ad_image;
         private String city_name;
         private String ad_category_name;
         private String ad_sub_category_name;
@@ -388,7 +388,7 @@ public class UserModel implements Serializable {
         }
 
         public String getImage() {
-            return image;
+            return ad_image;
         }
 
         public String getCity_name() {

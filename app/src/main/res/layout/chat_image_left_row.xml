@@ -74,7 +74,8 @@
                     android:layout_marginBottom="5dp"
                     android:textColor="@color/black"
                     android:textSize="13sp"
-                    android:visibility="gone" />
+                    date="@{messagemodel.date_stamp}"
+                    />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

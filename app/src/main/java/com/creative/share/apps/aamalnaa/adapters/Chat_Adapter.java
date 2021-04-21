@@ -3,6 +3,7 @@ package com.creative.share.apps.aamalnaa.adapters;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -106,7 +107,13 @@ private ChatActivity activity;
 
             eventHolder.binding.setMessagemodel(messageModel);
 eventHolder.binding.setLang(lang);
-
+            eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ChatActivity productActivity=(ChatActivity) context;
+                    productActivity.showimage(messageModelList.get(position).getMessage());
+                }
+            });
 
         }
         else   if (holder instanceof LeftImageEventHolder)
@@ -115,7 +122,13 @@ eventHolder.binding.setLang(lang);
 
             eventHolder.binding.setMessagemodel(messageModel);
             eventHolder.binding.setLang(lang);
-
+            eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ChatActivity productActivity=(ChatActivity) context;
+                    productActivity.showimage(messageModelList.get(position).getMessage());
+                }
+            });
 
         }
         else   if (holder instanceof RightMessageEventHolder)

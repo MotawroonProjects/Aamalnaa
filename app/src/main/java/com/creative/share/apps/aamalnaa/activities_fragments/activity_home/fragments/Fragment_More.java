@@ -68,7 +68,7 @@ public class Fragment_More extends Fragment {
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         userModel = preferences.getUserData(activity);
         if (userModel != null) {
-            Picasso.with(activity).load(Tags.IMAGE_user_URL + userModel.getUser().getAvatar()).placeholder(R.drawable.user_profile).fit().into(binding.image);
+            Picasso.get().load(Tags.IMAGE_user_URL + userModel.getUser().getAvatar()).placeholder(R.drawable.user_profile).fit().into(binding.image);
             binding.tvName.setText(userModel.getUser().getName());
         }
         if(userModel==null){

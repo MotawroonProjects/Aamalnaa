@@ -320,7 +320,7 @@ add_balance_model.setBank_id(bank_id);
 
 
         }
-        Picasso.with(this).load(url).fit().into(binding.image);
+        Picasso.get().load(url).fit().into(binding.image);
 
     }
 

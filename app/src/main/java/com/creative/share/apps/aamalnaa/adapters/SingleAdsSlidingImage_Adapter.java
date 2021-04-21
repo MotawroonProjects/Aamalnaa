@@ -54,7 +54,7 @@ private AdsDetialsActivity adsDetialsActivity;
 rowBinding.tvDetials.setVisibility(View.GONE);
 rowBinding.tvTitle.setVisibility(View.GONE);
 
-        Picasso.with(context).load(Uri.parse(Tags.IMAGE_Ads_URL+IMAGES.get(position).getImage())).fit().into(rowBinding.image);
+        Picasso.get().load(Uri.parse(Tags.IMAGE_Ads_URL+IMAGES.get(position).getImage())).fit().into(rowBinding.image);
         rowBinding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

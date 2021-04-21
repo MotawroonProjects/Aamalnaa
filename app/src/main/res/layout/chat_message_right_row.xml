@@ -8,63 +8,65 @@
         <variable
             name="lang"
             type="String" />
+
         <variable
             name="messagemodel"
             type="com.creative.share.apps.aamalnaa.models.MessageModel.SingleMessageModel" />
-    </data><RelativeLayout
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
-    android:layoutDirection="ltr"
-    tools:ignore="UnusedAttribute">
+    </data>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
         android:layoutDirection="ltr"
-        tools:ignore="RtlCompat">
+        tools:ignore="UnusedAttribute">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/msg_right_bg"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layoutDirection="ltr"
+            android:orientation="horizontal"
+            tools:ignore="RtlCompat">
 
-
-            >
-            <TextView
-                android:id="@+id/tv_message_content"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                android:maxWidth="270dp"
-                android:text="@{messagemodel.message}"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                />
-            <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:textColor="@color/white"
-                android:textSize="13sp"
-                android:visibility="gone"
-                android:layout_marginBottom="5dp"
-                />
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/msg_right_bg"
+                android:orientation="vertical"
+
+
+                >
+
+                <TextView
+                    android:id="@+id/tv_message_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:maxWidth="270dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@{messagemodel.message}"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    date="@{messagemodel.date_stamp}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</RelativeLayout>
+    </RelativeLayout>
 </layout>

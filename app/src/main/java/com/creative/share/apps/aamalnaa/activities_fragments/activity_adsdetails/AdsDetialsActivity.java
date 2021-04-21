@@ -561,9 +561,12 @@ public class AdsDetialsActivity extends AppCompatActivity implements Listeners.B
         }
         if (body.getReport() == 0) {
             binding.tvReport.setText(getResources().getString(R.string.report));
+            binding.imagereport.setColorFilter(ContextCompat.getColor(this, R.color.secondColor));
 
         } else {
             binding.tvReport.setText(getResources().getString(R.string.delete_reporting));
+            binding.imagereport.setColorFilter(ContextCompat.getColor(this, R.color.delete));
+
         }
         if (body.getImages() != null && body.getImages().size() > 0) {
             Log.e("lll", body.getImages().size() + "");

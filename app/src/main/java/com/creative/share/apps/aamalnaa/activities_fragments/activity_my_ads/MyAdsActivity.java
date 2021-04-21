@@ -92,27 +92,27 @@ public class MyAdsActivity extends AppCompatActivity implements Listeners.BackLi
                 getAds();
             }
         });
-        binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if(dy>0){
-                    int totalItems = ads_adapter.getItemCount();
-                    int lastVisiblePos = manager.findLastCompletelyVisibleItemPosition();
-                    if (totalItems > 5 && (totalItems - lastVisiblePos) == 1 && !isLoading) {
-                        isLoading = true;
-                        advesriment_data_list.add(null);
-                        ads_adapter.notifyItemInserted(advesriment_data_list.size() - 1);
-                        int page= current_page2 +1;
-                        loadMore(page);
-
-
-
-
-                    }
-                }
-            }
-        });
+//        binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                if(dy>0){
+//                    int totalItems = ads_adapter.getItemCount();
+//                    int lastVisiblePos = manager.findLastCompletelyVisibleItemPosition();
+//                    if (totalItems > 5 && (totalItems - lastVisiblePos) == 1 && !isLoading) {
+//                        isLoading = true;
+//                        advesriment_data_list.add(null);
+//                        ads_adapter.notifyItemInserted(advesriment_data_list.size() - 1);
+//                        int page= current_page2 +1;
+//                        loadMore(page);
+//
+//
+//
+//
+//                    }
+//                }
+//            }
+//        });
         binding.recView.setAdapter(ads_adapter);
 
     }
@@ -127,7 +127,7 @@ public class MyAdsActivity extends AppCompatActivity implements Listeners.BackLi
 
 
             Api.getService( Tags.base_url)
-                    .getMyAds(1,userModel.getUser().getId()+"")
+                    .getMyAds(userModel.getUser().getId()+"")
                     .enqueue(new Callback<Adversiment_Model>() {
                         @Override
                         public void onResponse(Call<Adversiment_Model> call, Response<Adversiment_Model> response) {
@@ -192,7 +192,7 @@ public class MyAdsActivity extends AppCompatActivity implements Listeners.BackLi
 
 
             Api.getService(Tags.base_url)
-                    .getMyAds(page, userModel.getUser().getId()+"")
+                    .getMyAds( userModel.getUser().getId()+"")
                     .enqueue(new Callback<Adversiment_Model>() {
                         @Override
                         public void onResponse(Call<Adversiment_Model> call, Response<Adversiment_Model> response) {

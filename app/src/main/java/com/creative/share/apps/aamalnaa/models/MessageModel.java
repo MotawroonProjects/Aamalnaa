@@ -3,7 +3,7 @@ package com.creative.share.apps.aamalnaa.models;
 import java.io.Serializable;
 import java.util.List;
 
-public class MessageModel  implements Serializable {
+public class MessageModel implements Serializable {
     private SingleMessageModel data;
 
     public SingleMessageModel getData() {
@@ -20,7 +20,7 @@ public class MessageModel  implements Serializable {
         private String type;
         private double lat;
         private double lng;
-
+        private long date_stamp;
         private String user_name;
         private String user_avatar;
 
@@ -75,6 +75,10 @@ public class MessageModel  implements Serializable {
 
         public String getUser_avatar() {
             return user_avatar;
+        }
+
+        public long getDate_stamp() {
+            return date_stamp;
         }
     }
 }

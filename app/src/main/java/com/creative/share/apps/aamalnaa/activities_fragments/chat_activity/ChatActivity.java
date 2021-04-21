@@ -7,7 +7,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import com.ceylonlabs.imageviewpopup.ImagePopup;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
@@ -86,6 +88,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
     private Uri url = null;
     Intent intent;
     private static final int REQUEST_PHONE_CALL = 1;
+    ImagePopup imagePopup;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -104,6 +107,12 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
     }
 
     private void initView() {
+        imagePopup = new ImagePopup(this);
+        imagePopup.setFullScreen(true);
+        imagePopup.setBackgroundColor(Color.BLACK);  // Optional
+        imagePopup.setFullScreen(true); // Optional
+        imagePopup.setHideCloseIcon(false);
+        imagePopup.setImageOnClickClose(true);  // Optional
         EventBus.getDefault().register(this);
 
         getDataFromIntent();
@@ -609,5 +618,10 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
                 return;
             }
         }
+    }
+    public void showimage(String image) {
+        imagePopup.initiatePopupWithPicasso(Tags.IMAGE_message_URL+image);
+        imagePopup.viewPopup();
+
     }
 }

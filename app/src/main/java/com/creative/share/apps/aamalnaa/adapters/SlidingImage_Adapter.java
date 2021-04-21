@@ -59,7 +59,7 @@ else {
     rowBinding.tvDetials.setText(IMAGES.get(position).getDetails());
 
 }
-        Picasso.with(context).load(Uri.parse(Tags.IMAGE_Ads_URL+IMAGES.get(position).getImage())).fit().into(rowBinding.image);
+        Picasso.get().load(Uri.parse(Tags.IMAGE_Ads_URL+IMAGES.get(position).getImage())).fit().into(rowBinding.image);
 rowBinding.getRoot().setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {

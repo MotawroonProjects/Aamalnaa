@@ -52,9 +52,9 @@
                 android:layout_gravity="end"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="13sp"
-                android:visibility="gone"
+                date="@{messagemodel.date_stamp}"
                 android:layout_marginBottom="5dp"
                 />
         </LinearLayout>
