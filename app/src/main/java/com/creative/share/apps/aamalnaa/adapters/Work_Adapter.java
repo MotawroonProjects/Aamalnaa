@@ -73,6 +73,7 @@ private int can_rate;
             eventHolder.binding.btDelte.setVisibility(View.GONE);
         }
         else {
+
             eventHolder.binding.btDelte.setVisibility(View.VISIBLE);
 
         }
