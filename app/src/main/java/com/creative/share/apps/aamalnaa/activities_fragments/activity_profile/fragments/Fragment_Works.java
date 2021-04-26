@@ -143,6 +143,7 @@ public class Fragment_Works extends Fragment {
 
     private void updateprofile(UserModel userModel) {
 
+        can_rate=userModel.getUser().getCan_rate();
 
         if (userModel.getPrevious() != null) {
 
@@ -150,13 +151,16 @@ public class Fragment_Works extends Fragment {
             activity.updateWorkCount(userModel.getPrevious().size());
 
         }
-        can_rate=userModel.getUser().getCan_rate();
 
     }
 
     private void setads(List<UserModel.Previous> ads) {
+
+
         adsList.clear();
         adsList.addAll(ads);
+        Log.e("dlldldl",can_rate+"");
+        work_adapter.can_rate=can_rate;
         work_adapter.notifyDataSetChanged();
     }
     public void delte(int layoutPosition) {

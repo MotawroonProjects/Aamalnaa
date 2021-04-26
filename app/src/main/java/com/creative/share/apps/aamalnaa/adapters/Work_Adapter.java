@@ -29,21 +29,22 @@ public class Work_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private String lang;
     private ProfileActivity activity;
     private int i = 0;
-private int type;
-private Preferences preferences;
-private UserModel userModel;
-private int can_rate;
-    public Work_Adapter(List<UserModel.Previous> orderlist, Context context,int type,int can_rate) {
+    private int type;
+    private Preferences preferences;
+    private UserModel userModel;
+    public int can_rate;
+
+    public Work_Adapter(List<UserModel.Previous> orderlist, Context context, int type, int can_rate) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         this.activity = (ProfileActivity) context;
-        this.type=type;
-        preferences=Preferences.getInstance();
-        userModel=preferences.getUserData(activity);
-        this.can_rate=can_rate;
+        this.type = type;
+        preferences = Preferences.getInstance();
+        userModel = preferences.getUserData(activity);
+        this.can_rate = can_rate;
 
     }
 
@@ -64,26 +65,28 @@ private int can_rate;
         EventHolder eventHolder = (EventHolder) holder;
         eventHolder.binding.setLang(lang);
         eventHolder.binding.setWorkmodel(orderlist.get(position));
-        if(type==2){
+        if (type == 2) {
             eventHolder.binding.btDelte.setText(activity.getResources().getString(R.string.rate));
         }
 
         //Common.CreateAlertDialog(activity,orderlist.get(position).getId()+" "+ userModel.getUser().getId());
-        if((orderlist.get(position).getId()!=userModel.getUser().getId())&&can_rate==0&&type==2){
+        if ((orderlist.get(position).getId() != userModel.getUser().getId()) && can_rate == 0 && type == 2) {
             eventHolder.binding.btDelte.setVisibility(View.GONE);
-        }
-        else {
+        } else {
+            if (type == 2 && can_rate == 0) {
+                eventHolder.binding.btDelte.setVisibility(View.GONE);
 
-            eventHolder.binding.btDelte.setVisibility(View.VISIBLE);
-
+            } else {
+                eventHolder.binding.btDelte.setVisibility(View.VISIBLE);
+            }
         }
         eventHolder.binding.btDelte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(type==1){
-                activity.deletework(eventHolder.getLayoutPosition());}
-                else if(type==2){
+                if (type == 1) {
+                    activity.deletework(eventHolder.getLayoutPosition());
+                } else if (type == 2) {
                     activity.Createratedialog(context);
                 }
 
