@@ -70,10 +70,10 @@ public class Work_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
 
         //Common.CreateAlertDialog(activity,orderlist.get(position).getId()+" "+ userModel.getUser().getId());
-        if ((orderlist.get(position).getId() != userModel.getUser().getId()) && can_rate == 0 && type == 2) {
+        if ( can_rate == 0 && type == 2) {
             eventHolder.binding.btDelte.setVisibility(View.GONE);
         } else {
-            if (type == 2 && can_rate == 0) {
+            if (type == 2 && orderlist.get(position).getId() != userModel.getUser().getId()) {
                 eventHolder.binding.btDelte.setVisibility(View.GONE);
 
             } else {
