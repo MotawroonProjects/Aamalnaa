@@ -289,7 +289,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
 
 
         binding.imageFilter.setOnClickListener(view -> {
-            binding.fab.setVisibility(View.INVISIBLE);
+            binding.llfab.setVisibility(View.INVISIBLE);
             behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
         });
@@ -306,7 +306,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
         btcancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                binding.fab.setVisibility(View.VISIBLE);
+                binding.llfab.setVisibility(View.VISIBLE);
                 behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         });
@@ -538,7 +538,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
     @Override
     public void onBackPressed() {
         if (behavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-            binding.fab.setVisibility(View.VISIBLE);
+            binding.llfab.setVisibility(View.VISIBLE);
 
             behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         } else {
@@ -634,15 +634,15 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
 
     private void getCities() {
         try {
-            ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
-            dialog.setCancelable(false);
-            dialog.show();
+//            ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+//            dialog.setCancelable(false);
+//            dialog.show();
             Api.getService(Tags.base_url)
                     .getCity()
                     .enqueue(new Callback<Cities_Model>() {
                         @Override
                         public void onResponse(Call<Cities_Model> call, Response<Cities_Model> response) {
-                            dialog.dismiss();
+                           // dialog.dismiss();
                             if (response.isSuccessful() && response.body() != null) {
                                 if (response.body().getData() != null) {
                                     updateCityAdapter(response.body());
@@ -674,7 +674,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
                         @Override
                         public void onFailure(Call<Cities_Model> call, Throwable t) {
                             try {
-                                dialog.dismiss();
+                             //   dialog.dismiss();
                                 if (t.getMessage() != null) {
                                     Log.e("error", t.getMessage());
                                     if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
