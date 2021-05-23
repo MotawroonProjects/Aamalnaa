@@ -55,7 +55,6 @@ public interface Service {
     @POST("api/register")
     Call<UserModel> sign_up(@Field("name") String name,
                             @Field("mobile") String mobile,
-
                             @Field("email") String email,
                             @Field("city_id") String city_id,
                             @Field("password") String password,
@@ -204,9 +203,9 @@ public interface Service {
     Call<ResponseBody> Like(
 
             @Field("ad_id") String ad_id,
+
             @Field("user_id") String user_id
     );
-
     @FormUrlEncoded
     @POST("api/add_comment")
     Call<ResponseBody> comment(
