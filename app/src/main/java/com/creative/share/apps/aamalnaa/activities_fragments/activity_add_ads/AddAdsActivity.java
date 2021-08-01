@@ -255,7 +255,7 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
         binding.imageSelectPhoto.setOnClickListener(view -> CreateImageAlertDialog());
 
         manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        manager2 = new GridLayoutManager(this,2);
+        manager2 = new GridLayoutManager(this,1);
         subcategories.add(new Catogries_Model.Data.Subcategory("إختر القسم الفرعى"));
 
         binding.recView.setLayoutManager(manager);

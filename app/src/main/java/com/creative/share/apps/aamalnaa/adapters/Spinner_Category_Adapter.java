@@ -24,6 +24,7 @@ public class Spinner_Category_Adapter extends BaseAdapter {
     private List<Catogries_Model.Data> dataList;
     private Context context;
     private String lang;
+
     public Spinner_Category_Adapter(List<Catogries_Model.Data> dataList, Context context) {
         this.dataList = dataList;
         this.context = context;

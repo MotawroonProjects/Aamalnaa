@@ -10,6 +10,7 @@
             name="backListener"
             type="com.creative.share.apps.aamalnaa.interfaces.Listeners.BackListener" />
 
+
         <variable
             name="lang"
             type="String" />
@@ -177,7 +178,7 @@
                         android:longClickable="false"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:text='@{((int)usermodel.user.rate)+""}'
+                        android:text='@{(Math.abs((int)usermodel.user.rate))+""}'
                         android:textColor="@color/textColor"
                         android:textSize="15sp" />
 
@@ -189,7 +190,7 @@
                         android:longClickable="false"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:text='@{(int)(usermodel.user.rate/10)+""}'
+                        android:text='@{(Math.abs((int)(usermodel.user.rate/10)))+""}'
                         android:textColor="@color/textColor"
                         android:textSize="15sp" />
                 </LinearLayout>

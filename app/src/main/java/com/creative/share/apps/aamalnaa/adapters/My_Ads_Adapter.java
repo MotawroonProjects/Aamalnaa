@@ -71,6 +71,14 @@ eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
         notifyDataSetChanged();}
     }
 });
+        eventHolder.binding.tvedit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(type==1){
+                    i=position;
+                    notifyDataSetChanged();}
+            }
+        });
 if(type==2){
     eventHolder.binding.expandLayout.setVisibility(View.GONE);
 }

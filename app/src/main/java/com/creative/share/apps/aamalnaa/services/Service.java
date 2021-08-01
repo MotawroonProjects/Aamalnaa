@@ -318,6 +318,7 @@ public interface Service {
 
     );
 
+
     @FormUrlEncoded
     @POST("api/my_wallet")
     Call<Wallet_Model> getmywallet(

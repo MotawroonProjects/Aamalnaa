@@ -51,6 +51,7 @@ public class ProfitActivity extends AppCompatActivity implements Listeners.BackL
         if (userModel != null) {
             getprofiledata();
         }
+
     }
 
     private void initView() {
