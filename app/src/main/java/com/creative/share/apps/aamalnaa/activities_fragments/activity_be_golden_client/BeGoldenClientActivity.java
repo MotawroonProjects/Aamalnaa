@@ -36,7 +36,6 @@ public class BeGoldenClientActivity extends AppCompatActivity implements Listene
         super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", "ar")));
 
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

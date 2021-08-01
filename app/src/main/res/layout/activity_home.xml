@@ -118,7 +118,8 @@
             android:tint="@color/white"
             app:elevation="3dp"
             app:borderWidth="2dp"
-app:fabCustomSize="40dp"
+            android:layout_marginTop="40dp"
+              app:fabCustomSize="40dp"
             />
             <TextView
                 android:layout_width="wrap_content"
