@@ -419,7 +419,7 @@ Log.e("lsllsl",ads.getCommented()+""+ads.getIs_Special()+""+ads.getViews_num()+"
             total += dataList.get(3).getPrice();
 
         }
-        binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
+        binding.tvtotal.setText(((int)total)  + " " + getResources().getString(R.string.sar));
 
         binding.setOrderModel(order_upload_model);
 
@@ -829,7 +829,7 @@ Log.e("lsllsl",ads.getCommented()+""+ads.getIs_Special()+""+ads.getViews_num()+"
             total -= dataList.get(0).getPrice();
 
         }
-        binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
+        binding.tvtotal.setText(((int)total)  + " " + getResources().getString(R.string.sar));
         return 1;
     }
 
@@ -850,7 +850,7 @@ Log.e("lsllsl",ads.getCommented()+""+ads.getIs_Special()+""+ads.getViews_num()+"
 
         }
 
-        binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
+        binding.tvtotal.setText(((int)total)  + " " + getResources().getString(R.string.sar));
         return 1;
     }
 
@@ -870,7 +870,7 @@ Log.e("lsllsl",ads.getCommented()+""+ads.getIs_Special()+""+ads.getViews_num()+"
             total -= dataList.get(2).getPrice();
 
         }
-        binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
+        binding.tvtotal.setText(((int)total)  + " " + getResources().getString(R.string.sar));
         return 1;
     }
 
@@ -890,7 +890,7 @@ Log.e("lsllsl",ads.getCommented()+""+ads.getIs_Special()+""+ads.getViews_num()+"
             total -= dataList.get(3).getPrice();
 
         }
-        binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
+        binding.tvtotal.setText(((int)total)  + " " + getResources().getString(R.string.sar));
         return 1;
     }
 

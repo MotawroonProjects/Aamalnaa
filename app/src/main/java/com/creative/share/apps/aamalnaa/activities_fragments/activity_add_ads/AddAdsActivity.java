@@ -809,7 +809,7 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
             total -= dataList.get(0).getPrice();
 
         }
-        binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
+        binding.tvtotal.setText(((int)total) + " " + getResources().getString(R.string.sar));
         return 1;
     }
 
@@ -830,7 +830,7 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
 
         }
 
-        binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
+        binding.tvtotal.setText(((int)total)  + " " + getResources().getString(R.string.sar));
         return 1;
     }
 
@@ -850,7 +850,7 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
             total -= dataList.get(2).getPrice();
 
         }
-        binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
+        binding.tvtotal.setText(((int)total)  + " " + getResources().getString(R.string.sar));
         return 1;
     }
 
@@ -870,7 +870,7 @@ public class AddAdsActivity extends AppCompatActivity implements Listeners.BackL
             total -= dataList.get(3).getPrice();
 
         }
-        binding.tvtotal.setText(total + " " + getResources().getString(R.string.sar));
+        binding.tvtotal.setText(((int)total)  + " " + getResources().getString(R.string.sar));
         return 1;
     }
 
