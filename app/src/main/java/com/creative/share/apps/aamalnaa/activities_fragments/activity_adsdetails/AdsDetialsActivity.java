@@ -189,10 +189,14 @@ public class AdsDetialsActivity extends AppCompatActivity implements Listeners.B
                 binding.edtComment.setText("");
                 if (!TextUtils.isEmpty(query)) {
                     Common.CloseKeyBoard(AdsDetialsActivity.this, binding.edtComment);
-                    if (userModel != null) {
+                    if (userModel != null&&single_adversiment_model.getCommented()==0) {
                         comment(query);
                     } else {
-                        Common.CreateNoSignAlertDialog(this);
+                        if(userModel==null){
+                        Common.CreateNoSignAlertDialog(this);}
+                        else{
+                            Toast.makeText(this,"التعليق مغلق لهذا الاعلان",Toast.LENGTH_LONG).show();
+                        }
                     }
                     return false;
                 }

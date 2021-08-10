@@ -177,7 +177,7 @@ public class Fragment_Main extends Fragment {
 
 
             Api.getService(Tags.base_url)
-                    .getMAINAds( 1,cat_id)
+                    .getMAINAds(1, cat_id)
                     .enqueue(new Callback<Adversiment_Model>() {
                         @Override
                         public void onResponse(Call<Adversiment_Model> call, Response<Adversiment_Model> response) {
@@ -329,6 +329,8 @@ public class Fragment_Main extends Fragment {
     }
 
     public void getDepartments() {
+        dataList.clear();
+        catogries_adapter.notifyDataSetChanged();
         Api.getService(Tags.base_url)
                 .getDepartment()
                 .enqueue(new Callback<Catogries_Model>() {
@@ -447,5 +449,16 @@ public class Fragment_Main extends Fragment {
             this.pos = pos;
         }
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        get_slider();
+
+        getDepartments();
+        cat_id = "all";
+        getAds();
     }
 }
