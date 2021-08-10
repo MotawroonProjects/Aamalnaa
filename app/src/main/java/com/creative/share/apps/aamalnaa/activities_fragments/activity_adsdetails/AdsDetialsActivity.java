@@ -188,6 +188,7 @@ public class AdsDetialsActivity extends AppCompatActivity implements Listeners.B
                 String query = binding.edtComment.getText().toString();
                 binding.edtComment.setText("");
                 if (!TextUtils.isEmpty(query)) {
+
                     Common.CloseKeyBoard(AdsDetialsActivity.this, binding.edtComment);
                     if (userModel != null&&single_adversiment_model.getCommented()==0) {
                         comment(query);
