@@ -58,7 +58,7 @@
                     android:clickable="false"
                     android:longClickable="false"
                     android:textSize="16sp"
-                    android:text="@string/my_ads"
+                    android:text="@string/their_ads_to_me"
                     />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>

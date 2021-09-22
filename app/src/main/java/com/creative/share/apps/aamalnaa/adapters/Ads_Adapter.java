@@ -81,7 +81,7 @@ private Search_Activity search_activity;
                 eventHolder.binding.fl.setVisibility(View.GONE);
             }
             Log.e("kkdkk",order_data.getIs_Special()+"");
-            if(order_data.getIs_Special()==0){
+            if(order_data.getIs_Install()==0){
                 eventHolder.binding.imstar.setVisibility(View.GONE);
             }
             if(context instanceof FavoriteActivity){

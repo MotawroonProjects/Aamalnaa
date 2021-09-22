@@ -538,6 +538,7 @@ Log.e("ldllflfl",userModel.getUser().getId()+" "+id);
     }
 
     public void changetoworks(int layoutPosition) {
+
         if (pagerAdapter != null && pagerAdapter.getItem(1) != null) {
             Fragment_Clients fragment_clients = (Fragment_Clients) pagerAdapter.getItem(1);
             fragment_clients.changeitem(layoutPosition);

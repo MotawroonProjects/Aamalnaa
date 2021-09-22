@@ -29,15 +29,16 @@ public class Customer_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private String lang;
     private ProfileActivity activity;
     private int i = 0;
-int type;
-    public Customer_Adapter(List<UserModel.Customers> orderlist, Context context,int type) {
+    int type;
+
+    public Customer_Adapter(List<UserModel.Customers> orderlist, Context context, int type) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         this.activity = (ProfileActivity) context;
-        this.type=type;
+        this.type = type;
     }
 
     @NonNull
@@ -57,38 +58,38 @@ int type;
         EventHolder eventHolder = (EventHolder) holder;
         eventHolder.binding.setLang(lang);
         eventHolder.binding.setWorkmodel(orderlist.get(position));
-eventHolder.binding.btBecustomer.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        activity.changetoworks(eventHolder.getLayoutPosition());
-    }
-});
-eventHolder.binding.btDelete.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        activity.delteclients(eventHolder.getLayoutPosition());
+        eventHolder.binding.btBecustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-    }
-});
-eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(context, ProfileActivity.class);
-        intent.putExtra("data",orderlist.get(eventHolder.getLayoutPosition()).getId()+"");
-        context.startActivity(intent);
-    }
-});
-if(type==2){
-    eventHolder.binding.btDelete.setVisibility(View.GONE);
-    eventHolder.binding.btBecustomer.setVisibility(View.GONE);
-}
-if(orderlist.get(position).getBy_my_previous()==0){
-    eventHolder.binding.btBecustomer.setVisibility(View.GONE);
-}
-else  if(type==1){
-    eventHolder.binding.btBecustomer.setVisibility(View.VISIBLE);
+                activity.changetoworks(eventHolder.getLayoutPosition());
+            }
+        });
+        eventHolder.binding.btDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.delteclients(eventHolder.getLayoutPosition());
 
-}
+            }
+        });
+        eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ProfileActivity.class);
+                intent.putExtra("data", orderlist.get(eventHolder.getLayoutPosition()).getId() + "");
+                context.startActivity(intent);
+            }
+        });
+        if (type == 2) {
+            eventHolder.binding.btDelete.setVisibility(View.GONE);
+            eventHolder.binding.btBecustomer.setVisibility(View.GONE);
+        }
+        if (orderlist.get(position).getBy_my_previous() == 0) {
+            eventHolder.binding.btBecustomer.setVisibility(View.GONE);
+        } else if (type == 1) {
+            eventHolder.binding.btBecustomer.setVisibility(View.VISIBLE);
+
+        }
     }
 
     @Override

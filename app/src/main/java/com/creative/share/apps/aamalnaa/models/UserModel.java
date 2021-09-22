@@ -290,6 +290,7 @@ public class UserModel implements Serializable {
         private int is_reported;
         private String user_name;
         private long date;
+        private List<Images> images;
 
         public long getDate() {
             return date;
@@ -414,6 +415,29 @@ public class UserModel implements Serializable {
         public String getUser_name() {
             return user_name;
         }
+
+        public List<Images> getImages() {
+            return images;
+        }
+
+        public class Images implements Serializable {
+            private int id;
+            private int ad_id;
+            private String image;
+
+            public int getId() {
+                return id;
+            }
+
+            public int getAd_id() {
+                return ad_id;
+            }
+
+            public String getImage() {
+                return image;
+            }
+        }
+
     }
 
     public class Rateds implements Serializable {

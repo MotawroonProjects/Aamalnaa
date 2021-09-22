@@ -31,6 +31,7 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_add_ads.AddAdsActivity;
@@ -38,6 +39,7 @@ import com.creative.share.apps.aamalnaa.activities_fragments.activity_map.MapAct
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_profile.ProfileActivity;
 import com.creative.share.apps.aamalnaa.adapters.CityAdapter;
 import com.creative.share.apps.aamalnaa.adapters.ImagesAdapter;
+import com.creative.share.apps.aamalnaa.adapters.ImagesAdsAdapter;
 import com.creative.share.apps.aamalnaa.adapters.Service_Adapter;
 import com.creative.share.apps.aamalnaa.adapters.Spinner_Category_Adapter;
 import com.creative.share.apps.aamalnaa.adapters.Spinner_Sub_Category_Adapter;
@@ -104,6 +106,8 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
     private UserModel userModel;
     private UserModel.Ads ads;
     private double balance = 0, total = 0;
+    private ImagesAdsAdapter imagesAdsAdapter;
+    private List<UserModel.Ads.Images> imagesList;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -206,9 +210,13 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
     }
 
     private void initView() {
+        imagesList = new ArrayList<>();
         if (getIntent().getSerializableExtra("data") != null) {
             ads = (UserModel.Ads) getIntent().getSerializableExtra("data");
         }
+        imagesAdsAdapter = new ImagesAdsAdapter(imagesList, this);
+        binding.recViewimages.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+        binding.recViewimages.setAdapter(imagesAdsAdapter);
         order_upload_model = new Order_Upload_Model();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
@@ -327,12 +335,11 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
         binding.spinnerAdType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(i==0){
-                 //   Toast.makeText(UpdateAdsActivity.this,"اختر نوع الاعلان",Toast.LENGTH_LONG).show();
+                if (i == 0) {
+                    //   Toast.makeText(UpdateAdsActivity.this,"اختر نوع الاعلان",Toast.LENGTH_LONG).show();
                     type_id = (i) + "";
 
-                }
-                else {
+                } else {
                     type_id = (i) + "";
                 }
                 order_upload_model.setType_id(type_id);
@@ -395,7 +402,7 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
             binding.spinnerAdType.setSelection(2);
 
         }
-Log.e("lsllsl",ads.getCommented()+""+ads.getIs_Special()+""+ads.getViews_num()+""+ads.getIs_Install());
+        Log.e("lsllsl", ads.getCommented() + "" + ads.getIs_Special() + "" + ads.getViews_num() + "" + ads.getIs_Install());
         if (ads.getCommented() == 1) {
             service_adapter.setSelection(0);
             commented = 1;
@@ -403,24 +410,26 @@ Log.e("lsllsl",ads.getCommented()+""+ads.getIs_Special()+""+ads.getViews_num()+"
         }
         if (ads.getIs_Special() == 1) {
             service_adapter.setSelection(1);
-            is_Special=1;
+            is_Special = 1;
             total += dataList.get(1).getPrice();
 
         }
         if (ads.getViews_num() > 0) {
             service_adapter.setSelection(2);
-            views_num=ads.getViews_num();
+            views_num = ads.getViews_num();
             total += dataList.get(2).getPrice();
 
         }
         if (ads.getIs_Install() == 1) {
             service_adapter.setSelection(3);
-            is_Install=1;
+            is_Install = 1;
             total += dataList.get(3).getPrice();
 
         }
-        binding.tvtotal.setText(((int)total)  + " " + getResources().getString(R.string.sar));
-
+        binding.tvtotal.setText(((int) total) + " " + getResources().getString(R.string.sar));
+        if(ads.getImages()!=null){
+        imagesList.addAll(ads.getImages());
+        imagesAdsAdapter.notifyDataSetChanged();}
         binding.setOrderModel(order_upload_model);
 
     }
@@ -829,7 +838,7 @@ Log.e("lsllsl",ads.getCommented()+""+ads.getIs_Special()+""+ads.getViews_num()+"
             total -= dataList.get(0).getPrice();
 
         }
-        binding.tvtotal.setText(((int)total)  + " " + getResources().getString(R.string.sar));
+        binding.tvtotal.setText(((int) total) + " " + getResources().getString(R.string.sar));
         return 1;
     }
 
@@ -850,7 +859,7 @@ Log.e("lsllsl",ads.getCommented()+""+ads.getIs_Special()+""+ads.getViews_num()+"
 
         }
 
-        binding.tvtotal.setText(((int)total)  + " " + getResources().getString(R.string.sar));
+        binding.tvtotal.setText(((int) total) + " " + getResources().getString(R.string.sar));
         return 1;
     }
 
@@ -870,7 +879,7 @@ Log.e("lsllsl",ads.getCommented()+""+ads.getIs_Special()+""+ads.getViews_num()+"
             total -= dataList.get(2).getPrice();
 
         }
-        binding.tvtotal.setText(((int)total)  + " " + getResources().getString(R.string.sar));
+        binding.tvtotal.setText(((int) total) + " " + getResources().getString(R.string.sar));
         return 1;
     }
 
@@ -890,7 +899,7 @@ Log.e("lsllsl",ads.getCommented()+""+ads.getIs_Special()+""+ads.getViews_num()+"
             total -= dataList.get(3).getPrice();
 
         }
-        binding.tvtotal.setText(((int)total)  + " " + getResources().getString(R.string.sar));
+        binding.tvtotal.setText(((int) total) + " " + getResources().getString(R.string.sar));
         return 1;
     }
 

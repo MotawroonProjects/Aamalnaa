@@ -282,6 +282,9 @@ public class Fragment_Main extends Fragment {
     }
 
     private void get_slider() {
+      //  Log.e("dldkkd","dkkdk");
+        binding.progBar.setVisibility(View.VISIBLE);
+        binding.pager.setAdapter(null);
 
         Api.getService(Tags.base_url).get_slider().enqueue(new Callback<Slider_Model>() {
             @Override
@@ -396,6 +399,7 @@ public class Fragment_Main extends Fragment {
             }
         }
         getAds();
+        get_slider();
     }
 
     public static void CreateNoSignAlertDialog(Fragment fragment, Context context, List<Catogries_Model.Data.Subcategory> subcategories) {

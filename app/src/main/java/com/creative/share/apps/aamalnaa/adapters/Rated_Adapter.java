@@ -65,7 +65,7 @@ if(orderlist.get(position).getLiked()==0){
 }
 else {
     eventHolder.binding.imagelike.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_like));
-    eventHolder.binding.imagelike.setColorFilter(context.getResources().getColor(R.color.end_color));
+    eventHolder.binding.imagelike.setColorFilter(context.getResources().getColor(R.color.secondColor));
 
 }
 

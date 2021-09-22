@@ -199,7 +199,6 @@
                     android:gravity="top"
                     android:hint="@string/ad_details"
                     android:padding="8dp"
-                    android:singleLine="true"
                     android:text="@={orderModel.details}"
                     android:textColor="@color/black"
                     android:textColorHint="@color/gray4"
@@ -249,6 +248,14 @@
                         android:textSize="14sp" />
 
                 </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recViewimages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    >
+
+                </androidx.recyclerview.widget.RecyclerView>
 
                 <TextView
                     android:layout_width="wrap_content"
