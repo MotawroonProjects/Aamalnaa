@@ -256,6 +256,10 @@ public class UserModel implements Serializable {
         public int getBy_my_previous() {
             return by_my_previous;
         }
+
+        public void setBy_my_previous(int by_my_previous) {
+            this.by_my_previous = by_my_previous;
+        }
     }
 
     public class Ads implements Serializable {

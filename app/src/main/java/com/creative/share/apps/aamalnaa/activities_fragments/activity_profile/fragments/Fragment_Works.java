@@ -91,10 +91,16 @@ public class Fragment_Works extends Fragment {
     }
 
     public void getprofiledata() {
+
+    try {
         ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
         try {
+            Log.e("lkjjj",id);
+            if(id==null||id.isEmpty()){
+                id=userModel.getUser().getId()+"";
+            }
 
             Api.getService(Tags.base_url)
                     .getmyprofile(id+ "",userModel.getUser().getId()+"")
@@ -106,7 +112,7 @@ public class Fragment_Works extends Fragment {
                                 updateprofile(response.body());
                             } else {
 
-                               // Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                // Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
 
                                 try {
 
@@ -125,9 +131,9 @@ public class Fragment_Works extends Fragment {
                                 if (t.getMessage() != null) {
                                     Log.e("error", t.getMessage());
                                     if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-                                     //   Toast.makeText(activity, R.string.something, Toast.LENGTH_SHORT).show();
+                                        //   Toast.makeText(activity, R.string.something, Toast.LENGTH_SHORT).show();
                                     } else {
-                                       // Toast.makeText(activity, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                        // Toast.makeText(activity, t.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
@@ -137,12 +143,15 @@ public class Fragment_Works extends Fragment {
                     });
         } catch (Exception e) {
             dialog.dismiss();
-//            Log.e("err", e.getCause().toString());
+            Log.e("", e.getCause().toString());
         }
+    }catch (Exception e){
+
+    }
     }
 
     private void updateprofile(UserModel userModel) {
-
+Log.e("ldldll","ssss");
         can_rate=userModel.getUser().getCan_rate();
 
         if (userModel.getPrevious() != null) {
@@ -217,4 +226,10 @@ public class Fragment_Works extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(id!=null){
+        getprofiledata();}
+    }
 }

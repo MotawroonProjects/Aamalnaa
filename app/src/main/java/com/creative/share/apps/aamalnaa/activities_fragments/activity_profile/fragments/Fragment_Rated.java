@@ -78,55 +78,60 @@ public class Fragment_Rated extends Fragment {
         binding.recView.setAdapter(rated_adapter);
     }
 
-    private void getprofiledata() {
-        ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
-        dialog.setCancelable(false);
-        dialog.show();
+    public void getprofiledata() {
         try {
+            ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
+            dialog.setCancelable(false);
+            dialog.show();
+            try {
 
-            Api.getService(Tags.base_url)
-                    .getmyprofile(id+ "",userModel.getUser().getId()+"")
-                    .enqueue(new Callback<UserModel>() {
-                        @Override
-                        public void onResponse(Call<UserModel> call, Response<UserModel> response) {
-                            dialog.dismiss();
-                            if (response.isSuccessful() && response.body() != null) {
-                                updateprofile(response.body());
-                            } else {
-
-                             //   Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
-
-                                try {
-
-                                    Log.e("error_data2", response.code() + "_" + response.errorBody().string());
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<UserModel> call, Throwable t) {
-                            try {
+                Api.getService(Tags.base_url)
+                        .getmyprofile(id+ "",userModel.getUser().getId()+"")
+                        .enqueue(new Callback<UserModel>() {
+                            @Override
+                            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                                 dialog.dismiss();
-                                if (t.getMessage() != null) {
-                                    Log.e("error", t.getCause().toString());
-                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-                                       // Toast.makeText(activity, R.string.something, Toast.LENGTH_SHORT).show();
-                                    } else {
-                                      //  Toast.makeText(activity, t.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                }
+                                if (response.isSuccessful() && response.body() != null) {
+                                    updateprofile(response.body());
+                                } else {
 
-                            } catch (Exception e) {
+                                    //   Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+                                    try {
+
+                                        Log.e("error_data2", response.code() + "_" + response.errorBody().string());
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
                             }
-                        }
-                    });
-        } catch (Exception e) {
-            dialog.dismiss();
-            Log.e("err", e.getCause().toString());
+
+                            @Override
+                            public void onFailure(Call<UserModel> call, Throwable t) {
+                                try {
+                                    dialog.dismiss();
+                                    if (t.getMessage() != null) {
+                                        Log.e("error", t.getCause().toString());
+                                        if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                            // Toast.makeText(activity, R.string.something, Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            //  Toast.makeText(activity, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                } catch (Exception e) {
+                                }
+                            }
+                        });
+            } catch (Exception e) {
+                dialog.dismiss();
+                Log.e("err", e.getCause().toString());
+            }
+        }catch (Exception e){
+
         }
+
     }
 
     private void updateprofile(UserModel userModel) {
