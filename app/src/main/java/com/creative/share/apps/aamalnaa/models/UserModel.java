@@ -9,7 +9,8 @@ public class UserModel implements Serializable {
     private List<Ads> ads;
     private List<Rateds> rateds;
     private List<Previous> previous;
-
+    private int negativeRate;
+    private int postivesRate;
     public User getUser() {
         return user;
     }
@@ -33,7 +34,13 @@ public class UserModel implements Serializable {
     public List<Previous> getPrevious() {
         return previous;
     }
+    public int getNegativeRate() {
+        return negativeRate;
+    }
 
+    public int getPostivesRate() {
+        return postivesRate;
+    }
     public static class User implements Serializable {
         private int id;
         private String user_type;
@@ -61,8 +68,7 @@ public class UserModel implements Serializable {
         private String city_name;
         private double total;
         private double Evaluation;
-        private int negativeRate;
-        private int postivesRate;
+
         private int is_follow;
         private String lastSeen;
         private long date;
@@ -182,13 +188,7 @@ public class UserModel implements Serializable {
             return Evaluation;
         }
 
-        public int getNegativeRate() {
-            return negativeRate;
-        }
 
-        public int getPostivesRate() {
-            return postivesRate;
-        }
 
         public int getIs_follow() {
             return is_follow;

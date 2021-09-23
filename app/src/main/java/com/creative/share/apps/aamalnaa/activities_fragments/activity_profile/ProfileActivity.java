@@ -258,7 +258,7 @@ Log.e("ldllflfl",userModel.getUser().getId()+" "+id);
         pagerAdapter.addFragment(getFragments());
         pagerAdapter.addTitle(getTitles());
         binding.pager.setAdapter(pagerAdapter);
-        binding.setUsermodel(userModel.getUser());
+        binding.setUsermodel(userModel);
         View tab_item1 = LayoutInflater.from(this).inflate(R.layout.tab_custom_view, null);
         View tab_item2 = LayoutInflater.from(this).inflate(R.layout.tab_custom_view, null);
         View tab_item3 = LayoutInflater.from(this).inflate(R.layout.tab_custom_view, null);
@@ -477,7 +477,7 @@ Log.e("ldllflfl",userModel.getUser().getId()+" "+id);
     }
 
     private void updateprofile(UserModel userModel) {
-        binding.setUsermodel(userModel.getUser());
+        binding.setUsermodel(userModel);
         can_rate=userModel.getUser().getCan_rate();
         if (!id.equals(this.userModel.getUser().getId() + "")) {
             binding.tvTitle.setText(userModel.getUser().getName());
@@ -521,7 +521,7 @@ Log.e("ldllflfl",userModel.getUser().getId()+" "+id);
 
             }
             try {
-                updateWork(userModel.getPrevious().size());
+                updateWorkCount(userModel.getPrevious().size());
 
             }catch (Exception e){
 
