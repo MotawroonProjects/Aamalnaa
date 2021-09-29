@@ -57,7 +57,7 @@ public class Customer_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         EventHolder eventHolder = (EventHolder) holder;
         eventHolder.binding.setLang(lang);
-        eventHolder.binding.setWorkmodel(orderlist.get(position));
+        eventHolder.binding.setWorkmodel(orderlist.get(position)); 
         eventHolder.binding.btBecustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

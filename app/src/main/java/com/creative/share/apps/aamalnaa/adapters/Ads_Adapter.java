@@ -1,5 +1,6 @@
 package com.creative.share.apps.aamalnaa.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.util.Log;
@@ -67,7 +68,7 @@ private Search_Activity search_activity;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Adversiment_Model.Data order_data = orderlist.get(position);
         if (holder instanceof EventHolder)
         {
@@ -127,6 +128,15 @@ else if(context instanceof  Search_Activity){
                     if(context instanceof  MyAdsActivity){
                         myAdsActivity=(MyAdsActivity)context;
                         myAdsActivity.DeleteMYAd(orderlist.get(holder.getLayoutPosition()).getId(),holder.getLayoutPosition());
+                    }
+                }
+            });
+            eventHolder.binding.imFav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(context instanceof FavoriteActivity){
+                        FavoriteActivity favoriteActivity=(FavoriteActivity) context;
+                        favoriteActivity.Likeads(orderlist.get(position).getId()+"");
                     }
                 }
             });

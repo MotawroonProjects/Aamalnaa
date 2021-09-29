@@ -182,7 +182,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     app:el_duration="500"
-                                    app:el_expanded="true"
+                                    app:el_expanded="false"
                                     app:el_parallax=".5">
 
                                     <LinearLayout
