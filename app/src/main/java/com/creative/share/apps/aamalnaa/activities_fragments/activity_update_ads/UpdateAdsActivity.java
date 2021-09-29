@@ -377,7 +377,7 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
     }
 
     private void updatedata(UserModel.Ads ads) {
-        balance += ads.getTotal_points();
+       // balance += ads.getTotal_points();
         order_upload_model.setPrice(ads.getPrice() + "");
         order_upload_model.setCity_id(ads.getCity_id() + "");
         order_upload_model.setSubcategory_id(ads.getSubcategory_id() + "");
@@ -403,29 +403,29 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
 
         }
         Log.e("lsllsl", ads.getCommented() + "" + ads.getIs_Special() + "" + ads.getViews_num() + "" + ads.getIs_Install());
-        if (ads.getCommented() == 1) {
-            service_adapter.setSelection(0);
-            commented = 1;
-            total += dataList.get(0).getPrice();
-        }
-        if (ads.getIs_Special() == 1) {
-            service_adapter.setSelection(1);
-            is_Special = 1;
-            total += dataList.get(1).getPrice();
-
-        }
-        if (ads.getViews_num() > 0) {
-            service_adapter.setSelection(2);
-            views_num = ads.getViews_num();
-            total += dataList.get(2).getPrice();
-
-        }
-        if (ads.getIs_Install() == 1) {
-            service_adapter.setSelection(3);
-            is_Install = 1;
-            total += dataList.get(3).getPrice();
-
-        }
+//        if (ads.getCommented() == 1) {
+//            service_adapter.setSelection(0);
+//            commented = 1;
+//            total += dataList.get(0).getPrice();
+//        }
+//        if (ads.getIs_Special() == 1) {
+//            service_adapter.setSelection(1);
+//            is_Special = 1;
+//            total += dataList.get(1).getPrice();
+//
+//        }
+//        if (ads.getViews_num() > 0) {
+//            service_adapter.setSelection(2);
+//            views_num = ads.getViews_num();
+//            total += dataList.get(2).getPrice();
+//
+//        }
+//        if (ads.getIs_Install() == 1) {
+//            service_adapter.setSelection(3);
+//            is_Install = 1;
+//            total += dataList.get(3).getPrice();
+//
+//        }
         binding.tvtotal.setText(((int) total) + " " + getResources().getString(R.string.sar));
         if(ads.getImages()!=null){
         imagesList.addAll(ads.getImages());
