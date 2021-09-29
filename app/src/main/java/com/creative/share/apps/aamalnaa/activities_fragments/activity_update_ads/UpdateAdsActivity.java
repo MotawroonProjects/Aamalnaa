@@ -496,9 +496,9 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
                         Toast.makeText(UpdateAdsActivity.this, getString(R.string.suc2), Toast.LENGTH_SHORT).show();
 
                         //  adsActivity.finish(response.body().getId_advertisement());
-                        Intent intent = new Intent(UpdateAdsActivity.this, ProfileActivity.class);
-
-                        startActivity(intent);
+//                        Intent intent = new Intent(UpdateAdsActivity.this, ProfileActivity.class);
+//
+//                        startActivity(intent);
                         finish();
                     } else {
                         try {
@@ -545,9 +545,9 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
                         Toast.makeText(UpdateAdsActivity.this, getString(R.string.suc2), Toast.LENGTH_SHORT).show();
 
                         //  adsActivity.finish(response.body().getId_advertisement());
-                        Intent intent = new Intent(UpdateAdsActivity.this, ProfileActivity.class);
-
-                        startActivity(intent);
+//                        Intent intent = new Intent(UpdateAdsActivity.this, ProfileActivity.class);
+//
+//                        startActivity(intent);
                         finish();
                     } else {
                         try {
