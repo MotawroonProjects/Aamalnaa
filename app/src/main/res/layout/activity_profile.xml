@@ -16,7 +16,7 @@
 
         <variable
             name="usermodel"
-            type="com.creative.share.apps.aamalnaa.models.UserModel.User" />
+            type="com.creative.share.apps.aamalnaa.models.UserModel" />
 
     </data>
 
@@ -58,7 +58,7 @@
 
                             <de.hdodenhof.circleimageview.CircleImageView
                                 android:id="@+id/image"
-                                imageUserEndPoint="@{usermodel.avatar}"
+                                imageUserEndPoint="@{usermodel.user.avatar}"
                                 type="@{2}"
                                 android:layout_width="90dp"
                                 android:layout_height="90dp"
@@ -76,7 +76,7 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="8dp"
                                 android:gravity="center"
-                                android:text="@{usermodel.name}"
+                                android:text="@{usermodel.user.name}"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="15sp" />
 
@@ -213,7 +213,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_marginStart="10dp"
                                                 android:layout_marginEnd="10dp"
-                                                android:text='@{"عضو منذ"+usermodel.created_at}'
+                                                android:text='@{"عضو منذ"+usermodel.user.created_at}'
                                                 android:textColor="@color/textColor"
                                                 android:textSize="12sp"
                                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -336,7 +336,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="center_vertical"
                                                 android:layout_weight=".6"
-                                                android:text="@{usermodel.about}"
+                                                android:text="@{usermodel.user.about}"
                                                 android:textColor="@color/black"
                                                 android:textSize="13sp" />
                                         </LinearLayout>
@@ -377,7 +377,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="center_vertical"
                                                 android:layout_weight=".6"
-                                                android:text="@{usermodel.city_name}"
+                                                android:text="@{usermodel.user.city_name}"
                                                 android:textColor="@color/black"
                                                 android:textSize="13sp" />
                                         </LinearLayout>
@@ -418,7 +418,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="center_vertical"
                                                 android:layout_weight=".6"
-                                                android:text="@{usermodel.mobile}"
+                                                android:text="@{usermodel.user.mobile}"
                                                 android:textColor="@color/black"
                                                 android:textSize="13sp" />
                                         </LinearLayout>
@@ -460,7 +460,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="center_vertical"
                                                 android:layout_weight=".6"
-                                                android:text="@{usermodel.email}"
+                                                android:text="@{usermodel.user.email}"
                                                 android:textColor="@color/black"
                                                 android:textSize="13sp" />
                                         </LinearLayout>
@@ -496,8 +496,8 @@
 
 
                                             <TextView
-                                                date="@{usermodel.logout_time}"
-                                                islogin="@{usermodel.is_login}"
+                                                date="@{usermodel.user.logout_time}"
+                                                islogin="@{usermodel.user.is_login}"
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="center_vertical"

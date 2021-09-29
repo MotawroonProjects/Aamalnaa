@@ -258,7 +258,7 @@ Log.e("ldllflfl",userModel.getUser().getId()+" "+id);
         pagerAdapter.addFragment(getFragments());
         pagerAdapter.addTitle(getTitles());
         binding.pager.setAdapter(pagerAdapter);
-        binding.setUsermodel(userModel.getUser());
+        binding.setUsermodel(userModel);
         View tab_item1 = LayoutInflater.from(this).inflate(R.layout.tab_custom_view, null);
         View tab_item2 = LayoutInflater.from(this).inflate(R.layout.tab_custom_view, null);
         View tab_item3 = LayoutInflater.from(this).inflate(R.layout.tab_custom_view, null);
@@ -299,33 +299,49 @@ Log.e("ldllflfl",userModel.getUser().getId()+" "+id);
 
                     TextView tvTitle2 = binding.tab.getTabAt(1).getCustomView().findViewById(R.id.tvTitle);
                     tvTitle2.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
+                    if (pagerAdapter != null && pagerAdapter.getItem(1) != null) {
+                        Fragment_Clients fragment_clients = (Fragment_Clients) pagerAdapter.getItem(1);
+                        fragment_clients.getprofiledata();
+                    }
 
-
-                } else if (tab.getPosition() == 0) {
+                }
+                else if (tab.getPosition() == 0) {
                     TextView tvTitle = tab.getCustomView().findViewById(R.id.tvTitle);
                     tvTitle.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.colorPrimary));
 
                     TextView tvTitle2 = binding.tab.getTabAt(0).getCustomView().findViewById(R.id.tvTitle);
                     tvTitle2.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
+                    if (pagerAdapter != null && pagerAdapter.getItem(0) != null) {
+                        Fragment_Ads fragment_clients = (Fragment_Ads) pagerAdapter.getItem(0);
+                        fragment_clients.getprofiledata();
+                    }
 
-
-                } else if (tab.getPosition() == 2) {
+                }
+                else if (tab.getPosition() == 2) {
                     TextView tvTitle = tab.getCustomView().findViewById(R.id.tvTitle);
                     tvTitle.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.colorPrimary));
 
                     TextView tvTitle2 = binding.tab.getTabAt(2).getCustomView().findViewById(R.id.tvTitle);
                     tvTitle2.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
+                    if (pagerAdapter != null && pagerAdapter.getItem(2) != null) {
+                        Fragment_Works fragment_clients = (Fragment_Works) pagerAdapter.getItem(2);
+                        fragment_clients.getprofiledata();
+                    }
 
-
-                } else if (tab.getPosition() == 3) {
+                }
+                else if (tab.getPosition() == 3) {
                     TextView tvTitle = tab.getCustomView().findViewById(R.id.tvTitle);
                     tvTitle.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.colorPrimary));
 
                     TextView tvTitle2 = binding.tab.getTabAt(3).getCustomView().findViewById(R.id.tvTitle);
                     tvTitle2.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
+                    if (pagerAdapter != null && pagerAdapter.getItem(3) != null) {
+                        Fragment_Rated fragment_clients = (Fragment_Rated) pagerAdapter.getItem(3);
+                        fragment_clients.getprofiledata();
+                    }
 
-
-                } else {
+                }
+                else {
                     TextView tvTitle = binding.tab.getTabAt(1).getCustomView().findViewById(R.id.tvTitle);
                     tvTitle.setTextColor(ContextCompat.getColor(ProfileActivity.this, R.color.textColor));
 
@@ -409,7 +425,9 @@ Log.e("ldllflfl",userModel.getUser().getId()+" "+id);
         dialog.show();
         try {
             Log.e("data_f", id);
-
+            if(id==null||id.isEmpty()){
+                id=userModel.getUser().getId()+"";
+            }
             Api.getService(Tags.base_url)
                     .getmyprofile(id + "", userModel.getUser().getId() + "")
                     .enqueue(new Callback<UserModel>() {
@@ -459,7 +477,7 @@ Log.e("ldllflfl",userModel.getUser().getId()+" "+id);
     }
 
     private void updateprofile(UserModel userModel) {
-        binding.setUsermodel(userModel.getUser());
+        binding.setUsermodel(userModel);
         can_rate=userModel.getUser().getCan_rate();
         if (!id.equals(this.userModel.getUser().getId() + "")) {
             binding.tvTitle.setText(userModel.getUser().getName());
@@ -469,7 +487,8 @@ Log.e("ldllflfl",userModel.getUser().getId()+" "+id);
                 binding.llcity.setVisibility(View.GONE);
                 binding.llEmail.setVisibility(View.GONE);
                 binding.llphone.setVisibility(View.GONE);
-            } else {
+            }
+            else {
                 binding.consinfo.setVisibility(View.VISIBLE);
                 binding.llAbout.setVisibility(View.VISIBLE);
                 binding.llcity.setVisibility(View.VISIBLE);
@@ -502,16 +521,17 @@ Log.e("ldllflfl",userModel.getUser().getId()+" "+id);
 
             }
             try {
-                updateWork(userModel.getPrevious().size());
+                updateWorkCount(userModel.getPrevious().size());
 
             }catch (Exception e){
 
 
             }
-            if(pagerAdapter!=null&&pagerAdapter.getItem(2)!=null){
-                Fragment_Works fragment_works= (Fragment_Works) pagerAdapter.getItem(2);
-                fragment_works.getprofiledata();
-            }
+//            if(pagerAdapter!=null&&pagerAdapter.getItem(2)!=null){
+//
+//                Fragment_Works fragment_works= (Fragment_Works) pagerAdapter.getItem(2);
+//                fragment_works.getprofiledata();
+//            }
         }
 
 
@@ -563,11 +583,11 @@ Log.e("ldllflfl",userModel.getUser().getId()+" "+id);
 
     public void updateWork(int i) {
 
-      /*  updateWorkCount(i+work_count);
+
         if(pagerAdapter!=null&&pagerAdapter.getItem(2)!=null){
             Fragment_Works fragment_works= (Fragment_Works) pagerAdapter.getItem(2);
             fragment_works.getprofiledata();
-        }*/
+        }
         binding.pager.setCurrentItem(2);
 
     }

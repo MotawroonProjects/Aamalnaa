@@ -89,55 +89,59 @@ public class Fragment_Clients extends Fragment {
 
     }
 
-    private void getprofiledata() {
-        ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
-        dialog.setCancelable(false);
-        dialog.show();
-        try {
+    public void getprofiledata() {
+   try {
+       ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
+       dialog.setCancelable(false);
+       dialog.show();
+       try {
 
-            Api.getService(Tags.base_url)
-                    .getmyprofile(id+ "",userModel.getUser().getId()+"")
-                    .enqueue(new Callback<UserModel>() {
-                        @Override
-                        public void onResponse(Call<UserModel> call, Response<UserModel> response) {
-                            dialog.dismiss();
-                            if (response.isSuccessful() && response.body() != null) {
-                                updateprofile(response.body());
-                            } else {
+           Api.getService(Tags.base_url)
+                   .getmyprofile(id+ "",userModel.getUser().getId()+"")
+                   .enqueue(new Callback<UserModel>() {
+                       @Override
+                       public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                           dialog.dismiss();
+                           if (response.isSuccessful() && response.body() != null) {
+                               updateprofile(response.body());
+                           } else {
 
-                             //   Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                               //   Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
 
-                                try {
+                               try {
 
-                                    Log.e("error_data3", response.code() + "_" + response.errorBody().string());
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                                   Log.e("error_data3", response.code() + "_" + response.errorBody().string());
+                               } catch (IOException e) {
+                                   e.printStackTrace();
+                               }
 
-                            }
-                        }
+                           }
+                       }
 
-                        @Override
-                        public void onFailure(Call<UserModel> call, Throwable t) {
-                            try {
-                                dialog.dismiss();
-                                if (t.getMessage() != null) {
-                                    Log.e("error", t.getMessage());
-                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-                                    //    Toast.makeText(activity, R.string.something, Toast.LENGTH_SHORT).show();
-                                    } else {
-                                    //    Toast.makeText(activity, t.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                }
+                       @Override
+                       public void onFailure(Call<UserModel> call, Throwable t) {
+                           try {
+                               dialog.dismiss();
+                               if (t.getMessage() != null) {
+                                   Log.e("error", t.getMessage());
+                                   if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                       //    Toast.makeText(activity, R.string.something, Toast.LENGTH_SHORT).show();
+                                   } else {
+                                       //    Toast.makeText(activity, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                   }
+                               }
 
-                            } catch (Exception e) {
-                            }
-                        }
-                    });
-        } catch (Exception e) {
-            dialog.dismiss();
-            Log.e("err", e.getCause().toString());
-        }
+                           } catch (Exception e) {
+                           }
+                       }
+                   });
+       } catch (Exception e) {
+           dialog.dismiss();
+           Log.e("err", e.getCause().toString());
+       }
+   }catch (Exception e){
+
+   }
     }
 
     private void updateprofile(UserModel userModel) {
@@ -153,6 +157,8 @@ public class Fragment_Clients extends Fragment {
 
     private void setads(List<UserModel.Customers> ads) {
         adsList.clear();
+        customer_adapter.notifyDataSetChanged();
+
         adsList.addAll(ads);
         customer_adapter.notifyDataSetChanged();
     }
@@ -179,6 +185,8 @@ public class Fragment_Clients extends Fragment {
                                // adsList.remove(layoutPosition);
                                 //customer_adapter.notifyItemRemoved(layoutPosition);
                                 //activity.updateClientCount(adsList.size() );
+                                adsList.get(layoutPosition).setBy_my_previous(0);
+                                customer_adapter.notifyDataSetChanged();
                                 activity.updateWork(1);
                               //  Toast.makeText(activity, getString(R.string.suc), Toast.LENGTH_SHORT).show();
 
@@ -265,5 +273,11 @@ public class Fragment_Clients extends Fragment {
 
             dialog.dismiss();
         }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(id!=null){
+            getprofiledata();}
     }
 }

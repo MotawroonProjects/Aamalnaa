@@ -394,12 +394,12 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
         order_upload_model.setDetails(ads.getDetails());
         type_id = ads.getAds_type() + "";
         if (type_id.equals("1")) {
-            binding.spinnerAdType.setSelection(0);
-        } else if (type_id.equals("2")) {
             binding.spinnerAdType.setSelection(1);
+        } else if (type_id.equals("2")) {
+            binding.spinnerAdType.setSelection(2);
 
         } else if (type_id.equals("3")) {
-            binding.spinnerAdType.setSelection(2);
+            binding.spinnerAdType.setSelection(3);
 
         }
         Log.e("lsllsl", ads.getCommented() + "" + ads.getIs_Special() + "" + ads.getViews_num() + "" + ads.getIs_Install());
@@ -466,9 +466,18 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
             price_part = Common.getRequestBodyText(order_upload_model.getPrice() + "");
 
         }
-        RequestBody address_part = Common.getRequestBodyText(order_upload_model.getAddress());
-        RequestBody long_part = Common.getRequestBodyText(order_upload_model.getLongitude());
-        RequestBody lat_part = Common.getRequestBodyText(order_upload_model.getLatitude());
+        RequestBody address_part;
+        RequestBody long_part;
+        RequestBody lat_part;
+        if (order_upload_model.getAddress() != null) {
+            address_part = Common.getRequestBodyText(order_upload_model.getAddress());
+            long_part = Common.getRequestBodyText(order_upload_model.getLongitude());
+            lat_part = Common.getRequestBodyText(order_upload_model.getLatitude());
+        } else {
+            address_part = Common.getRequestBodyText("");
+            long_part = Common.getRequestBodyText("");
+            lat_part = Common.getRequestBodyText("");
+        }
         RequestBody views_num_part = Common.getRequestBodyText(views_num + "");
         RequestBody is_Special_part = Common.getRequestBodyText(is_Special + "");
         RequestBody is_Install_part = Common.getRequestBodyText(is_Install + "");
