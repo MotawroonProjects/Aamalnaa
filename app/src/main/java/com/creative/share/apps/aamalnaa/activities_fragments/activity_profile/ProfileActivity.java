@@ -162,7 +162,8 @@ Log.e("ldllflfl",userModel.getUser().getId()+" "+id);
                             //  binding.progBar.setVisibility(View.GONE);
                             if (response.isSuccessful() && response.body() != null && response.body() != null) {
                                 //binding.coord1.scrollTo(0,0);
-                                getprofiledata();
+
+                                updateData();
                                 Toast.makeText(ProfileActivity.this, getResources().getString(R.string.suc), Toast.LENGTH_LONG).show();
 
                             } else {
@@ -196,6 +197,13 @@ Log.e("ldllflfl",userModel.getUser().getId()+" "+id);
 
             dialog.dismiss();
         }
+    }
+
+    private void updateData() {
+        if (pagerAdapter != null && pagerAdapter.getItem(2) != null) {
+            Fragment_Works fragment_clients = (Fragment_Works) pagerAdapter.getItem(2);
+            fragment_clients.getprofiledata();
+        }       getprofiledata();
     }
 
     private void initView() {

@@ -173,8 +173,14 @@ public class Fragment_More extends Fragment {
         });
 
         binding.llContact.setOnClickListener(view -> {
-            Intent intent = new Intent(activity, ContactActivity.class);
-            startActivity(intent);
+
+            if (userModel != null) {
+                Intent intent = new Intent(activity, ContactActivity.class);
+                startActivity(intent);
+            } else {
+                Common.CreateNoSignAlertDialog(activity);
+
+            }
         });
 
         binding.llLogout.setOnClickListener(view -> {

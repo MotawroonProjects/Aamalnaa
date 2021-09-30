@@ -8,7 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -60,10 +62,14 @@ import com.creative.share.apps.aamalnaa.tags.Tags;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 import io.paperdb.Paper;
 import okhttp3.MultipartBody;
@@ -429,7 +435,20 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
         binding.tvtotal.setText(((int) total) + " " + getResources().getString(R.string.sar));
         if(ads.getImages()!=null){
         imagesList.addAll(ads.getImages());
-        imagesAdsAdapter.notifyDataSetChanged();}
+        imagesAdsAdapter.notifyDataSetChanged();
+        binding.recViewimages.setVisibility(View.GONE);
+        for(int i=0;i<imagesList.size();i++){
+          AsyncTask downloadImage=new DownloadImage().execute(Tags.IMAGE_Ads_URL+imagesList.get(i).getImage());
+            try {
+                urlList.add(Uri.parse(downloadImage.get().toString()));
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        imagesAdapter.notifyDataSetChanged();
+        }
         binding.setOrderModel(order_upload_model);
 
     }
@@ -437,12 +456,12 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
     private List<MultipartBody.Part> getMultipartBodyList(List<Uri> uriList, String image_cv) {
         List<MultipartBody.Part> partList = new ArrayList<>();
         for (Uri uri : uriList) {
+
             MultipartBody.Part part = Common.getMultiPart(UpdateAdsActivity.this, uri, image_cv);
             partList.add(part);
         }
         return partList;
     }
-
     private void updateorder(Order_Upload_Model order_upload_model) {
         final Dialog dialog = Common.createProgressDialog(UpdateAdsActivity.this, getString(R.string.wait));
         dialog.setCancelable(false);
@@ -485,6 +504,7 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
         RequestBody total_part = Common.getRequestBodyText(total + "");
 
         List<MultipartBody.Part> partimageList = getMultipartBodyList(urlList, "image[]");
+        Log.e("lll",partimageList.size()+"{");
         try {
             Api.getService(Tags.base_url)
                     .Updateorder(ad_part, user_part, category_part, subcategory_part, city_part, type_part, title_part, detials_part, price_part, address_part, long_part, lat_part, views_num_part, is_Special_part, is_Install_part, commented_part, total_part, partimageList).enqueue(new Callback<ResponseBody>() {
@@ -1035,5 +1055,25 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
             // Log.e("err", e.getMessage());
         }
     }
+    private class DownloadImage extends AsyncTask  {
 
+
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            String imageURL = (String) objects[0];
+            Bitmap bitmap = null;
+            Uri uri = null;
+            try {
+                // Download Image from URL
+                InputStream input = new java.net.URL(imageURL).openStream();
+                // Decode Bitmap
+                bitmap = BitmapFactory.decodeStream(input);
+                uri=getUriFromBitmap(bitmap);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return uri;
+        }
+    }
 }

@@ -300,4 +300,10 @@ public class Fragment_Ads extends Fragment {
             dialog.dismiss();
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getprofiledata();
+    }
 }

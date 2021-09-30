@@ -206,6 +206,7 @@ public interface Service {
 
             @Field("user_id") String user_id
     );
+
     @FormUrlEncoded
     @POST("api/add_comment")
     Call<ResponseBody> comment(
@@ -227,7 +228,7 @@ public interface Service {
     @POST("api/changepr")
     Call<UserModel> Transform(
 
-            @Field("user_id") String user_id,
+            @Field("id") String id,
             @Field("points") double points
 
     );
@@ -297,10 +298,12 @@ public interface Service {
 
     @FormUrlEncoded
     @POST("api/contact_us")
-    Call<ResponseBody> sendContact(@Field("name") String name,
-                                   @Field("email") String email,
-                                   @Field("title") String title,
-                                   @Field("content") String content
+    Call<ResponseBody> sendContact(
+            @Field("user_id") String user_id,
+            @Field("name") String name,
+            @Field("email") String email,
+            @Field("title") String title,
+            @Field("content") String content
     );
 
     @FormUrlEncoded

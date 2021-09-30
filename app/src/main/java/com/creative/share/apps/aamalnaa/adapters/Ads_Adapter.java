@@ -37,10 +37,11 @@ public class Ads_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater inflater;
     private String lang;
     private Ads_Activity ads_activity;
-private FavoriteActivity favoriteActivity;
-private MyAdsActivity myAdsActivity;
-private HomeActivity homeActivity;
-private Search_Activity search_activity;
+    private FavoriteActivity favoriteActivity;
+    private MyAdsActivity myAdsActivity;
+    private HomeActivity homeActivity;
+    private Search_Activity search_activity;
+
     public Ads_Adapter(List<Adversiment_Model.Data> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
@@ -55,98 +56,88 @@ private Search_Activity search_activity;
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        if (viewType==ITEM_DATA)
-        {
-            AdsRowBinding binding  = DataBindingUtil.inflate(inflater, R.layout.ads_row,parent,false);
+        if (viewType == ITEM_DATA) {
+            AdsRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.ads_row, parent, false);
             return new EventHolder(binding);
 
-        }else
-            {
-                LoadMoreBinding binding = DataBindingUtil.inflate(inflater, R.layout.load_more,parent,false);
-                return new LoadHolder(binding);
-            }
+        } else {
+            LoadMoreBinding binding = DataBindingUtil.inflate(inflater, R.layout.load_more, parent, false);
+            return new LoadHolder(binding);
+        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Adversiment_Model.Data order_data = orderlist.get(position);
-        if (holder instanceof EventHolder)
-        {
+        if (holder instanceof EventHolder) {
             EventHolder eventHolder = (EventHolder) holder;
             eventHolder.binding.setLang(lang);
             eventHolder.binding.setAdversimentmodel(order_data);
-            if(context instanceof MyAdsActivity){
+            if (context instanceof MyAdsActivity) {
                 eventHolder.binding.fl.setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 eventHolder.binding.fl.setVisibility(View.GONE);
             }
-            Log.e("kkdkk",order_data.getIs_Special()+"");
-            if(order_data.getIs_Install()==0){
-                eventHolder.binding.imstar.setVisibility(View.GONE);
-            }
-            if(context instanceof FavoriteActivity){
+        //    Log.e("kkdkk", order_data.getIs_Special() + "");
+//            if (order_data.getIs_Install() == 0) {
+//                eventHolder.binding.imstar.setVisibility(View.GONE);
+//            }
+            if (context instanceof FavoriteActivity) {
                 eventHolder.binding.imFav.setVisibility(View.VISIBLE);
 
-            }
-            else {
+            } else {
                 eventHolder.binding.imFav.setVisibility(View.GONE);
 
             }
-eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-if(context instanceof  Ads_Activity){
-    ads_activity=(Ads_Activity)context;
-    ads_activity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
+            eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (context instanceof Ads_Activity) {
+                        ads_activity = (Ads_Activity) context;
+                        ads_activity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
 
-}
-else if(context instanceof  MyAdsActivity){
-    myAdsActivity=(MyAdsActivity)context;
-    myAdsActivity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
-}
-else  if(context instanceof HomeActivity){
-    homeActivity=(HomeActivity)context;
-    homeActivity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
+                    } else if (context instanceof MyAdsActivity) {
+                        myAdsActivity = (MyAdsActivity) context;
+                        myAdsActivity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
+                    } else if (context instanceof HomeActivity) {
+                        homeActivity = (HomeActivity) context;
+                        homeActivity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
 
-}
-else if(context instanceof FavoriteActivity){
-    favoriteActivity=(FavoriteActivity)context;
-    favoriteActivity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
+                    } else if (context instanceof FavoriteActivity) {
+                        favoriteActivity = (FavoriteActivity) context;
+                        favoriteActivity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
 
-}
-else if(context instanceof  Search_Activity){
-    search_activity=(Search_Activity)context;
-    search_activity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
-}
-    }
-});
+                    } else if (context instanceof Search_Activity) {
+                        search_activity = (Search_Activity) context;
+                        search_activity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
+                    }
+                }
+            });
 
             eventHolder.binding.fl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(context instanceof  MyAdsActivity){
-                        myAdsActivity=(MyAdsActivity)context;
-                        myAdsActivity.DeleteMYAd(orderlist.get(holder.getLayoutPosition()).getId(),holder.getLayoutPosition());
+                    if (context instanceof MyAdsActivity) {
+                        myAdsActivity = (MyAdsActivity) context;
+                        myAdsActivity.DeleteMYAd(orderlist.get(holder.getLayoutPosition()).getId(), holder.getLayoutPosition());
                     }
                 }
             });
             eventHolder.binding.imFav.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(context instanceof FavoriteActivity){
-                        FavoriteActivity favoriteActivity=(FavoriteActivity) context;
-                        favoriteActivity.Likeads(orderlist.get(position).getId()+"");
+                    if (context instanceof FavoriteActivity) {
+                        FavoriteActivity favoriteActivity = (FavoriteActivity) context;
+                        favoriteActivity.Likeads(orderlist.get(position).getId() + "");
                     }
                 }
             });
 
 
-        }else
-            {
-                LoadHolder loadHolder = (LoadHolder) holder;
-                loadHolder.binding.progBar.setIndeterminate(true);
-            }
+        } else {
+            LoadHolder loadHolder = (LoadHolder) holder;
+            loadHolder.binding.progBar.setIndeterminate(true);
+        }
     }
 
     @Override
@@ -156,6 +147,7 @@ else if(context instanceof  Search_Activity){
 
     public class EventHolder extends RecyclerView.ViewHolder {
         public AdsRowBinding binding;
+
         public EventHolder(@NonNull AdsRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
@@ -166,10 +158,11 @@ else if(context instanceof  Search_Activity){
 
     public class LoadHolder extends RecyclerView.ViewHolder {
         private LoadMoreBinding binding;
+
         public LoadHolder(@NonNull LoadMoreBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+            binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         }
 
     }
@@ -177,13 +170,11 @@ else if(context instanceof  Search_Activity){
     @Override
     public int getItemViewType(int position) {
         Adversiment_Model.Data order_Model = orderlist.get(position);
-        if (order_Model!=null)
-        {
+        if (order_Model != null) {
             return ITEM_DATA;
-        }else
-            {
-                return LOAD;
-            }
+        } else {
+            return LOAD;
+        }
 
     }
 

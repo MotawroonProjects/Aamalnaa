@@ -101,7 +101,7 @@ public class ContactActivity extends AppCompatActivity implements Listeners.Back
             dialog.setCancelable(false);
             dialog.show();
             Api.getService(Tags.base_url)
-                    .sendContact(contactUsModel.getName(), contactUsModel.getEmail(), contactUsModel.getSubject(), contactUsModel.getMessage())
+                    .sendContact(userModel.getUser().getId()+"",contactUsModel.getName(), contactUsModel.getEmail(), contactUsModel.getSubject(), contactUsModel.getMessage())
                     .enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

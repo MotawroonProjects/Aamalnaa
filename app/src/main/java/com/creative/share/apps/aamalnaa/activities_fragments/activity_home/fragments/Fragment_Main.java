@@ -23,6 +23,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeActivity;
@@ -165,7 +166,12 @@ public class Fragment_Main extends Fragment {
             }
         });
 
-
+        binding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getAds();
+            }
+        });
     }
 
     private void getAds() {
@@ -173,6 +179,7 @@ public class Fragment_Main extends Fragment {
         ads_adapter.notifyDataSetChanged();
         binding.progBar2.setVisibility(View.VISIBLE);
 
+        current_page2 = 1;
         try {
 
 
@@ -182,6 +189,8 @@ public class Fragment_Main extends Fragment {
                         @Override
                         public void onResponse(Call<Adversiment_Model> call, Response<Adversiment_Model> response) {
                             binding.progBar2.setVisibility(View.GONE);
+                            binding.swipeRefresh.setRefreshing(false);
+
                             if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
                                 advesriment_data_list.clear();
                                 advesriment_data_list.addAll(response.body().getData());
@@ -218,6 +227,7 @@ public class Fragment_Main extends Fragment {
                             try {
                                 binding.progBar2.setVisibility(View.GONE);
                                 binding.llNoStore.setVisibility(View.VISIBLE);
+                                binding.swipeRefresh.setRefreshing(false);
 
 
                                 Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
@@ -229,6 +239,7 @@ public class Fragment_Main extends Fragment {
         } catch (Exception e) {
             binding.progBar2.setVisibility(View.GONE);
             binding.llNoStore.setVisibility(View.VISIBLE);
+            binding.swipeRefresh.setRefreshing(false);
 
         }
     }
@@ -282,7 +293,7 @@ public class Fragment_Main extends Fragment {
     }
 
     private void get_slider() {
-      //  Log.e("dldkkd","dkkdk");
+        //  Log.e("dldkkd","dkkdk");
         binding.progBar.setVisibility(View.VISIBLE);
         binding.pager.setAdapter(null);
 
