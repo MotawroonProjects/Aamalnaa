@@ -123,7 +123,7 @@ public class Ads_Activity extends AppCompatActivity implements Listeners.BackLis
 
 
             Api.getService(Tags.base_url)
-                    .getAds(Filter_Model.getCity_id(), Filter_Model.getLat(), Filter_Model.getLng(), Filter_Model.getIs_new(), Filter_Model.getSearch())
+                    .getAds(Filter_Model.getCity_id(), Filter_Model.getLat(), Filter_Model.getLng(), Filter_Model.getIs_new(),Filter_Model.getPhoto(), Filter_Model.getSearch())
                     .enqueue(new Callback<Adversiment_Model>() {
                         @Override
                         public void onResponse(Call<Adversiment_Model> call, Response<Adversiment_Model> response) {
@@ -182,7 +182,7 @@ public class Ads_Activity extends AppCompatActivity implements Listeners.BackLis
 
 
             Api.getService(Tags.base_url)
-                    .getAds(Filter_Model.getCity_id(), Filter_Model.getLat(), Filter_Model.getLng(), Filter_Model.getIs_new(), Filter_Model.getSearch())
+                    .getAds(Filter_Model.getCity_id(), Filter_Model.getLat(), Filter_Model.getLng(), Filter_Model.getIs_new(),Filter_Model.getPhoto(), Filter_Model.getSearch())
                     .enqueue(new Callback<Adversiment_Model>() {
                         @Override
                         public void onResponse(Call<Adversiment_Model> call, Response<Adversiment_Model> response) {

@@ -342,7 +342,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_vertical"
-                                android:text="@{usermodel.name}"
+                                android:text="@{adversimentmodel.user_name}"
                                 android:textColor="@color/gray7"
                                 android:textSize="12sp"
                                 app:layout_constraintBottom_toBottomOf="parent"

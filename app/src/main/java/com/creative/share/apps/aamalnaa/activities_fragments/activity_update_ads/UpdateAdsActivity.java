@@ -114,6 +114,7 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
     private double balance = 0, total = 0;
     private ImagesAdsAdapter imagesAdsAdapter;
     private List<UserModel.Ads.Images> imagesList;
+    private List<Integer> ids;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -216,6 +217,7 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
     }
 
     private void initView() {
+        ids = new ArrayList<>();
         imagesList = new ArrayList<>();
         if (getIntent().getSerializableExtra("data") != null) {
             ads = (UserModel.Ads) getIntent().getSerializableExtra("data");
@@ -383,7 +385,7 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
     }
 
     private void updatedata(UserModel.Ads ads) {
-       // balance += ads.getTotal_points();
+        // balance += ads.getTotal_points();
         order_upload_model.setPrice(ads.getPrice() + "");
         order_upload_model.setCity_id(ads.getCity_id() + "");
         order_upload_model.setSubcategory_id(ads.getSubcategory_id() + "");
@@ -433,21 +435,21 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
 //
 //        }
         binding.tvtotal.setText(((int) total) + " " + getResources().getString(R.string.sar));
-        if(ads.getImages()!=null){
-        imagesList.addAll(ads.getImages());
-        imagesAdsAdapter.notifyDataSetChanged();
-        binding.recViewimages.setVisibility(View.GONE);
-        for(int i=0;i<imagesList.size();i++){
-          AsyncTask downloadImage=new DownloadImage().execute(Tags.IMAGE_Ads_URL+imagesList.get(i).getImage());
-            try {
-                urlList.add(Uri.parse(downloadImage.get().toString()));
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        imagesAdapter.notifyDataSetChanged();
+        if (ads.getImages() != null) {
+            imagesList.addAll(ads.getImages());
+            imagesAdsAdapter.notifyDataSetChanged();
+//        binding.recViewimages.setVisibility(View.GONE);
+//        for(int i=0;i<imagesList.size();i++){
+//          AsyncTask downloadImage=new DownloadImage().execute(Tags.IMAGE_Ads_URL+imagesList.get(i).getImage());
+//            try {
+//                urlList.add(Uri.parse(downloadImage.get().toString()));
+//            } catch (ExecutionException e) {
+//                e.printStackTrace();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        imagesAdapter.notifyDataSetChanged();
         }
         binding.setOrderModel(order_upload_model);
 
@@ -462,6 +464,7 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
         }
         return partList;
     }
+
     private void updateorder(Order_Upload_Model order_upload_model) {
         final Dialog dialog = Common.createProgressDialog(UpdateAdsActivity.this, getString(R.string.wait));
         dialog.setCancelable(false);
@@ -502,12 +505,16 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
         RequestBody is_Install_part = Common.getRequestBodyText(is_Install + "");
         RequestBody commented_part = Common.getRequestBodyText(commented + "");
         RequestBody total_part = Common.getRequestBodyText(total + "");
-
+        RequestBody android_part = Common.getRequestBodyText("yes");
+        List<RequestBody> idspart = new ArrayList<>();
+        for (int i = 0; i < ids.size(); i++) {
+            idspart.add(Common.getRequestBodyText(ids.get(i) + ""));
+        }
         List<MultipartBody.Part> partimageList = getMultipartBodyList(urlList, "image[]");
-        Log.e("lll",partimageList.size()+"{");
+        Log.e("lll", partimageList.size() + "{");
         try {
             Api.getService(Tags.base_url)
-                    .Updateorder(ad_part, user_part, category_part, subcategory_part, city_part, type_part, title_part, detials_part, price_part, address_part, long_part, lat_part, views_num_part, is_Special_part, is_Install_part, commented_part, total_part, partimageList).enqueue(new Callback<ResponseBody>() {
+                    .Updateorder(ad_part, user_part, category_part, subcategory_part, city_part, type_part, title_part, detials_part, price_part, address_part, long_part, lat_part, views_num_part, is_Special_part, is_Install_part, commented_part, total_part, partimageList,android_part,idspart).enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     dialog.dismiss();
@@ -556,7 +563,7 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
 
         try {
             Api.getService(Tags.base_url)
-                    .Updateorder(ads.getId() + "", userModel.getUser().getId() + "", order_upload_model.getCategory_id(), order_upload_model.getSubcategory_id(), order_upload_model.getCity_id(), type_id, order_upload_model.getTitle(), order_upload_model.getDetails(), order_upload_model.getPrice(), order_upload_model.getAddress(), order_upload_model.getLongitude(), order_upload_model.getLatitude(), views_num + "", is_Special + "", is_Install + "", commented + "", total + "").enqueue(new Callback<ResponseBody>() {
+                    .Updateorderwithoutimage(ads.getId() + "", userModel.getUser().getId() + "", order_upload_model.getCategory_id(), order_upload_model.getSubcategory_id(), order_upload_model.getCity_id(), type_id, order_upload_model.getTitle(), order_upload_model.getDetails(), order_upload_model.getPrice(), order_upload_model.getAddress(), order_upload_model.getLongitude(), order_upload_model.getLatitude(), views_num + "", is_Special + "", is_Install + "", commented + "", total + "", "yes", ids).enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     dialog.dismiss();
@@ -1055,8 +1062,12 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
             // Log.e("err", e.getMessage());
         }
     }
-    private class DownloadImage extends AsyncTask  {
 
+    public void deleteImages(int adapterPosition) {
+        ids.add(imagesList.get(adapterPosition).getId());
+    }
+
+    private class DownloadImage extends AsyncTask {
 
 
         @Override
@@ -1069,7 +1080,7 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
                 InputStream input = new java.net.URL(imageURL).openStream();
                 // Decode Bitmap
                 bitmap = BitmapFactory.decodeStream(input);
-                uri=getUriFromBitmap(bitmap);
+                uri = getUriFromBitmap(bitmap);
             } catch (Exception e) {
                 e.printStackTrace();
             }

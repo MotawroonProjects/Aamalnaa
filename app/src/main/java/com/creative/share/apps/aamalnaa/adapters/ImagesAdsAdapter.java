@@ -53,8 +53,15 @@ else if(context instanceof UpdateAdsActivity){
 
         holder.imageRowBinding.setUrl(url.toString());
 
-     holder.imageRowBinding.imageDelete.setVisibility(View.GONE);
-
+    // holder.imageRowBinding.imageDelete.setVisibility(View.GONE);
+holder.imageRowBinding.imageDelete.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        if(context instanceof  UpdateAdsActivity){
+            updateAdsActivity.deleteImages(holder.getAdapterPosition());
+        }
+    }
+});
 
     }
 

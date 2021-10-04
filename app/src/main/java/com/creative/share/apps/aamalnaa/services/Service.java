@@ -167,6 +167,8 @@ public interface Service {
             @Field("lat") String lat,
             @Field("lng") String lng,
             @Field("is_new") int is_new,
+            @Field("is_image") int is_image,
+
             @Field("title") String title
     );
 
@@ -408,14 +410,15 @@ public interface Service {
                     @Part("is_Install") RequestBody is_Install,
                     @Part("commented") RequestBody commented,
                     @Part("total") RequestBody total,
-                    @Part List<MultipartBody.Part> partimageInsideList
-
+                    @Part List<MultipartBody.Part> partimageInsideList,
+                    @Part("android") RequestBody android,
+                    @Part("android_ids") List<RequestBody> android_ids
 //
             );
 
     @FormUrlEncoded
     @POST("api/update_ad")
-    Call<ResponseBody> Updateorder
+    Call<ResponseBody> Updateorderwithoutimage
             (
                     @Field("ad_id") String ad_id,
                     @Field("user_id") String user_id,
@@ -433,8 +436,9 @@ public interface Service {
                     @Field("is_Special") String is_Special,
                     @Field("is_Install") String is_Install,
                     @Field("commented") String commented,
-                    @Field("total") String total
-
+                    @Field("total") String total,
+                    @Field("android") String android,
+                    @Field("android_ids") List<Integer> android_ids
 //
             );
 

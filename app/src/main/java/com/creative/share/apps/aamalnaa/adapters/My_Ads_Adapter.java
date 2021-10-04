@@ -61,7 +61,6 @@ eventHolder.binding.setAdversimentmodel(orderlist.get(position));
         if(orderlist.get(position).getIs_Install()==0){
             eventHolder.binding.imstar.setVisibility(View.GONE);
         }
-eventHolder.binding.setUsermodel(Preferences.getInstance().getUserData(activity).getUser());
 eventHolder.binding.expandLayout.setOrientation(ExpandableLayout.HORIZONTAL);
 eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -98,6 +97,8 @@ eventHolder.binding.imagenew.setOnClickListener(new View.OnClickListener() {
 eventHolder.binding.imageDelete.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
+
+        i=-1;
         activity.deleteads(eventHolder.getLayoutPosition());
     }
 });
