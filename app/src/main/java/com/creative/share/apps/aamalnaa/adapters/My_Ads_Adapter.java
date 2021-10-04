@@ -1,5 +1,6 @@
 package com.creative.share.apps.aamalnaa.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import io.paperdb.Paper;
 
 public class My_Ads_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    public String name;
     private List<UserModel.Ads> orderlist;
     private Context context;
     private LayoutInflater inflater;
@@ -31,14 +33,16 @@ public class My_Ads_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private ProfileActivity activity;
     private int i = -1;
     int type;
-    public My_Ads_Adapter(List<UserModel.Ads> orderlist, Context context,int type) {
+
+    public My_Ads_Adapter(List<UserModel.Ads> orderlist, Context context, int type, String name) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         this.activity = (ProfileActivity) context;
-        this.type=type;
+        this.type = type;
+        this.name = name;
     }
 
     @NonNull
@@ -53,73 +57,75 @@ public class My_Ads_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         EventHolder eventHolder = (EventHolder) holder;
         eventHolder.binding.setLang(lang);
-eventHolder.binding.setAdversimentmodel(orderlist.get(position));
-        if(orderlist.get(position).getIs_Install()==0){
+        eventHolder.binding.setName(name);
+        eventHolder.binding.setAdversimentmodel(orderlist.get(position));
+        if (orderlist.get(position).getIs_Install() == 0) {
             eventHolder.binding.imstar.setVisibility(View.GONE);
         }
-eventHolder.binding.expandLayout.setOrientation(ExpandableLayout.HORIZONTAL);
-eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        if(type==1){
-        i=position;
-        notifyDataSetChanged();}
-    }
-});
+        eventHolder.binding.expandLayout.setOrientation(ExpandableLayout.HORIZONTAL);
+        eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (type == 1) {
+                    i = holder.getLayoutPosition();
+                    notifyDataSetChanged();
+                }
+            }
+        });
         eventHolder.binding.tvedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(type==1){
-                    i=position;
-                    notifyDataSetChanged();}
+                if (type == 1) {
+                    i = holder.getLayoutPosition();
+                    notifyDataSetChanged();
+                }
             }
         });
-if(type==2){
-    eventHolder.binding.expandLayout.setVisibility(View.GONE);
-}
-eventHolder.binding.imageedit.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        activity.editads(orderlist.get(eventHolder.getLayoutPosition()));
-    }
-});
-eventHolder.binding.imagenew.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        activity.updateads(eventHolder.getLayoutPosition());
+        if (type == 2) {
+            eventHolder.binding.expandLayout.setVisibility(View.GONE);
+        }
+        eventHolder.binding.imageedit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.editads(orderlist.get(eventHolder.getLayoutPosition()));
+            }
+        });
+        eventHolder.binding.imagenew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.updateads(eventHolder.getLayoutPosition());
 
-    }
-});
-eventHolder.binding.imageDelete.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
+            }
+        });
+        eventHolder.binding.imageDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        i=-1;
-        activity.deleteads(eventHolder.getLayoutPosition());
-    }
-});
+                i = -1;
 
-eventHolder.binding.cons1.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        activity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
-    }
-});
-if(i==position){
-    if(eventHolder.binding.expandLayout.isExpanded()){
-        eventHolder.binding.expandLayout.collapse(true);
-    }
-    else {
-        eventHolder.binding.expandLayout.expand(true);
-    }
-}
-else {
-    eventHolder.binding.expandLayout.collapse(true);
-}
+                activity.deleteads(eventHolder.getLayoutPosition());
+            }
+        });
+
+        eventHolder.binding.cons1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.showdetials(orderlist.get(eventHolder.getLayoutPosition()).getId());
+            }
+        });
+        if (i == position) {
+            if (eventHolder.binding.expandLayout.isExpanded()) {
+                eventHolder.binding.expandLayout.collapse(true);
+            } else {
+                eventHolder.binding.expandLayout.expand(true);
+            }
+        } else {
+            eventHolder.binding.expandLayout.collapse(true);
+        }
     }
 
     @Override

@@ -75,9 +75,9 @@ public class Fragment_Ads extends Fragment {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
         if (id.equals(userModel.getUser().getId() + "")) {
-            ads_adapter = new My_Ads_Adapter(adsList, activity, 1);
+            ads_adapter = new My_Ads_Adapter(adsList, activity, 1,userModel.getUser().getName());
         } else {
-            ads_adapter = new My_Ads_Adapter(adsList, activity, 2);
+            ads_adapter = new My_Ads_Adapter(adsList, activity, 2,"");
         }
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.progBar.setVisibility(View.GONE);
@@ -153,6 +153,7 @@ public class Fragment_Ads extends Fragment {
         if (userModel.getAds() != null) {
 
             setads(userModel.getAds());
+            ads_adapter.name=userModel.getUser().getName();
             activity.updateadsCount(userModel.getAds().size());
 
         }
@@ -162,6 +163,7 @@ public class Fragment_Ads extends Fragment {
     private void setads(List<UserModel.Ads> ads) {
         adsList.clear();
         adsList.addAll(ads);
+
         ads_adapter.notifyDataSetChanged();
     }
 
