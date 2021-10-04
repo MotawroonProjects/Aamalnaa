@@ -412,7 +412,7 @@ public interface Service {
                     @Part("total") RequestBody total,
                     @Part List<MultipartBody.Part> partimageInsideList,
                     @Part("android") RequestBody android,
-                    @Part("android_ids") List<RequestBody> android_ids
+                    @Part("android_ids[]") List<RequestBody> android_ids
 //
             );
 
@@ -438,7 +438,7 @@ public interface Service {
                     @Field("commented") String commented,
                     @Field("total") String total,
                     @Field("android") String android,
-                    @Field("android_ids") List<Integer> android_ids
+                    @Field("android_ids[]") List<Integer> android_ids
 //
             );
 

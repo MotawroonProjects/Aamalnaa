@@ -531,7 +531,7 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
                         try {
 
                             Toast.makeText(UpdateAdsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                            Log.e("Error", response.toString() + " " + response.code() + "" + response.message() + "" + response.errorBody() + response.raw() + response.body() + response.headers() + " " + response.errorBody().toString());
+                            Log.e("Error", response.toString() + " " + response.code() + "" + response.message() + "" + response.errorBody() + response.raw() + response.body() + response.headers() + " " + response.errorBody().string());
                         } catch (Exception e) {
 
 

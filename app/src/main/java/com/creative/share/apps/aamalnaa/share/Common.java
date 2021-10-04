@@ -305,7 +305,11 @@ public class Common {
         MultipartBody.Part part = MultipartBody.Part.createFormData(partName, name, requestBody);
         return part;
     }
+    public static MultipartBody.Part getMultiParts( String name, String partName) {
 
+        MultipartBody.Part part = MultipartBody.Part.createFormData(name,partName);
+        return part;
+    }
 
 
     public static MultipartBody.Part getMultiPartAudio(Context context, String audio_path, String partName) {
