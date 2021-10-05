@@ -505,7 +505,14 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
         RequestBody is_Install_part = Common.getRequestBodyText(is_Install + "");
         RequestBody commented_part = Common.getRequestBodyText(commented + "");
         RequestBody total_part = Common.getRequestBodyText(total + "");
-        RequestBody android_part = Common.getRequestBodyText("yes");
+        String android="";
+        if(ids.size()==0){
+            android="";
+        }
+        else {
+            android="yes";
+        }
+        RequestBody android_part = Common.getRequestBodyText(android);
         List<RequestBody> idspart = new ArrayList<>();
         for (int i = 0; i < ids.size(); i++) {
             idspart.add(Common.getRequestBodyText(ids.get(i) + ""));
@@ -560,10 +567,16 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
         final Dialog dialog = Common.createProgressDialog(UpdateAdsActivity.this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
-
+String android="";
+if(ids.size()==0){
+    android="";
+}
+else {
+    android="yes";
+}
         try {
             Api.getService(Tags.base_url)
-                    .Updateorderwithoutimage(ads.getId() + "", userModel.getUser().getId() + "", order_upload_model.getCategory_id(), order_upload_model.getSubcategory_id(), order_upload_model.getCity_id(), type_id, order_upload_model.getTitle(), order_upload_model.getDetails(), order_upload_model.getPrice(), order_upload_model.getAddress(), order_upload_model.getLongitude(), order_upload_model.getLatitude(), views_num + "", is_Special + "", is_Install + "", commented + "", total + "", "yes", ids).enqueue(new Callback<ResponseBody>() {
+                    .Updateorderwithoutimage(ads.getId() + "", userModel.getUser().getId() + "", order_upload_model.getCategory_id(), order_upload_model.getSubcategory_id(), order_upload_model.getCity_id(), type_id, order_upload_model.getTitle(), order_upload_model.getDetails(), order_upload_model.getPrice(), order_upload_model.getAddress(), order_upload_model.getLongitude(), order_upload_model.getLatitude(), views_num + "", is_Special + "", is_Install + "", commented + "", total + "", android, ids).enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     dialog.dismiss();
