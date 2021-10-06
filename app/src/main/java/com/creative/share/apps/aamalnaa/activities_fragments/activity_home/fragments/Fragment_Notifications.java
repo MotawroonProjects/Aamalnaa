@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.activity_home.HomeActivity;
@@ -98,15 +99,15 @@ binding.recView.setAdapter(notification_adapter);
                 }
             }
         });
-
+binding.swipeRefresh.setOnRefreshListener(() -> getnotification());
 
 
     }
     private void getnotification() {
+        current_page2=1;
         notificationModelList.clear();
         notification_adapter.notifyDataSetChanged();
         binding.progBar.setVisibility(View.VISIBLE);
-
         try {
 
 
@@ -116,6 +117,8 @@ binding.recView.setAdapter(notification_adapter);
                         @Override
                         public void onResponse(Call<NotificationDataModel> call, Response<NotificationDataModel> response) {
                             binding.progBar.setVisibility(View.GONE);
+                            binding.swipeRefresh.setRefreshing(false);
+
                             if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
                                 notificationModelList.clear();
                                 notificationModelList.addAll(response.body().getData());
@@ -150,6 +153,8 @@ binding.recView.setAdapter(notification_adapter);
                         @Override
                         public void onFailure(Call<NotificationDataModel> call, Throwable t) {
                             try {
+                                binding.swipeRefresh.setRefreshing(false);
+
                                 binding.progBar.setVisibility(View.GONE);
                                 binding.llNoNotification.setVisibility(View.VISIBLE);
 
@@ -161,6 +166,8 @@ binding.recView.setAdapter(notification_adapter);
                         }
                     });
         } catch (Exception e) {
+            binding.swipeRefresh.setRefreshing(false);
+
             binding.progBar.setVisibility(View.GONE);
             binding.llNoNotification.setVisibility(View.VISIBLE);
 

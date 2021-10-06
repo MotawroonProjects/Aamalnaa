@@ -510,36 +510,37 @@ Log.e("ldllflfl",userModel.getUser().getId()+" "+id);
                 //  binding.btnSend.setVisibility(View.VISIBLE);
                 can_rate = 1;
             }
-            try {
-                updateadsCount(userModel.getAds().size());
 
-            }catch (Exception e){
-
-            }
-            try {
-                updateratedCount(userModel.getRateds().size());
-
-            }catch (Exception e){
-
-            }
-            try {
-                updateClientCount(userModel.getCustomers().size());
-
-            }catch (Exception e){
-
-            }
-            try {
-                updateWorkCount(userModel.getPrevious().size());
-
-            }catch (Exception e){
-
-
-            }
 //            if(pagerAdapter!=null&&pagerAdapter.getItem(2)!=null){
 //
 //                Fragment_Works fragment_works= (Fragment_Works) pagerAdapter.getItem(2);
 //                fragment_works.getprofiledata();
 //            }
+        }
+        try {
+            updateadsCount(userModel.getAds().size());
+
+        }catch (Exception e){
+
+        }
+        try {
+            updateratedCount(userModel.getRateds().size());
+
+        }catch (Exception e){
+
+        }
+        try {
+            updateClientCount(userModel.getCustomers().size());
+
+        }catch (Exception e){
+
+        }
+        try {
+            updateWorkCount(userModel.getPrevious().size());
+
+        }catch (Exception e){
+
+
         }
 
 

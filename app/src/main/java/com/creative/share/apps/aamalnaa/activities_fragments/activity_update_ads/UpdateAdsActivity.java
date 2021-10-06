@@ -505,12 +505,11 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
         RequestBody is_Install_part = Common.getRequestBodyText(is_Install + "");
         RequestBody commented_part = Common.getRequestBodyText(commented + "");
         RequestBody total_part = Common.getRequestBodyText(total + "");
-        String android="";
-        if(ids.size()==0){
-            android="";
-        }
-        else {
-            android="yes";
+        String android = "";
+        if (ids.size() == 0) {
+            android = "no";
+        } else {
+            android = "yes";
         }
         RequestBody android_part = Common.getRequestBodyText(android);
         List<RequestBody> idspart = new ArrayList<>();
@@ -518,10 +517,10 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
             idspart.add(Common.getRequestBodyText(ids.get(i) + ""));
         }
         List<MultipartBody.Part> partimageList = getMultipartBodyList(urlList, "image[]");
-        Log.e("lll", partimageList.size() + "{"+idspart.size());
+        Log.e("lll", partimageList.size() + "{" + idspart.size());
         try {
             Api.getService(Tags.base_url)
-                    .Updateorder(ad_part, user_part, category_part, subcategory_part, city_part, type_part, title_part, detials_part, price_part, address_part, long_part, lat_part, views_num_part, is_Special_part, is_Install_part, commented_part, total_part, partimageList,android_part,idspart).enqueue(new Callback<ResponseBody>() {
+                    .Updateorder(ad_part, user_part, category_part, subcategory_part, city_part, type_part, title_part, detials_part, price_part, address_part, long_part, lat_part, views_num_part, is_Special_part, is_Install_part, commented_part, total_part, partimageList, android_part, idspart).enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     dialog.dismiss();
@@ -567,13 +566,12 @@ public class UpdateAdsActivity extends AppCompatActivity implements Listeners.Ba
         final Dialog dialog = Common.createProgressDialog(UpdateAdsActivity.this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
-String android="";
-if(ids.size()==0){
-    android="";
-}
-else {
-    android="yes";
-}
+        String android = "";
+        if (ids.size() == 0) {
+            android = "no";
+        } else {
+            android = "yes";
+        }
         try {
             Api.getService(Tags.base_url)
                     .Updateorderwithoutimage(ads.getId() + "", userModel.getUser().getId() + "", order_upload_model.getCategory_id(), order_upload_model.getSubcategory_id(), order_upload_model.getCity_id(), type_id, order_upload_model.getTitle(), order_upload_model.getDetails(), order_upload_model.getPrice(), order_upload_model.getAddress(), order_upload_model.getLongitude(), order_upload_model.getLatitude(), views_num + "", is_Special + "", is_Install + "", commented + "", total + "", android, ids).enqueue(new Callback<ResponseBody>() {

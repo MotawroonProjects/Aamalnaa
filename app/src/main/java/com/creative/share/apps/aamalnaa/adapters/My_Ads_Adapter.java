@@ -62,6 +62,7 @@ public class My_Ads_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         EventHolder eventHolder = (EventHolder) holder;
         eventHolder.binding.setLang(lang);
         eventHolder.binding.setName(name);
+        eventHolder.binding.setUsermodel(Preferences.getInstance().getUserData(context).getUser());
         eventHolder.binding.setAdversimentmodel(orderlist.get(position));
         if (orderlist.get(position).getIs_Install() == 0) {
             eventHolder.binding.imstar.setVisibility(View.GONE);
