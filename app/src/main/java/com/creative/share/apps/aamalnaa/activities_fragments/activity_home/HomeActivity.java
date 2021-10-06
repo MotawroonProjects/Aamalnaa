@@ -75,6 +75,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -144,13 +145,29 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
             displayFragmentMain();
         }
         if (userModel != null) {
+            EventBus.getDefault().register(this);
+
             updateToken();
             getNotificationCount();
             getMessageCount();
         }
 
     }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void listenToNewMessage(MessageModel messageModel) {
+      getNotificationCount();
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void listenToNewMessage(NotificationCount notificationCount) {
+        getNotificationCount();
+    }
     private void updateToken() {
         FirebaseInstanceId.getInstance()
                 .getInstanceId()

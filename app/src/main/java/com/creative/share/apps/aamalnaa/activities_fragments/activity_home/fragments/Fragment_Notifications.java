@@ -272,4 +272,9 @@ binding.swipeRefresh.setOnRefreshListener(() -> getnotification());
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getnotification();
+    }
 }

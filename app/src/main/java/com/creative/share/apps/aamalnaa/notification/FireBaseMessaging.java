@@ -26,6 +26,7 @@ import com.creative.share.apps.aamalnaa.R;
 import com.creative.share.apps.aamalnaa.activities_fragments.chat_activity.ChatActivity;
 import com.creative.share.apps.aamalnaa.models.ChatUserModel;
 import com.creative.share.apps.aamalnaa.models.MessageModel;
+import com.creative.share.apps.aamalnaa.models.NotificationCount;
 import com.creative.share.apps.aamalnaa.preferences.Preferences;
 import com.creative.share.apps.aamalnaa.tags.Tags;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -179,7 +180,8 @@ public class FireBaseMessaging extends FirebaseMessagingService {
 
 
             builder.setContentText(map.get("body"));
-
+            NotificationCount notificationCount=new NotificationCount();
+            EventBus.getDefault().post(notificationCount);
 
             NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
@@ -187,7 +189,6 @@ public class FireBaseMessaging extends FirebaseMessagingService {
             builder.setLargeIcon(bitmap);
             manager.createNotificationChannel(channel);
             manager.notify(new Random().nextInt(200), builder.build());
-
 
         }
 
@@ -319,7 +320,8 @@ public class FireBaseMessaging extends FirebaseMessagingService {
 
 
             builder.setContentText(map.get("body"));
-
+            NotificationCount notificationCount=new NotificationCount();
+            EventBus.getDefault().post(notificationCount);
 
             NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 

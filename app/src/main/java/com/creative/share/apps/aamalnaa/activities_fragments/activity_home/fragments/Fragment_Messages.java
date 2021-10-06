@@ -171,5 +171,9 @@ binding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListen
             }
         }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        getRooms();
+    }
 }
