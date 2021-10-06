@@ -162,11 +162,14 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void listenToNewMessage(MessageModel messageModel) {
-      getNotificationCount();
+     // getNotificationCount();
+      getMessageCount();
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void listenToNewMessage(NotificationCount notificationCount) {
+
         getNotificationCount();
+
     }
     private void updateToken() {
         FirebaseInstanceId.getInstance()
@@ -453,6 +456,9 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
             if (fragment_messages == null) {
                 fragment_messages = Fragment_Messages.newInstance();
             }
+            else {
+                fragment_messages.getRooms();
+            }
             if (fragment_main != null && fragment_main.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_main).commit();
             }
@@ -478,6 +484,9 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
         try {
             if (fragment_notifications == null) {
                 fragment_notifications = Fragment_Notifications.newInstance();
+            }
+            else {
+                fragment_notifications.getnotification();
             }
             if (fragment_main != null && fragment_main.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_main).commit();
@@ -871,6 +880,11 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
                     public void onResponse(Call<NotificationCount> call, Response<NotificationCount> response) {
                         if (response.isSuccessful()) {
                             updateNotificationCount(response.body());
+                            if(fragment_notifications!=null){
+                                fragment_notifications.getnotification();
+                            }
+
+
                         } else {
                             try {
                                 Log.e("errorNotCode", response.code() + "__" + response.errorBody().string());
@@ -906,6 +920,7 @@ public class HomeActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     private void updateNotificationCount(NotificationCount body) {
+
         AHNotification.Builder builder = new AHNotification.Builder();
         builder.setTextColor(ContextCompat.getColor(this, R.color.white));
         builder.setBackgroundColor(ContextCompat.getColor(this, R.color.golden_stars));

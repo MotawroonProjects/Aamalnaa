@@ -79,6 +79,9 @@ binding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListen
 });
     }
     public void getRooms() {
+        userRoomModels.clear();
+        room_adapter.notifyDataSetChanged();
+        binding.progBar.setVisibility(View.VISIBLE);
         Api.getService(Tags.base_url)
                 .getRooms(userModel.getUser().getId()+"")
                 .enqueue(new Callback<UserRoomModelData>() {

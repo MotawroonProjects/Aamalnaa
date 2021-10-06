@@ -103,7 +103,7 @@ binding.swipeRefresh.setOnRefreshListener(() -> getnotification());
 
 
     }
-    private void getnotification() {
+    public void getnotification() {
         current_page2=1;
         notificationModelList.clear();
         notification_adapter.notifyDataSetChanged();
